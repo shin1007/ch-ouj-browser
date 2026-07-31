@@ -4,6 +4,8 @@
 // 拡張機能の追加パネルではなく画面の一部のように見せる。
 
 const NATIVE_OVERLAY_ID = 'ouj-native-overlay';
+const NATIVE_OVERLAY_CLOSE_CLASS = 'ouj-native-overlay-close';
+const NATIVE_OVERLAY_TOP_CLASS = 'ouj-native-overlay-top';
 // 画面更新(F5)すると拡張機能のオーバーレイはDOM/JSごと消えてしまい、パネルを
 // 開いていたはずが元のネイティブ画面に戻ってしまう。sessionStorageに「今開いて
 // いるパネルのid」を持たせておき、リロード後にcontent.js側で読み直して同じ
@@ -13,6 +15,10 @@ const OUJ_OPEN_PANEL_STORAGE_KEY = 'oujOpenNativePanelId';
 
 let oujNativeOverlayCleanup = null;
 let oujNativeOverlayOutsideClickTimeout = null;
+// パネルから別のパネルへ切り替えている最中かどうか。切り替えでは一度
+// removeNativeOverlay()を通るが、すぐ次のパネルが動画を覆い隠すので、
+// このときだけは動画を小窓(PiP)からページへ戻さない。
+let oujIsSwitchingNativeOverlay = false;
 
 function setOujOpenNativePanelId(panelId) {
   try {
@@ -35,6 +41,24 @@ function removeNativeOverlay() {
   const overlay = document.getElementById(NATIVE_OVERLAY_ID);
   if (overlay) overlay.remove();
   setOujOpenNativePanelId(null);
+  // パネルを開いたときに動画を覆い隠すため自動で小窓(PiP)へ逃がしていた場合は、
+  // パネルを閉じたらページ内の元の場所へ戻す。小窓が残ったままだと、動画が
+  // ページに戻っているのに小窓も出ている紛らわしい状態になる。
+  // ユーザーが「⧉ 小窓」ボタンで自分から始めた小窓は意図的なものなので触らない。
+  if (overlay && !oujIsSwitchingNativeOverlay
+      && window.oujPipStartedByOverlay && document.pictureInPictureElement) {
+    window.oujPipStartedByOverlay = false;
+    // パネル内を下までスクロールしてから閉じると、動画をページへ戻しただけでは
+    // 動画が画面外に残り、「小窓が消えたのに動画もどこにも無い」状態になる。
+    // 戻すときは必ず動画が見える位置までスクロールする（scrollIntoViewの
+    // block:'nearest'は、既に見えている場合は何もしないので画面が飛ばない）
+    document.exitPictureInPicture()
+      .then(() => {
+        const video = document.querySelector('video');
+        if (video) video.scrollIntoView({ block: 'nearest' });
+      })
+      .catch(() => {});
+  }
   // 前のオーバーレイ用に予約されていた「外側クリック監視の設定」がまだ
   // 実行されていなければキャンセルする。これをしないと、100ms以内に
   // 別のオーバーレイを開いた場合、古いオーバーレイ用のクリックハンドラが
@@ -63,7 +87,10 @@ function openNativeOverlay(render, panelId) {
   if (typeof window.pipOrPauseCurrentVideoIfPlaying === 'function') {
     window.pipOrPauseCurrentVideoIfPlaying();
   }
+  // 別のパネルへの切り替えでは、動画は次のパネルにも覆われたままなので小窓のまま残す
+  oujIsSwitchingNativeOverlay = true;
   removeNativeOverlay();
+  oujIsSwitchingNativeOverlay = false;
   const mainEl = document.getElementById('main');
   if (!mainEl) return null;
 
@@ -86,6 +113,18 @@ function openNativeOverlay(render, panelId) {
     overflowY: 'auto'
   });
   mainEl.appendChild(overlay);
+
+  // 右上ボタン（↑／✕）のクリック処理。パネルは表示切り替えのたびにinnerHTMLを
+  // 丸ごと書き換えるため、ボタン自身ではなく（書き換えられない）overlayに委譲で登録する
+  overlay.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!target || typeof target.closest !== 'function') return;
+    if (target.closest(`.${NATIVE_OVERLAY_CLOSE_CLASS}`)) {
+      removeNativeOverlay();
+    } else if (target.closest(`.${NATIVE_OVERLAY_TOP_CLASS}`)) {
+      scrollNativeOverlayToTop(overlay);
+    }
+  });
 
   render(overlay);
   setOujOpenNativePanelId(panelId);
@@ -123,6 +162,45 @@ function openNativeOverlay(render, panelId) {
   return overlay;
 }
 
+// パネル右上の操作ボタン（↑ 一番上へ ／ ✕ 閉じる）。
+// 従来はパネル外をクリックするか画面遷移するしか閉じる手段が無く、閉じ方が
+// 分からない／再生ページでは動画に戻れない状態になっていた。
+// お気に入りや履歴は数百件になるため、「↑」で一気に先頭へ戻れるようにしている。
+// 高さ0のsticky帯に入れることで、レイアウトを押し下げずに、パネル内を
+// スクロールしても常に右上へ留まる（＝長い一覧の途中でも押せる）。
+// このHTMLは各パネルの再描画(overlay.innerHTML書き換え)のたびに作り直されるため、
+// クリック処理はボタンに直接ではなくoverlayへの委譲で登録する（openNativeOverlay参照）。
+const NATIVE_OVERLAY_BUTTON_STYLE = 'width:34px;height:34px;line-height:1;padding:0;cursor:pointer;font-size:17px;color:#555;background:#fff;border:1px solid #ddd;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.15);';
+
+function buildNativeOverlayActionsHtml() {
+  return `
+    <div style="position:sticky;top:0;z-index:30;height:0;text-align:right;">
+      <div style="position:relative;top:10px;right:14px;display:inline-flex;gap:6px;">
+        <button type="button" class="${NATIVE_OVERLAY_TOP_CLASS}" title="一番上へ戻る" aria-label="一番上へ戻る"
+          style="${NATIVE_OVERLAY_BUTTON_STYLE}">↑</button>
+        <button type="button" class="${NATIVE_OVERLAY_CLOSE_CLASS}" title="閉じる" aria-label="閉じる"
+          style="${NATIVE_OVERLAY_BUTTON_STYLE}">✕</button>
+      </div>
+    </div>
+  `;
+}
+
+// パネルを先頭までスクロールする。
+// 実際にスクロールしている要素はサイト側CSS次第でoverlay自身のことも内側の
+// .scroll-contentのこともあるため、スクロール位置を持っている要素を全て戻す。
+// どれも動いていなければページ自体がスクロールしているとみなす。
+function scrollNativeOverlayToTop(overlay) {
+  const candidates = [overlay].concat(Array.from(overlay.querySelectorAll('.scroll-content')));
+  let scrolled = false;
+  candidates.forEach((el) => {
+    if (el && el.scrollTop > 0) {
+      el.scrollTo({ top: 0, behavior: 'smooth' });
+      scrolled = true;
+    }
+  });
+  if (!scrolled) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /**
  * カテゴリー一覧ページと同じクラス構成のシェルHTML。
  * asideList（パンくず＋フォルダ一覧）とmain（動画カード等）を両方持てる。
@@ -130,6 +208,7 @@ function openNativeOverlay(render, panelId) {
 function renderNativeShellHtml({ breadcrumbHtml, extraAsideHtml = '', asideListHtml = '', mainHtml = '' }) {
   return `
     <div class="scroll-content">
+      ${buildNativeOverlayActionsHtml()}
       <list-title>
         <div class="common-outer-main-content-area">
           <ion-title class="page-list-title common-list-title-bottom title title-md">

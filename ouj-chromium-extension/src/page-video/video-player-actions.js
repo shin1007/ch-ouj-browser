@@ -105,6 +105,10 @@ async function pipOrPauseCurrentVideoIfPlaying() {
   if (document.pictureInPictureEnabled) {
     try {
       await video.requestPictureInPicture();
+      // 「パネルを開いたから小窓にした」ことを覚えておき、小窓を閉じたとき／
+      // パネルを閉じたときに動画をページ内へ戻せるようにする（下記の
+      // leavepictureinpicture 監視と menu-native-shell.js の removeNativeOverlay）
+      window.oujPipStartedByOverlay = true;
       return;
     } catch (e) {
       // PiP不可(ラジオ番組等、動画トラックが無いコンテンツ)の場合は下の一時停止に
@@ -131,6 +135,31 @@ if (!window.oujPipAutoExitOnNavigateAdded) {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture().catch(() => {});
     }
+  });
+}
+
+// 小窓(PiP)を閉じた（PiPウィンドウの「タブに戻る」＝拡大ボタン、または×）ときの後始末。
+// メニューのオーバーレイパネルを開くと動画は自動的に小窓へ逃がされるが、パネル自体は
+// #main全体を覆ったまま残る。そのため小窓から戻ってきても動画は隠れたままで、
+// 「拡張機能のパネルへ行くと動画に戻れない」状態になっていた。PiPが終わったら
+// パネルを閉じ、動画を画面内までスクロールして必ず見える状態にする。
+// leavepictureinpictureはvideo要素で発火してバブリングするため、SPAで動画要素が
+// 差し替わっても効くようdocumentで受ける。
+if (!window.oujPipShowVideoOnLeaveAdded) {
+  window.oujPipShowVideoOnLeaveAdded = true;
+  document.addEventListener('leavepictureinpicture', () => {
+    // 先に降ろしておく。この後のremoveNativeOverlayが「パネルを閉じたので
+    // PiPを解除する」処理へ入って二重に解除しようとするのを防ぐ
+    window.oujPipStartedByOverlay = false;
+    const overlayOpen = typeof window.isOujNativeOverlayOpen === 'function'
+      && window.isOujNativeOverlayOpen();
+    if (!overlayOpen) return;
+    window.removeNativeOverlay();
+    // パネル内を下までスクロールしていると、パネルを閉じただけでは動画が画面外に
+    // ある。block:'nearest'なら既に見えているときは動かず、画面外のときだけ最小限
+    // スクロールして必ず見える状態にできる
+    const video = document.querySelector('video');
+    if (video) video.scrollIntoView({ block: 'nearest' });
   });
 }
 

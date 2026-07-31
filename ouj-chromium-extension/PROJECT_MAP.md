@@ -10,7 +10,7 @@
 - **モジュール共有**: ES Modules や bundler は使わず、各ファイルは末尾で `window.関数名 = 関数名` として公開し、他ファイルは `window.*` 経由で呼ぶ。→ 並列作業向けのファイル分割方針（[AGENTS.md](AGENTS.md)）と対応。
 - **ロード順 ＝ 依存順**: `utils/`（基盤）→ `menu/` → `page-video/` → `page-*`（各ページ）→ 最後に [src/content.js](src/content.js)（オーケストレーター）。
 - **オーケストレーション**: [content.js](src/content.js) が `detectOujPageType()` で画面種別を判定し、ページごとに必要な機能を起動する。対象サイトはIonic/AngularのSPAなので、URL変化（pushState/popstate/hashchange＋250msポーリング）を監視して再実行する。
-- **表示オプション**: 拡張機能が画面に追加するUIは、[utils/display-options.js](src/utils/display-options.js) の定義に基づき機能単位で非表示にできる（メニューの「表示オプション」）。挿入処理側のゲート（`isOujFeatureVisible`）＋挿入済み要素を隠すCSSの2段構え。
+- **表示オプション**: 拡張機能が画面に追加するUIは、[utils/display-options.js](src/utils/display-options.js) の定義に基づき機能単位で非表示にできる（メニューの「表示オプション」）。挿入処理側のゲート（`isOujFeatureVisible`）＋挿入済み要素を隠すCSSの2段構え。「表示」に戻す方向はゲートで挿入されなかった要素が対象なので、[menu/menu-display-options.js](src/menu/menu-display-options.js) が `rebuildOujMenus()`＋`oujRerunPageFeatures()` を呼んで再挿入する。
 - **状態の保存先**:
   - `localStorage`（[utils/settings.js](src/utils/settings.js)）… お気に入り・履歴・あとで見る・しおり・視聴override・各種設定・学習時間 等。拡張機能のデータはほぼここ。
   - `chrome.storage.sync` … ポップアップの設定（自動ログインON/OFF・テーマ）など少数。
@@ -30,7 +30,7 @@
 | ファイル | 役割 | 主な公開IF |
 |---|---|---|
 | [src/background.js](src/background.js) | service worker。`webNavigation.onCompleted` で content.js 注入を補助 | — |
-| [src/content.js](src/content.js) | **オーケストレーター**。ページ種別で分岐し各機能を起動。SPAのURL変化監視／画面更新後のネイティブ風パネル復元 | `main()` / `safeMain()`（内部）、`restoreOujOpenNativePanelIfAny()`（内部） |
+| [src/content.js](src/content.js) | **オーケストレーター**。ページ種別で分岐し各機能を起動。SPAのURL変化監視／画面更新後のネイティブ風パネル復元 | `main()` / `safeMain()`（内部）、`restoreOujOpenNativePanelIfAny()`（内部）、`oujRerunPageFeatures()`（表示オプションを「表示」に戻したとき、再読み込みなしで挿入処理を走らせ直す口） |
 
 ## utils/ — 基盤ユーティリティ（最初にロード）
 
@@ -61,8 +61,8 @@
 
 | ファイル | 役割 | 主な公開IF（window.*） |
 |---|---|---|
-| [menu/menu.js](src/menu/menu.js) | メニュー本体。左メニュー挿入・`MENU_CONFIG`・開閉監視 | `insertLeftMenu`, `startMenuOpeningMutationObserver`, `getIconHtml` |
-| [menu/menu-native-shell.js](src/menu/menu-native-shell.js) | **各パネル共通のネイティブ風右ペイン基盤**（お気に入り/履歴/おすすめ等が共用）。開いているパネルのidをsessionStorageに記録し、画面更新(F5)でオーバーレイが消えても content.js が読み直して同じパネルを自動的に開き直す（SPA内遷移では従来通り自動で閉じ、記録も消える） | `openNativeOverlay(render, panelId)`, `removeNativeOverlay`, `getOujOpenNativePanelId`, `isOujNativeOverlayOpen`, `renderNativeShellHtml`, `buildNative*Html` 系多数 |
+| [menu/menu.js](src/menu/menu.js) | メニュー本体。左メニュー挿入・`MENU_CONFIG`・開閉監視 | `insertLeftMenu`, `rebuildOujMenus`（表示オプション変更時に項目を作り直す）, `startMenuOpeningMutationObserver`, `getIconHtml` |
+| [menu/menu-native-shell.js](src/menu/menu-native-shell.js) | **各パネル共通のネイティブ風右ペイン基盤**（お気に入り/履歴/おすすめ等が共用）。右上に「↑ 一番上へ」「✕ 閉じる」ボタンを持つ（`renderNativeShellHtml`が出力するsticky帯。クリックはoverlayへの委譲で処理し、再描画でinnerHTMLが書き換わっても効く）。開いているパネルのidをsessionStorageに記録し、画面更新(F5)でオーバーレイが消えても content.js が読み直して同じパネルを自動的に開き直す（SPA内遷移では従来通り自動で閉じ、記録も消える）。再生ページでパネルを開くと動画は自動でPiPへ逃がされ、パネルを閉じるとページ内へ戻す（`window.oujPipStartedByOverlay` で連携。PiP側の処理は [page-video/video-player-actions.js](src/page-video/video-player-actions.js)） | `openNativeOverlay(render, panelId)`, `removeNativeOverlay`, `getOujOpenNativePanelId`, `isOujNativeOverlayOpen`, `renderNativeShellHtml`, `buildNative*Html` 系多数 |
 | [menu/menu-favorites.js](src/menu/menu-favorites.js) | お気に入りパネル（手動並び替え・「▶続き」・視聴回数バッジ） | `handleFavoritesPanelOpen`, `createFavoriteListData` |
 | [menu/menu-watch-later.js](src/menu/menu-watch-later.js) | あとで見るパネル | `handleWatchLaterPanelOpen` |
 | [menu/menu-bookmarks.js](src/menu/menu-bookmarks.js) | しおり一覧パネル（位置＋メモへジャンプ） | `handleBookmarksPanelOpen` |
@@ -82,7 +82,7 @@
 |---|---|---|
 | [page-video/video-player-core.js](src/page-video/video-player-core.js) | **再生ページ初期化の中心**。次動画の決定と共有状態管理 | `initializeVideoPlayer`, `fetchNextVideoId`, `fetchNextVideoFrom{SameCourse,Favorites}`, `getCurrent/NextVideoId`, 共有: `nextVideoId`/`videoListInCourse`/`currentVideoIndexInCourse` |
 | [page-video/video-playback-management.js](src/page-video/video-playback-management.js) | 再生管理・再生位置保存(playlog)・速度・次へスキップ | `StartPlaybackManagement`, `setPlaybackSpeed`, `skipToNextVideo` |
-| [page-video/video-player-actions.js](src/page-video/video-player-actions.js) | タイトル横ボタン（PiP/しおり/あとで見る）・しおりデータ・pendingSeek | `addPlayerActionButtons`, `getBookmarks`, `removeBookmark`, `formatBookmarkTime`, `applyPendingSeekIfAny`, `setPendingSeek` |
+| [page-video/video-player-actions.js](src/page-video/video-player-actions.js) | タイトル横ボタン（PiP/しおり/あとで見る）・しおりデータ・pendingSeek。PiPの出入り監視も持つ（ページ遷移時は閉じる／PiPを閉じたらパネルを閉じて動画を画面内へ戻す） | `addPlayerActionButtons`, `pipOrPauseCurrentVideoIfPlaying`, `getBookmarks`, `removeBookmark`, `formatBookmarkTime`, `applyPendingSeekIfAny`, `setPendingSeek` |
 | [page-video/video-settings.js](src/page-video/video-settings.js) | 動画下部の設定パネル（トークン方式で二重挿入を防ぐ） | `addVideoSettingsPanel` |
 | [page-video/video-prev-next.js](src/page-video/video-prev-next.js) | 前後の回へのリンク | `insertPrevNextLinks` |
 | [page-video/video-episode-list.js](src/page-video/video-episode-list.js) | 同一科目の回一覧ジャンプメニュー | `insertEpisodeListMenu` |
@@ -106,7 +106,8 @@
 | [page-course-select-progress.js](src/page-course-select-progress.js) | 科目一覧の視聴進捗バッジ・「▶続き」（遅延計算） | `waitThenAddProgressBadgesToCategoryList` |
 | [page-course-select-filters.js](src/page-course-select-filters.js) | 科目一覧(series-select)の絞り込み（媒体/字幕は行の表示テキストから即判定、未完了/視聴途中は`getCategoryProgress`で必要時のみ遅延判定、年度は科目名末尾の（'YY）から即判定）。検索と同じ設定キーを共有。検索ボックスパネルから`window.__oujPendingCourseYear`で年度初期値を受け取る | `initializeCourseListFilters`, `refreshCourseListFilterUI` |
 | [page-video-select.js](src/page-video-select.js) | 回の一覧(video-select)へ「あとで見る」トグル | `addWatchLaterButtonsToVideoList` |
-| [page-search-result-filters.js](src/page-search-result-filters.js) | 検索結果の絞り込み/並び替え。年度・コース(科目の親カテゴリ、`utils/categories.js`の`getCourseForSubjectId`)の複数選択に対応。回一覧(video-select)でも`context`引数で流用（視聴状況フィルタ＋並び替えのみ／媒体・字幕・年度・コース・最近の検索は出さない） | `initializeSearchResultFilters(context)`, `refreshSearchResultFilterUI`, `updateSearchResultItemVisibility`, `buildOujFilterChip`, `OUJ_SEARCH_*_KEY` |
+| [page-search-result-filters.js](src/page-search-result-filters.js) | 検索結果の絞り込み/並び替え。年度・コース(科目の親カテゴリ、`utils/categories.js`の`getCourseForSubjectId`)の複数選択に対応。回一覧(video-select)でも`context`引数で流用（視聴状況フィルタ＋並び替えのみ／媒体・字幕・年度・コース・最近の検索は出さない） | `initializeSearchResultFilters(context)`, `refreshSearchResultFilterUI`, `updateSearchResultItemVisibility`, `buildOujFilterChip`, `OUJ_SEARCH_*_KEY`, `queryOujSearchResultList`, `ensureOujItemClassified`（項目1件の遅延分類の共通入口。二重リクエスト防止） |
+| [page-search-result-compact.js](src/page-search-result-compact.js) | 検索結果の**コンパクト表示**（絞り込みバーの「表示: コンパクト表示」チップでON/OFF、localStorage `searchCompactView`）。サムネイルとあらすじをCSSで隠し、同じ科目（項目のパンくず`.content-category`末尾の科目categoryIdで判定＝追加通信なし）の回を1行にまとめて「第01回」等のチップで並べる。まとめて隠した回はIntersectionObserverが発火しないため、まとめ行が画面内に入った時に`ensureOujItemClassified`でその科目の回をまとめて分類する。項目の表示可否は`dataset.oujCompactState`で`updateSearchResultItemVisibility`に伝え、絞り込みの判定より優先させる | `isOujCompactViewEnabled`, `applyOujCompactGrouping`, `scheduleOujCompactRegroup`, `buildOujCompactViewRow` |
 | [search-box-filter-panel.js](src/search-box-filter-panel.js) | 検索ボックスのクイック絞り込みパネル（全ページ共通）。「最近の検索」／「年度・コースで探す（コースを選ぶとそのコースへ遷移、年度も選べば遷移先を年度絞り込み）」／絞り込みプリセット | `initSearchBoxFilterPanel` |
 | [search-box-all-subjects-panel.js](src/search-box-all-subjects-panel.js) | 上記パネルでキーワード欄が空のまま絞り込みプリセットのチップを操作した瞬間に開く/更新するネイティブ風パネル。カテゴリAPIのsummary/name欄だけで媒体・字幕・年度を全科目分即時判定（追加通信なし）、視聴状況のみ画面内に入った科目だけ遅延取得 | `handleAllSubjectsFilterPanelOpen` |
 
@@ -147,3 +148,7 @@ v.* 共通           → applyOujDisplayOptionStyles(表示オプションの非
 
 - `manifest.json` の `version` はストア公開直前にのみ上げる。README変更点の記載とは別タイミング。
 - リリース時は [menu/menu-whats-new.js](src/menu/menu-whats-new.js) の `OUJ_CHANGELOG_ENTRIES` 先頭にも追記する。
+
+## 自動テスト
+.envがあるので、それを利用してログイン・テストを行えます。
+playwright, selenium, cypressどれを使っても構いません。
