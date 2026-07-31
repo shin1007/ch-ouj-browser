@@ -1,0 +1,1179 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+  <title>放送大学</title>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./assets/images/webclip/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/images/webclip/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="./assets/images/webclip/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/images/webclip/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./assets/images/webclip/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/images/webclip/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/images/webclip/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./assets/images/webclip/apple-touch-icon-180x180.png">
+  <script>
+      var tenantId = "1";
+      var cssTemplate = "tenant/ouj";
+      var options = {
+                        homeSettingUrl: "./top-page.json"
+                      , initMessageUrl: "./init-message.html?v=1"
+                      , loginType: 2
+                      , logoUrl: "./assets/images/icon_logo.png"
+                      , maxListNum: 30
+                      , sami: true
+                      , systemRequirementUrl: "https://www.ouj.ac.jp/help/siteinfo/#recommended"
+                      , tenantType: 1
+                      , visibleVodMenu: false
+      };
+  </script>
+  <script src="cas-cooperation.js"></script>
+  <script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-header.min.js"></script><base href="./"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/css/tenant/ouj.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/leaflet/1.3.1/leaflet.css"><script>  var basePath = "//v.ouj.ac.jp/module/classtream_viewer3/";</script>
+<div><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/ui.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/icomoon/style.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/player.css?ver=1.0.25"></div><style type="text/css">.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+</style><style type="text/css">.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}</style></head>
+<body>
+  <iframe style="width:100%; height:100%; border:none;" src="//v.ouj.ac.jp/module/classtream_viewer3/assets/html/no-script.html"></iframe>
+  <ion-app class="app-root app-root-md md platform-core enable-hover" ng-version="5.0.0"><div app-viewport=""></div><ng-component class="app-root"><ion-content id="app-content" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div class="wrapper">
+
+        <router-outlet></router-outlet><navi><div id="main-navi">
+
+  
+
+  <common-header>
+
+<ion-header class="header header-md">
+
+    <ion-navbar class="left toolbar toolbar-md" id="cls-common-header" role="banner"><div class="toolbar-background toolbar-background-md"></div><button class="back-button bar-button bar-button-md back-button-md bar-button-default bar-button-default-md" ion-button="bar-button"><span class="button-inner"><ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" aria-label="arrow back"></ion-icon><span class="back-button-text back-button-text-md"></span></span><div class="button-effect"></div></button><div class="toolbar-content toolbar-content-md">
+
+        <div class="logo-menu">
+
+            <!----><img class="logo-img" src="./assets/images/icon_logo.png" alt="ホーム">
+
+        </div>
+
+        
+
+        <!----><div class="login-button login-button-bottom">
+
+            <!---->
+
+            <div class="user-id-menu">
+
+                <!----><ion-label class="user-id label label-md">XXXXXXXXXX</ion-label>
+
+            </div>
+
+        </div>
+
+        <div class="vod-list-search">
+
+            
+
+            <vod-list-search>
+
+<div class="search-area" role="search">
+
+    
+
+    <button class="search-back-button button button-md button-outline button-outline-md" ion-button="" outline="" title="戻る"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" name="arrow-round-back" role="img" class="icon icon-md ion-md-arrow-round-back" aria-label="arrow round-back"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <input autocomplete="off" id="searchText" maxlength="200" type="text" placeholder="動画検索" title="検索する文字を入力してください。">
+
+    
+
+    <button aria-labelledby="searchText" class="theme-color search-button button button-md button-default button-default-md" ion-button="" value="動画検索" aria-label="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <button class="theme-color search-expand-button button button-md button-clear button-clear-md button-round button-round-md" clear="" ion-button="" round="" title="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+</div></vod-list-search>
+
+        </div>
+
+        
+
+        <!---->
+
+    </div></ion-navbar>
+
+    
+
+    <!---->
+
+</ion-header></common-header>
+
+  
+
+  <div class="menu-background-color" id="menu">
+
+    <menu-navi><ion-content class="wrapper-menu-main menu-background-color content content-md" role="navigation"><div class="fixed-content"></div><div class="scroll-content">
+
+    <ion-content class="menu-main menu-background-color content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+        
+
+        <ion-list class="menu-list top-ion-list list list-md" role="menu">
+
+            <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="home" role="img" class="icon icon-md ion-md-home item-icon" aria-label="home"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ホーム
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+            <!---->
+
+            <!---->
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list" aria-label="カテゴリー">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md"> 
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        カテゴリー
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!----><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            01 教養学部
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            02 大学院
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            03 夏季集中科目
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            04 ラジオ番組の字幕付加実験
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            05 特別講義
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        設定
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <ion-item class="item-selectable item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="exit" role="img" class="icon icon-md ion-md-exit item-icon" aria-label="exit"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ログアウト
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+        </ion-list>
+
+
+
+        <!----><ion-list class="menu-list list list-md">
+
+            
+
+            <div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/help/siteinfo/#recommended" aria-label="ご利用にあたって別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                                <div class="icon-text">
+
+                                    <div class="icon-area">
+
+                                        <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                    </div>
+
+                                    <div class="text-area">
+
+                                        ご利用にあたって
+
+                                    </div>
+
+                                </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            
+
+            <!----><div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/" aria-label="放送大学トップページへ別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                            <div class="icon-text">
+
+                                <div class="icon-area">
+
+                                    <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                </div>
+
+                                <div class="text-area">
+
+                                    放送大学トップページへ
+
+                                </div>
+
+                            </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </ion-list>
+
+    </div></ion-content>
+
+
+
+    
+
+    <!----><menu-footer><footer class="footer" lang="en" role="contentinfo">
+
+    ver. 3.2.30 powered by IPL
+
+    
+
+<footer>
+
+</footer></footer></menu-footer>
+
+</div></ion-content></menu-navi>
+
+  </div>
+
+  
+
+  <main class="navi-main-default" id="main" role="main">
+
+    
+
+    <div></div><main-vod-list>
+
+<common-overlay>
+
+<div id="common-overlay" ion-fixed="" padding="" hidden=""></div></common-overlay>
+
+
+
+<ion-content class="content content-md has-infinite-scroll"><div class="fixed-content"></div><div class="scroll-content">
+
+    
+
+    <list-title><div class="common-outer-main-content-area">
+
+    <ion-title class="page-list-title common-list-title-bottom title title-md"><div class="toolbar-title toolbar-title-md">
+
+        
+
+        <span class="list-title-span" id="list-title-span" role="heading" tabindex="0">動画</span>
+
+        
+
+        <!---->
+
+        <!---->
+
+    </div></ion-title>
+
+    
+
+    <!---->
+
+</div></list-title>
+
+    
+
+    <vod-list-navigator><aside role="complementary">
+
+    
+
+    <!----><div class="breadcrumbs">
+
+        <ul aria-label="カテゴリーのパンくずリスト">
+
+            <!----><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">01 教養学部</a>
+
+            </li><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">01 基盤科目</a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    
+
+    <ion-list class="vod-category-list list list-md" id="child-category-list" role="list" aria-label="カテゴリー">
+
+        <!----><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        001 運動と健康（’２２） 1140094
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 関根　紀子
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        002 市民自治の知識と実践（’２１） 1140086
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (ラジオ) 山岡　龍一、岡﨑　晴輝
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        003 平和と安全保障（’２６） 1140140
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (ラジオ) 秋山　信将
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        004 社会と産業の倫理（’２１） 1140078
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (ラジオ・字幕) 松原　隆一郎、山岡　龍一
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        005 問題解決の進め方（’２５） 1140132
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 秋光　淳生
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        006 自然科学はじめの一歩（’２２） 1140108
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 岸根　順一郎、大森　聡一
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        007 より良い思考の技法（’２３） 1140116
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 菊池　聡
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        008 心理と教育へのいざない（’２４） 1140124
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (ラジオ・字幕) 苑　復傑、向田　久美子、佐藤　仁美
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        009 日本語リテラシー（’２６） 1150057
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ) 滝浦　真人
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        010 日本語アカデミックライティング（’２２） 1150049
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 滝浦　真人
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        011 遠隔学習のためのパソコン活用（’２５） 1170066
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 秋光　淳生、仁科　エミ
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        012 地理空間情報の基礎と活用（’２２） 1170058
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 川原　靖弘、関本　義秀
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        013 情報学へのとびら（’２２） 1170040
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 加藤　浩、大西　仁
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        014 初歩からの数学（’１８） 1160028
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 隈部　正博
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <button class="child-category-button" id="link-item-button">
+
+                <div class="icon-text">
+
+                    <div aria-hidden="true" class="icon-area">
+
+                        <ion-icon name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                    </div>
+
+                    <div class="text-area">
+
+                        015 身近な統計（’２４） 1160036
+
+                    </div>
+
+                </div>
+
+                <!----><div class="sub-icon-text">
+
+                    <div class="icon-area">
+
+                    </div>
+
+                    <div class="text-area">
+
+                        (テレビ・字幕) 石崎　克也、渡辺　美智子
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+    </ion-list>
+
+</aside></vod-list-navigator>
+
+    
+
+    <div aria-labelledby="list-title-span" role="main">
+
+        
+
+        <!---->
+
+        
+
+        <!---->
+
+        
+
+        <ion-list aria-describedby="list-title-span" can-swipe="listCanSwipe" id="common-list-content" role="list" class="list list-md">
+
+            <!---->
+
+        </ion-list>
+
+        
+
+        <ion-infinite-scroll>
+
+            <ion-infinite-scroll-content loadingspinner="bubbles" loadingtext="Loading more data..." state="enabled"><div class="infinite-loading"><!----><div class="infinite-loading-spinner"><ion-spinner class="spinner spinner-md spinner-bubbles spinner-md-bubbles"><!----><svg viewBox="0 0 64 64" style="top: 0px; left: 9px; animation-delay: -1000ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 5.78509px; left: 6.8944px; animation-delay: -888.889ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 8.86327px; left: 1.56283px; animation-delay: -777.778ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 7.79423px; left: -4.5px; animation-delay: -666.667ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 3.07818px; left: -8.45723px; animation-delay: -555.556ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -3.07818px; left: -8.45723px; animation-delay: -444.444ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -7.79423px; left: -4.5px; animation-delay: -333.333ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -8.86327px; left: 1.56283px; animation-delay: -222.222ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -5.78509px; left: 6.8944px; animation-delay: -111.111ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><!----></ion-spinner></div><!----><div class="infinite-loading-text">Loading more data...</div></div></ion-infinite-scroll-content>
+
+        </ion-infinite-scroll>
+
+    </div>
+
+</div></ion-content></main-vod-list>
+
+  </main>
+
+  
+
+</div></navi>
+
+    </div>
+
+</div></ion-content></ng-component><div overlay-portal=""></div><div overlay-portal=""></div><div class="loading-portal" overlay-portal=""></div><div class="toast-portal"></div><div class="click-block click-block-enabled"></div></ion-app>
+
+
+<script src="//v.ouj.ac.jp/module/js/jquery/jquery-2.2.3.min.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-check.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/js/classtream-webapi-1.1.0/classtream-webapi.js?v=1.1.0.17"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream.min.js"></script><script src="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/THEOplayer.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/pdf/2.1.266/pdf.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/polyfills.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/vendor.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-base.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-player.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/webrtc/webrtc-player.min.js?ver=1.0.0"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.js?v=3.2.30"></script></body></html>

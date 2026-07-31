@@ -8,7 +8,10 @@
     "test:visual:update": "playwright test --update-snapshots",
     "test:visual:ui": "playwright test --ui",
     "test:drm": "playwright test --project=drm-desktop --project=drm-mobile",
-    "test:buffer": "playwright test --project=drm-buffer"
+    "test:buffer": "playwright test --project=drm-buffer",
+    "capture": "node tests/capture/capture-target-site.js",
+    "capture:if-stale": "node tests/capture/capture-target-site.js --if-stale",
+    "capture:check": "node tests/capture/capture-target-site.js --check"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

@@ -22,7 +22,7 @@
 
 - カテゴリAPI: `https://v.ouj.ac.jp/v1/tenants/1/categories`（[utils/categories.js](src/utils/categories.js)）。
 - 画面種別: `home` / `search-result` / `player`（動画再生）/ `series-select`（科目一覧）/ `video-select`（回の一覧）。判定は [utils/page-type.js](src/utils/page-type.js)。
-- `target_site/` は放送大学実サイトの保存HTML/JSON（**参照用資料。拡張機能本体ではない**）。DOM構造やAPIレスポンス形状を確認したいときに読む。
+- `target_site/` は放送大学実サイトの保存HTML/JSON（**参照用資料。拡張機能本体ではない**）。DOM構造やAPIレスポンス形状を確認したいときに読む。直下と `view/` は手動採取の古い資料、`captured/` は [tests/capture/capture-target-site.js](tests/capture/capture-target-site.js) が採取したもの（画面HTML・APIレスポンス・採取日時入りの `manifest.json`）。**1か月を超えたら `npm run capture:if-stale` で取り直す**（詳細は [TESTING.md](TESTING.md) §3.1）。
 
 ---
 

@@ -53,10 +53,35 @@ node --check src/変更したファイル.js
 
 ## 3. 実サイトを使わないロジック確認（推奨。まずここで確かめる）
 
-`target_site/` に実サイトの保存 HTML がある。Playwright で `file://` として開き、
+`target_site/` に実サイトの保存 HTML／API JSON がある。Playwright で `file://` として開き、
 content script を `addScriptTag` で読み込めば、**ログインも通信もなしに** DOM 操作の
 挙動を確認できる。`chrome.*` に依存する `utils/settings.js` は読み込まず、
 `window.getSetting` / `saveSetting` などを自前のスタブで差し替えるのがコツ。
+
+### 3.1 素材の置き場所と鮮度（1か月で取り直す）
+
+| 置き場所 | 中身 |
+|---|---|
+| `target_site/captured/` | **スクリプトで採取した資料**。`pages/*.html`（画面）、`api/*.json`（APIレスポンス）、`manifest.json`（採取日時・元URL一覧） |
+| `target_site/` 直下・`view/` | 手動で採取した古い資料。スクショ(PNG)やサイトのJS/CSS本体もここ |
+
+`captured/` の資料が**1か月を超えたら取り直す**（サイトのDOM構造やAPIの形が変わっても
+気づけないため）。使う前に鮮度を確認する:
+
+```powershell
+cd ouj-chromium-extension
+npm run capture:check     # 通信なし。古い/未採取なら終了コード1
+npm run capture:if-stale  # 1か月以上古いときだけ取り直す（古くなければ何もしない）
+npm run capture           # 常に取り直す
+```
+
+採取は `tests/capture/capture-target-site.js`。**1回の実行でログインは1回**
+（1つのブラウザで全ページを巡回する）なので、`npm run capture` を連打しないこと（§4.1）。
+拡張機能を読み込まない状態で保存するため、`captured/pages/*.html` に `ouj-` 系の要素は
+入っていない＝サイト素のDOMとして使える。ログインID・利用者番号は伏せ字にしてある。
+
+`.env` の `OUJ_TEST_*` が未設定のページ（例: ラジオ科目の再生ページ）は採取がスキップされる。
+不足しているものは `manifest.json` の `knownGaps` に書かれる。
 
 ```js
 // scratchpad に置く使い捨てスクリプトの骨子（リポジトリには入れない）
@@ -75,8 +100,17 @@ for (const f of ['src/utils/page-type.js', 'src/対象ファイル.js']) {
 // あとは page.evaluate() で関数を呼び、DOMの結果を assert する
 ```
 
-`target_site/view/at_start.html` にはヘッダーの検索欄 `#searchText` と純正の検索ボタン
-`button.search-button` があるので、検索まわりの確認に使える。
+よく使う素材:
+
+| 確認したいもの | 使うファイル |
+|---|---|
+| ヘッダーの検索欄・検索ボタン（`#searchText` / `button.search-button`） | `captured/pages/home.html`、`target_site/view/at_start.html` |
+| 検索結果の一覧（絞り込み・並び替え・コンパクト表示・自動読み込み） | `captured/pages/search-result.html`（一覧は `#common-list-content`、純正の並び替えは `ion-item.sort`、続き読み込みは `ion-infinite-scroll`） |
+| 科目一覧 / 回の一覧 | `captured/pages/series-select.html` / `captured/pages/video-select.html` |
+| 動画再生ページ | `captured/pages/player-tv.html` |
+| 未ログイン（ゲスト）時の見え方 | `captured/pages/home-guest.html` |
+| カテゴリAPI・検索API・総件数API・字幕/ラジオ判定（`video-src/v3`）・視聴ログ | `captured/api/*.json`（ファイル名は元URL由来。対応表は `manifest.json`） |
+
 画像やCSSの `ERR_FILE_NOT_FOUND` がコンソールに出るが、保存HTMLの参照切れなので無視してよい。
 
 ---

@@ -1,0 +1,244 @@
+{
+  "capturedAt": "2026-07-31T07:25:44.053Z",
+  "startedAt": "2026-07-31T07:25:05.162Z",
+  "maxAgeDays": 30,
+  "generatedBy": "tests/capture/capture-target-site.js",
+  "note": [
+    "実サイトから機械的に採取した資料。拡張機能本体ではない(参照用)。",
+    "拡張機能を読み込まない状態のDOMなので、ここに ouj- 系の要素は含まれない。",
+    "ログインID(学生番号)は伏せ字に置換済み。",
+    "30日を超えたら取り直すこと(npm run capture:check で確認できる)。"
+  ],
+  "searchKeyword": "心理",
+  "pages": [
+    {
+      "name": "home-guest",
+      "file": "pages/home-guest.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/home",
+      "note": "ホーム画面(未ログイン=ゲスト)",
+      "renderedMarker": true,
+      "bytes": 22827
+    },
+    {
+      "name": "home",
+      "file": "pages/home.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/home",
+      "note": "ホーム画面(ログイン済み)",
+      "renderedMarker": true,
+      "bytes": 25568
+    },
+    {
+      "name": "search-result",
+      "file": "pages/search-result.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/vod?se=%E5%BF%83%E7%90%86",
+      "note": "検索結果(キーワード「心理」)。絞り込み/コンパクト表示/自動読み込みの確認用",
+      "renderedMarker": true,
+      "bytes": 196090
+    },
+    {
+      "name": "series-select",
+      "file": "pages/series-select.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/vod?ca=7",
+      "note": "科目一覧(コース配下)",
+      "renderedMarker": true,
+      "bytes": 39764
+    },
+    {
+      "name": "video-select",
+      "file": "pages/video-select.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/vod?ca=30211",
+      "note": "回の一覧(1科目)",
+      "renderedMarker": true,
+      "bytes": 111606
+    },
+    {
+      "name": "player-tv",
+      "file": "pages/player-tv.html",
+      "url": "https://v.ouj.ac.jp/view/ouj/#/navi/player?co=38215&ct=V&ca=30778",
+      "note": "動画再生ページ(テレビ科目)",
+      "renderedMarker": true,
+      "bytes": 52296
+    }
+  ],
+  "api": [
+    {
+      "file": "api/_v1_tenants_1.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1",
+      "bytes": 14250
+    },
+    {
+      "file": "api/categories.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/categories",
+      "bytes": 143293
+    },
+    {
+      "file": "api/functions.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/functions",
+      "bytes": 280
+    },
+    {
+      "file": "api/live-contents_count.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/live-contents/count",
+      "bytes": 11
+    },
+    {
+      "file": "api/live-contents_offset=0&limit=1.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/live-contents?offset=0&limit=1",
+      "bytes": 2
+    },
+    {
+      "file": "api/login_guest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/login/guest",
+      "bytes": 0
+    },
+    {
+      "file": "api/notices_show=true.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/notices?show=true",
+      "bytes": 3944
+    },
+    {
+      "file": "api/users_own.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/users/own",
+      "bytes": 134
+    },
+    {
+      "file": "api/vod-contents_10974_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/10974/viewinglog/latest",
+      "bytes": 166
+    },
+    {
+      "file": "api/vod-contents_11439_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/11439/viewinglog/latest",
+      "bytes": 165
+    },
+    {
+      "file": "api/vod-contents_30536_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/30536/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31331_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31331/viewinglog/latest",
+      "bytes": 167
+    },
+    {
+      "file": "api/vod-contents_31761_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31761/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31762_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31762/viewinglog/latest",
+      "bytes": 167
+    },
+    {
+      "file": "api/vod-contents_31763_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31763/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31764_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31764/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31765_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31765/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31766_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31766/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_31767_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31767/viewinglog/latest",
+      "bytes": 165
+    },
+    {
+      "file": "api/vod-contents_31768_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31768/viewinglog/latest",
+      "bytes": 165
+    },
+    {
+      "file": "api/vod-contents_31775_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31775/viewinglog/latest",
+      "bytes": 164
+    },
+    {
+      "file": "api/vod-contents_34594_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/34594/viewinglog/latest",
+      "bytes": 165
+    },
+    {
+      "file": "api/vod-contents_34789_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/34789/viewinglog/latest",
+      "bytes": 167
+    },
+    {
+      "file": "api/vod-contents_35539_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/35539/viewinglog/latest",
+      "bytes": 166
+    },
+    {
+      "file": "api/vod-contents_37803_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/37803/viewinglog/latest",
+      "bytes": 165
+    },
+    {
+      "file": "api/vod-contents_38215_video-src_v3.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/38215/video-src/v3",
+      "bytes": 1885
+    },
+    {
+      "file": "api/vod-contents_38215.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/38215",
+      "bytes": 1045
+    },
+    {
+      "file": "api/vod-contents_9123_viewinglog_latest.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/9123/viewinglog/latest",
+      "bytes": 163
+    },
+    {
+      "file": "api/vod-contents_count_q=_E5_BF_83_E7_90_86&qt=4.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/count?q=%E5%BF%83%E7%90%86&qt=4",
+      "bytes": 13
+    },
+    {
+      "file": "api/vod-contents_count_qt=4&categoryId=30211.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/count?qt=4&categoryId=30211",
+      "bytes": 12
+    },
+    {
+      "file": "api/vod-contents_count_qt=4&categoryId=7.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/count?qt=4&categoryId=7",
+      "bytes": 11
+    },
+    {
+      "file": "api/vod-contents_offset=0&limit=1.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents?offset=0&limit=1",
+      "bytes": 1137
+    },
+    {
+      "file": "api/vod-contents_pickup-orders.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents/pickup-orders",
+      "bytes": 2
+    },
+    {
+      "file": "api/vod-contents_q=_E5_BF_83_E7_90_86&qt=4&offset=0&limit=30&sortType=1&sortOrder=asc.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents?q=%E5%BF%83%E7%90%86&qt=4&offset=0&limit=30&sortType=1&sortOrder=asc",
+      "bytes": 35375
+    },
+    {
+      "file": "api/vod-contents_qt=4&categoryId=30211&offset=0&limit=30&sortType=1&sortOrder=asc.json",
+      "url": "https://v.ouj.ac.jp/v1/tenants/1/vod-contents?qt=4&categoryId=30211&offset=0&limit=30&sortType=1&sortOrder=asc",
+      "bytes": 15467
+    }
+  ],
+  "knownGaps": [
+    "検索の2ページ目(vod-contents?q=…&offset=30)は今回の採取では取れていない(無限スクロールが発火しなかったため)。スクリプトは修正済みなので次回の採取で入る。形はoffset=0のものと同じ。",
+    "ラジオ科目の再生ページ(player-radio)は .env の OUJ_TEST_RADIO_CONTENT_ID が未設定のため未採取。"
+  ]
+}
