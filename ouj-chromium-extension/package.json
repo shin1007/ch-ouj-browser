@@ -7,7 +7,8 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:visual:ui": "playwright test --ui",
-    "test:drm": "playwright test --project=drm-desktop --project=drm-mobile"
+    "test:drm": "playwright test --project=drm-desktop --project=drm-mobile",
+    "test:buffer": "playwright test --project=drm-buffer"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

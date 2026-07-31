@@ -36,7 +36,7 @@ module.exports = defineConfig({
     {
       name: 'desktop',
       testMatch: /.*\.spec\.js/,
-      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/],
+      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/, /player-buffer\.spec\.js/],
       use: {
         viewport: { width: 1280, height: 800 },
       },
@@ -44,7 +44,7 @@ module.exports = defineConfig({
     {
       name: 'mobile',
       testMatch: /.*\.spec\.js/,
-      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/],
+      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/, /player-buffer\.spec\.js/],
       use: {
         viewport: { width: 390, height: 844 },
       },
@@ -66,6 +66,15 @@ module.exports = defineConfig({
       testMatch: /subtitle-layout\.spec\.js/,
       use: {
         viewport: { width: 390, height: 844 },
+      },
+    },
+    // 先読み（バッファ）量の検証も実際のDRM動画の読み込みを見るためEdgeが要る。
+    // ビューポート差は関係ない検証なので1プロジェクトだけ（＝ログインも1回だけ）にしている。
+    {
+      name: 'drm-buffer',
+      testMatch: /player-buffer\.spec\.js/,
+      use: {
+        viewport: { width: 1280, height: 800 },
       },
     },
   ],

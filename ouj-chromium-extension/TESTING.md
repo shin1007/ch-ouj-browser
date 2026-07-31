@@ -1,7 +1,13 @@
 # テスト手順（人間／エージェント共通）
 
 このリポジトリのテストの走らせ方と、実行前にハマりやすい点をまとめる。
-**「node が入っていない」と判断する前に、必ず §1 を読むこと。**
+
+最初に押さえること:
+
+- **「node が入っていない」と判断する前に §1 を読む**（入っているがPATHに出ないだけ）。
+- **実サイトへのログインは回数を絞る**（§4.1）。短時間に繰り返すとアカウントがはじかれる。
+  確認は §2・§3 のオフライン手段を優先し、実サイトのテストは最後に1回。
+- スナップショットの1px差による失敗は日常的に起きる（§4.4）。自分の変更のせいと決めつけない。
 
 ---
 
@@ -97,7 +103,8 @@ for (const f of ['src/utils/page-type.js', 'src/対象ファイル.js']) {
 | `--project=popup-desktop --project=popup-mobile` | 0 |
 | `--project=desktop` | 1 |
 | `--project=desktop --project=mobile` | 2 |
-| `npm run test:visual`（DRM含む全プロジェクト） | 4 |
+| `--project=drm-buffer`（`npm run test:buffer`） | 1 |
+| `npm run test:visual`（DRM含む全プロジェクト） | 5 |
 
 守ること:
 
@@ -145,6 +152,7 @@ npx playwright test --project=popup-desktop --project=popup-mobile --project=des
 | `popup-desktop` / `popup-mobile` | `popup.spec.js` | 実サイトへのログイン不要 |
 | `desktop` / `mobile` | 上記以外（`subtitle-layout` を除く） | 実サイトへログインする |
 | `drm-desktop` / `drm-mobile` | `subtitle-layout.spec.js` | **Microsoft Edge が必要**（DRM再生）。`npm run test:drm` |
+| `drm-buffer` | `player-buffer.spec.js` | 先読み（バッファ）量の検証。同じくEdgeが必要。ログイン1回で済むよう1プロジェクトのみ。`npm run test:buffer` |
 
 `npm run test:visual` は全プロジェクト（DRM含む）を回すので、DRM を検証しないときは
 上のように `--project` を明示した方が速く、失敗ノイズも減る。
@@ -159,11 +167,15 @@ npx playwright test --project=popup-desktop --project=popup-mobile --project=des
 
 **失敗の切り分け手順（自分の変更が原因か確かめる）**
 
+この確認にもログイン1回分かかる。失敗したテストが自分の変更と物理的に関係し得るか
+（触っていないページ／機能ではないか）を先に考え、必要な場合だけ、**落ちたテストだけに
+絞って**実行する。
+
 ```powershell
 # 1) 自分が触ったファイルだけ退避してベースラインを測る
 git stash push -m baseline -- <自分が編集したファイル...>
-npx playwright test --project=desktop --reporter=list
-# 2) 同じテストが同じ内容で落ちるなら、自分の変更とは無関係
+npx playwright test --project=desktop tests/visual/<落ちたspec>.js --reporter=list
+# 2) 同じテストが同じ内容（同じピクセル数）で落ちるなら、自分の変更とは無関係
 git stash pop
 ```
 

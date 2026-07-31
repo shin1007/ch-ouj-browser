@@ -34,7 +34,8 @@
         "https://v.ouj.ac.jp/*"
       ],
       "js": [
-        "page-size-patch.js"
+        "page-size-patch.js",
+        "player-buffer-patch.js"
       ],
       "run_at": "document_start",
       "world": "MAIN"

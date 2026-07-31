@@ -6,7 +6,7 @@
 
 ## 全体像
 
-- **種別**: Chrome拡張（Manifest V3）。ビルド工程なし。生の `.js`/`.css` を [src/manifest.json](src/manifest.json) の `content_scripts` に**列挙した順**でロードする。例外は [page-size-patch.js](src/page-size-patch.js) だけで、これはサイト自身のfetch/XHRに触れる必要があるため `world: "MAIN"` の専用エントリで読み込む。
+- **種別**: Chrome拡張（Manifest V3）。ビルド工程なし。生の `.js`/`.css` を [src/manifest.json](src/manifest.json) の `content_scripts` に**列挙した順**でロードする。例外は [page-size-patch.js](src/page-size-patch.js) と [player-buffer-patch.js](src/player-buffer-patch.js) の2つで、これらはサイト自身のfetch/XHRやTHEOplayerインスタンスに触れる必要があるため `world: "MAIN"` の専用エントリで読み込む。
 - **モジュール共有**: ES Modules や bundler は使わず、各ファイルは末尾で `window.関数名 = 関数名` として公開し、他ファイルは `window.*` 経由で呼ぶ。→ 並列作業向けのファイル分割方針（[AGENTS.md](AGENTS.md)）と対応。
 - **ロード順 ＝ 依存順**: `utils/`（基盤）→ `menu/` → `page-video/` → `page-*`（各ページ）→ 最後に [src/content.js](src/content.js)（オーケストレーター）。
 - **オーケストレーション**: [content.js](src/content.js) が `detectOujPageType()` で画面種別を判定し、ページごとに必要な機能を起動する。対象サイトはIonic/AngularのSPAなので、URL変化（pushState/popstate/hashchange＋250msポーリング）を監視して再実行する。
@@ -16,6 +16,7 @@
   - `chrome.storage.sync` … ポップアップの設定（自動ログインON/OFF・テーマ）など少数。
   - `window.*` 共有変数 … 動画ページの一時状態（`nextVideoId`, `videoListInCourse`, `currentVideoIndexInCourse` 等）。
 - **重要方針**: 放送大学サーバーへの負荷を最小化する。API取得は [utils/net.js](src/utils/net.js) の `fetchWithCache` でキャッシュし、一覧系は IntersectionObserver＋同時実行制限で「画面内に入った項目だけ」遅延取得する。
+- **テスト**: 手順とハマりどころは [TESTING.md](TESTING.md)（Nodeのパス／構文チェック／`target_site`を使う実サイト不要の確認／Playwright視覚回帰テストと基準画像の1pxずれの切り分け）。
 
 ## 対象サイトのAPI/画面
 
@@ -83,7 +84,7 @@
 | [page-video/video-player-core.js](src/page-video/video-player-core.js) | **再生ページ初期化の中心**。次動画の決定と共有状態管理 | `initializeVideoPlayer`, `fetchNextVideoId`, `fetchNextVideoFrom{SameCourse,Favorites}`, `getCurrent/NextVideoId`, 共有: `nextVideoId`/`videoListInCourse`/`currentVideoIndexInCourse` |
 | [page-video/video-playback-management.js](src/page-video/video-playback-management.js) | 再生管理・再生位置保存(playlog)・速度・次へスキップ | `StartPlaybackManagement`, `setPlaybackSpeed`, `skipToNextVideo` |
 | [page-video/video-player-actions.js](src/page-video/video-player-actions.js) | タイトル横ボタン（PiP/しおり/あとで見る）・しおりデータ・pendingSeek。PiPの出入り監視も持つ（ページ遷移時は閉じる／PiPを閉じたらパネルを閉じて動画を画面内へ戻す） | `addPlayerActionButtons`, `pipOrPauseCurrentVideoIfPlaying`, `getBookmarks`, `removeBookmark`, `formatBookmarkTime`, `applyPendingSeekIfAny`, `setPendingSeek` |
-| [page-video/video-settings.js](src/page-video/video-settings.js) | 動画下部の設定パネル（トークン方式で二重挿入を防ぐ） | `addVideoSettingsPanel` |
+| [page-video/video-settings.js](src/page-video/video-settings.js) | 動画下部の設定パネル（トークン方式で二重挿入を防ぐ）。「先読み（バッファ）する長さ」もここ。値を保存するだけで、適用はMAIN worldの [player-buffer-patch.js](src/player-buffer-patch.js) が行う | `addVideoSettingsPanel` |
 | [page-video/video-prev-next.js](src/page-video/video-prev-next.js) | 前後の回へのリンク | `insertPrevNextLinks` |
 | [page-video/video-episode-list.js](src/page-video/video-episode-list.js) | 同一科目の回一覧ジャンプメニュー | `insertEpisodeListMenu` |
 | [page-video/video-radio-detection.js](src/page-video/video-radio-detection.js) | ラジオ判定・字幕有無判定（videoWidth/Heightで判定） | `checkIfRadioProgram`, `isRadioProgram`, `isCaptionAvailable`, `getVideoSrcInfo`, `showRadioProgramUI` |
@@ -110,6 +111,7 @@
 | [page-search-result-compact.js](src/page-search-result-compact.js) | 検索結果の**コンパクト表示**（絞り込みバーの「表示: コンパクト表示」チップでON/OFF、localStorage `searchCompactView`）。サムネイルとあらすじをCSSで隠し、同じ科目の回を1行にまとめて「第01回」等のチップで並べる。**科目の判定は項目のパンくず`.content-category`末尾の科目コード（追加通信なし）**。同じ科目が複数コースに登録されていると科目コードは`1519549`/`1519549a`/`1519549b`のように枝分かれし同じ回が重複して並ぶので、英字を落とした数字をキーにまとめ、同一タイトルの回はチップ1つに集約する。**この科目コードはサイトのcategoryIdではない**（`vod?ca=`に渡すと空の一覧になる）ので、リンクには分類時にvod-contentから拾った`dataset.oujCategoryId`を使う。チップ・科目名は`<a href>`で、通常クリックはサイト純正のリンクボタンに委譲（SPA遷移・`se=`の文脈を保つ）、Ctrl/⌘/中クリックはブラウザ標準の新しいタブに任せる。まとめて隠した回はIntersectionObserverが発火しないため、まとめ行が画面内に入った時に`ensureOujItemClassified`でその科目の回をまとめて分類する。項目の表示可否は`dataset.oujCompactState`で`updateSearchResultItemVisibility`に伝え、絞り込みの判定より優先させる | `isOujCompactViewEnabled`, `applyOujCompactGrouping`, `scheduleOujCompactRegroup`, `buildOujCompactViewRow` |
 | [page-search-result-autoload.js](src/page-search-result-autoload.js) | 検索結果の**自動読み込み**（絞り込みバーの「自動読み込み」チップでON/OFF、localStorage `searchAutoLoadMore`、既定OFF）。サイトの続き読み込み（1ページ30件のion-infinite-scroll）を、下までスクロールする操作の代わりに拡張が発火させる。**発火方法は実測で決定**: Ionicはscrollイベントの「次のフレーム」でスクロール位置を読むため、下端へ移動→scrollイベント→**2フレーム保持**→元の位置へ戻す（同じタスク内で戻す方式・高さを縮める方式・infinite要素を膨らませる方式はいずれも発火しないことを実サイトで確認）。バックグラウンドタブでrAFが来ない場合に下端で固まらないようタイマーの保険付き。負荷対策として既定OFF＋一度に300件までで停止し「さらに読み込む」を出す。総件数はサイト自身と同じ`vod-contents/count?q=…&qt=4`から取得して「330 / 817件」と表示し、残りがあるのに増えないときは`stalled`として手動再開に委ねる（「すべて読み込み済み」と誤って言わない） | `isOujAutoLoadEnabled`, `startOujAutoLoad`, `buildOujAutoLoadControls` |
 | [page-size-patch.js](src/page-size-patch.js) | **本拡張で唯一 MAIN world（サイト自身のJSと同じ世界）で動くファイル**。manifest.jsonの専用エントリ（`world: "MAIN"`, `document_start`）で読み込む。「自動読み込み」がONのときだけ、検索一覧API（`vod-contents?q=…`）の`limit=30`を`limit=100`に書き換える（fetchとXMLHttpRequest.openをラップ）。実測でサイトは100件でも正しく描画し、続きも offset=100→200→300 と正しく続く（重複なし）。1リクエストの所要時間は件数によらずほぼ同じなので取得回数が約1/3になる。MAIN worldではchrome.*が使えないため、ON/OFFはページと共有のlocalStorage（`searchAutoLoadMore`）を直接読む。OFFのユーザーには従来どおり30件しか取りに行かせない（サーバー負荷を増やさないため）。総件数API・カテゴリ一覧は対象外 | （公開IFなし。副作用のみ） |
+| [player-buffer-patch.js](src/player-buffer-patch.js) | **MAIN worldで動く2つ目のファイル**（manifest.jsonの `world: "MAIN"`, `document_start` エントリ）。サイトの再生プレイヤーTHEOplayer 7の先読み量（`player.abr.targetBuffer`、サイト既定20秒）を、設定パネルで選んだ秒数に差し替える。`window.THEOplayer.players` を2秒ごとに見て適用（SPAでプレイヤーが作り直されても、再生中に設定を変えても効かせるため）。設定はlocalStorage `videoTargetBufferSeconds`（0＝サイト標準のまま／既定）。実際に貯まる量は THEOplayer 内部の `min(targetBuffer, maxBufferLength)` とブラウザのMSEバッファ上限で頭打ちになる | （公開IFなし。副作用のみ） |
 | [search-box-filter-panel.js](src/search-box-filter-panel.js) | 検索ボックスのクイック絞り込みパネル（全ページ共通）。「最近の検索」／「年度・コースで探す（コースを選ぶとそのコースへ遷移、年度も選べば遷移先を年度絞り込み）」／絞り込みプリセット | `initSearchBoxFilterPanel` |
 | [search-box-all-subjects-panel.js](src/search-box-all-subjects-panel.js) | 上記パネルでキーワード欄が空のまま絞り込みプリセットのチップを操作した瞬間に開く/更新するネイティブ風パネル。カテゴリAPIのsummary/name欄だけで媒体・字幕・年度を全科目分即時判定（追加通信なし）、視聴状況のみ画面内に入った科目だけ遅延取得 | `handleAllSubjectsFilterPanelOpen` |
 
