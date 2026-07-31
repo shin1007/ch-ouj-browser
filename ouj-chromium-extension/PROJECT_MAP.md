@@ -10,6 +10,7 @@
 - **モジュール共有**: ES Modules や bundler は使わず、各ファイルは末尾で `window.関数名 = 関数名` として公開し、他ファイルは `window.*` 経由で呼ぶ。→ 並列作業向けのファイル分割方針（[AGENTS.md](AGENTS.md)）と対応。
 - **ロード順 ＝ 依存順**: `utils/`（基盤）→ `menu/` → `page-video/` → `page-*`（各ページ）→ 最後に [src/content.js](src/content.js)（オーケストレーター）。
 - **オーケストレーション**: [content.js](src/content.js) が `detectOujPageType()` で画面種別を判定し、ページごとに必要な機能を起動する。対象サイトはIonic/AngularのSPAなので、URL変化（pushState/popstate/hashchange＋250msポーリング）を監視して再実行する。
+- **表示オプション**: 拡張機能が画面に追加するUIは、[utils/display-options.js](src/utils/display-options.js) の定義に基づき機能単位で非表示にできる（メニューの「表示オプション」）。挿入処理側のゲート（`isOujFeatureVisible`）＋挿入済み要素を隠すCSSの2段構え。
 - **状態の保存先**:
   - `localStorage`（[utils/settings.js](src/utils/settings.js)）… お気に入り・履歴・あとで見る・しおり・視聴override・各種設定・学習時間 等。拡張機能のデータはほぼここ。
   - `chrome.storage.sync` … ポップアップの設定（自動ログインON/OFF・テーマ）など少数。
@@ -38,6 +39,7 @@
 | [utils/net.js](src/utils/net.js) | APIキャッシュ・同時実行ゲート | `fetchWithCache`, `createConcurrencyGate` |
 | [utils/dom-wait.js](src/utils/dom-wait.js) | DOM/条件の出現待ち | `waitForElement`, `waitForCondition` |
 | [utils/settings.js](src/utils/settings.js) | localStorage設定の読み書き（科目別設定含む） | `getSetting`, `saveSetting`, `getBooleanSetting`, `getPerCourseSetting`, `savePerCourseSetting`, `removeSetting` |
+| [utils/display-options.js](src/utils/display-options.js) | **表示オプション**（拡張機能が追加するUIの表示/非表示）。全オプションの定義（id・ラベル・即時非表示用CSSセレクタ）を持ち、localStorage `displayOptions` に保存。未設定は「表示」扱いなので既存ユーザーの見え方は変わらない。**UIを追加する機能を新設したらここに定義を足し、挿入処理の冒頭で `isOujFeatureVisible(id)` を見ること** | `isOujFeatureVisible`, `setOujFeatureVisible`, `setOujDisplayOptions`, `resetOujDisplayOptions`, `getOujDisplayOptions`, `getOujDisplayOptionList`, `applyOujDisplayOptionStyles`, `OUJ_DISPLAY_OPTION_GROUPS` |
 | [utils/notification.js](src/utils/notification.js) | トースト通知 | `showNotification`, `show{Success,Error,Warning,Info}Notification`, `closeNotification` |
 | [utils/dialog.js](src/utils/dialog.js) | モーダル確認/入力ダイアログ | `showConfirmDialog`, `showPromptDialog` |
 | [utils/text.js](src/utils/text.js) | タイトル/科目名の整形 | `trimTitle`, `trimCourseName` |
@@ -69,6 +71,7 @@
 | [menu/menu-recommendation-panel.js](src/menu/menu-recommendation-panel.js) | おすすめ**表示**（HTML生成） | `handleRecommendPanelOpen` |
 | [menu/menu-study-time.js](src/menu/menu-study-time.js) | 学習時間パネル（7/30/90日・ストリーク・科目別内訳） | `handleStudyTimePanelOpen` |
 | [menu/menu-whats-new.js](src/menu/menu-whats-new.js) | お知らせ/変更点（NEWバッジ）。**★リリース時は `OUJ_CHANGELOG_ENTRIES` 先頭に追記** | `handleWhatsNewPanelOpen`, `updateWhatsNewBadge` |
+| [menu/menu-display-options.js](src/menu/menu-display-options.js) | 表示オプションのパネル（チェックボックス一覧＋プリセット）。定義と保存は [utils/display-options.js](src/utils/display-options.js) | `handleDisplayOptionsPanelOpen` |
 | [menu/menu-header-darkmode.js](src/menu/menu-header-darkmode.js) | ヘッダーのテーマ切替ボタン | `insertHeaderDarkModeToggle` |
 | [menu/menu-header-collapse.js](src/menu/menu-header-collapse.js) | ヘッダー行の折りたたみ | `insertHeaderCollapseToggle` |
 | [menu/menu-header-wakaba.js](src/menu/menu-header-wakaba.js) | ヘッダーのシステムWAKABAリンク | `insertHeaderWakabaLink` |
@@ -129,7 +132,8 @@
 
 ```
 sso（ログイン画面） → waitForPasswordAndLogin → 成功ならhomeへ
-v.* 共通           → startOujLoginStateWatcher(ログイン/ログアウト検知で授業一覧キャッシュ破棄)
+v.* 共通           → applyOujDisplayOptionStyles(表示オプションの非表示CSSを入れ直す)
+                    ／ startOujLoginStateWatcher(ログイン/ログアウト検知で授業一覧キャッシュ破棄)
                     ／ insertLeftMenu / ヘッダー2ボタン / メニュー監視 / initSearchBoxFilterPanel
                     ＋ SPA遷移対策: 前ページのフィルターバー(search-result-filter-bar / course-list-filter-bar)を除去
   home            → insertHomeContinuePanel + handleHomePageAutoLogin

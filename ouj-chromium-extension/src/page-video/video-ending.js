@@ -139,7 +139,15 @@ function startVideoEndMonitoring() {
         return;
       }
       if (window.nextVideoId) {
-        startNextVideoCountdown(5);
+        // 表示オプションでカウントダウン表示を隠している場合は、表示せずに
+        // そのまま次の動画へ進む（「自動で次に進む」設定とは別物なので止めない）
+        const countdownVisible = typeof window.isOujFeatureVisible !== 'function'
+          || window.isOujFeatureVisible('player-next-countdown');
+        if (countdownVisible) {
+          startNextVideoCountdown(5);
+        } else if (typeof window.skipToNextVideo === 'function') {
+          window.skipToNextVideo();
+        }
       }
     };
     // SPA遷移で同じvideo要素が使い回される場合の重複登録を防ぐ

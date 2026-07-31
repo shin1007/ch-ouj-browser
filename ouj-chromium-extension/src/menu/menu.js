@@ -13,9 +13,18 @@ const MENU_CONFIG = {
     { id: "recommend", text: "おすすめ動画", icon: "play" },
     { id: "studytime", text: "学習時間", icon: "stats" },
     { id: "whatsnew", text: "お知らせ", icon: "notifications" },
-    { id: "darkmode", text: "ダークモード", icon: "moon" }
+    { id: "darkmode", text: "ダークモード", icon: "moon" },
+    // 表示オプションは他の項目を隠すための入口なので、表示オプション自体では隠せない
+    { id: "displayoptions", text: "表示オプション", icon: "options" }
   ]
 };
+
+// 表示オプションで非表示にされたメニュー項目を除いた一覧を返す。
+// （CSS側でも隠しているが、そもそもDOMに作らないことでクリック判定等も無くす）
+function getVisibleMenuItems() {
+  if (typeof window.isOujFeatureVisible !== 'function') return MENU_CONFIG.items;
+  return MENU_CONFIG.items.filter((item) => window.isOujFeatureVisible(`menu-${item.id}`));
+}
 const LEFT_SELECTOR = '#menu > menu-navi > ion-content > div.scroll-content > ion-content > div.scroll-content > ion-list:nth-child(3)';
 const POPOVER_SELECTOR = 'body > ion-app > ion-popover > div > div.popover-content > div > menu-navi > ion-content > div.scroll-content > ion-content > div.scroll-content > ion-list:nth-child(3)';
 
@@ -39,7 +48,7 @@ function createMenuHTML() {
     </ion-item>
   `;
 
-  const itemsHTML = MENU_CONFIG.items.map(item => `
+  const itemsHTML = getVisibleMenuItems().map(item => `
     <ion-item class="item-selectable item item-block item-md" id="${item.id}-menu-item">
       <div class="item-inner">
         <div class="input-wrapper"><!---->
@@ -181,6 +190,10 @@ function createMenuList() {
   const studyTimeItem = menuList.querySelector('#studytime-menu-item');
   if (studyTimeItem) {
     studyTimeItem.addEventListener('click', window.handleStudyTimePanelOpen);
+  }
+  const displayOptionsItem = menuList.querySelector('#displayoptions-menu-item');
+  if (displayOptionsItem) {
+    displayOptionsItem.addEventListener('click', window.handleDisplayOptionsPanelOpen);
   }
   const darkModeItem = menuList.querySelector('#darkmode-menu-item');
   if (darkModeItem) {

@@ -40,7 +40,10 @@ async function addFavoriteButtonsToCategoryList() {
     
     // お気に入りボタン作成
     const favBtn = document.createElement('button');
-    favBtn.className = 'favorite-btn';
+    // ouj-course-fav-btnは表示オプション(utils/display-options.js)で
+    // 「科目一覧のお気に入り星」だけを隠すための目印。お気に入りパネル内の
+    // .favorite-btn（menu-native-shell.js）を巻き込まないよう別クラスにしている
+    favBtn.className = 'favorite-btn ouj-course-fav-btn';
     favBtn.title = 'お気に入り';
     favBtn.style.display = 'inline-flex';
     favBtn.style.alignItems = 'center';

@@ -25,12 +25,37 @@ function addVideoSettingsPanel() {
   window.oujVideoSettingsPanelToken = (window.oujVideoSettingsPanelToken || 0) + 1;
   const myToken = window.oujVideoSettingsPanelToken;
   window.waitForElement('#content-detail-area > div.title', async (targetElement) => {
-    await window.insertPrevNextLinks(targetElement);
-    await window.insertEpisodeListMenu(targetElement);
+    if (isVideoUiVisible('player-prev-next')) {
+      await window.insertPrevNextLinks(targetElement);
+    }
+    if (isVideoUiVisible('player-episode-list')) {
+      await window.insertEpisodeListMenu(targetElement);
+    }
     // 待っている間により新しい呼び出しが発生していれば、この呼び出しの結果は古いので破棄する
     if (window.oujVideoSettingsPanelToken !== myToken) return;
-    insertSettingsPanel(targetElement);
+    if (isVideoUiVisible('player-settings-panel')) {
+      insertSettingsPanel(targetElement);
+    } else {
+      // パネルを隠していても、字幕まわりの設定は従来どおり効かせる必要がある
+      // （設定の適用がパネル生成処理の中にあるため、ここで同じ処理を行う）
+      applyCaptionSettingsWithoutPanel();
+    }
   });
+}
+
+// 表示オプション(utils/display-options.js)による表示判定
+function isVideoUiVisible(featureId) {
+  return typeof window.isOujFeatureVisible !== 'function' || window.isOujFeatureVisible(featureId);
+}
+
+// 設定パネルを表示しない場合でも、保存済みの字幕設定は反映する
+function applyCaptionSettingsWithoutPanel() {
+  if (typeof window.showCaptionAccordingToSetting === 'function') {
+    window.showCaptionAccordingToSetting();
+  }
+  if (typeof window.applyCaptionShrinkFix === 'function') {
+    window.applyCaptionShrinkFix(window.getBooleanSetting('preventCaptionShrink', true));
+  }
 }
 function insertSettingsPanel(targetElement) {
   // 設定パネルを作成
@@ -224,7 +249,7 @@ function insertSettingsPanel(targetElement) {
 
   // A-B区間リピートの操作行を挿入
   const abRepeatContainer = panel.querySelector('#ab-repeat-container');
-  if (abRepeatContainer && typeof window.insertAbRepeatControls === 'function') {
+  if (abRepeatContainer && typeof window.insertAbRepeatControls === 'function' && isVideoUiVisible('player-ab-repeat')) {
     window.insertAbRepeatControls(abRepeatContainer);
   }
 

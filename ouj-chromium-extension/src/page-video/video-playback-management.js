@@ -27,6 +27,8 @@ function setPlaybackSpeed() {
 // 倍速再生時は「あと何分で見終わるか」が直感的に分からないため、
 // 再生速度で割った換算値を表示する（等速なら実時間のみ）
 function updateRemainingTimeDisplay(video) {
+  // 表示オプション(utils/display-options.js)で非表示にしていれば作らない
+  if (typeof window.isOujFeatureVisible === 'function' && !window.isOujFeatureVisible('player-remaining-time')) return;
   const titleEl = document.querySelector('#content-detail-area > div.title');
   if (!titleEl || !video || !isFinite(video.duration) || video.duration <= 0) return;
   let span = document.getElementById('ouj-remaining-time');

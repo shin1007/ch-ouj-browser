@@ -129,6 +129,10 @@ async function updateThumbnailProgress() {
  * ページ読み込み時にサムネイル進捗を表示する
  */
 function initializeThumbnailProgress() {
+  // 表示オプション(utils/display-options.js)で非表示にしている場合は、
+  // 進捗の取得や監視ごと行わない
+  if (typeof window.isOujFeatureVisible === 'function' && !window.isOujFeatureVisible('thumbnail-progress')) return;
+
   // 初期表示
   showThumbnailProgress();
   

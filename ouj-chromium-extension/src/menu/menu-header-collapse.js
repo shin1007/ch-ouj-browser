@@ -183,6 +183,10 @@ function insertHeaderCollapseToggle() {
   });
 }
 window.insertHeaderCollapseToggle = insertHeaderCollapseToggle;
+// 表示オプションでこのボタンを隠したとき、折りたたんだままだと戻す手段が
+// 無くなるため、パネル側からヘッダーを開き直せるように公開する
+// （chrome.storageの設定値は変えないので、再度表示すれば元の状態に戻る）
+window.applyOujHeaderCollapsed = applyOujHeaderCollapsed;
 
 // ポップアップ等、他のタブでの変更もリアルタイムに反映
 chrome.storage.onChanged.addListener((changes, areaName) => {

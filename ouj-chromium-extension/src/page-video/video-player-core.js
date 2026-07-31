@@ -62,10 +62,17 @@ async function addFunctionPanel(currentVideo, startUrl){
     }
     return;
   }
-  addShareButtonAfterVideoTitle();
+  // 表示オプション(utils/display-options.js)で非表示にされていれば挿入しない
+  const isPlayerUiVisible = (featureId) => (
+    typeof window.isOujFeatureVisible !== 'function' || window.isOujFeatureVisible(featureId)
+  );
+
+  if (isPlayerUiVisible('player-share')) {
+    addShareButtonAfterVideoTitle();
+  }
 
   // タイトル横のアクションボタン群（PiP・しおり・あとで見る）を追加
-  if (typeof window.addPlayerActionButtons === 'function') {
+  if (typeof window.addPlayerActionButtons === 'function' && isPlayerUiVisible('player-actions')) {
     window.addPlayerActionButtons(currentVideo);
   }
 
