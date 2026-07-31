@@ -24,6 +24,12 @@ const OUJ_DISPLAY_OPTIONS_STYLE_ID = 'ouj-display-options-style';
  * - selectors: 「既に挿入済みの要素」を即時に隠すためのCSSセレクタ
  * - group: 表示オプション画面での見出し。groupの `description` は見出しの下に補足として出る
  *          （どこに出る表示なのかが分かりにくいグループで使う）
+ *
+ * **並び順は「画面に出てくる順」に合わせている**（グループも、グループ内の項目も、
+ * 画面の上から下・左から右の順）。探している表示を目で追う順に見つけられるようにするため。
+ * 項目を追加するときも、その表示が画面のどこに出るかを見て差し込む位置を決めること。
+ * 最後の「拡張機能メニューの項目」だけは例外で、ページ内の表示ではなくメニューの
+ * 中身なので、ページ内の項目をすべて挙げた後ろにまとめている（並びはメニューと同じ順）。
  * - inPage: ページ内に直接追加される要素かどうか（false＝拡張機能メニューの項目）。
  *           「ページ内の追加表示を最小限にする」プリセットの対象判定に使う
  */
@@ -33,17 +39,17 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
     label: 'ヘッダー（画面上部）',
     options: [
       {
+        id: 'search-box-panel',
+        label: '検索ボックスの絞り込みパネル',
+        description: '検索欄をクリックしたときに開く「最近の検索」「年度・コースで探す」パネル',
+        selectors: ['#ouj-search-box-panel'],
+        inPage: true,
+      },
+      {
         id: 'header-darkmode',
         label: 'テーマ切替ボタン（🌓）',
         description: 'ライト／ダーク／自動を切り替えるボタン。隠してもメニューの「ダークモード」から切り替えられます',
         selectors: ['.ouj-header-darkmode-toggle'],
-        inPage: true,
-      },
-      {
-        id: 'header-collapse',
-        label: 'ヘッダー折りたたみボタン',
-        description: 'ロゴ・検索欄の行を隠して表示領域を広げるボタン',
-        selectors: ['#ouj-header-collapse-tab', '#ouj-header-expand-tab'],
         inPage: true,
       },
       {
@@ -54,10 +60,10 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         inPage: true,
       },
       {
-        id: 'search-box-panel',
-        label: '検索ボックスの絞り込みパネル',
-        description: '検索欄をクリックしたときに開く「最近の検索」「年度・コースで探す」パネル',
-        selectors: ['#ouj-search-box-panel'],
+        id: 'header-collapse',
+        label: 'ヘッダー折りたたみボタン',
+        description: 'ロゴ・検索欄の行を隠して表示領域を広げるボタン',
+        selectors: ['#ouj-header-collapse-tab', '#ouj-header-expand-tab'],
         inPage: true,
       },
     ],
@@ -74,6 +80,20 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         inPage: true,
       },
       {
+        id: 'breadcrumb-favorite',
+        label: 'パンくずのお気に入り星',
+        description: '回の一覧・再生ページの上部（パンくず）に出る★ボタン',
+        selectors: ['#favorite-button'],
+        inPage: true,
+      },
+      {
+        id: 'course-filters',
+        label: '科目一覧の絞り込みバー',
+        description: 'テレビ／ラジオ・字幕・視聴状況・年度で絞り込むバー',
+        selectors: ['#course-list-filter-bar'],
+        inPage: true,
+      },
+      {
         id: 'course-favorite',
         label: '科目一覧のお気に入り星',
         description: '科目一覧の各行に付く★ボタン',
@@ -85,13 +105,6 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         label: '科目一覧の視聴進捗バッジ・「▶続き」',
         description: '「3/15回」などの進捗バッジと、最初の未視聴回へ飛ぶボタン',
         selectors: ['.course-progress-badge', '.course-continue-btn'],
-        inPage: true,
-      },
-      {
-        id: 'course-filters',
-        label: '科目一覧の絞り込みバー',
-        description: 'テレビ／ラジオ・字幕・視聴状況・年度で絞り込むバー',
-        selectors: ['#course-list-filter-bar'],
         inPage: true,
       },
       {
@@ -115,19 +128,19 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         selectors: ['.progress-bar-container'],
         inPage: true,
       },
-      {
-        id: 'breadcrumb-favorite',
-        label: 'パンくずのお気に入り星',
-        description: '回の一覧・再生ページの上部（パンくず）に出る★ボタン',
-        selectors: ['#favorite-button'],
-        inPage: true,
-      },
     ],
   },
   {
     id: 'player',
     label: '再生ページ',
     options: [
+      {
+        id: 'player-next-countdown',
+        label: '次の動画のカウントダウン',
+        description: '動画終了時に次の動画名とカウントダウンを重ねて表示',
+        selectors: ['#ouj-next-video-countdown'],
+        inPage: true,
+      },
       {
         id: 'player-share',
         label: '共有ボタン',
@@ -168,13 +181,6 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         label: '動画下部の設定パネル（全体）',
         description: '再生速度・字幕・スキップ秒数などの設定パネル。パネルごと隠します（中の項目を1つずつ選ぶなら次のグループ）',
         selectors: ['#video-settings-panel'],
-        inPage: true,
-      },
-      {
-        id: 'player-next-countdown',
-        label: '次の動画のカウントダウン',
-        description: '動画終了時に次の動画名とカウントダウンを重ねて表示',
-        selectors: ['#ouj-next-video-countdown'],
         inPage: true,
       },
     ],
