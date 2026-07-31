@@ -168,6 +168,16 @@ function callSafeMainOnce() {
   }
 }
 
+// 表示オプションを「非表示 → 表示」に戻したときに、ページ再読み込みなしで
+// 反映するための再実行口。非表示の機能は上のisVisible()ゲートでそもそも挿入
+// されないため、CSSを外すだけでは戻らない。各挿入処理は冪等（挿入済みなら
+// 何もしない）なので、main()をもう一度走らせれば足りない要素だけが補われる。
+// 直前の実行からの間隔でスロットルされないよう、タイムスタンプを明示的に消す。
+window.oujRerunPageFeatures = function oujRerunPageFeatures() {
+  window.oujLastMainTime = 0;
+  callSafeMainOnce();
+};
+
 // content.jsは、manifest.jsonの宣言的content_scripts(document_end)と、
 // background.jsのwebNavigation.onCompletedによる再注入の両方から、同じページに対して
 // 実行されることがある(background.js側は宣言的注入の補助として残っている)。実機で

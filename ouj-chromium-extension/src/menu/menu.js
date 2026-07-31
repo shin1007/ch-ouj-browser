@@ -153,6 +153,17 @@ function insertPopoverMenu() {
   insertMenuWhenReady(POPOVER_SELECTOR);
 }
 
+// 表示オプションで項目の表示/非表示を切り替えたときに、拡張機能メニューを作り直す。
+// メニュー項目の有無はDOM生成時（createMenuHTML→getVisibleMenuItems）に決まるため、
+// 「非表示 → 表示」に戻しても、既に挿入済みのメニューはinsertMenu()の二重挿入防止に
+// 阻まれて更新されない。一度取り除いてから入れ直すことで再読み込みなしに反映する。
+function rebuildOujMenus() {
+  document.querySelectorAll('ion-list.menu-list[aria-label="拡張機能"]').forEach((menu) => menu.remove());
+  insertMenu(LEFT_SELECTOR);
+  // ポップオーバー（狭い画面でのメニュー）は開いているときだけ存在する
+  insertMenu(POPOVER_SELECTOR);
+}
+
 // メニューのイベントリスナーを追加
 function createMenuList() {
   // メニュー要素を作成
@@ -254,4 +265,5 @@ function getIconHtml(type, filled = false) {
 }
 window.getIconHtml = getIconHtml;
 window.insertLeftMenu = insertLeftMenu;
+window.rebuildOujMenus = rebuildOujMenus;
 window.startMenuOpeningMutationObserver = startMenuOpeningMutationObserver;

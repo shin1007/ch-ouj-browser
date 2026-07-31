@@ -2,9 +2,10 @@
 // この拡張機能がページに追加するUIを、機能ごとに表示/非表示できる設定画面。
 // 定義と保存・即時反映のロジックは utils/display-options.js にある。
 //
-// 非表示への切り替えは utils/display-options.js のCSSで即座に反映されるが、
-// 表示へ戻す方向は「挿入自体をしなかった要素」までは戻せないため、変更があれば
-// 再読み込みを促すバーを出す。
+// 非表示への切り替えは utils/display-options.js のCSSで即座に反映される。
+// 表示へ戻す方向は「挿入自体をしなかった要素」が対象なので、メニューの作り直しと
+// ページ側の挿入処理の再実行（reapplyOujFeaturesAfterDisplayOptionChange）で反映する。
+// それでも取りこぼす表示があり得るため、保険として再読み込みバーは残している。
 
 function buildDisplayOptionRowHtml(option, visible) {
   const descriptionHtml = option.description
@@ -44,7 +45,7 @@ function buildDisplayOptionsMainHtml() {
       </div>
       <div id="ouj-display-options-reload" style="display:none;padding:12px 20px 0 20px;">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:8px 12px;">
-          <span style="font-size:12px;color:#795548;">設定は保存されました。すべての画面に反映するにはページを再読み込みしてください。</span>
+          <span style="font-size:12px;color:#795548;">設定を保存し、この画面に反映しました。反映されていない表示があれば再読み込みしてください。</span>
           <button type="button" id="ouj-display-options-reload-button" style="padding:5px 12px;border-radius:12px;font-size:12px;cursor:pointer;border:1px solid #1976d2;background:#1976d2;color:#fff;">再読み込み</button>
         </div>
       </div>
@@ -66,6 +67,17 @@ function applyDisplayOptionSideEffect(optionId, visible) {
   }
 }
 
+// 「非表示 → 表示」に戻したときの即時反映。
+// 非表示の機能は挿入処理のゲート（isOujFeatureVisible）でそもそもDOMに作られない
+// ため、utils/display-options.js のCSSを外すだけでは何も現れない。特に「初期状態で
+// 非表示」の項目はページを開いた時点で一度も挿入されておらず、再読み込みするまで
+// 戻らなかった。ここでメニューを作り直し、ページ側の挿入処理を走らせ直す。
+// 各挿入処理は冪等なので、既にある要素が重複することはない。
+function reapplyOujFeaturesAfterDisplayOptionChange() {
+  if (typeof window.rebuildOujMenus === 'function') window.rebuildOujMenus();
+  if (typeof window.oujRerunPageFeatures === 'function') window.oujRerunPageFeatures();
+}
+
 function renderDisplayOptionsPanel(overlay) {
   overlay.innerHTML = window.renderNativeShellHtml({
     breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: '表示オプション' }]),
@@ -82,6 +94,7 @@ function renderDisplayOptionsPanel(overlay) {
       const optionId = event.target.dataset.optionId;
       window.setOujFeatureVisible(optionId, event.target.checked);
       applyDisplayOptionSideEffect(optionId, event.target.checked);
+      if (event.target.checked) reapplyOujFeaturesAfterDisplayOptionChange();
       showReloadBar();
     });
   });
@@ -97,6 +110,8 @@ function renderDisplayOptionsPanel(overlay) {
         if (option.inPage) applyDisplayOptionSideEffect(option.id, false);
       });
       window.setOujDisplayOptions(next);
+      // メニュー項目は表示のまま残すため、作り直して確実に出しておく
+      reapplyOujFeaturesAfterDisplayOptionChange();
       renderDisplayOptionsPanel(overlay);
       const bar = overlay.querySelector('#ouj-display-options-reload');
       if (bar) bar.style.display = 'block';
@@ -107,6 +122,7 @@ function renderDisplayOptionsPanel(overlay) {
   if (resetButton) {
     resetButton.addEventListener('click', () => {
       window.resetOujDisplayOptions();
+      reapplyOujFeaturesAfterDisplayOptionChange();
       renderDisplayOptionsPanel(overlay);
       const bar = overlay.querySelector('#ouj-display-options-reload');
       if (bar) bar.style.display = 'block';
