@@ -369,10 +369,10 @@ function buildSearchKeywordHistoryRow(list) {
   const historyKey = window.OUJ_SEARCH_KEYWORD_HISTORY_KEY;
   const history = window.getSetting(historyKey, []);
   if (!Array.isArray(history) || history.length === 0) return null;
-  // 現在表示中のキーワードは除いて表示する
-  const currentMatch = window.location.href.match(/[?&]se=([^&]+)/);
-  const currentRaw = currentMatch ? currentMatch[1] : '';
-  const others = history.filter((item) => item.raw !== currentRaw);
+  // 現在表示中のキーワードは除いて表示する。URL上のエンコード段数は経路により変わるため、
+  // デコード済みのキーワード同士で比較する
+  const current = window.getOujCurrentSearchKeyword ? window.getOujCurrentSearchKeyword() : '';
+  const others = history.filter((item) => item.label !== current);
   if (others.length === 0) return null;
 
   const row = document.createElement('div');
@@ -386,7 +386,7 @@ function buildSearchKeywordHistoryRow(list) {
   others.forEach((item) => {
     row.appendChild(
       buildFilterChip(item.label, false, () => {
-        window.location.href = `https://v.ouj.ac.jp/view/ouj/#/navi/vod?se=${item.raw}`;
+        window.runOujSearchByKeyword(item.label);
       })
     );
   });

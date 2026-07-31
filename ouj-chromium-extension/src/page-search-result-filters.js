@@ -111,23 +111,66 @@ function getSearchFilterState(list) {
   };
 }
 
-// 現在のURLから検索キーワード（se=パラメータ）を取り出して履歴に保存する。
-// rawはURLに入っていたそのままの値（再検索時にそのまま使う）、labelは表示用のデコード済み文字列
-function recordSearchKeyword() {
+// 現在のURLの se= から検索キーワードをデコードして取り出す。取れなければ空文字。
+// サイトはURLへ書く時にencodeURI、読む時にdecodeURIを通しており、さらにその外側で
+// ルーターのエンコード/デコードが入る。そのため同じキーワードでもURL上の
+// エンコード段数は経路によって変わる（例: 家族 が 家族 / %E5%AE%B6… / %25E5%25AE… の
+// いずれにもなり得る）。decodeURLComponentSafeは'%'が消えるまで再帰デコードするので
+// 段数に関わらず素のキーワードへ揃えられる
+function getCurrentSearchKeyword() {
   const match = window.location.href.match(/[?&]se=([^&]+)/);
-  if (!match) return;
-  const raw = match[1];
-  let label = raw;
+  if (!match) return '';
   try {
-    label = window.decodeURLComponentSafe(`se=${raw}`);
-  } catch (e) { /* デコード失敗時はrawのまま表示 */ }
+    return window.decodeURLComponentSafe(`se=${match[1]}`) || '';
+  } catch (e) {
+    return match[1]; // デコード失敗時はURL上の値をそのまま使う
+  }
+}
+
+// 現在のURLから検索キーワード（se=パラメータ）を取り出して履歴に保存する。
+// 保存するのはデコード済みの素のキーワード(label)のみ。以前はURL上の値(raw)も持って
+// 再検索時にそのまま流用していたが、上記のとおりエンコード段数が経路ごとに違うため、
+// 再検索→履歴保存を繰り返すうちに段数がずれて文字化けする原因になっていた
+function recordSearchKeyword() {
+  const label = getCurrentSearchKeyword();
   if (!label || !label.trim()) return;
   let history = window.getSetting(SEARCH_KEYWORD_HISTORY_KEY, []);
   if (!Array.isArray(history)) history = [];
   history = history.filter((item) => item.label !== label);
-  history.unshift({ raw, label });
+  history.unshift({ label });
   if (history.length > SEARCH_KEYWORD_HISTORY_MAX) history = history.slice(0, SEARCH_KEYWORD_HISTORY_MAX);
   window.saveSetting(SEARCH_KEYWORD_HISTORY_KEY, history);
+}
+
+// キーワードで検索し直す（「最近の検索」チップの共通処理）。
+// ヘッダーの検索欄へ値を入れてサイト純正の検索ボタンを押す＝サイト自身の検索処理に
+// 乗せる。こうする理由は2つ:
+//  - URL(?se=)を組み立てて遷移する方式だと、今表示中のキーワードと同じ場合はURLが
+//    まったく同じになり、ハッシュ遷移が起きない＝クリックしても無反応になっていた
+//    （サイトの検索ボタンは同じ語でも毎回検索し直す）
+//  - URLを経由しないためエンコード段数の問題が起きない（文字化け対策）
+// 純正の検索欄が見つからないページ用に、URL遷移のフォールバックも残す
+function runOujSearchByKeyword(keyword) {
+  const text = (keyword || '').trim();
+  if (!text) return;
+
+  const input = document.getElementById('searchText');
+  const button = document.querySelector('button.search-button');
+  if (input && button) {
+    input.value = text;
+    button.click();
+    return;
+  }
+
+  // フォールバック: 1回だけエンコードして遷移する（サイトの読み出し側は
+  // ルーターのデコード＋decodeURIを通すのでこの形で正しく復元される）。
+  // 同一URLだと遷移が起きないため、その場合は再読み込みする
+  const url = `https://v.ouj.ac.jp/view/ouj/#/navi/vod?se=${encodeURIComponent(text)}`;
+  if (window.location.href === url) {
+    window.location.reload();
+    return;
+  }
+  window.location.href = url;
 }
 
 // 分類結果（字幕・視聴状況）を項目上に常時表示する小さなバッジ。
@@ -494,4 +537,7 @@ window.ensureOujItemClassified = ensureItemClassified;
 // 検索ボックスのクイック絞り込みパネルから再利用する設定キー・履歴キー
 window.OUJ_SEARCH_FILTER_KEYS = SEARCH_FILTER_SETTINGS_KEYS;
 window.OUJ_SEARCH_KEYWORD_HISTORY_KEY = SEARCH_KEYWORD_HISTORY_KEY;
+// 「最近の検索」チップからの再検索（フィルターバー・検索ボックスパネルの両方で共有）
+window.runOujSearchByKeyword = runOujSearchByKeyword;
+window.getOujCurrentSearchKeyword = getCurrentSearchKeyword;
 window.getOujMediaFilterState = getMediaFilterState;
