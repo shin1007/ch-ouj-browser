@@ -153,6 +153,19 @@ v.* 共通           → applyOujDisplayOptionStyles(表示オプションの非
 
 - `manifest.json` の `version` はストア公開直前にのみ上げる。README変更点の記載とは別タイミング。
 - リリース時は [menu/menu-whats-new.js](src/menu/menu-whats-new.js) の `OUJ_CHANGELOG_ENTRIES` 先頭にも追記する。
+- リリース手順（順番どおりに）:
+  1. `投稿用.md` の「### 変更点（次回リリース予定）」に今回の変更を書く（このファイルはgit管理外の手元原稿）
+  2. `manifest.json` の `version` を上げる
+  3. `npm run store:release`（＝`node tools/build-store-description.js --release`）… 投稿用.mdの「次回リリース予定」の見出しにバージョン番号を入れ、[ストア説明.md](ストア説明.md) を作り直す。バージョンを省略すると manifest.json の値を使う
+  4. `ストア説明.md` の中身をそのままChromeウェブストアの「詳細な説明」へ貼る（**プレーンテキスト**に整形済み。概要欄の下書きはコマンドの出力に出る）
+  5. `OUJ_CHANGELOG_ENTRIES` に追記
+- `ストア説明.md` は**生成物**なので直接編集しない（直すのは `投稿用.md` かジェネレータ側）。ずれていないかは `npm run store:check`／`npm run test:offline` で分かる。
+
+## tools/ — 運用スクリプト
+
+| ファイル | 役割 |
+|---|---|
+| [tools/build-store-description.js](tools/build-store-description.js) | `投稿用.md` → `ストア説明.md`（Chromeウェブストアの「詳細な説明」用プレーンテキスト）の生成。Markdown記法を落とし、文中リンクはURLを行末へ、見出しは`■`/`◆`に変換。「変更点（次回リリース予定）」と自分自身のストアページへのリンクは載せない。`--check`で生成物が最新か確認、`--release [version]`でバージョン番号を投稿用.mdに書き込んでから生成。検証は [tests/offline/store-description.spec.js](tests/offline/store-description.spec.js) |
 
 ## 自動テスト
 .envがあるので、それを利用してログイン・テストを行えます。

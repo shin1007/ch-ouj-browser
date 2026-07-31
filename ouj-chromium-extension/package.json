@@ -10,6 +10,9 @@
     "test:visual:ui": "playwright test --ui",
     "test:drm": "playwright test --project=drm-desktop --project=drm-mobile",
     "test:buffer": "playwright test --project=drm-buffer",
+    "store": "node tools/build-store-description.js",
+    "store:check": "node tools/build-store-description.js --check",
+    "store:release": "node tools/build-store-description.js --release",
     "capture": "node tests/capture/capture-target-site.js",
     "capture:if-stale": "node tests/capture/capture-target-site.js --if-stale",
     "capture:check": "node tests/capture/capture-target-site.js --check"
