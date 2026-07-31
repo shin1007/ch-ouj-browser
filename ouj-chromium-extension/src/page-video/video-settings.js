@@ -208,20 +208,23 @@ function insertSettingsPanel(targetElement) {
             <option value="15" ${playlogIntervalMinutes == 15 ? 'selected' : ''}>15分</option>
           </select>
         </div>
-        <div style="margin-bottom: 8px; display: flex; align-items: center;">
-          <label for="target-buffer" style="width: 300px; margin-right: 8px; color: #333;">先読み（バッファ）する長さ</label>
-          <select id="target-buffer">
-            <option value="0" ${targetBufferSeconds == 0 ? 'selected' : ''}>標準（約20秒）</option>
-            <option value="60" ${targetBufferSeconds == 60 ? 'selected' : ''}>1分</option>
-            <option value="180" ${targetBufferSeconds == 180 ? 'selected' : ''}>3分</option>
-            <option value="300" ${targetBufferSeconds == 300 ? 'selected' : ''}>5分</option>
-            <option value="600" ${targetBufferSeconds == 600 ? 'selected' : ''}>10分</option>
-          </select>
-        </div>
-        <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-          回線が不安定でも止まりにくくなります。実際に貯まる量はブラウザや配信側の上限で頭打ちになるため、
-          指定した長さまで必ず貯まるとは限りません。途中で視聴をやめると先読み分の通信は無駄になります。
-        </div>
+        ${isVideoUiVisible('player-target-buffer') ? `
+        <div id="target-buffer-container">
+          <div style="margin-bottom: 8px; display: flex; align-items: center;">
+            <label for="target-buffer" style="width: 300px; margin-right: 8px; color: #333;">先読み（バッファ）する長さ</label>
+            <select id="target-buffer">
+              <option value="0" ${targetBufferSeconds == 0 ? 'selected' : ''}>標準（約20秒）</option>
+              <option value="60" ${targetBufferSeconds == 60 ? 'selected' : ''}>1分</option>
+              <option value="180" ${targetBufferSeconds == 180 ? 'selected' : ''}>3分</option>
+              <option value="300" ${targetBufferSeconds == 300 ? 'selected' : ''}>5分</option>
+              <option value="600" ${targetBufferSeconds == 600 ? 'selected' : ''}>10分</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
+            回線が不安定でも止まりにくくなります。実際に貯まる量はブラウザや配信側の上限で頭打ちになるため、
+            指定した長さまで必ず貯まるとは限りません。途中で視聴をやめると先読み分の通信は無駄になります。
+          </div>
+        </div>` : ''}
         <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
 
         <div style='margin-bottom: 8px;'>
@@ -292,6 +295,8 @@ function insertSettingsPanel(targetElement) {
   // 先読み（バッファ）秒数のイベントリスナー。
   // 実際の適用はMAIN worldのplayer-buffer-patch.jsが行う（THEOplayerのインスタンスは
   // isolated worldからは触れないため）。ここはlocalStorageに書くだけでよい。
+  // 表示オプションで隠している場合はselect自体が無いが、保存済みの秒数は
+  // player-buffer-patch.jsが読み続けるため、設定の効き方は変わらない。
   const targetBufferSelect = panel.querySelector('#target-buffer');
   if (targetBufferSelect) {
     targetBufferSelect.addEventListener('change', (event) => {

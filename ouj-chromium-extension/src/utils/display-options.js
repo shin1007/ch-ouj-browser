@@ -177,6 +177,13 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         inPage: true,
       },
       {
+        id: 'player-target-buffer',
+        label: '先読み（バッファ）の設定',
+        description: '設定パネル内の、動画をどれだけ先まで読み込んでおくかの選択。隠しても選んだ長さはそのまま効き続けます',
+        selectors: ['#target-buffer-container'],
+        inPage: true,
+      },
+      {
         id: 'player-next-countdown',
         label: '次の動画のカウントダウン',
         description: '動画終了時に次の動画名とカウントダウンを重ねて表示',

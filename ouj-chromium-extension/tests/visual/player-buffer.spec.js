@@ -71,7 +71,10 @@ test.describe('先読み（バッファ）量の設定', () => {
   // 各テストが「標準」から始まるように、毎回明示的に初期化する。
   test.beforeEach(async ({ page }) => {
     await page.goto('https://v.ouj.ac.jp/view/ouj/#/navi/home');
-    await page.evaluate(() => localStorage.removeItem('videoTargetBufferSeconds'));
+    await page.evaluate(() => {
+      localStorage.removeItem('videoTargetBufferSeconds');
+      localStorage.removeItem('displayOptions');
+    });
   });
 
   test('既定（標準）ではサイトの先読み量を変更しない', async ({ page }) => {
@@ -93,6 +96,30 @@ test.describe('先読み（バッファ）量の設定', () => {
     // 同じプレイヤーインスタンスのまま「標準」へ戻す（WeakMapに退避した元値の復元）
     await selectTargetBufferSeconds(page, '0');
     expect(await readTargetBuffer(page)).toBe(SITE_DEFAULT_TARGET_BUFFER);
+  });
+
+  test('表示オプションでこの設定行だけを隠せる（隠しても秒数は効き続ける）', async ({ page }) => {
+    await gotoPlayer(page, tvContentId, tvCategoryId);
+    await expect(page.locator('#target-buffer-container')).toBeVisible({ timeout: 15000 });
+
+    // 「先読み（バッファ）の設定」だけを非表示にし、3分を選んだ状態にしておく
+    await page.evaluate(() => {
+      localStorage.setItem('displayOptions', JSON.stringify({ 'player-target-buffer': false }));
+      localStorage.setItem('videoTargetBufferSeconds', '180');
+    });
+    await page.reload();
+    await waitForVideoPlaying(page);
+
+    // 設定パネル自体は従来どおり出るが、この行だけが挿入されない
+    await expect(page.locator('#video-settings-panel')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('#playback-speed')).toBeVisible();
+    await expect(page.locator('#target-buffer-container')).toHaveCount(0);
+
+    // UIを隠しても、保存済みの秒数はplayer-buffer-patch.jsが読み続ける
+    await page.waitForFunction(() => {
+      const players = window.THEOplayer && window.THEOplayer.players;
+      return !!(players && players.length) && players[0].abr.targetBuffer === 180;
+    }, undefined, { timeout: 10000 });
   });
 
   test('先読みを増やすと実際に既定(約20秒)より多く貯まる', async ({ page }) => {
