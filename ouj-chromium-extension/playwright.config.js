@@ -21,6 +21,14 @@ module.exports = defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [
+    // 採取済みHTML（target_site/captured/）だけで完結し、実サイトにも拡張機能の
+    // 読み込みにも依存しないテスト。ログイン0回で何度でも回せる（TESTING.md §3）。
+    {
+      name: 'offline',
+      testDir: './tests/offline',
+      testMatch: /.*\.spec\.js/,
+      use: { viewport: { width: 1280, height: 800 } },
+    },
     // popup.spec.jsは実サイトへのログインが不要なため専用プロジェクトで実行する
     // （tests/visual/fixtures.js 側でプロジェクト名を見てログイン処理をスキップする）。
     {

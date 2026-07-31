@@ -22,7 +22,8 @@ const OUJ_DISPLAY_OPTIONS_STYLE_ID = 'ouj-display-options-style';
  * 表示オプションの定義。
  * - id: 保存キー。既存の設定を壊さないため、一度公開したidは変えないこと
  * - selectors: 「既に挿入済みの要素」を即時に隠すためのCSSセレクタ
- * - group: 設定パネルでの見出し
+ * - group: 表示オプション画面での見出し。groupの `description` は見出しの下に補足として出る
+ *          （どこに出る表示なのかが分かりにくいグループで使う）
  * - inPage: ページ内に直接追加される要素かどうか（false＝拡張機能メニューの項目）。
  *           「ページ内の追加表示を最小限にする」プリセットの対象判定に使う
  */
@@ -164,23 +165,9 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
       },
       {
         id: 'player-settings-panel',
-        label: '動画下部の設定パネル',
-        description: '再生速度・字幕・スキップ秒数などの設定パネル。隠すとこれらの設定は変更できなくなります',
+        label: '動画下部の設定パネル（全体）',
+        description: '再生速度・字幕・スキップ秒数などの設定パネル。パネルごと隠します（中の項目を1つずつ選ぶなら次のグループ）',
         selectors: ['#video-settings-panel'],
-        inPage: true,
-      },
-      {
-        id: 'player-ab-repeat',
-        label: 'A-B区間リピートの操作行',
-        description: '設定パネル内の、区間を指定して繰り返す操作（語学の聞き取り練習用）',
-        selectors: ['#ab-repeat-container'],
-        inPage: true,
-      },
-      {
-        id: 'player-target-buffer',
-        label: '先読み（バッファ）の設定',
-        description: '設定パネル内の、動画をどれだけ先まで読み込んでおくかの選択。隠しても選んだ長さはそのまま効き続けます',
-        selectors: ['#target-buffer-container'],
         inPage: true,
       },
       {
@@ -188,6 +175,90 @@ const OUJ_DISPLAY_OPTION_GROUPS = [
         label: '次の動画のカウントダウン',
         description: '動画終了時に次の動画名とカウントダウンを重ねて表示',
         selectors: ['#ouj-next-video-countdown'],
+        inPage: true,
+      },
+    ],
+  },
+  {
+    id: 'player-settings-panel-items',
+    label: '動画下部の設定パネルの中の項目',
+    description: '使わない設定だけを1ブロックずつ隠せます。隠しても保存済みの設定はそのまま効き続けます（変更できなくなるだけです）。パネルごと消すなら「再生ページ」の「動画下部の設定パネル（全体）」を外してください。',
+    options: [
+      {
+        id: 'player-panel-speed',
+        label: '再生速度',
+        description: '「再生速度を調整する」と速度の選択',
+        selectors: ['#playback-speed-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-ab-repeat',
+        label: 'A-B区間リピートの操作行',
+        description: '区間を指定して繰り返す操作（語学の聞き取り練習用）',
+        selectors: ['#ab-repeat-container'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-caption',
+        label: '字幕の表示設定',
+        description: 'テレビ／ラジオの字幕表示と「字幕表示時に画面を縮小しない」',
+        selectors: ['#caption-settings-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-volume',
+        label: '音量正規化',
+        description: '「番組間の音量差を自動で抑える」',
+        selectors: ['#volume-normalization-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-autoplay',
+        label: '自動再生・自動で次へ',
+        description: '「可能なら動画を自動再生する」と「動画終了時に自動で次の動画に進む」',
+        selectors: ['#autoplay-settings-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-next-source',
+        label: '次に再生する動画の選び方',
+        description: '同じ科目／お気に入りからランダム／「あとで見る」の順、の選択',
+        selectors: ['#next-video-source-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-skip',
+        label: '最初・最後のスキップ秒数',
+        description: 'オープニング／エンディングを飛ばす秒数の選択',
+        selectors: ['#skip-settings-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-playlog',
+        label: '再生ログの保存頻度',
+        description: '再生位置を大学側へ記録する間隔の選択',
+        selectors: ['#playlog-settings-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-target-buffer',
+        label: '先読み（バッファ）の設定',
+        description: '動画をどれだけ先まで読み込んでおくかの選択',
+        selectors: ['#target-buffer-container'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-wake-lock',
+        label: '画面の自動ロック防止',
+        description: '「再生中に画面が自動でロックされないようにする」',
+        selectors: ['#wake-lock-section'],
+        inPage: true,
+      },
+      {
+        id: 'player-panel-sleep-timer',
+        label: 'スリープタイマー',
+        description: '指定時間／この回の終わりで自動停止する設定',
+        selectors: ['#sleep-timer-section'],
         inPage: true,
       },
     ],

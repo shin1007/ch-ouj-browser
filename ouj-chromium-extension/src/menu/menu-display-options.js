@@ -27,6 +27,7 @@ function buildDisplayOptionsMainHtml() {
   const groupsHtml = (window.OUJ_DISPLAY_OPTION_GROUPS || []).map((group) => `
     <div style="padding:0 20px 4px 20px;">
       <div style="font-size:13px;font-weight:bold;color:#1565c0;margin:18px 0 4px 0;">${group.label}</div>
+      ${group.description ? `<div style="font-size:11px;color:#888;line-height:1.6;margin:0 0 6px 0;">${group.description}</div>` : ''}
       <div style="border-top:1px solid #eee;">
         ${group.options.map((option) => buildDisplayOptionRowHtml(option, saved[option.id] !== false)).join('')}
       </div>

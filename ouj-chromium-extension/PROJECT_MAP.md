@@ -40,7 +40,7 @@
 | [utils/net.js](src/utils/net.js) | APIキャッシュ・同時実行ゲート | `fetchWithCache`, `createConcurrencyGate` |
 | [utils/dom-wait.js](src/utils/dom-wait.js) | DOM/条件の出現待ち | `waitForElement`, `waitForCondition` |
 | [utils/settings.js](src/utils/settings.js) | localStorage設定の読み書き（科目別設定含む） | `getSetting`, `saveSetting`, `getBooleanSetting`, `getPerCourseSetting`, `savePerCourseSetting`, `removeSetting` |
-| [utils/display-options.js](src/utils/display-options.js) | **表示オプション**（拡張機能が追加するUIの表示/非表示）。全オプションの定義（id・ラベル・即時非表示用CSSセレクタ）を持ち、localStorage `displayOptions` に保存。未設定は「表示」扱いなので既存ユーザーの見え方は変わらない。**UIを追加する機能を新設したらここに定義を足し、挿入処理の冒頭で `isOujFeatureVisible(id)` を見ること** | `isOujFeatureVisible`, `setOujFeatureVisible`, `setOujDisplayOptions`, `resetOujDisplayOptions`, `getOujDisplayOptions`, `getOujDisplayOptionList`, `applyOujDisplayOptionStyles`, `OUJ_DISPLAY_OPTION_GROUPS` |
+| [utils/display-options.js](src/utils/display-options.js) | **表示オプション**（拡張機能が追加するUIの表示/非表示）。全オプションの定義（id・ラベル・即時非表示用CSSセレクタ）を持ち、localStorage `displayOptions` に保存。未設定は「表示」扱いなので既存ユーザーの見え方は変わらない。**UIを追加する機能を新設したらここに定義を足し、挿入処理の冒頭で `isOujFeatureVisible(id)` を見ること**。グループに `description` を付けると見出しの下に補足が出る（「動画下部の設定パネルの中の項目」グループで使用） | `isOujFeatureVisible`, `setOujFeatureVisible`, `setOujDisplayOptions`, `resetOujDisplayOptions`, `getOujDisplayOptions`, `getOujDisplayOptionList`, `applyOujDisplayOptionStyles`, `OUJ_DISPLAY_OPTION_GROUPS` |
 | [utils/notification.js](src/utils/notification.js) | トースト通知 | `showNotification`, `show{Success,Error,Warning,Info}Notification`, `closeNotification` |
 | [utils/dialog.js](src/utils/dialog.js) | モーダル確認/入力ダイアログ | `showConfirmDialog`, `showPromptDialog` |
 | [utils/text.js](src/utils/text.js) | タイトル/科目名の整形 | `trimTitle`, `trimCourseName` |
@@ -84,7 +84,7 @@
 | [page-video/video-player-core.js](src/page-video/video-player-core.js) | **再生ページ初期化の中心**。次動画の決定と共有状態管理 | `initializeVideoPlayer`, `fetchNextVideoId`, `fetchNextVideoFrom{SameCourse,Favorites}`, `getCurrent/NextVideoId`, 共有: `nextVideoId`/`videoListInCourse`/`currentVideoIndexInCourse` |
 | [page-video/video-playback-management.js](src/page-video/video-playback-management.js) | 再生管理・再生位置保存(playlog)・速度・次へスキップ | `StartPlaybackManagement`, `setPlaybackSpeed`, `skipToNextVideo` |
 | [page-video/video-player-actions.js](src/page-video/video-player-actions.js) | タイトル横ボタン（PiP/しおり/あとで見る）・しおりデータ・pendingSeek。PiPの出入り監視も持つ（ページ遷移時は閉じる／PiPを閉じたらパネルを閉じて動画を画面内へ戻す） | `addPlayerActionButtons`, `pipOrPauseCurrentVideoIfPlaying`, `getBookmarks`, `removeBookmark`, `formatBookmarkTime`, `applyPendingSeekIfAny`, `setPendingSeek` |
-| [page-video/video-settings.js](src/page-video/video-settings.js) | 動画下部の設定パネル（トークン方式で二重挿入を防ぐ）。「先読み（バッファ）する長さ」もここ（表示オプション `player-target-buffer` で行だけ隠せる。隠しても保存済みの秒数は効き続ける）。値を保存するだけで、適用はMAIN worldの [player-buffer-patch.js](src/player-buffer-patch.js) が行う | `addVideoSettingsPanel` |
+| [page-video/video-settings.js](src/page-video/video-settings.js) | 動画下部の設定パネル（トークン方式で二重挿入を防ぐ）。**パネル内は `settingsSection(表示オプションid, コンテナid, 中身)` で組む1ブロック単位**で、表示オプション（グループ「動画下部の設定パネルの中の項目」）から1つずつ隠せる。**ブロックを足すときは display-options.js に定義を足し、[tests/offline/video-settings-sections.spec.js](tests/offline/video-settings-sections.spec.js) の対応表にも追記すること**。区切り線は`<hr>`ではなく`.ouj-settings-section`同士の境界線（隠したときに線だけ残らないようにするため）。「先読み（バッファ）する長さ」は値を保存するだけで、適用はMAIN worldの [player-buffer-patch.js](src/player-buffer-patch.js) が行う | `addVideoSettingsPanel` |
 | [page-video/video-prev-next.js](src/page-video/video-prev-next.js) | 前後の回へのリンク | `insertPrevNextLinks` |
 | [page-video/video-episode-list.js](src/page-video/video-episode-list.js) | 同一科目の回一覧ジャンプメニュー | `insertEpisodeListMenu` |
 | [page-video/video-radio-detection.js](src/page-video/video-radio-detection.js) | ラジオ判定・字幕有無判定（videoWidth/Heightで判定） | `checkIfRadioProgram`, `isRadioProgram`, `isCaptionAvailable`, `getVideoSrcInfo`, `showRadioProgramUI` |
@@ -129,7 +129,8 @@
 ## tests/ — Playwright視覚回帰テスト
 
 - 設定: [playwright.config.js](playwright.config.js)。`workers:1`（実サイト負荷回避）。desktop/mobileの2ビューポート。
-- `popup.spec.js` はログイン不要の専用プロジェクト。`subtitle-layout.spec.js` はDRM検証用にEdge(`drm-*`)で分離。
+- `popup.spec.js` はログイン不要の専用プロジェクト。`subtitle-layout.spec.js` はDRM検証用にEdge(`drm-*`)で分離。`player-buffer.spec.js` も実動画の読み込みを見るためEdge(`drm-buffer`、1プロジェクト＝ログイン1回)。
+- [tests/offline/](tests/offline/) は**ログイン0回**のプロジェクト（`offline` / `npm run test:offline`）。採取済みHTML(`target_site/captured/`)をfile://で開き、対象のsrcファイルだけを読み込んでDOMを検証する。設定パネルまわりを触ったらまずこれ。
 - 共通: [tests/visual/fixtures.js](tests/visual/fixtures.js)（ログイン処理）, [helpers.js](tests/visual/helpers.js), [auth.js](tests/visual/auth.js)。
 - 実行: `npm run test:visual` / `test:visual:update`（スナップショット更新）/ `test:drm`。認証情報は `.env`（[.env.example](.env.example) 参照）。
 

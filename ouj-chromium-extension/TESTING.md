@@ -113,6 +113,13 @@ for (const f of ['src/utils/page-type.js', 'src/対象ファイル.js']) {
 
 画像やCSSの `ERR_FILE_NOT_FOUND` がコンソールに出るが、保存HTMLの参照切れなので無視してよい。
 
+### 3.2 使い捨てにせず残す場合は `tests/offline/`
+
+同じ方式でテストとして残すなら `tests/offline/` に置く。専用プロジェクト `offline`
+（`npm run test:offline`）で回り、**ログインもブラウザ拡張の読み込みも不要**なので
+何度実行してもよい。例: [tests/offline/video-settings-sections.spec.js](tests/offline/video-settings-sections.spec.js)
+（動画下部の設定パネルの各ブロックを表示オプションで隠せるかの検証）。
+
 ---
 
 ## 4. 視覚回帰テスト（Playwright / 実サイトへアクセスする）
@@ -135,6 +142,7 @@ for (const f of ['src/utils/page-type.js', 'src/対象ファイル.js']) {
 
 | コマンド | ログイン回数 |
 |---|---|
+| `--project=offline`（`npm run test:offline`） | 0 |
 | `--project=popup-desktop --project=popup-mobile` | 0 |
 | `--project=desktop` | 1 |
 | `--project=desktop --project=mobile` | 2 |
@@ -184,6 +192,7 @@ npx playwright test --project=popup-desktop --project=popup-mobile --project=des
 
 | プロジェクト | 対象 | 備考 |
 |---|---|---|
+| `offline` | `tests/offline/*.spec.js` | 採取済みHTMLだけで完結。ログイン不要。`npm run test:offline` |
 | `popup-desktop` / `popup-mobile` | `popup.spec.js` | 実サイトへのログイン不要 |
 | `desktop` / `mobile` | 上記以外（`subtitle-layout` を除く） | 実サイトへログインする |
 | `drm-desktop` / `drm-mobile` | `subtitle-layout.spec.js` | **Microsoft Edge が必要**（DRM再生）。`npm run test:drm` |

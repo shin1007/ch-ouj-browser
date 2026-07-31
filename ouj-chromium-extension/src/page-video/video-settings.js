@@ -48,6 +48,21 @@ function isVideoUiVisible(featureId) {
   return typeof window.isOujFeatureVisible !== 'function' || window.isOujFeatureVisible(featureId);
 }
 
+/**
+ * 設定パネル内の1ブロックを、表示オプションで隠せる形（idとclass付きのコンテナ）で組み立てる。
+ * 隠す指定なら空文字を返し、そもそも挿入しない（表示オプションの「挿入時ゲート」側の役割。
+ * 挿入済み要素を隠すCSSは utils/display-options.js が id セレクタで当てる）。
+ * ブロックを隠しても、その設定の保存値は各機能側で従来どおり適用される（操作UIが消えるだけ）。
+ * @param {string} optionId - 表示オプションのid
+ * @param {string} containerId - コンテナのid（display-options.jsのselectorsと一致させること）
+ * @param {string} innerHtml - ブロックの中身
+ * @returns {string} HTML文字列（非表示なら空文字）
+ */
+function settingsSection(optionId, containerId, innerHtml) {
+  if (!isVideoUiVisible(optionId)) return '';
+  return `<div id="${containerId}" class="ouj-settings-section">${innerHtml}</div>`;
+}
+
 // 設定パネルを表示しない場合でも、保存済みの字幕設定は反映する
 function applyCaptionSettingsWithoutPanel() {
   if (typeof window.showCaptionAccordingToSetting === 'function') {
@@ -111,105 +126,118 @@ function insertSettingsPanel(targetElement) {
   }
 
   panel.innerHTML = `
+    <style>
+      /* ブロック間の区切り線。<hr>を独立した要素として置くと、表示オプションで
+         ブロックを隠したときに区切り線だけが残ってしまうため、
+         「隣り合うブロックの境目」としてCSSで引く */
+      #video-settings-panel .ouj-settings-section + .ouj-settings-section {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #ddd;
+      }
+    </style>
     <div style="display: flex; flex-direction: row; gap: 24px; align-items: flex-start;">
       <!-- 左カラム: 設定項目 -->
       <div style="flex: 1 1 0; min-width: 260px;">
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="playback-speed-control-enabled" ${playbackSpeedControlEnabled ? 'checked' : ''}>
-          <label for="playback-speed-control-enabled" style="margin-left: 5px; cursor: pointer; color: #333;">再生速度を調整する</label>
-        </div>
-        <div id="playback-speed-container" style="margin-bottom: 8px; display: flex; align-items: center; ${playbackSpeedControlEnabled ? '' : 'display: none;'}">
-          <label for="playback-speed" style="width: 300px; margin-right: 8px; color: #333;">再生速度（科目ごとに記憶）</label>
-          <select id="playback-speed" style="flex: 1;">
-            ${speedOptions}
-          </select>
-        </div>
-        <div id="ab-repeat-container"></div>
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="auto-caption-tv" ${autoCaptionEnabledTV ? 'checked' : ''}>
-          <label for="auto-caption-tv" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（テレビ番組）</label>
-        </div>
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="auto-caption-radio" ${autoCaptionEnabledRadio ? 'checked' : ''}>
-          <label for="auto-caption-radio" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（ラジオ番組）</label>
-        </div>
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="prevent-caption-shrink" ${preventCaptionShrink ? 'checked' : ''}>
-          <label for="prevent-caption-shrink" style="margin-left: 5px; cursor: pointer; color: #333;">字幕表示時に画面を縮小しない</label>
-        </div>
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="volume-normalization" ${volumeNormalizationEnabled ? 'checked' : ''}>
-          <label for="volume-normalization" style="margin-left: 5px; cursor: pointer; color: #333;">番組間の音量差を自動で抑える（音量正規化）</label>
-        </div>
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="auto-play-video" ${autoPlayEnabled ? 'checked' : ''}>
-          <label for="auto-play-video" style="margin-left: 5px; cursor: pointer; color: #333;">可能なら動画を自動再生する</label>
-        </div>
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="auto-next-video" ${autoNextVideoEnabled ? 'checked' : ''}>
-          <label for="auto-next-video" style="margin-left: 5px; cursor: pointer; color: #333;">動画終了時に自動で次の動画に進む</label>
-        </div>
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-        <div style="margin-bottom: 8px;">
-          <input type="radio" id="same-course" name="next-video" value="same-course" ${nextVideoMode === 'same-course' ? 'checked' : ''}>
-          <label for="same-course" style="margin-left: 5px; cursor: pointer; color: #333;">同じ科目の中で次を再生</label>
-        </div>
-        <div style="margin-bottom: 8px;">
-          <input type="radio" id="favorites-random" name="next-video" value="favorites-random" ${nextVideoMode === 'favorites-random' ? 'checked' : ''}>
-          <label for="favorites-random" style="margin-left: 5px; cursor: pointer; color: #333;">お気に入りの中からランダムで次を再生</label>
-        </div>
-        <div style="margin-bottom: 8px;">
-          <input type="radio" id="watch-later-queue" name="next-video" value="watch-later" ${nextVideoMode === 'watch-later' ? 'checked' : ''}>
-          <label for="watch-later-queue" style="margin-left: 5px; cursor: pointer; color: #333;">「あとで見る」リストの順に次を再生</label>
-        </div>
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-        <div style="margin-bottom: 8px; display: flex; align-items: center;">
-          <label for="skip-start" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最初をスキップ（科目ごとに記憶）</label>
-          <select id="skip-start">
-            <option value="0" ${skipStart == 0 ? 'selected' : ''}>なし</option>
-            <option value="15" ${skipStart == 15 ? 'selected' : ''}>15秒</option>
-            <option value="30" ${skipStart == 30 ? 'selected' : ''}>30秒</option>
-            <option value="45" ${skipStart == 45 ? 'selected' : ''}>45秒</option>
-            <option value="60" ${skipStart == 60 ? 'selected' : ''}>60秒</option>
-            <option value="75" ${skipStart == 75 ? 'selected' : ''}>75秒</option>
-            <option value="90" ${skipStart == 90 ? 'selected' : ''}>90秒</option>
-            <option value="105" ${skipStart == 105 ? 'selected' : ''}>105秒</option>
-            <option value="120" ${skipStart == 120 ? 'selected' : ''}>120秒</option>
-          </select>
-        </div>
-        <div style="margin-bottom: 8px; display: flex; align-items: center;">
-          <label for="skip-end" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最後をスキップ（科目ごとに記憶）</label>
-          <select id="skip-end">
-            <option value="0" ${skipEnd == 0 ? 'selected' : ''}>なし</option>
-            <option value="15" ${skipEnd == 15 ? 'selected' : ''}>15秒</option>
-            <option value="30" ${skipEnd == 30 ? 'selected' : ''}>30秒</option>
-            <option value="45" ${skipEnd == 45 ? 'selected' : ''}>45秒</option>
-            <option value="60" ${skipEnd == 60 ? 'selected' : ''}>60秒</option>
-            <option value="75" ${skipEnd == 75 ? 'selected' : ''}>75秒</option>
-            <option value="90" ${skipEnd == 90 ? 'selected' : ''}>90秒</option>
-            <option value="105" ${skipEnd == 105 ? 'selected' : ''}>105秒</option>
-            <option value="120" ${skipEnd == 120 ? 'selected' : ''}>120秒</option>
-          </select>
-        </div>
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-        <div style="margin-bottom: 8px; display: flex; align-items: center;">
-          <label for="playlog-interval" style="width: 300px; margin-right: 8px; color: #333;">再生ログ保存頻度(一瞬止まるかも)</label>
-          <select id="playlog-interval">
-            <option value="3" ${playlogIntervalMinutes == 3 ? 'selected' : ''}>3分</option>
-            <option value="5" ${playlogIntervalMinutes == 5 ? 'selected' : ''}>5分</option>
-            <option value="10" ${playlogIntervalMinutes == 10 ? 'selected' : ''}>10分</option>
-            <option value="15" ${playlogIntervalMinutes == 15 ? 'selected' : ''}>15分</option>
-          </select>
-        </div>
-        ${isVideoUiVisible('player-target-buffer') ? `
-        <div id="target-buffer-container">
+        ${settingsSection('player-panel-speed', 'playback-speed-section', `
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="playback-speed-control-enabled" ${playbackSpeedControlEnabled ? 'checked' : ''}>
+            <label for="playback-speed-control-enabled" style="margin-left: 5px; cursor: pointer; color: #333;">再生速度を調整する</label>
+          </div>
+          <div id="playback-speed-container" style="margin-bottom: 8px; display: flex; align-items: center; ${playbackSpeedControlEnabled ? '' : 'display: none;'}">
+            <label for="playback-speed" style="width: 300px; margin-right: 8px; color: #333;">再生速度（科目ごとに記憶）</label>
+            <select id="playback-speed" style="flex: 1;">
+              ${speedOptions}
+            </select>
+          </div>
+        `)}
+        ${settingsSection('player-ab-repeat', 'ab-repeat-container', '')}
+        ${settingsSection('player-panel-caption', 'caption-settings-section', `
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="auto-caption-tv" ${autoCaptionEnabledTV ? 'checked' : ''}>
+            <label for="auto-caption-tv" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（テレビ番組）</label>
+          </div>
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="auto-caption-radio" ${autoCaptionEnabledRadio ? 'checked' : ''}>
+            <label for="auto-caption-radio" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（ラジオ番組）</label>
+          </div>
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="prevent-caption-shrink" ${preventCaptionShrink ? 'checked' : ''}>
+            <label for="prevent-caption-shrink" style="margin-left: 5px; cursor: pointer; color: #333;">字幕表示時に画面を縮小しない</label>
+          </div>
+        `)}
+        ${settingsSection('player-panel-volume', 'volume-normalization-section', `
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="volume-normalization" ${volumeNormalizationEnabled ? 'checked' : ''}>
+            <label for="volume-normalization" style="margin-left: 5px; cursor: pointer; color: #333;">番組間の音量差を自動で抑える（音量正規化）</label>
+          </div>
+        `)}
+        ${settingsSection('player-panel-autoplay', 'autoplay-settings-section', `
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="auto-play-video" ${autoPlayEnabled ? 'checked' : ''}>
+            <label for="auto-play-video" style="margin-left: 5px; cursor: pointer; color: #333;">可能なら動画を自動再生する</label>
+          </div>
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="auto-next-video" ${autoNextVideoEnabled ? 'checked' : ''}>
+            <label for="auto-next-video" style="margin-left: 5px; cursor: pointer; color: #333;">動画終了時に自動で次の動画に進む</label>
+          </div>
+        `)}
+        ${settingsSection('player-panel-next-source', 'next-video-source-section', `
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="same-course" name="next-video" value="same-course" ${nextVideoMode === 'same-course' ? 'checked' : ''}>
+            <label for="same-course" style="margin-left: 5px; cursor: pointer; color: #333;">同じ科目の中で次を再生</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="favorites-random" name="next-video" value="favorites-random" ${nextVideoMode === 'favorites-random' ? 'checked' : ''}>
+            <label for="favorites-random" style="margin-left: 5px; cursor: pointer; color: #333;">お気に入りの中からランダムで次を再生</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="watch-later-queue" name="next-video" value="watch-later" ${nextVideoMode === 'watch-later' ? 'checked' : ''}>
+            <label for="watch-later-queue" style="margin-left: 5px; cursor: pointer; color: #333;">「あとで見る」リストの順に次を再生</label>
+          </div>
+        `)}
+        ${settingsSection('player-panel-skip', 'skip-settings-section', `
+          <div style="margin-bottom: 8px; display: flex; align-items: center;">
+            <label for="skip-start" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最初をスキップ（科目ごとに記憶）</label>
+            <select id="skip-start">
+              <option value="0" ${skipStart == 0 ? 'selected' : ''}>なし</option>
+              <option value="15" ${skipStart == 15 ? 'selected' : ''}>15秒</option>
+              <option value="30" ${skipStart == 30 ? 'selected' : ''}>30秒</option>
+              <option value="45" ${skipStart == 45 ? 'selected' : ''}>45秒</option>
+              <option value="60" ${skipStart == 60 ? 'selected' : ''}>60秒</option>
+              <option value="75" ${skipStart == 75 ? 'selected' : ''}>75秒</option>
+              <option value="90" ${skipStart == 90 ? 'selected' : ''}>90秒</option>
+              <option value="105" ${skipStart == 105 ? 'selected' : ''}>105秒</option>
+              <option value="120" ${skipStart == 120 ? 'selected' : ''}>120秒</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 8px; display: flex; align-items: center;">
+            <label for="skip-end" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最後をスキップ（科目ごとに記憶）</label>
+            <select id="skip-end">
+              <option value="0" ${skipEnd == 0 ? 'selected' : ''}>なし</option>
+              <option value="15" ${skipEnd == 15 ? 'selected' : ''}>15秒</option>
+              <option value="30" ${skipEnd == 30 ? 'selected' : ''}>30秒</option>
+              <option value="45" ${skipEnd == 45 ? 'selected' : ''}>45秒</option>
+              <option value="60" ${skipEnd == 60 ? 'selected' : ''}>60秒</option>
+              <option value="75" ${skipEnd == 75 ? 'selected' : ''}>75秒</option>
+              <option value="90" ${skipEnd == 90 ? 'selected' : ''}>90秒</option>
+              <option value="105" ${skipEnd == 105 ? 'selected' : ''}>105秒</option>
+              <option value="120" ${skipEnd == 120 ? 'selected' : ''}>120秒</option>
+            </select>
+          </div>
+        `)}
+        ${settingsSection('player-panel-playlog', 'playlog-settings-section', `
+          <div style="margin-bottom: 8px; display: flex; align-items: center;">
+            <label for="playlog-interval" style="width: 300px; margin-right: 8px; color: #333;">再生ログ保存頻度(一瞬止まるかも)</label>
+            <select id="playlog-interval">
+              <option value="3" ${playlogIntervalMinutes == 3 ? 'selected' : ''}>3分</option>
+              <option value="5" ${playlogIntervalMinutes == 5 ? 'selected' : ''}>5分</option>
+              <option value="10" ${playlogIntervalMinutes == 10 ? 'selected' : ''}>10分</option>
+              <option value="15" ${playlogIntervalMinutes == 15 ? 'selected' : ''}>15分</option>
+            </select>
+          </div>
+        `)}
+        ${settingsSection('player-target-buffer', 'target-buffer-container', `
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
             <label for="target-buffer" style="width: 300px; margin-right: 8px; color: #333;">先読み（バッファ）する長さ</label>
             <select id="target-buffer">
@@ -224,37 +252,37 @@ function insertSettingsPanel(targetElement) {
             回線が不安定でも止まりにくくなります。実際に貯まる量はブラウザや配信側の上限で頭打ちになるため、
             指定した長さまで必ず貯まるとは限りません。途中で視聴をやめると先読み分の通信は無駄になります。
           </div>
-        </div>` : ''}
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+        `)}
+        ${settingsSection('player-panel-wake-lock', 'wake-lock-section', `
+          <div style='margin-bottom: 8px;'>
+            <input type="checkbox" id="screen-wake-lock" ${screenWakeLockEnabled ? 'checked' : ''}>
+            <label for="screen-wake-lock" style="margin-left: 5px; cursor: pointer; color: #333;">再生中に画面が自動でロックされないようにする</label>
+          </div>
+        `)}
+        ${settingsSection('player-panel-sleep-timer', 'sleep-timer-section', `
+          <div style="margin-bottom: 8px; display: flex; align-items: center;">
+            <label for="sleep-timer" style="width: 300px; margin-right: 8px; color: #333;">スリープタイマー</label>
+            <select id="sleep-timer">
+              <option value="0">オフ</option>
+              <option value="episode-end" ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? 'selected' : ''}>この回の終わりまで</option>
+              <option value="15">15分</option>
+              <option value="30">30分</option>
+              <option value="45">45分</option>
+              <option value="60">60分</option>
+              <option value="90">90分</option>
+            </select>
+          </div>
+          ${sleepTimerRemainingMinutes > 0 ? `
+          <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
+            残り約${sleepTimerRemainingMinutes}分で自動的に一時停止します
+          </div>` : ''}
+          ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? `
+          <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
+            この回の再生が終わったところで自動的に停止します
+          </div>` : ''}
+        `)}
 
-        <div style='margin-bottom: 8px;'>
-          <input type="checkbox" id="screen-wake-lock" ${screenWakeLockEnabled ? 'checked' : ''}>
-          <label for="screen-wake-lock" style="margin-left: 5px; cursor: pointer; color: #333;">再生中に画面が自動でロックされないようにする</label>
-        </div>
-        <div style="margin-bottom: 8px; display: flex; align-items: center;">
-          <label for="sleep-timer" style="width: 300px; margin-right: 8px; color: #333;">スリープタイマー</label>
-          <select id="sleep-timer">
-            <option value="0">オフ</option>
-            <option value="episode-end" ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? 'selected' : ''}>この回の終わりまで</option>
-            <option value="15">15分</option>
-            <option value="30">30分</option>
-            <option value="45">45分</option>
-            <option value="60">60分</option>
-            <option value="90">90分</option>
-          </select>
-        </div>
-        ${sleepTimerRemainingMinutes > 0 ? `
-        <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-          残り約${sleepTimerRemainingMinutes}分で自動的に一時停止します
-        </div>` : ''}
-        ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? `
-        <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-          この回の再生が終わったところで自動的に停止します
-        </div>` : ''}
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-
-
-        <div style="margin-top: 10px; font-size: 12px; color: #666;">
+        <div style="margin-top: 15px; font-size: 12px; color: #666;">
           設定は自動的に保存されます
         </div>
       </div>

@@ -5,6 +5,7 @@
   "description": "放送大学授業ブラウザ拡張機能の表示テスト（Playwright視覚回帰テスト）",
   "scripts": {
     "test:visual": "playwright test",
+    "test:offline": "playwright test --project=offline",
     "test:visual:update": "playwright test --update-snapshots",
     "test:visual:ui": "playwright test --ui",
     "test:drm": "playwright test --project=drm-desktop --project=drm-mobile",
