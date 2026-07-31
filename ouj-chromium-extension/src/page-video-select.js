@@ -15,10 +15,16 @@ function createVideoSelectWatchLaterToggle(contentId, categoryId) {
   toggle.setAttribute('role', 'button');
   toggle.setAttribute('tabindex', '0');
   toggle.title = '「あとで見る」に追加/削除（メニューの「あとで見る」から一覧できます）';
+  // 同じ行に並ぶ視聴状況バッジ(.ouj-result-badges / page-search-result-filters.js)と
+  // 縦位置を揃える。inline-flexの既定のvertical-align:baselineは、中身を
+  // align-items:centerで中央寄せしているぶんベースラインがずれて下がって見えるため、
+  // バッジ側と同じvertical-align:middleを指定する（以前はmargin-topで下げていたが、
+  // これがタイトル行に並んだときの不自然なズレの原因だった）
   toggle.style.cssText = `
     display: inline-flex;
     align-items: center;
-    margin-top: 6px;
+    vertical-align: middle;
+    margin-left: 8px;
     padding: 3px 10px;
     border-radius: 14px;
     font-size: 12px;
