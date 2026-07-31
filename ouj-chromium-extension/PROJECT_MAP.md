@@ -16,6 +16,7 @@
   - `chrome.storage.sync` … ポップアップの設定（自動ログインON/OFF・テーマ）など少数。
   - `window.*` 共有変数 … 動画ページの一時状態（`nextVideoId`, `videoListInCourse`, `currentVideoIndexInCourse` 等）。
 - **重要方針**: 放送大学サーバーへの負荷を最小化する。API取得は [utils/net.js](src/utils/net.js) の `fetchWithCache` でキャッシュし、一覧系は IntersectionObserver＋同時実行制限で「画面内に入った項目だけ」遅延取得する。
+- **リリース**: ストア公開の手順は [リリース手順.md](リリース手順.md)（変更点・バージョンの反映箇所、ストア説明の生成、公開後の後始末）。
 - **テスト**: 手順とハマりどころは [TESTING.md](TESTING.md)（Nodeのパス／構文チェック／`target_site`を使う実サイト不要の確認／Playwright視覚回帰テストと基準画像の1pxずれの切り分け）。
 
 ## 対象サイトのAPI/画面
@@ -153,13 +154,8 @@ v.* 共通           → applyOujDisplayOptionStyles(表示オプションの非
 
 - `manifest.json` の `version` はストア公開直前にのみ上げる。README変更点の記載とは別タイミング。
 - リリース時は [menu/menu-whats-new.js](src/menu/menu-whats-new.js) の `OUJ_CHANGELOG_ENTRIES` 先頭にも追記する。
-- リリース手順（順番どおりに）:
-  1. `投稿用.md` の「### 変更点（次回リリース予定）」に今回の変更を書く（このファイルはgit管理外の手元原稿）
-  2. `manifest.json` の `version` を上げる
-  3. `npm run store:release`（＝`node tools/build-store-description.js --release`）… 投稿用.mdの「次回リリース予定」の見出しにバージョン番号を入れ、[ストア説明.md](ストア説明.md) を作り直す。バージョンを省略すると manifest.json の値を使う
-  4. `ストア説明.md` の中身をそのままChromeウェブストアの「詳細な説明」へ貼る（**プレーンテキスト**に整形済み。概要欄の下書きはコマンドの出力に出る）
-  5. `OUJ_CHANGELOG_ENTRIES` に追記
-- `ストア説明.md` は**生成物**なので直接編集しない（直すのは `投稿用.md` かジェネレータ側）。ずれていないかは `npm run store:check`／`npm run test:offline` で分かる。
+- **リリース作業の全手順は [リリース手順.md](リリース手順.md)**（変更点の書き場所2か所・バージョン反映2か所・テスト・`npm run store:release`・zip作成・公開後の後始末）。リリースのときは必ずこれをチェックリストとして使う。
+- `ストア説明.md` は `投稿用.md` からの**生成物**なので直接編集しない（直すのは `投稿用.md` かジェネレータ側）。ずれていないかは `npm run store:check`／`npm run test:offline` で分かる。
 
 ## tools/ — 運用スクリプト
 
