@@ -104,6 +104,17 @@ function renderFilterBar(list) {
   if (!isVideoSelect) bar.appendChild(buildYearCourseRow(list));
   bar.appendChild(buildSortRow(list));
 
+  // コンパクト表示(同じ科目の回を1行にまとめる)。1科目の回一覧(video-select)では
+  // 全項目が同じ科目＝1グループになってしまい意味がないので出さない。
+  // 自動読み込み(続きのページを自動で読む)も検索結果だけの機能なので同じ行に並べる
+  if (!isVideoSelect && typeof window.buildOujCompactViewRow === 'function') {
+    const displayRow = window.buildOujCompactViewRow(list);
+    if (typeof window.buildOujAutoLoadControls === 'function') {
+      displayRow.appendChild(window.buildOujAutoLoadControls(list));
+    }
+    bar.appendChild(displayRow);
+  }
+
   if (!isVideoSelect) {
     const keywordRow = buildSearchKeywordHistoryRow(list);
     if (keywordRow) bar.appendChild(keywordRow);

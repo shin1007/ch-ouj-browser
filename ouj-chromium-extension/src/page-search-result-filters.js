@@ -41,8 +41,18 @@ function querySearchResultList() {
 
 // フィルタの判定結果(dataset.oujFilterHidden)に応じて表示/非表示を切り替える共通関数。
 // 以前は重複講義の非表示機能(page-search-result.js)もこのdatasetと合わせて判定していたが、
-// 重複扱いされた科目が検索結果から見えなくなるのは望ましくないとのことでその機能自体を廃止した
+// 重複扱いされた科目が検索結果から見えなくなるのは望ましくないとのことでその機能自体を廃止した。
+//
+// コンパクト表示(page-search-result-compact.js)がONの間は、同じ科目の回を1行にまとめる都合で
+// 「絞り込みでは残るが、まとめ役の行に集約したので隠す」項目が出る。まとめ側の判断
+// (dataset.oujCompactState)を絞り込みより優先する。分類完了のたびに呼ばれる
+// applyFiltersToItemが、まとめて隠した項目を表示し直してしまうのを防ぐため
 function updateSearchResultItemVisibility(item) {
+    const compactState = item.dataset.oujCompactState;
+    if (compactState === 'shown' || compactState === 'hidden') {
+      item.style.display = compactState === 'hidden' ? 'none' : '';
+      return;
+    }
     item.style.display = item.dataset.oujFilterHidden === 'true' ? 'none' : '';
 }
 
@@ -191,6 +201,10 @@ async function classifySearchResultItem(item, gate, context = 'search') {
       // 粒度の粗いコース単位で絞り込みたいという要望のため科目そのものは使わない)
       const videoData = await gate.run(() => window.getVideoData(contentId));
       if (videoData) {
+        // 動画が属する科目のcategoryId。サイト内リンク(player?…&ca= / vod?ca=)の組み立てに使う。
+        // 項目のパンくず末尾に出ている数字は科目コードであってcategoryIdではないため、
+        // リンクにはこちらを使う必要がある(page-search-result-compact.jsのリンク生成)
+        if (videoData.categoryId) item.dataset.oujCategoryId = String(videoData.categoryId);
         const detailLine = (videoData.detail || '').split('\n')[0] || '';
         const yearMatch = detailLine.match(/[（(][’'‘`]?([0-9０-９]{2})[）)]/);
         if (yearMatch) item.dataset.oujYear = yearMatch[1].replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xFEE0));
@@ -204,6 +218,24 @@ async function classifySearchResultItem(item, gate, context = 'search') {
   }
   applyFiltersToItem(item);
   applyBadgesToItem(item);
+  // コンパクト表示中は分類結果でまとめ方(チップに出す回・「確認中」の残数)が変わる
+  if (window.scheduleOujCompactRegroup) window.scheduleOujCompactRegroup(querySearchResultList());
+}
+
+// 未分類の項目を1件だけ分類する(既に分類済み/分類中なら何もせず既存の結果を待つ)。
+// IntersectionObserver・並び替え・コンパクト表示のいずれから呼ばれても、同じcontentIdへの
+// 分類リクエストが二重に走らないようにするための共通入口
+function ensureItemClassified(item, gate, context = 'search') {
+  if (item.dataset.oujClassified === 'done' || item.dataset.oujClassified === 'unavailable') {
+    return Promise.resolve();
+  }
+  if (item.dataset.oujClassified === 'pending' && item.__oujClassifyPromise) {
+    return item.__oujClassifyPromise;
+  }
+  item.dataset.oujClassified = 'pending';
+  const promise = classifySearchResultItem(item, gate, context);
+  item.__oujClassifyPromise = promise;
+  return promise;
 }
 
 // 何らかのフィルタ条件が有効になっているか(絞り込みが1つも掛かっていない「すべて表示」
@@ -256,6 +288,8 @@ function applyFilters() {
   if (!list) return;
   const state = getSearchFilterState(list);
   list.querySelectorAll(':scope > ion-item[role="listitem"]').forEach((item) => applyFiltersToItem(item, state));
+  // 絞り込み結果が変わればまとめ方(各グループに残る回)も変わる
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
 }
 
 // --- 並び替え機能 ---
@@ -287,17 +321,8 @@ async function applySearchResultSort(list) {
     const context = list.oujFilterContext || 'search';
     // IntersectionObserverによって既に分類中(pending)の項目は、ここで再度
     // classifySearchResultItemを呼ぶと同じcontentIdへの分類リクエストが二重に走って
-    // しまう。既存の分類Promiseがあればそれを待ち、無い項目だけ新規に分類する
-    const needsClassification = items.filter((item) => item.dataset.oujClassified !== 'done' && item.dataset.oujClassified !== 'unavailable');
-    await Promise.all(needsClassification.map((item) => {
-      if (item.dataset.oujClassified === 'pending' && item.__oujClassifyPromise) {
-        return item.__oujClassifyPromise;
-      }
-      item.dataset.oujClassified = 'pending';
-      const promise = classifySearchResultItem(item, gate, context);
-      item.__oujClassifyPromise = promise;
-      return promise;
-    }));
+    // しまう。ensureItemClassifiedが既存の分類Promiseの使い回しを引き受ける
+    await Promise.all(items.map((item) => ensureItemClassified(item, gate, context)));
   }
 
   // 視聴状況の優先度で並べ替える。同順位内はサイト表示順を保つ
@@ -336,6 +361,8 @@ async function applySearchResultSort(list) {
   }
 
   sorted.forEach((item) => list.appendChild(item));
+  // 並び替え後はグループの代表(先頭の回)も変わりうるのでまとめ直す
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
 }
 
 function startSearchFilterObserver(context = 'search') {
@@ -388,6 +415,9 @@ function setupSearchFilterBarOnList(list, context) {
   list.__oujFilterGate = observer.__oujGate;
   window.renderFilterBar(list);
   registerItemsForClassification(observer, list);
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
+  // 「自動読み込み」がONなら、続きのページを自動で読み始める(OFFなら何もしない)
+  if (window.startOujAutoLoad) window.startOujAutoLoad(list);
 
   // 無限スクロールで追加される項目にも監視対象を広げる。あわせて、このリストへの流し込みと
   // 同じタイミングでバーが消えた場合にも入れ直す(itemが流し込まれる=検索/回一覧ページなので安全)。
@@ -401,6 +431,8 @@ function setupSearchFilterBarOnList(list, context) {
     // 検索結果の流し込み・再描画のたびに純正の並び替えが復活しうるので隠し直す
     window.hideNativeSortControl();
     registerItemsForClassification(observer, list);
+    // 無限スクロールで足された項目もまとめ対象にする(既存グループへの追加もありうる)
+    if (window.scheduleOujCompactRegroup) window.scheduleOujCompactRegroup(list);
   });
   mutationObserver.observe(list, { childList: true });
 }
@@ -456,6 +488,9 @@ window.updateSearchResultItemVisibility = updateSearchResultItemVisibility;
 window.getSearchFilterState = getSearchFilterState;
 window.applyFilters = applyFilters;
 window.applySearchResultSort = applySearchResultSort;
+// コンパクト表示(page-search-result-compact.js)から使う一覧要素の取得と単発分類
+window.queryOujSearchResultList = querySearchResultList;
+window.ensureOujItemClassified = ensureItemClassified;
 // 検索ボックスのクイック絞り込みパネルから再利用する設定キー・履歴キー
 window.OUJ_SEARCH_FILTER_KEYS = SEARCH_FILTER_SETTINGS_KEYS;
 window.OUJ_SEARCH_KEYWORD_HISTORY_KEY = SEARCH_KEYWORD_HISTORY_KEY;

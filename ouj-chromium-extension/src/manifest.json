@@ -31,6 +31,16 @@
     },
     {
       "matches": [
+        "https://v.ouj.ac.jp/*"
+      ],
+      "js": [
+        "page-size-patch.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
         "*://*.ouj.ac.jp/*"
       ],
       "css": [
@@ -92,6 +102,8 @@
         "page-course-select-filters.js",
         "page-search-result-filters.js",
         "page-search-result-filter-bar.js",
+        "page-search-result-compact.js",
+        "page-search-result-autoload.js",
         "search-box-filter-panel.js",
         "search-box-all-subjects-panel.js",
         "page-video-select.js",
