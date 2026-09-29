@@ -109,8 +109,8 @@ function getCompactItemTitle(item) {
 // チップの短いラベル。「第01回 ○○」なら「第01回」だけにする(まとめ行では回番号が分かれば十分)
 function getCompactEpisodeLabel(title) {
   const match = title.match(/^第\s*([0-9０-９]+)\s*回/);
-  if (match) return `第${match[1]}回`;
-  return title.length > 14 ? `${title.slice(0, 14)}…` : (title || '(無題)');
+  if (match) return t('episode.label', { n: match[1] });
+  return title.length > 14 ? `${title.slice(0, 14)}…` : (title || t('common.untitled'));
 }
 
 // 「第01回 …」から回番号を取り出す(全角数字もありうる)。取れなければ末尾扱いの大きな値
@@ -212,12 +212,12 @@ function renderCompactGroupBlock(rep, info, shownItems, pendingCount) {
   subject.textContent = info.subject;
   if (realCategoryId) {
     subject.href = `${OUJ_VIEW_BASE}/vod?ca=${realCategoryId}`;
-    subject.title = `${info.subject} の回一覧を開く`;
+    subject.title = t('compact.openEpisodes', { subject: info.subject });
   }
   if (ordered.length > 0) {
     const count = document.createElement('span');
     count.className = 'ouj-compact-count';
-    count.textContent = `${ordered.length}件`;
+    count.textContent = t('common.itemsCount', { n: ordered.length });
     subject.appendChild(count);
   }
   block.appendChild(subject);
@@ -228,7 +228,7 @@ function renderCompactGroupBlock(rep, info, shownItems, pendingCount) {
     // 同じ科目が複数のコースに登録されている場合、代表のコースだけを見せると
     // 他のコースの科目が消えたように見えるので、まとめた数を添える
     const paths = new Set(shownItems.map((item) => (getCompactGroupInfo(item) || {}).parentPath).filter(Boolean));
-    path.textContent = paths.size > 1 ? `${info.parentPath} ほか${paths.size - 1}コース` : info.parentPath;
+    path.textContent = paths.size > 1 ? t('compact.pathAndOthers', { path: info.parentPath, n: paths.size - 1 }) : info.parentPath;
     block.appendChild(path);
   }
 
@@ -244,10 +244,10 @@ function renderCompactGroupBlock(rep, info, shownItems, pendingCount) {
       if (href) chip.href = href;
       if (item.dataset.oujWatchState === 'done') {
         chip.classList.add('ouj-compact-done');
-        chip.title = `${title}（視聴済み）`;
+        chip.title = t('compact.chipWatched', { title });
       } else if (item.dataset.oujWatchState === 'partial') {
         chip.classList.add('ouj-compact-partial');
-        chip.title = `${title}（途中 ${item.dataset.oujWatchPercent || ''}%）`;
+        chip.title = t('compact.chipPartial', { title, percent: item.dataset.oujWatchPercent || '' });
       } else {
         chip.title = title;
       }
@@ -260,7 +260,7 @@ function renderCompactGroupBlock(rep, info, shownItems, pendingCount) {
   if (pendingCount > 0) {
     const pending = document.createElement('div');
     pending.className = 'ouj-compact-pending';
-    pending.textContent = `他 ${pendingCount}件を確認中...`;
+    pending.textContent = t('compact.pending', { n: pendingCount });
     block.appendChild(pending);
   }
 
@@ -402,12 +402,12 @@ function buildCompactViewRow(list) {
   row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;width:100%;margin-top:4px;';
 
   const label = document.createElement('span');
-  label.textContent = '表示:';
+  label.textContent = t('compact.viewLabel');
   label.style.cssText = 'font-size:13px;color:#666;margin-right:8px;';
   row.appendChild(label);
 
   const enabled = isOujCompactViewEnabled();
-  const chip = window.buildOujFilterChip('コンパクト表示（同じ科目をまとめる）', enabled, () => {
+  const chip = window.buildOujFilterChip(t('compact.chip'), enabled, () => {
     setOujCompactViewEnabled(!enabled);
     window.renderFilterBar(list);
     applyCompactGrouping(list);

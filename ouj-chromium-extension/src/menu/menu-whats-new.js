@@ -4,6 +4,8 @@
 // 一度開いたらそのバージョンは既読として記録し、バッジを消す。
 //
 // ★リリース時: 下のOUJ_CHANGELOG_ENTRIESの先頭に新しいバージョンの項目を追加すること
+//   （itemsは日本語。他言語は itemsByLang: { en: [...], ko: [...], zh_CN: [...], zh_TW: [...] } で
+//    任意に追加でき、無い言語は日本語のまま表示する。過去バージョンの多言語化は必須ではない）
 
 const LAST_SEEN_VERSION_KEY = 'lastSeenVersion';
 
@@ -18,6 +20,36 @@ const OUJ_CHANGELOG_ENTRIES = [
       '動画下部の設定パネルの中身も、使わない項目だけを1ブロックずつ隠せます（隠しても設定内容はそのまま効きます）',
       '動画の「先読み（バッファ）する長さ」を設定できるようにしました。標準（約20秒）から最大10分まで選べ、回線が不安定でも再生が止まりにくくなります',
     ],
+    itemsByLang: {
+      en: [
+        'Added "Display options" to the menu. You can turn off the elements this extension adds to the screen, feature by feature (the features themselves, such as recording favorites and history, keep working).',
+        'The "Minimize elements added to pages" button turns off everything added to pages at once (features in the menu remain available).',
+        'Extension menu items you do not use can also be hidden individually.',
+        'Inside the settings panel below the video, you can hide only the items you do not use, one block at a time (saved settings still apply even when hidden).',
+        'You can now set how far ahead the video is preloaded (buffer). Choose from the default (about 20 seconds) up to 10 minutes, so playback is less likely to stall on an unstable connection.',
+      ],
+      ko: [
+        '메뉴에 "표시 옵션"을 추가했습니다. 이 확장 프로그램이 화면에 추가하는 표시를 기능별로 끌 수 있습니다(즐겨찾기나 기록 저장 등 기능 자체는 유지됩니다).',
+        '"페이지 내 추가 표시를 최소화" 버튼으로 페이지 내 추가 표시를 한 번에 끌 수 있습니다(메뉴의 기능은 그대로 사용할 수 있습니다).',
+        '확장 프로그램 메뉴 항목도 사용하지 않는 것만 개별적으로 숨길 수 있습니다.',
+        '동영상 하단 설정 패널의 내용도 사용하지 않는 항목만 블록 단위로 숨길 수 있습니다(숨겨도 설정 내용은 그대로 적용됩니다).',
+        '동영상의 "미리 읽기(버퍼) 길이"를 설정할 수 있게 했습니다. 기본(약 20초)부터 최대 10분까지 선택할 수 있어, 회선이 불안정해도 재생이 멈추기 어려워집니다.',
+      ],
+      zh_CN: [
+        '菜单中新增“显示选项”。可以按功能关闭此扩展在页面上添加的显示内容（收藏和历史记录的保存等功能本身仍会保留）。',
+        '通过“将页面内的附加显示降到最少”按钮，可以一次性关闭页面内的所有附加显示（菜单中的功能仍可正常使用）。',
+        '扩展菜单中不使用的项目也可以单独隐藏。',
+        '视频下方设置面板中的内容也可以只逐块隐藏不使用的项目（隐藏后设置内容仍然有效）。',
+        '现在可以设置视频的“预加载（缓冲）时长”。可从默认（约 20 秒）到最长 10 分钟中选择，即使网络不稳定也不容易卡顿。',
+      ],
+      zh_TW: [
+        '選單中新增「顯示選項」。可以依功能關閉此擴充功能在頁面上新增的顯示內容（收藏和歷史紀錄的儲存等功能本身仍會保留）。',
+        '透過「將頁面內的附加顯示降到最少」按鈕，可以一次關閉頁面內的所有附加顯示（選單中的功能仍可正常使用）。',
+        '擴充功能選單中不使用的項目也可以單獨隱藏。',
+        '影片下方設定面板中的內容也可以只逐塊隱藏不使用的項目（隱藏後設定內容仍然有效）。',
+        '現在可以設定影片的「預先載入（緩衝）時長」。可從預設（約 20 秒）到最長 10 分鐘中選擇，即使網路不穩定也不容易卡頓。',
+      ],
+    },
   },
   {
     version: '2026.7.18',
@@ -50,6 +82,11 @@ const OUJ_CHANGELOG_ENTRIES = [
     ],
   },
 ];
+
+function getChangelogItems(entry) {
+  const byLang = entry.itemsByLang && entry.itemsByLang[window.oujI18n.getLanguage()];
+  return byLang || entry.items;
+}
 
 function getExtensionVersion() {
   try {
@@ -104,19 +141,20 @@ function handleWhatsNewPanelOpen() {
       <div style="padding:0 20px 8px 20px;">
         <div style="font-size:15px;font-weight:bold;color:#1565c0;margin:16px 0 8px 0;">${entry.version}</div>
         <ul style="margin:0;padding-left:20px;">
-          ${entry.items.map((item) => `<li style="font-size:13px;color:#374151;line-height:1.8;">${item}</li>`).join('')}
+          ${getChangelogItems(entry).map((item) => `<li style="font-size:13px;color:#374151;line-height:1.8;">${item}</li>`).join('')}
         </ul>
       </div>
     `).join('');
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: 'お知らせ' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.whatsNew') }]),
       mainHtml: `
         <div style="text-align:left;">
           ${sectionsHtml}
+          ${window.oujI18n.getLanguage() !== 'ja' ? `<div style="padding:0 20px;font-size:12px;color:#999;">${t('whatsNew.olderInJapanese')}</div>` : ''}
           <div style="padding:12px 20px 20px 20px;font-size:12px;color:#999;">
-            バージョン: ${getExtensionVersion() || '不明'} ／ 不具合の報告・要望は
+            ${t('whatsNew.versionLine', { version: getExtensionVersion() || t('whatsNew.unknown') })}
             <a href="https://github.com/shin1007/ouj_browser" target="_blank" rel="noopener" style="color:#1976d2;">GitHub</a>
-            へお寄せください
+            ${t('whatsNew.reportSuffix')}
           </div>
         </div>
       `

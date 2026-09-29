@@ -38,6 +38,7 @@
 
 | ファイル | 役割 | 主な公開IF（window.*） |
 |---|---|---|
+| [utils/i18n.js](src/utils/i18n.js) + [i18n/messages-*.js](src/i18n/messages-ja.js) | **多言語化**（ja/en/ko/zh_CN/zh_TW）。文字列は `i18n/messages-<言語>.js` が `OUJ_I18N_MESSAGES` に登録（**日本語が基準・フォールバック**。キーは必ずjaに足す）。言語は chrome.storage.sync `language`（`auto`＝ブラウザ言語追従、対応外はja）を localStorage `oujLanguage` にミラーして同期で決定。静的HTMLは `data-i18n`／`data-i18n-title`／`data-i18n-aria-label`、JSは `t(key, {param})`。**新しい画面文言は直書きせず `t()` を使うこと**。`_locales/` は manifest の name/description 専用（chrome.i18n。手動言語切替とは別系統）。**移行状況: 画面に出る文言は全て `t()` 化済み**（残る日本語は、サイトのDOM/文言を判定する文字列・コメント・コンソールログのみ。サイト側の文言判定は翻訳しないこと）。動的に組み立てるUIは、生成時に `t()` を呼ぶ（言語変更は次回表示・再読み込みで反映。メニューは `onChange` で作り直し）。表示オプション定義(`utils/display-options.js`)の label/description は getter で `t()` を返す。お知らせ(`menu/menu-whats-new.js`)は最新版のみ `itemsByLang` で多言語化（過去版は日本語のまま）。キー追加時は5言語すべてに足すこと（`tests/offline/i18n.spec.js` が訳し漏れ・プレースホルダ不一致・未定義キー参照を検出） | `t`, `oujI18n.{applyToDom,getLanguage,getLanguageSetting,setLanguageSetting,onChange,LANGUAGES}` |
 | [utils/net.js](src/utils/net.js) | APIキャッシュ・同時実行ゲート | `fetchWithCache`, `createConcurrencyGate` |
 | [utils/dom-wait.js](src/utils/dom-wait.js) | DOM/条件の出現待ち | `waitForElement`, `waitForCondition` |
 | [utils/settings.js](src/utils/settings.js) | localStorage設定の読み書き（科目別設定含む） | `getSetting`, `saveSetting`, `getBooleanSetting`, `getPerCourseSetting`, `savePerCourseSetting`, `removeSetting` |
@@ -118,7 +119,7 @@
 
 ## popup/ — ポップアップ兼オプションページ
 
-- [popup/popup.html](src/popup/popup.html) / [popup.css](src/popup/popup.css) / [popup.js](src/popup/popup.js) … 放送大学ページを開くボタン、自動ログインON/OFF、テーマ切替。
+- [popup/popup.html](src/popup/popup.html) / [popup.css](src/popup/popup.css) / [popup.js](src/popup/popup.js) … 放送大学ページを開くボタン、自動ログインON/OFF、テーマ切替、表示言語の選択（`language-select`。文言は `data-i18n`）。
 - [popup/licenses.js](src/popup/licenses.js) … ライセンス表示。
 
 ## CSS（content_scriptで注入）

@@ -37,22 +37,22 @@ function buildDisplayOptionsMainHtml() {
   return `
     <div style="text-align:left;">
       <div style="padding:16px 20px 0 20px;font-size:12px;color:#666;line-height:1.7;">
-        この拡張機能が画面に追加している表示を、機能ごとにオフにできます。
-        チェックを外すとその表示だけが消え、機能そのもの（お気に入りや履歴の記録など）は残ります。
+        ${t('displayOptionsPanel.intro1')}
+        ${t('displayOptionsPanel.intro2')}
       </div>
       <div style="padding:12px 20px 0 20px;display:flex;gap:8px;flex-wrap:wrap;">
-        <button type="button" id="ouj-display-options-minimal" style="padding:6px 14px;border-radius:14px;font-size:12px;cursor:pointer;border:1px solid #1976d2;background:#fff;color:#1976d2;">ページ内の追加表示を最小限にする</button>
-        <button type="button" id="ouj-display-options-reset" style="padding:6px 14px;border-radius:14px;font-size:12px;cursor:pointer;border:1px solid #ddd;background:#fff;color:#333;">すべて表示（初期状態）に戻す</button>
+        <button type="button" id="ouj-display-options-minimal" style="padding:6px 14px;border-radius:14px;font-size:12px;cursor:pointer;border:1px solid #1976d2;background:#fff;color:#1976d2;">${t('displayOptionsPanel.minimal')}</button>
+        <button type="button" id="ouj-display-options-reset" style="padding:6px 14px;border-radius:14px;font-size:12px;cursor:pointer;border:1px solid #ddd;background:#fff;color:#333;">${t('displayOptionsPanel.reset')}</button>
       </div>
       <div id="ouj-display-options-reload" style="display:none;padding:12px 20px 0 20px;">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:8px 12px;">
-          <span style="font-size:12px;color:#795548;">設定を保存し、この画面に反映しました。反映されていない表示があれば再読み込みしてください。</span>
-          <button type="button" id="ouj-display-options-reload-button" style="padding:5px 12px;border-radius:12px;font-size:12px;cursor:pointer;border:1px solid #1976d2;background:#1976d2;color:#fff;">再読み込み</button>
+          <span style="font-size:12px;color:#795548;">${t('displayOptionsPanel.saved')}</span>
+          <button type="button" id="ouj-display-options-reload-button" style="padding:5px 12px;border-radius:12px;font-size:12px;cursor:pointer;border:1px solid #1976d2;background:#1976d2;color:#fff;">${t('displayOptionsPanel.reload')}</button>
         </div>
       </div>
       ${groupsHtml}
       <div style="padding:16px 20px 20px 20px;font-size:12px;color:#999;">
-        ※「表示オプション」の項目自体は非表示にできません（設定に戻れなくなるため）
+        ${t('displayOptionsPanel.footnote')}
       </div>
     </div>
   `;
@@ -81,7 +81,7 @@ function reapplyOujFeaturesAfterDisplayOptionChange() {
 
 function renderDisplayOptionsPanel(overlay) {
   overlay.innerHTML = window.renderNativeShellHtml({
-    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: '表示オプション' }]),
+    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.displayOptions') }]),
     mainHtml: buildDisplayOptionsMainHtml(),
   });
 

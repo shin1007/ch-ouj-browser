@@ -4,18 +4,18 @@
 
 // メニュー設定
 const MENU_CONFIG = {
-  title: "拡張機能",
+  get title() { return t('menu.title'); },
   items: [
-    { id: "favorites", text: "お気に入り", icon: "star" },
-    { id: "watchlater", text: "あとで見る", icon: "list" },
-    { id: "bookmarks", text: "しおり", icon: "bookmark" },
-    { id: "history", text: "履歴", icon: "time" },
-    { id: "recommend", text: "おすすめ動画", icon: "play" },
-    { id: "studytime", text: "学習時間", icon: "stats" },
-    { id: "whatsnew", text: "お知らせ", icon: "notifications" },
-    { id: "darkmode", text: "ダークモード", icon: "moon" },
+    { id: "favorites", get text() { return t('menu.favorites'); }, icon: "star" },
+    { id: "watchlater", get text() { return t('menu.watchLater'); }, icon: "list" },
+    { id: "bookmarks", get text() { return t('menu.bookmarks'); }, icon: "bookmark" },
+    { id: "history", get text() { return t('menu.history'); }, icon: "time" },
+    { id: "recommend", get text() { return t('menu.recommend'); }, icon: "play" },
+    { id: "studytime", get text() { return t('menu.studyTime'); }, icon: "stats" },
+    { id: "whatsnew", get text() { return t('menu.whatsNew'); }, icon: "notifications" },
+    { id: "darkmode", get text() { return t('menu.darkMode'); }, icon: "moon" },
     // 表示オプションは他の項目を隠すための入口なので、表示オプション自体では隠せない
-    { id: "displayoptions", text: "表示オプション", icon: "options" }
+    { id: "displayoptions", get text() { return t('menu.displayOptions'); }, icon: "options" }
   ]
 };
 
@@ -72,7 +72,7 @@ function createMenuHTML() {
   `).join('');
 
   return `
-    <ion-list class="menu-list list list-md" role="list" aria-label="拡張機能">
+    <ion-list class="menu-list list list-md" role="list" aria-label="${t('menu.title')}" data-ouj-menu>
       ${titleHTML}
       ${itemsHTML}
     </ion-list>
@@ -139,7 +139,7 @@ function insertMenuWhenReady(selector) {
 function insertMenu(selector){
   // 既にメニューが存在する場合はスキップ（aria-labelで検索）
   const existing = document.querySelector(selector);
-  const isMenuInserted = existing && existing.getAttribute('aria-label') === '拡張機能';
+  const isMenuInserted = existing && existing.hasAttribute('data-ouj-menu');
   if (isMenuInserted) return;
   // メニュー要素を作成
   const menuList = createMenuList();
@@ -158,7 +158,7 @@ function insertPopoverMenu() {
 // 「非表示 → 表示」に戻しても、既に挿入済みのメニューはinsertMenu()の二重挿入防止に
 // 阻まれて更新されない。一度取り除いてから入れ直すことで再読み込みなしに反映する。
 function rebuildOujMenus() {
-  document.querySelectorAll('ion-list.menu-list[aria-label="拡張機能"]').forEach((menu) => menu.remove());
+  document.querySelectorAll('ion-list.menu-list[data-ouj-menu]').forEach((menu) => menu.remove());
   insertMenu(LEFT_SELECTOR);
   // ポップオーバー（狭い画面でのメニュー）は開いているときだけ存在する
   insertMenu(POPOVER_SELECTOR);
@@ -223,7 +223,7 @@ function createMenuList() {
 function updateDarkModeMenuLabel(menuItemEl, settingValue) {
   const labelEl = menuItemEl.querySelector('.ouj-darkmode-current-label');
   if (!labelEl) return;
-  const labels = window.OUJ_DARK_MODE_LABELS || { auto: '自動', light: 'ライト', dark: 'ダーク' };
+  const labels = window.OUJ_DARK_MODE_LABELS;
   if (settingValue) {
     labelEl.textContent = `（${labels[settingValue] || labels.auto}）`;
     return;
@@ -266,4 +266,6 @@ function getIconHtml(type, filled = false) {
 window.getIconHtml = getIconHtml;
 window.insertLeftMenu = insertLeftMenu;
 window.rebuildOujMenus = rebuildOujMenus;
+// 言語が切り替わったら、挿入済みのメニューの文言も入れ替える
+window.oujI18n.onChange(() => rebuildOujMenus());
 window.startMenuOpeningMutationObserver = startMenuOpeningMutationObserver;

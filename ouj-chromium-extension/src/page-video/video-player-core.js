@@ -459,8 +459,8 @@ function addShareButtonAfterVideoTitle() {
   button.style.border = '1px solid #ccc';
   button.style.borderRadius = '3px';
   button.style.backgroundColor = '#f0f0f0';
-  button.innerHTML = getIconHtml('share') + '共有';
-  button.title = '科目名、授業名、URLをクリップボードにコピー';
+  button.innerHTML = getIconHtml('share') + t('actions.share');
+  button.title = t('actions.shareTitle');
   button.addEventListener('click', () => {
     // 既存のメッセージがあれば削除
     const existingMessage = button.parentNode.querySelector('.copy-status-message');
@@ -485,10 +485,10 @@ function addShareButtonAfterVideoTitle() {
     const url = window.location.href;
     const copyText = `\n${trimmedLectureName} ${videoTitle}\n#放送大学\n${url}`;
     navigator.clipboard.writeText(copyText)
-      .then(() => showCopyStatusMessage('コピーしました', true))
+      .then(() => showCopyStatusMessage(t('actions.copied'), true))
       .catch(err => {
         console.error('クリップボードへのコピーに失敗しました:', err);
-        showCopyStatusMessage('コピー失敗', false);
+        showCopyStatusMessage(t('actions.copyFailed'), false);
       });
   });
 

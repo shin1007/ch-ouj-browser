@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const licenseFiles = [
     {
-      name: 'この拡張機能 (ouj-chromium-extension)',
+      name: t('licenses.thisExtension'),
       path: 'popup/licenses/LICENSE_this_extension.txt'
     }
     // 他のライブラリがあればここに追加

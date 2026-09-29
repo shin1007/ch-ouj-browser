@@ -68,8 +68,8 @@ async function addPipButton(titleElement) {
   if (titleElement.querySelector('.video-pip-button')) return; // 判定待ちの間に他経路で追加済み
   const button = createTitleActionButton({
     className: 'video-pip-button',
-    title: 'ピクチャーインピクチャー（小窓）で再生',
-    html: '⧉ 小窓',
+    title: t('actions.pipTitle'),
+    html: t('actions.pip'),
   });
   button.addEventListener('click', async () => {
     const video = document.querySelector('video');
@@ -85,9 +85,9 @@ async function addPipButton(titleElement) {
       // ラジオ番組は動画トラックが無くPiP自体が構造的に使えない(InvalidStateError)ため、
       // 原因不明の失敗と区別して対応不可であることを伝える
       if (e.name === 'InvalidStateError' && video.videoWidth === 0) {
-        window.showErrorNotification('ラジオ番組（映像のない音声のみのコンテンツ）は小窓表示に対応していません');
+        window.showErrorNotification(t('actions.pipRadio'));
       } else {
-        window.showErrorNotification('小窓表示に失敗しました');
+        window.showErrorNotification(t('actions.pipFailed'));
       }
     }
   });
@@ -118,7 +118,7 @@ async function pipOrPauseCurrentVideoIfPlaying() {
   }
   video.pause();
   if (typeof window.showInfoNotification === 'function') {
-    window.showInfoNotification('ラジオ番組など小窓表示に対応していないコンテンツのため、動画を一時停止しました（閉じると続きから再生できます）');
+    window.showInfoNotification(t('actions.pipPaused'));
   }
 }
 
@@ -173,22 +173,22 @@ function addBookmarkButton(titleElement, currentVideo) {
   if (existing) existing.remove();
   const button = createTitleActionButton({
     className: 'video-bookmark-button',
-    title: '現在の再生位置にしおりを挟む（メニューの「しおり」から一覧できます）',
-    html: '🔖 しおり',
+    title: t('actions.bookmarkTitle'),
+    html: t('actions.bookmark'),
   });
   button.addEventListener('click', async () => {
     const video = document.querySelector('video');
     if (!video) {
-      window.showWarningNotification('動画が見つかりません');
+      window.showWarningNotification(t('actions.videoNotFound'));
       return;
     }
     const time = Math.floor(video.currentTime);
     const detailLines = (currentVideo?.detail || '').split('\n');
     const courseName = (detailLines[0] || '').replace(/（’\d{2}）$/, '').trim();
     const note = await window.showPromptDialog(
-      `位置: ${formatBookmarkTime(time)} にしおりを挟みます。メモがあれば入力してください（空欄でもOK）。`,
-      'しおりを追加',
-      { placeholder: '例: 試験に出そうな用語の説明', okText: '追加' }
+      t('actions.bookmarkPrompt', { time: formatBookmarkTime(time) }),
+      t('actions.bookmarkAdd'),
+      { placeholder: t('actions.bookmarkPlaceholder'), okText: t('common.add') }
     );
     if (note === null) return; // キャンセル
     saveBookmark({
@@ -201,7 +201,7 @@ function addBookmarkButton(titleElement, currentVideo) {
       note: note.trim(),
       createdAt: new Date().toISOString(),
     });
-    window.showSuccessNotification(`しおりを追加しました（${formatBookmarkTime(time)}）`);
+    window.showSuccessNotification(t('actions.bookmarkAdded', { time: formatBookmarkTime(time) }));
   });
   titleElement.appendChild(button);
 }
@@ -216,19 +216,19 @@ function addWatchLaterButton(titleElement, currentVideo) {
   const categoryId = String(currentVideo?.categoryId || window.getCurrentCategoryId() || '');
   const button = createTitleActionButton({
     className: 'video-watch-later-button',
-    title: '「あとで見る」リストに追加/削除（メニューから一覧できます）',
+    title: t('actions.watchLaterTitle'),
     html: '',
   });
   const updateLabel = () => {
     const active = window.isInWatchLater(contentId);
-    button.innerHTML = active ? '✓ あとで見る' : '⏱ あとで見る';
+    button.innerHTML = active ? t('videoSelect.watchLaterOn') : t('videoSelect.watchLaterOff');
     button.style.backgroundColor = active ? '#e3f2fd' : '#f0f0f0';
   };
   updateLabel();
   button.addEventListener('click', () => {
     const nowActive = window.toggleWatchLater(contentId, categoryId);
     updateLabel();
-    window.showSuccessNotification(nowActive ? '「あとで見る」に追加しました' : '「あとで見る」から削除しました');
+    window.showSuccessNotification(nowActive ? t('videoSelect.addedToWatchLater') : t('videoSelect.removedFromWatchLater'));
   });
   titleElement.appendChild(button);
 }
@@ -263,7 +263,7 @@ function applyPendingSeekIfAny() {
     const seek = () => {
       if (isFinite(video.duration) && video.duration > 0) {
         video.currentTime = Math.min(pending.time, Math.max(0, video.duration - 1));
-        window.showInfoNotification(`しおりの位置（${formatBookmarkTime(pending.time)}）から再生します`);
+        window.showInfoNotification(t('actions.resumeFromBookmark', { time: formatBookmarkTime(pending.time) }));
       }
     };
     if (video.readyState >= 1 && isFinite(video.duration)) {

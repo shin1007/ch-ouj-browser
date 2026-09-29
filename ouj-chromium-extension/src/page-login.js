@@ -60,7 +60,7 @@ async function insertReferTo() {
         infoDiv.style.color = '#555';
         // id
         infoDiv.id = 'ouj-login-redirect-info';
-        infoDiv.textContent = `遷移先：${message}`;
+        infoDiv.textContent = t('loginRedirect.destination', { name: message });
         nextElement.parentNode.insertBefore(infoDiv, nextElement);
     }
 }
@@ -70,43 +70,50 @@ async function getReferToMessage() {
     if (!referTo) {
         return null;
     }
-    const subDomainDic = {
-        'wakaba': 'システムWAKABA',
-        'tsushin': '通信指導',
-        'shiken': 'Web単位認定試験',
-        'online': 'オンライン授業',
-        'live': 'ライブWEB授業',
-        'sls': '自己学習サイト',
-        'nurse': '看護師国家試験対策',
-        'info': 'インフォ',
-        'v': 'インターネット配信'
+    // 表示名は言語切替に追従させるためキー(t()の引数)で持ち、表示の直前に翻訳する。
+    // 翻訳後の文字列で分岐すると言語ごとに比較が壊れるので、分岐はキーで行う
+    const subDomainKeys = {
+        'wakaba': 'loginRedirect.wakaba',
+        'tsushin': 'loginRedirect.tsushin',
+        'shiken': 'loginRedirect.shiken',
+        'online': 'loginRedirect.online',
+        'live': 'loginRedirect.live',
+        'sls': 'loginRedirect.sls',
+        'nurse': 'loginRedirect.nurse',
+        'info': 'loginRedirect.info',
+        'v': 'loginRedirect.v'
     };
-    const infoDic = {
-        'kyozaipdf': '印刷教材試し読み',
-        'mondai': '過去問',
-        'gakubu': '過去問（学部）',
-        'daigakuin': '過去問（大学院）',
-        'shisho': '過去問（司書）',
-        'inronbun': '修士論文'
+    const infoKeys = {
+        'kyozaipdf': 'loginRedirect.kyozaipdf',
+        'mondai': 'loginRedirect.mondai',
+        'gakubu': 'loginRedirect.gakubu',
+        'daigakuin': 'loginRedirect.daigakuin',
+        'shisho': 'loginRedirect.shisho',
+        'inronbun': 'loginRedirect.inronbun'
     };
-    const vodDic = {
-        'home': 'インターネット配信ホーム',
-        'player': '動画再生ページ',
-        'search-result': '検索結果',
-        'series-select': '科目一覧ページ',
-        'video-select': '動画一覧ページ',
-        'other': 'その他'
+    const vodKeys = {
+        'home': 'loginRedirect.vodHome',
+        'player': 'loginRedirect.vodPlayer',
+        'search-result': 'loginRedirect.vodSearchResult',
+        'series-select': 'loginRedirect.vodSeriesSelect',
+        'video-select': 'loginRedirect.vodVideoSelect',
+        'other': 'common.other'
     };
-    let message = subDomainDic[referTo.referTo.subDomain] || '不明なサービス';
-    if (message === 'インフォ') {
-        message = infoDic[referTo.referTo.page] || message;
+    const subDomain = referTo.referTo.subDomain;
+    let key = subDomainKeys[subDomain] || 'loginRedirect.unknown';
+    if (subDomain === 'info') {
+        key = infoKeys[referTo.referTo.page] || key;
     }
-    if (message === 'インターネット配信') {
-        message = vodDic[referTo.referTo.page] || message;
+    let message;
+    if (subDomain === 'v') {
+        key = vodKeys[referTo.referTo.page] || key;
+        message = t(key);
         const category = await window.getCategoryData(String(referTo.referTo.categoryId));
         if (category){
             message += `（${category.name}）`;
         }
+    } else {
+        message = t(key);
     }
 
     return message;

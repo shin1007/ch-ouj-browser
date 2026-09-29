@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "放送大学授業ブラウザ",
+  "name": "__MSG_extName__",
+  "default_locale": "ja",
   "version": "2026.7.31",
-  "description": "放送大学の放送授業での学習を便利にする拡張機能",
+  "description": "__MSG_extDescription__",
   "author": "shin1007",
   "permissions": [
     "storage",
@@ -49,6 +50,12 @@
         "page-video/video-subtitle-size.css"
       ],
       "js": [
+        "i18n/messages-ja.js",
+        "i18n/messages-en.js",
+        "i18n/messages-ko.js",
+        "i18n/messages-zh_CN.js",
+        "i18n/messages-zh_TW.js",
+        "utils/i18n.js",
         "utils/net.js",
         "utils/dom-wait.js",
         "utils/settings.js",

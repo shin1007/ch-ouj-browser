@@ -30,13 +30,13 @@ function updateAbRepeatStatusLabel() {
   const label = document.getElementById('ab-repeat-status');
   if (!label) return;
   if (oujAbPointA === null && oujAbPointB === null) {
-    label.textContent = '未設定';
+    label.textContent = t('abRepeat.unset');
     label.style.color = '#999';
   } else if (oujAbPointB === null) {
-    label.textContent = `A: ${formatAbTime(oujAbPointA)} → B: 未設定`;
+    label.textContent = t('abRepeat.aOnly', { a: formatAbTime(oujAbPointA) });
     label.style.color = '#1565c0';
   } else {
-    label.textContent = `${formatAbTime(oujAbPointA)} ～ ${formatAbTime(oujAbPointB)} を繰り返し中`;
+    label.textContent = t('abRepeat.repeating', { a: formatAbTime(oujAbPointA), b: formatAbTime(oujAbPointB) });
     label.style.color = '#2e7d32';
   }
 }
@@ -78,11 +78,11 @@ function setAbPointB() {
   const video = document.querySelector('video');
   if (!video) return;
   if (oujAbPointA === null) {
-    window.showWarningNotification('先にA点（開始位置）をセットしてください');
+    window.showWarningNotification(t('abRepeat.needA'));
     return;
   }
   if (video.currentTime <= oujAbPointA) {
-    window.showWarningNotification('B点はA点より後ろの位置でセットしてください');
+    window.showWarningNotification(t('abRepeat.bAfterA'));
     return;
   }
   oujAbPointB = video.currentTime;
@@ -99,13 +99,13 @@ function insertAbRepeatControls(container) {
   row.style.cssText = 'margin-bottom: 8px;';
   row.innerHTML = `
     <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-      <span style="color: #333;">A-B区間リピート</span>
-      <button type="button" id="ab-repeat-set-a" style="padding: 3px 10px; border: 1px solid #1976d2; background: #fff; color: #1976d2; border-radius: 4px; cursor: pointer; font-size: 12px;">A点セット</button>
-      <button type="button" id="ab-repeat-set-b" style="padding: 3px 10px; border: 1px solid #1976d2; background: #fff; color: #1976d2; border-radius: 4px; cursor: pointer; font-size: 12px;">B点セット</button>
-      <button type="button" id="ab-repeat-clear" style="padding: 3px 10px; border: 1px solid #999; background: #fff; color: #666; border-radius: 4px; cursor: pointer; font-size: 12px;">解除</button>
-      <span id="ab-repeat-status" style="font-size: 12px; color: #999;">未設定</span>
+      <span style="color: #333;">${t('abRepeat.title')}</span>
+      <button type="button" id="ab-repeat-set-a" style="padding: 3px 10px; border: 1px solid #1976d2; background: #fff; color: #1976d2; border-radius: 4px; cursor: pointer; font-size: 12px;">${t('abRepeat.setA')}</button>
+      <button type="button" id="ab-repeat-set-b" style="padding: 3px 10px; border: 1px solid #1976d2; background: #fff; color: #1976d2; border-radius: 4px; cursor: pointer; font-size: 12px;">${t('abRepeat.setB')}</button>
+      <button type="button" id="ab-repeat-clear" style="padding: 3px 10px; border: 1px solid #999; background: #fff; color: #666; border-radius: 4px; cursor: pointer; font-size: 12px;">${t('abRepeat.clear')}</button>
+      <span id="ab-repeat-status" style="font-size: 12px; color: #999;">${t('abRepeat.unset')}</span>
     </div>
-    <div style="font-size: 11px; color: #999; margin-top: 2px;">再生しながらA点→B点の順にセットすると、その区間を繰り返します（語学の聞き取り練習用）</div>
+    <div style="font-size: 11px; color: #999; margin-top: 2px;">${t('abRepeat.hint')}</div>
   `;
   container.appendChild(row);
   row.querySelector('#ab-repeat-set-a').addEventListener('click', setAbPointA);

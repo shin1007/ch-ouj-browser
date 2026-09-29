@@ -164,8 +164,8 @@ function createOujHeaderTab({ id, title, text, onClick }) {
 
 function ensureHeaderCollapseTabs() {
   if (document.getElementById(HEADER_EXPAND_TAB_ID)) return;
-  createOujHeaderTab({ id: HEADER_COLLAPSE_TAB_ID, title: 'ヘッダーを折りたたむ', text: '▲', onClick: cycleOujHeaderCollapsed });
-  createOujHeaderTab({ id: HEADER_EXPAND_TAB_ID, title: 'ヘッダーを表示', text: '▼', onClick: cycleOujHeaderCollapsed });
+  createOujHeaderTab({ id: HEADER_COLLAPSE_TAB_ID, title: t('header.collapse'), text: '▲', onClick: cycleOujHeaderCollapsed });
+  createOujHeaderTab({ id: HEADER_EXPAND_TAB_ID, title: t('header.expand'), text: '▼', onClick: cycleOujHeaderCollapsed });
 }
 
 function insertHeaderCollapseToggle() {

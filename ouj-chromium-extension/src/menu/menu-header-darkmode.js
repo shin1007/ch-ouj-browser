@@ -43,9 +43,9 @@ function insertHeaderDarkModeToggle() {
     });
 
     const applyLabel = (setting) => {
-      const labels = window.OUJ_DARK_MODE_LABELS || { auto: '自動', light: 'ライト', dark: 'ダーク' };
+      const labels = window.OUJ_DARK_MODE_LABELS;
       toggle.textContent = HEADER_DARKMODE_ICONS[setting] || HEADER_DARKMODE_ICONS.auto;
-      toggle.title = `表示テーマ: ${labels[setting] || labels.auto}（クリックで切替）`;
+      toggle.title = t('header.themeTitle', { theme: labels[setting] || labels.auto });
     };
 
     if (typeof window.getOujDarkModeSetting === 'function') {

@@ -176,9 +176,9 @@ function buildNativeOverlayActionsHtml() {
   return `
     <div style="position:sticky;top:0;z-index:30;height:0;text-align:right;">
       <div style="position:relative;top:10px;right:14px;display:inline-flex;gap:6px;">
-        <button type="button" class="${NATIVE_OVERLAY_TOP_CLASS}" title="一番上へ戻る" aria-label="一番上へ戻る"
+        <button type="button" class="${NATIVE_OVERLAY_TOP_CLASS}" title="${t('common.backToTop')}" aria-label="${t('common.backToTop')}"
           style="${NATIVE_OVERLAY_BUTTON_STYLE}">↑</button>
-        <button type="button" class="${NATIVE_OVERLAY_CLOSE_CLASS}" title="閉じる" aria-label="閉じる"
+        <button type="button" class="${NATIVE_OVERLAY_CLOSE_CLASS}" title="${t('common.close')}" aria-label="${t('common.close')}"
           style="${NATIVE_OVERLAY_BUTTON_STYLE}">✕</button>
       </div>
     </div>
@@ -213,7 +213,7 @@ function renderNativeShellHtml({ breadcrumbHtml, extraAsideHtml = '', asideListH
         <div class="common-outer-main-content-area">
           <ion-title class="page-list-title common-list-title-bottom title title-md">
             <div class="toolbar-title toolbar-title-md">
-              <span class="list-title-span" role="heading">動画</span>
+              <span class="list-title-span" role="heading">${t('nativeShell.videos')}</span>
             </div>
           </ion-title>
         </div>
@@ -221,10 +221,10 @@ function renderNativeShellHtml({ breadcrumbHtml, extraAsideHtml = '', asideListH
       <vod-list-navigator>
         <aside role="complementary">
           <div class="breadcrumbs">
-            <ul aria-label="カテゴリーのパンくずリスト">${breadcrumbHtml}</ul>
+            <ul aria-label="${t('nativeShell.breadcrumbList')}">${breadcrumbHtml}</ul>
           </div>
           ${extraAsideHtml}
-          <ion-list class="vod-category-list list list-md" role="list" aria-label="カテゴリー">
+          <ion-list class="vod-category-list list list-md" role="list" aria-label="${t('nativeShell.categories')}">
             ${asideListHtml}
           </ion-list>
         </aside>
@@ -318,8 +318,8 @@ function buildFavoriteToggleHtml(categoryId, isFavorite) {
   const iconName = isFavorite ? 'star' : 'star-outline';
   const iconClass = isFavorite ? 'ion-md-star' : 'ion-md-star-outline';
   return `
-    <span class="favorite-btn" role="button" tabindex="0" title="お気に入り" data-category-id="${categoryId}" style="display: inline-flex; align-items: center; justify-content: center; padding: 2px 16px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: background 0.2s; margin-left: 8px;">
-      <ion-icon name="${iconName}" class="icon icon-md ${iconClass} item-icon" aria-label="お気に入り" style="font-size:24px;"></ion-icon>
+    <span class="favorite-btn" role="button" tabindex="0" title="${t('common.favorites')}" data-category-id="${categoryId}" style="display: inline-flex; align-items: center; justify-content: center; padding: 2px 16px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: background 0.2s; margin-left: 8px;">
+      <ion-icon name="${iconName}" class="icon icon-md ${iconClass} item-icon" aria-label="${t('common.favorites')}" style="font-size:24px;"></ion-icon>
     </span>
   `;
 }
@@ -330,7 +330,7 @@ function buildPinToggleHtml(categoryId, isPinned) {
   const color = isPinned ? '#0075C1' : '#9ca3af';
   const fill = isPinned ? color : 'none';
   return `
-    <span class="pin-btn" role="button" tabindex="0" title="${isPinned ? 'ピンを外す' : 'ピン止め'}" data-category-id="${categoryId}" style="display: inline-flex; align-items: center; justify-content: center; padding: 2px 12px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: background 0.2s;">
+    <span class="pin-btn" role="button" tabindex="0" title="${isPinned ? t('nativeShell.unpin') : t('favorites.pinned')}" data-category-id="${categoryId}" style="display: inline-flex; align-items: center; justify-content: center; padding: 2px 12px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: background 0.2s;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="${fill}" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3H8L6 9h12L16 3z M12 9v12"/></svg>
     </span>
   `;
@@ -373,7 +373,7 @@ function buildNativeVideoItemHtml({ contentId, categoryId, title, summary, categ
                         </ion-col>
                       </ion-row>
                       <ion-row class="list-content-detail row">
-                        <ion-col class="col">${safeSummary || 'サマリー情報なし'}</ion-col>
+                        <ion-col class="col">${safeSummary || t('nativeShell.noSummary')}</ion-col>
                       </ion-row>
                       ${categoryPath ? `
                       <ion-row class="list-content-category row">
@@ -398,8 +398,8 @@ function buildNativeVideoItemHtml({ contentId, categoryId, title, summary, categ
 // 視聴済み/視聴日を示すネイティブ風の丸ピル（履歴用）
 function buildViewedDateHtml(dateStr) {
   return `
-    <div class="div-right" title="視聴日">
-      <div class="viewed-item no-aria-label" aria-label="視聴日">
+    <div class="div-right" title="${t('nativeShell.viewedDate')}">
+      <div class="viewed-item no-aria-label" aria-label="${t('nativeShell.viewedDate')}">
         <div class="viewed-button"><ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon></div>
       </div>
       <div class="viewed-item">

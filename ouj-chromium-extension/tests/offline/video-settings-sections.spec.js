@@ -51,6 +51,13 @@ const STUB_SCRIPT = `
 `;
 
 const SOURCE_FILES = [
+  // 文言は t() 経由なので、メッセージ定義と i18n.js が先に要る
+  'src/i18n/messages-ja.js',
+  'src/i18n/messages-en.js',
+  'src/i18n/messages-ko.js',
+  'src/i18n/messages-zh_CN.js',
+  'src/i18n/messages-zh_TW.js',
+  'src/utils/i18n.js',
   'src/utils/settings.js',
   'src/utils/dom-wait.js',
   'src/utils/display-options.js',

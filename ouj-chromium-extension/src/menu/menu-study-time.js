@@ -64,7 +64,7 @@ function calcStudyStreak(totalsByDate, goalMinutes) {
 
 // 日別の棒グラフ（7日/30日用）
 function buildStudyTimeChartHtml(totalsByDate, days) {
-  const dayLabels = ['日', '月', '火', '水', '木', '金', '土'];
+  const dayLabels = [t('studyTime.day0'), t('studyTime.day1'), t('studyTime.day2'), t('studyTime.day3'), t('studyTime.day4'), t('studyTime.day5'), t('studyTime.day6')];
   const entries = getLastNDateKeys(days);
   const values = entries.map(({ key }) => totalsByDate[key] || 0);
   const maxValue = Math.max(...values, 60); // 全て0分でも棒が潰れないよう最低1分相当を確保
@@ -81,9 +81,9 @@ function buildStudyTimeChartHtml(totalsByDate, days) {
     } else if (i % 5 === 0 || isToday) {
       label = `${date.getMonth() + 1}/${date.getDate()}`;
     }
-    const valueLabel = showEveryLabel ? `<div style="font-size:11px;color:#666;margin-bottom:4px;white-space:nowrap;">${formatStudyMinutes(seconds)}分</div>` : '';
+    const valueLabel = showEveryLabel ? `<div style="font-size:11px;color:#666;margin-bottom:4px;white-space:nowrap;">${t('studyTime.minutes', { n: formatStudyMinutes(seconds) })}</div>` : '';
     return `
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;" title="${key}: ${formatStudyMinutes(seconds)}分">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;" title="${key}: ${t('studyTime.minutes', { n: formatStudyMinutes(seconds) })}">
         ${valueLabel}
         <div style="width:100%;max-width:${showEveryLabel ? 32 : 12}px;height:120px;display:flex;align-items:flex-end;">
           <div style="width:100%;height:${heightPercent}%;background:${isToday ? '#1976d2' : '#90caf9'};border-radius:2px 2px 0 0;"></div>
@@ -110,10 +110,10 @@ function buildStudyTimeWeeklyChartHtml(totalsByDate) {
     const heightPercent = seconds > 0 ? Math.max(Math.round((seconds / maxValue) * 100), 4) : 0;
     const isThisWeek = i === values.length - 1;
     const weeksAgo = values.length - 1 - i;
-    const label = isThisWeek ? '今週' : (weeksAgo % 4 === 0 ? `${weeksAgo}週前` : '');
+    const label = isThisWeek ? t('studyTime.thisWeek') : (weeksAgo % 4 === 0 ? t('studyTime.weeksAgo', { n: weeksAgo }) : '');
     return `
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;" title="${weeksAgo === 0 ? '今週' : `${weeksAgo}週前`}: ${formatStudyMinutes(seconds)}分">
-        <div style="font-size:10px;color:#666;margin-bottom:4px;white-space:nowrap;">${formatStudyMinutes(seconds)}分</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;" title="${weeksAgo === 0 ? t('studyTime.thisWeek') : t('studyTime.weeksAgo', { n: weeksAgo })}: ${t('studyTime.minutes', { n: formatStudyMinutes(seconds) })}">
+        <div style="font-size:10px;color:#666;margin-bottom:4px;white-space:nowrap;">${t('studyTime.minutes', { n: formatStudyMinutes(seconds) })}</div>
         <div style="width:100%;max-width:24px;height:120px;display:flex;align-items:flex-end;">
           <div style="width:100%;height:${heightPercent}%;background:${isThisWeek ? '#1976d2' : '#90caf9'};border-radius:3px 3px 0 0;"></div>
         </div>
@@ -128,13 +128,13 @@ function buildStudyTimeSummaryHtml(totalsByDate, goalMinutes) {
   const thisWeek = sumStudyTimeRange(totalsByDate, 0, STUDY_TIME_WEEK_DAYS);
   const lastWeek = sumStudyTimeRange(totalsByDate, STUDY_TIME_WEEK_DAYS, STUDY_TIME_WEEK_DAYS * 2);
   const diff = thisWeek - lastWeek;
-  let diffText = '先週と同じ';
+  let diffText = t('studyTime.sameAsLastWeek');
   let diffColor = '#666';
   if (diff > 0) {
-    diffText = `先週より${formatStudyMinutes(diff)}分多い`;
+    diffText = t('studyTime.moreThanLastWeek', { n: formatStudyMinutes(diff) });
     diffColor = '#2e7d32';
   } else if (diff < 0) {
-    diffText = `先週より${formatStudyMinutes(Math.abs(diff))}分少ない`;
+    diffText = t('studyTime.lessThanLastWeek', { n: formatStudyMinutes(Math.abs(diff)) });
     diffColor = '#c62828';
   }
 
@@ -144,22 +144,22 @@ function buildStudyTimeSummaryHtml(totalsByDate, goalMinutes) {
   const todayMinutes = formatStudyMinutes(todaySeconds);
   const remainingToGoal = Math.max(0, goalMinutes - todayMinutes);
   const streakHtml = streak > 0
-    ? `<span style="font-size:15px;color:#e65100;font-weight:bold;">🔥 ${streak}日連続</span>`
-    : '<span style="font-size:13px;color:#999;">今日から連続記録を始めましょう</span>';
+    ? `<span style="font-size:15px;color:#e65100;font-weight:bold;">🔥 ${t('studyTime.streak', { n: streak })}</span>`
+    : `<span style="font-size:13px;color:#999;">${t('studyTime.startStreak')}</span>`;
   const todayGoalHtml = todayMet
-    ? `<span style="font-size:13px;color:#2e7d32;">今日の目標（${goalMinutes}分）達成！</span>`
-    : `<span style="font-size:13px;color:#666;">今日の目標（${goalMinutes}分）まで あと${remainingToGoal}分</span>`;
+    ? `<span style="font-size:13px;color:#2e7d32;">${t('studyTime.goalMet', { n: goalMinutes })}</span>`
+    : `<span style="font-size:13px;color:#666;">${t('studyTime.goalRemaining', { goal: goalMinutes, remaining: remainingToGoal })}</span>`;
 
   return `
     <div style="padding:20px 20px 0 20px;">
-      <div style="font-size:22px;font-weight:bold;color:#1565c0;">今週の学習時間: ${formatStudyMinutes(thisWeek)}分</div>
-      <div style="font-size:13px;color:${diffColor};margin-top:4px;">${diffText}（先週: ${formatStudyMinutes(lastWeek)}分）</div>
+      <div style="font-size:22px;font-weight:bold;color:#1565c0;">${t('studyTime.thisWeekTotal', { n: formatStudyMinutes(thisWeek) })}</div>
+      <div style="font-size:13px;color:${diffColor};margin-top:4px;">${diffText}${t('studyTime.lastWeekParen', { n: formatStudyMinutes(lastWeek) })}</div>
       <div style="margin-top:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
         ${streakHtml}
         ${todayGoalHtml}
-        <span style="font-size:12px;color:#999;">目標:
+        <span style="font-size:12px;color:#999;">${t('studyTime.goalLabel')}
           <select id="study-time-goal-select" style="font-size:12px;">
-            ${[5, 10, 15, 30, 45, 60, 90, 120].map((m) => `<option value="${m}" ${m === goalMinutes ? 'selected' : ''}>${m}分/日</option>`).join('')}
+            ${[5, 10, 15, 30, 45, 60, 90, 120].map((m) => `<option value="${m}" ${m === goalMinutes ? 'selected' : ''}>${t('studyTime.perDay', { n: m })}</option>`).join('')}
           </select>
         </span>
       </div>
@@ -184,7 +184,7 @@ async function fillCategoryBreakdown(overlay) {
   const maxSeconds = entries[0][1];
   const rows = entries.map(([catId, seconds]) => {
     const category = (categories || []).find((c) => String(c.categoryId) === String(catId));
-    const name = category ? window.trimCourseName(category.name) : `科目ID: ${catId}`;
+    const name = category ? window.trimCourseName(category.name) : t('studyTime.unknownCourse', { id: catId });
     const widthPercent = Math.max(Math.round((seconds / maxSeconds) * 100), 4);
     return `
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
@@ -192,12 +192,12 @@ async function fillCategoryBreakdown(overlay) {
         <div style="flex:1;height:14px;background:#f0f0f0;border-radius:7px;overflow:hidden;">
           <div style="height:100%;width:${widthPercent}%;background:#64b5f6;"></div>
         </div>
-        <div style="width:52px;text-align:right;font-size:12px;color:#666;">${formatStudyMinutes(seconds)}分</div>
+        <div style="width:52px;text-align:right;font-size:12px;color:#666;">${t('studyTime.minutes', { n: formatStudyMinutes(seconds) })}</div>
       </div>
     `;
   }).join('');
   container.innerHTML = `
-    <div style="font-size:13px;font-weight:bold;color:#374151;margin-bottom:8px;">科目別（直近7日）</div>
+    <div style="font-size:13px;font-weight:bold;color:#374151;margin-bottom:8px;">${t('studyTime.byCourse')}</div>
     ${rows}
   `;
 }
@@ -208,9 +208,9 @@ function renderStudyTimePanel(overlay, periodDays) {
 
   // 期間切替タブ
   const periods = [
-    { days: 7, label: '7日' },
-    { days: 30, label: '30日' },
-    { days: 90, label: '90日' },
+    { days: 7, label: t('studyTime.days', { n: 7 }) },
+    { days: 30, label: t('studyTime.days', { n: 30 }) },
+    { days: 90, label: t('studyTime.days', { n: 90 }) },
   ];
   const tabsHtml = `
     <div style="display:flex;gap:8px;padding:14px 20px 0 20px;">
@@ -230,14 +230,14 @@ function renderStudyTimePanel(overlay, periodDays) {
     : buildStudyTimeChartHtml(totalsByDate, periodDays);
 
   overlay.innerHTML = window.renderNativeShellHtml({
-    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: '学習時間' }]),
+    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.studyTime') }]),
     mainHtml: `
       ${buildStudyTimeSummaryHtml(totalsByDate, goalMinutes)}
       ${tabsHtml}
       ${chartHtml}
       ${buildCategoryBreakdownPlaceholderHtml()}
       <div style="padding:0 20px 20px 20px;font-size:12px;color:#999;">
-        ※この拡張機能で動画を再生した時間のみを記録しています（この機能を追加する前の視聴時間は含まれません）
+        ${t('studyTime.footnote')}
       </div>
     `
   });

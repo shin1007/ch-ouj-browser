@@ -18,7 +18,7 @@ function oujProgressBadgeStyleText() {
 // 動画が無い等でバッジ自体を消す判断は呼び出し側の責務（min-widthはあくまで「表示するなら
 // 最初から確保しておく」ためのもので、非表示にするケースまでは吸収しない）
 function fillProgressCountBadge(badge, { finishedCount, total, suffix = '' }) {
-  badge.textContent = `${finishedCount}/${total}回視聴済み${suffix}`;
+  badge.textContent = `${t('progress.watched', { finished: finishedCount, total })}${suffix}`;
   if (finishedCount >= total) {
     badge.style.background = '#dcedc8';
     badge.style.color = '#33691e';

@@ -1,5 +1,3 @@
-const captionUi = "字幕が利用可能です"
-const noCaptionUi = "字幕なし"
 
 // 再生ページ限定: 動画ストリームそのものの内在解像度(videoWidth/videoHeight)で判定する。
 // 従来はCSSで指定された表示幅(style.vjs-styles-dimensions)をテキスト解析していたが、
@@ -187,8 +185,8 @@ function showRadioProgramUI(startUrl) {
           -${outerPixel} 0px 1px ${outer},  /* 左 */
           0px -${outerPixel} 1px ${outer};  /* 上 */;
         ">♬</div>
-        <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">ラジオ番組</div>
-        <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">${await captionAvailable ? captionUi : noCaptionUi}</div>
+        <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">${t('filters.radio')}</div>
+        <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">${await captionAvailable ? t('radio.captionAvailable') : t('radio.noCaption')}</div>
       `;
     })();
           // 0px ${outerPixel} 1px ${outer},   /* 下 */

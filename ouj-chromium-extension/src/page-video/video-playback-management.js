@@ -46,9 +46,9 @@ function updateRemainingTimeDisplay(video) {
   const remainReal = Math.max(0, video.duration - video.currentTime);
   const rate = video.playbackRate || 1;
   if (Math.abs(rate - 1) < 0.01) {
-    span.textContent = `残り ${formatTime(remainReal)}`;
+    span.textContent = t('playback.remaining', { time: formatTime(remainReal) });
   } else {
-    span.textContent = `残り ${formatTime(remainReal / rate)}（${rate}x換算・実時間 ${formatTime(remainReal)}）`;
+    span.textContent = t('playback.remainingScaled', { time: formatTime(remainReal / rate), rate, real: formatTime(remainReal) });
   }
 }
 
@@ -94,7 +94,7 @@ function armOpeningSkip(video) {
       done = true;
       video.currentTime = skipStart;
       if (typeof window.showInfoNotification === 'function') {
-        window.showInfoNotification(`冒頭を${skipStart}秒スキップしました`);
+        window.showInfoNotification(t('playback.skippedStart', { n: skipStart }));
       }
     } else if (video.currentTime >= 3) {
       // レジューム等で途中から始まった → スキップ不要

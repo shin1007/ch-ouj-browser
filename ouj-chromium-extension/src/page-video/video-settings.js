@@ -142,10 +142,10 @@ function insertSettingsPanel(targetElement) {
         ${settingsSection('player-panel-speed', 'playback-speed-section', `
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="playback-speed-control-enabled" ${playbackSpeedControlEnabled ? 'checked' : ''}>
-            <label for="playback-speed-control-enabled" style="margin-left: 5px; cursor: pointer; color: #333;">再生速度を調整する</label>
+            <label for="playback-speed-control-enabled" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.speedEnable')}</label>
           </div>
           <div id="playback-speed-container" style="margin-bottom: 8px; display: flex; align-items: center; ${playbackSpeedControlEnabled ? '' : 'display: none;'}">
-            <label for="playback-speed" style="width: 300px; margin-right: 8px; color: #333;">再生速度（科目ごとに記憶）</label>
+            <label for="playback-speed" style="width: 300px; margin-right: 8px; color: #333;">${t('settings.speed')}</label>
             <select id="playback-speed" style="flex: 1;">
               ${speedOptions}
             </select>
@@ -155,135 +155,134 @@ function insertSettingsPanel(targetElement) {
         ${settingsSection('player-panel-caption', 'caption-settings-section', `
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="auto-caption-tv" ${autoCaptionEnabledTV ? 'checked' : ''}>
-            <label for="auto-caption-tv" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（テレビ番組）</label>
+            <label for="auto-caption-tv" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.captionTv')}</label>
           </div>
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="auto-caption-radio" ${autoCaptionEnabledRadio ? 'checked' : ''}>
-            <label for="auto-caption-radio" style="margin-left: 5px; cursor: pointer; color: #333;">字幕を表示する（ラジオ番組）</label>
+            <label for="auto-caption-radio" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.captionRadio')}</label>
           </div>
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="prevent-caption-shrink" ${preventCaptionShrink ? 'checked' : ''}>
-            <label for="prevent-caption-shrink" style="margin-left: 5px; cursor: pointer; color: #333;">字幕表示時に画面を縮小しない</label>
+            <label for="prevent-caption-shrink" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.captionNoShrink')}</label>
           </div>
         `)}
         ${settingsSection('player-panel-volume', 'volume-normalization-section', `
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="volume-normalization" ${volumeNormalizationEnabled ? 'checked' : ''}>
-            <label for="volume-normalization" style="margin-left: 5px; cursor: pointer; color: #333;">番組間の音量差を自動で抑える（音量正規化）</label>
+            <label for="volume-normalization" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.volumeNorm')}</label>
           </div>
         `)}
         ${settingsSection('player-panel-autoplay', 'autoplay-settings-section', `
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="auto-play-video" ${autoPlayEnabled ? 'checked' : ''}>
-            <label for="auto-play-video" style="margin-left: 5px; cursor: pointer; color: #333;">可能なら動画を自動再生する</label>
+            <label for="auto-play-video" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.autoPlay')}</label>
           </div>
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="auto-next-video" ${autoNextVideoEnabled ? 'checked' : ''}>
-            <label for="auto-next-video" style="margin-left: 5px; cursor: pointer; color: #333;">動画終了時に自動で次の動画に進む</label>
+            <label for="auto-next-video" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.autoNext')}</label>
           </div>
         `)}
         ${settingsSection('player-panel-next-source', 'next-video-source-section', `
           <div style="margin-bottom: 8px;">
             <input type="radio" id="same-course" name="next-video" value="same-course" ${nextVideoMode === 'same-course' ? 'checked' : ''}>
-            <label for="same-course" style="margin-left: 5px; cursor: pointer; color: #333;">同じ科目の中で次を再生</label>
+            <label for="same-course" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.sameCourse')}</label>
           </div>
           <div style="margin-bottom: 8px;">
             <input type="radio" id="favorites-random" name="next-video" value="favorites-random" ${nextVideoMode === 'favorites-random' ? 'checked' : ''}>
-            <label for="favorites-random" style="margin-left: 5px; cursor: pointer; color: #333;">お気に入りの中からランダムで次を再生</label>
+            <label for="favorites-random" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.favoritesRandom')}</label>
           </div>
           <div style="margin-bottom: 8px;">
             <input type="radio" id="watch-later-queue" name="next-video" value="watch-later" ${nextVideoMode === 'watch-later' ? 'checked' : ''}>
-            <label for="watch-later-queue" style="margin-left: 5px; cursor: pointer; color: #333;">「あとで見る」リストの順に次を再生</label>
+            <label for="watch-later-queue" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.watchLaterQueue')}</label>
           </div>
         `)}
         ${settingsSection('player-panel-skip', 'skip-settings-section', `
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
-            <label for="skip-start" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最初をスキップ（科目ごとに記憶）</label>
+            <label for="skip-start" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">${t('settings.skipStart')}</label>
             <select id="skip-start">
-              <option value="0" ${skipStart == 0 ? 'selected' : ''}>なし</option>
-              <option value="15" ${skipStart == 15 ? 'selected' : ''}>15秒</option>
-              <option value="30" ${skipStart == 30 ? 'selected' : ''}>30秒</option>
-              <option value="45" ${skipStart == 45 ? 'selected' : ''}>45秒</option>
-              <option value="60" ${skipStart == 60 ? 'selected' : ''}>60秒</option>
-              <option value="75" ${skipStart == 75 ? 'selected' : ''}>75秒</option>
-              <option value="90" ${skipStart == 90 ? 'selected' : ''}>90秒</option>
-              <option value="105" ${skipStart == 105 ? 'selected' : ''}>105秒</option>
-              <option value="120" ${skipStart == 120 ? 'selected' : ''}>120秒</option>
+              <option value="0" ${skipStart == 0 ? 'selected' : ''}>${t('common.none')}</option>
+              <option value="15" ${skipStart == 15 ? 'selected' : ''}>${t('units.seconds', { n: 15 })}</option>
+              <option value="30" ${skipStart == 30 ? 'selected' : ''}>${t('units.seconds', { n: 30 })}</option>
+              <option value="45" ${skipStart == 45 ? 'selected' : ''}>${t('units.seconds', { n: 45 })}</option>
+              <option value="60" ${skipStart == 60 ? 'selected' : ''}>${t('units.seconds', { n: 60 })}</option>
+              <option value="75" ${skipStart == 75 ? 'selected' : ''}>${t('units.seconds', { n: 75 })}</option>
+              <option value="90" ${skipStart == 90 ? 'selected' : ''}>${t('units.seconds', { n: 90 })}</option>
+              <option value="105" ${skipStart == 105 ? 'selected' : ''}>${t('units.seconds', { n: 105 })}</option>
+              <option value="120" ${skipStart == 120 ? 'selected' : ''}>${t('units.seconds', { n: 120 })}</option>
             </select>
           </div>
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
-            <label for="skip-end" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">動画の最後をスキップ（科目ごとに記憶）</label>
+            <label for="skip-end" style="width: 300px; margin-right: 8px; color: #333; white-space: nowrap;">${t('settings.skipEnd')}</label>
             <select id="skip-end">
-              <option value="0" ${skipEnd == 0 ? 'selected' : ''}>なし</option>
-              <option value="15" ${skipEnd == 15 ? 'selected' : ''}>15秒</option>
-              <option value="30" ${skipEnd == 30 ? 'selected' : ''}>30秒</option>
-              <option value="45" ${skipEnd == 45 ? 'selected' : ''}>45秒</option>
-              <option value="60" ${skipEnd == 60 ? 'selected' : ''}>60秒</option>
-              <option value="75" ${skipEnd == 75 ? 'selected' : ''}>75秒</option>
-              <option value="90" ${skipEnd == 90 ? 'selected' : ''}>90秒</option>
-              <option value="105" ${skipEnd == 105 ? 'selected' : ''}>105秒</option>
-              <option value="120" ${skipEnd == 120 ? 'selected' : ''}>120秒</option>
+              <option value="0" ${skipEnd == 0 ? 'selected' : ''}>${t('common.none')}</option>
+              <option value="15" ${skipEnd == 15 ? 'selected' : ''}>${t('units.seconds', { n: 15 })}</option>
+              <option value="30" ${skipEnd == 30 ? 'selected' : ''}>${t('units.seconds', { n: 30 })}</option>
+              <option value="45" ${skipEnd == 45 ? 'selected' : ''}>${t('units.seconds', { n: 45 })}</option>
+              <option value="60" ${skipEnd == 60 ? 'selected' : ''}>${t('units.seconds', { n: 60 })}</option>
+              <option value="75" ${skipEnd == 75 ? 'selected' : ''}>${t('units.seconds', { n: 75 })}</option>
+              <option value="90" ${skipEnd == 90 ? 'selected' : ''}>${t('units.seconds', { n: 90 })}</option>
+              <option value="105" ${skipEnd == 105 ? 'selected' : ''}>${t('units.seconds', { n: 105 })}</option>
+              <option value="120" ${skipEnd == 120 ? 'selected' : ''}>${t('units.seconds', { n: 120 })}</option>
             </select>
           </div>
         `)}
         ${settingsSection('player-panel-playlog', 'playlog-settings-section', `
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
-            <label for="playlog-interval" style="width: 300px; margin-right: 8px; color: #333;">再生ログ保存頻度(一瞬止まるかも)</label>
+            <label for="playlog-interval" style="width: 300px; margin-right: 8px; color: #333;">${t('settings.playlog')}</label>
             <select id="playlog-interval">
-              <option value="3" ${playlogIntervalMinutes == 3 ? 'selected' : ''}>3分</option>
-              <option value="5" ${playlogIntervalMinutes == 5 ? 'selected' : ''}>5分</option>
-              <option value="10" ${playlogIntervalMinutes == 10 ? 'selected' : ''}>10分</option>
-              <option value="15" ${playlogIntervalMinutes == 15 ? 'selected' : ''}>15分</option>
+              <option value="3" ${playlogIntervalMinutes == 3 ? 'selected' : ''}>${t('studyTime.minutes', { n: 3 })}</option>
+              <option value="5" ${playlogIntervalMinutes == 5 ? 'selected' : ''}>${t('studyTime.minutes', { n: 5 })}</option>
+              <option value="10" ${playlogIntervalMinutes == 10 ? 'selected' : ''}>${t('studyTime.minutes', { n: 10 })}</option>
+              <option value="15" ${playlogIntervalMinutes == 15 ? 'selected' : ''}>${t('studyTime.minutes', { n: 15 })}</option>
             </select>
           </div>
         `)}
         ${settingsSection('player-target-buffer', 'target-buffer-container', `
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
-            <label for="target-buffer" style="width: 300px; margin-right: 8px; color: #333;">先読み（バッファ）する長さ</label>
+            <label for="target-buffer" style="width: 300px; margin-right: 8px; color: #333;">${t('settings.targetBuffer')}</label>
             <select id="target-buffer">
-              <option value="0" ${targetBufferSeconds == 0 ? 'selected' : ''}>標準（約20秒）</option>
-              <option value="60" ${targetBufferSeconds == 60 ? 'selected' : ''}>1分</option>
-              <option value="180" ${targetBufferSeconds == 180 ? 'selected' : ''}>3分</option>
-              <option value="300" ${targetBufferSeconds == 300 ? 'selected' : ''}>5分</option>
-              <option value="600" ${targetBufferSeconds == 600 ? 'selected' : ''}>10分</option>
+              <option value="0" ${targetBufferSeconds == 0 ? 'selected' : ''}>${t('settings.bufferDefault')}</option>
+              <option value="60" ${targetBufferSeconds == 60 ? 'selected' : ''}>${t('studyTime.minutes', { n: 1 })}</option>
+              <option value="180" ${targetBufferSeconds == 180 ? 'selected' : ''}>${t('studyTime.minutes', { n: 3 })}</option>
+              <option value="300" ${targetBufferSeconds == 300 ? 'selected' : ''}>${t('studyTime.minutes', { n: 5 })}</option>
+              <option value="600" ${targetBufferSeconds == 600 ? 'selected' : ''}>${t('studyTime.minutes', { n: 10 })}</option>
             </select>
           </div>
           <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-            回線が不安定でも止まりにくくなります。実際に貯まる量はブラウザや配信側の上限で頭打ちになるため、
-            指定した長さまで必ず貯まるとは限りません。途中で視聴をやめると先読み分の通信は無駄になります。
+            ${t('settings.bufferNote')}
           </div>
         `)}
         ${settingsSection('player-panel-wake-lock', 'wake-lock-section', `
           <div style='margin-bottom: 8px;'>
             <input type="checkbox" id="screen-wake-lock" ${screenWakeLockEnabled ? 'checked' : ''}>
-            <label for="screen-wake-lock" style="margin-left: 5px; cursor: pointer; color: #333;">再生中に画面が自動でロックされないようにする</label>
+            <label for="screen-wake-lock" style="margin-left: 5px; cursor: pointer; color: #333;">${t('settings.wakeLock')}</label>
           </div>
         `)}
         ${settingsSection('player-panel-sleep-timer', 'sleep-timer-section', `
           <div style="margin-bottom: 8px; display: flex; align-items: center;">
-            <label for="sleep-timer" style="width: 300px; margin-right: 8px; color: #333;">スリープタイマー</label>
+            <label for="sleep-timer" style="width: 300px; margin-right: 8px; color: #333;">${t('settings.sleepTimer')}</label>
             <select id="sleep-timer">
-              <option value="0">オフ</option>
-              <option value="episode-end" ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? 'selected' : ''}>この回の終わりまで</option>
-              <option value="15">15分</option>
-              <option value="30">30分</option>
-              <option value="45">45分</option>
-              <option value="60">60分</option>
-              <option value="90">90分</option>
+              <option value="0">${t('common.off')}</option>
+              <option value="episode-end" ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? 'selected' : ''}>${t('settings.sleepEpisodeEnd')}</option>
+              <option value="15">${t('studyTime.minutes', { n: 15 })}</option>
+              <option value="30">${t('studyTime.minutes', { n: 30 })}</option>
+              <option value="45">${t('studyTime.minutes', { n: 45 })}</option>
+              <option value="60">${t('studyTime.minutes', { n: 60 })}</option>
+              <option value="90">${t('studyTime.minutes', { n: 90 })}</option>
             </select>
           </div>
           ${sleepTimerRemainingMinutes > 0 ? `
           <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-            残り約${sleepTimerRemainingMinutes}分で自動的に一時停止します
+            ${t('settings.sleepRemaining', { n: sleepTimerRemainingMinutes })}
           </div>` : ''}
           ${window.isSleepAtEpisodeEnd && window.isSleepAtEpisodeEnd() ? `
           <div style="margin-bottom: 8px; font-size: 12px; color: #666;">
-            この回の再生が終わったところで自動的に停止します
+            ${t('settings.sleepAtEpisodeEnd')}
           </div>` : ''}
         `)}
 
         <div style="margin-top: 15px; font-size: 12px; color: #666;">
-          設定は自動的に保存されます
+          ${t('settings.autoSaved')}
         </div>
       </div>
     </div>

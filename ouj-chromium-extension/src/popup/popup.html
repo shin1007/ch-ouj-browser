@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>放送大学授業ブラウザ</title>
+    <title data-i18n="popup.title">放送大学授業ブラウザ</title>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="../utils/dark-mode.css">
 </head>
 <body>
     <div id="popup-container">
-        <h1>放送大学授業ブラウザ</h1>
+        <h1 data-i18n="popup.title">放送大学授業ブラウザ</h1>
 
         <!-- 大きな放送大学ページボタン -->
         <div id="ouj-home-section">
             <button id="open-ouj-home" class="ouj-home-button">
                 <span class="button-icon">🏫</span>
-                <span class="button-text">放送授業のインターネット配信ページ</span>
+                <span class="button-text" data-i18n="popup.openHome">放送授業のインターネット配信ページ</span>
             </button>
             <button id="open-wakaba" class="wakaba-button">
                 <span class="button-icon">🎓</span>
-                <span class="button-text">システムWAKABA（学生ポータル）</span>
+                <span class="button-text" data-i18n="popup.openWakaba">システムWAKABA（学生ポータル）</span>
             </button>
         </div>
 
@@ -27,26 +27,34 @@
         <div id="auto-login-section">
             <label for="auto-login-checkbox" class="auto-login-label">
                 <input type="checkbox" id="auto-login-checkbox" name="auto-login">
-                <span class="checkbox-text">未ログインの場合に自動でログイン画面を表示</span>
+                <span class="checkbox-text" data-i18n="popup.autoLogin">未ログインの場合に自動でログイン画面を表示</span>
             </label>
         </div>
 
         <!-- 表示テーマ設定 -->
         <div id="theme-section">
             <label for="theme-select" class="theme-label">
-                <span class="checkbox-text">表示テーマ（放送大学サイト全体に適用）</span>
+                <span class="checkbox-text" data-i18n="popup.theme">表示テーマ（放送大学サイト全体に適用）</span>
             </label>
             <select id="theme-select">
-                <option value="auto">自動（OSの設定に従う）</option>
-                <option value="light">ライト</option>
-                <option value="dark">ダーク</option>
+                <option value="auto" data-i18n="popup.theme.auto">自動（OSの設定に従う）</option>
+                <option value="light" data-i18n="popup.theme.light">ライト</option>
+                <option value="dark" data-i18n="popup.theme.dark">ダーク</option>
             </select>
+        </div>
+
+        <!-- 表示言語設定（選択肢はpopup.jsが組み立てる） -->
+        <div id="language-section">
+            <label for="language-select" class="theme-label">
+                <span class="checkbox-text" data-i18n="popup.language">表示言語</span>
+            </label>
+            <select id="language-select"></select>
         </div>
 
         <!-- OSSライセンス -->
         <div class="accordion">
             <div class="accordion-header" id="licenses-header">
-                <span>オープンソースライセンス</span>
+                <span data-i18n="popup.licenses">オープンソースライセンス</span>
                 <span class="accordion-icon">▼</span>
             </div>
             <div class="accordion-content" id="licenses-content">
@@ -55,6 +63,12 @@
         </div>
 
     </div>
+    <script src="../i18n/messages-ja.js"></script>
+    <script src="../i18n/messages-en.js"></script>
+    <script src="../i18n/messages-ko.js"></script>
+    <script src="../i18n/messages-zh_CN.js"></script>
+    <script src="../i18n/messages-zh_TW.js"></script>
+    <script src="../utils/i18n.js"></script>
     <script src="../utils/dark-mode.js"></script>
     <script src="popup.js"></script>
     <script src="licenses.js"></script>

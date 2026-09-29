@@ -223,7 +223,7 @@ function buildAutoLoadControls(list) {
     const state = getAutoLoadState(list);
 
     const chip = window.buildOujFilterChip(
-      '自動読み込み',
+      t('autoload.chip'),
       enabled,
       () => {
         setOujAutoLoadEnabled(!enabled);
@@ -240,21 +240,21 @@ function buildAutoLoadControls(list) {
       },
       '#00695c'
     );
-    chip.title = '検索結果の続きを自動で読み込みます（下までスクロールする操作を拡張が代わりに行います）';
+    chip.title = t('autoload.tooltip');
     wrapper.appendChild(chip);
 
     const status = document.createElement('span');
     status.style.cssText = 'font-size:12px;color:#999;margin-left:4px;margin-bottom:8px;';
     const loaded = countAutoLoadItems(list);
-    const totalText = state.total !== null ? ` / ${state.total}件` : '件';
+    const totalText = state.total !== null ? t('autoload.ofTotal', { total: state.total }) : t('autoload.unitOnly');
     if (enabled && state.phase === 'loading') {
-      status.textContent = `読み込み中... ${loaded}${totalText}`;
+      status.textContent = t('autoload.loading', { count: `${loaded}${totalText}` });
     } else if (state.phase === 'capped') {
-      status.textContent = `${loaded}${totalText} まで読み込み`;
+      status.textContent = t('autoload.capped', { count: `${loaded}${totalText}` });
     } else if (state.phase === 'stalled') {
-      status.textContent = `${loaded}${totalText} で停止しました`;
+      status.textContent = t('autoload.stalled', { count: `${loaded}${totalText}` });
     } else if (state.phase === 'done') {
-      status.textContent = `すべて読み込み済み（${loaded}件）`;
+      status.textContent = t('autoload.done', { count: loaded });
     } else if (enabled) {
       status.textContent = `${loaded}${totalText}`;
     }
@@ -262,7 +262,7 @@ function buildAutoLoadControls(list) {
 
     // 上限や停止で止まっているときだけ「さらに読み込む」を出す(押されるまで通信しない)
     if (enabled && (state.phase === 'capped' || state.phase === 'stalled')) {
-      const more = window.buildOujFilterChip('さらに読み込む', false, () => {
+      const more = window.buildOujFilterChip(t('autoload.more'), false, () => {
         state.cap = countAutoLoadItems(list) + OUJ_AUTOLOAD_MAX_ITEMS;
         state.phase = 'loading';
         wrapper.oujRefresh();

@@ -11,6 +11,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // 表示テーマの選択欄
     const themeSelect = document.getElementById('theme-select');
 
+    // 表示言語の選択欄。先頭は「自動（ブラウザの言語）」、以降は各言語の自国語表記
+    const languageSelect = document.getElementById('language-select');
+    const buildLanguageOptions = () => {
+        languageSelect.replaceChildren();
+        const autoOption = new Option(oujI18n.t('popup.language.auto'), 'auto');
+        languageSelect.add(autoOption);
+        oujI18n.LANGUAGES.forEach((lang) => languageSelect.add(new Option(lang.name, lang.code)));
+        languageSelect.value = oujI18n.getLanguageSetting();
+    };
+    oujI18n.applyToDom();
+    buildLanguageOptions();
+    // 保存値の非同期読み込み後や他の画面での変更時にも、文言と選択肢を追従させる
+    oujI18n.onChange(buildLanguageOptions);
+    languageSelect.addEventListener('change', () => {
+        oujI18n.setLanguageSetting(languageSelect.value);
+    });
+
     // ポップアップが開いた際にボタンにフォーカスを当てる
     openOujHomeButton.focus();
 

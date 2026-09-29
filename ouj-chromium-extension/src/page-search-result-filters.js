@@ -187,12 +187,12 @@ function applyBadgesToItem(item) {
     `<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:normal;background:${bg};color:${color};white-space:nowrap;">${text}</span>`;
   let html = '';
   if (item.dataset.oujCaption === '1') {
-    html += makeBadge('字幕あり', '#e8f5e9', '#2e7d32');
+    html += makeBadge(t('badge.captions'), '#e8f5e9', '#2e7d32');
   }
   if (item.dataset.oujWatchState === 'done') {
-    html += makeBadge('✓ 視聴済み', '#dcedc8', '#33691e');
+    html += makeBadge(t('badge.watched'), '#dcedc8', '#33691e');
   } else if (item.dataset.oujWatchState === 'partial') {
-    html += makeBadge(`途中 ${item.dataset.oujWatchPercent || ''}%`, '#fff3e0', '#e65100');
+    html += makeBadge(t('badge.partial', { percent: item.dataset.oujWatchPercent || '' }), '#fff3e0', '#e65100');
   }
   if (!html) return;
   badges.innerHTML = html;

@@ -57,7 +57,7 @@ function buildContinueCardHtml(item) {
         <div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,0.4);">
           <div style="height:100%;width:${percent}%;background:linear-gradient(90deg, #ff0000, #ff4444);"></div>
         </div>
-        <div style="position:absolute;right:6px;bottom:8px;background:rgba(0,0,0,0.75);color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;">${percent}%まで視聴</div>
+        <div style="position:absolute;right:6px;bottom:8px;background:rgba(0,0,0,0.75);color:#fff;font-size:11px;padding:1px 6px;border-radius:3px;">${t('homeContinue.watchedPercent', { percent })}</div>
       </div>
       <div style="padding:8px 10px;">
         <div style="font-size:13px;font-weight:bold;color:#333;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${safeTitle}</div>
@@ -97,7 +97,7 @@ async function insertHomeContinuePanel() {
   panel.id = HOME_CONTINUE_PANEL_ID;
   panel.style.cssText = 'padding: 12px 16px 4px 16px;';
   panel.innerHTML = `
-    <div style="font-size:15px;font-weight:bold;color:#1565c0;margin-bottom:8px;">▶ 続きから見る</div>
+    <div style="font-size:15px;font-weight:bold;color:#1565c0;margin-bottom:8px;">${t('homeContinue.title')}</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       ${items.map(buildContinueCardHtml).join('')}
     </div>

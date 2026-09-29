@@ -16,9 +16,10 @@ async function fetchFavoriteItems(favorites, categories) {
     const parentCategoryName = await window.getParentCategoryName(id);
     return {
       id,
-      name: category ? category.name : `不明な科目 (ID: ${id})`,
+      name: category ? category.name : t('favorites.unknownCourse', { id }),
+      unknown: !category,
       summary: category ? category.summary : '',
-      parentCategoryName: parentCategoryName || 'その他',
+      parentCategoryName: parentCategoryName || t('common.other'),
       pinned: pinned.includes(id)
     };
   }));
@@ -31,7 +32,7 @@ async function createFavoriteListData() {
   let items = await fetchFavoriteItems(favorites, categories);
   // キャッシュが古く科目名が引けなかった場合は強制的に再取得して1回だけ再試行する
   // (先頭以外の項目だけが未解決のケースも拾えるよう、全件を確認する)
-  if (items.some((item) => item.name.startsWith('不明な科目'))) {
+  if (items.some((item) => item.unknown)) {
     const freshCategories = await window.getCategoriesData(0);
     items = await fetchFavoriteItems(favorites, freshCategories);
   }
@@ -77,7 +78,7 @@ function fillFavoriteProgressBadge(badge, result) {
 // 「▶続き」ボタン（その科目の最初の未視聴回へ直行）
 function buildContinueButtonHtml(categoryId) {
   return `
-    <span class="favorite-continue-btn" role="button" tabindex="0" title="最初の未視聴回から再生" data-category-id="${categoryId}" style="display:inline-flex;align-items:center;padding:2px 10px;border:1px solid #1976d2;color:#1976d2;background:transparent;cursor:pointer;border-radius:12px;font-size:12px;white-space:nowrap;margin-left:8px;">▶ 続き</span>
+    <span class="favorite-continue-btn" role="button" tabindex="0" title="${t('favorites.continueTitle')}" data-category-id="${categoryId}" style="display:inline-flex;align-items:center;padding:2px 10px;border:1px solid #1976d2;color:#1976d2;background:transparent;cursor:pointer;border-radius:12px;font-size:12px;white-space:nowrap;margin-left:8px;">${t('favorites.continue')}</span>
   `;
 }
 
@@ -85,8 +86,8 @@ function buildContinueButtonHtml(categoryId) {
 function buildMoveButtonsHtml(categoryId) {
   const btnStyle = 'display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid #d1d5db;background:#fff;color:#374151;cursor:pointer;border-radius:6px;font-size:12px;';
   return `
-    <span class="favorite-move-up" role="button" tabindex="0" title="上へ" data-category-id="${categoryId}" style="${btnStyle}margin-left:8px;">↑</span>
-    <span class="favorite-move-down" role="button" tabindex="0" title="下へ" data-category-id="${categoryId}" style="${btnStyle}margin-left:4px;">↓</span>
+    <span class="favorite-move-up" role="button" tabindex="0" title="${t('favorites.moveUp')}" data-category-id="${categoryId}" style="${btnStyle}margin-left:8px;">↑</span>
+    <span class="favorite-move-down" role="button" tabindex="0" title="${t('favorites.moveDown')}" data-category-id="${categoryId}" style="${btnStyle}margin-left:4px;">↓</span>
   `;
 }
 
@@ -110,7 +111,7 @@ function buildFavoriteItemHtml(item, sortMode) {
 
 function buildFavoriteListHtml(items, sortMode) {
   if (!items.length) {
-    return '<div style="padding:16px;color:#666;">該当するお気に入りはありません</div>';
+    return `<div style="padding:16px;color:#666;">${t('favorites.empty')}</div>`;
   }
   if (sortMode === 'manual') {
     // 手動モードはfavorites配列の順そのまま（グループ分けしない）
@@ -119,7 +120,7 @@ function buildFavoriteListHtml(items, sortMode) {
   const { pinnedItems, groups } = groupFavoriteItems(items);
   let html = '';
   if (pinnedItems.length) {
-    html += window.buildNativeSectionHeaderHtml('ピン止め');
+    html += window.buildNativeSectionHeaderHtml(t('favorites.pinned'));
     html += pinnedItems.map((item) => buildFavoriteItemHtml(item, sortMode)).join('');
   }
   groups.forEach((group) => {
@@ -216,7 +217,7 @@ function handleFavoritesPanelOpen() {
           if (contBtn.dataset.busy === '1') return;
           contBtn.dataset.busy = '1';
           const categoryId = contBtn.getAttribute('data-category-id');
-          contBtn.textContent = '検索中...';
+          contBtn.textContent = t('favorites.searching');
           try {
             const next = await window.findFirstUnfinishedVideo(categoryId);
             if (next) {
@@ -224,11 +225,11 @@ function handleFavoritesPanelOpen() {
               window.location.href = `https://v.ouj.ac.jp/view/ouj/#/navi/player?co=${next.contentId}&ct=V&ca=${categoryId}`;
               return;
             }
-            window.showInfoNotification('この科目は全話視聴済みです');
+            window.showInfoNotification(t('favorites.allWatched'));
           } catch (e) {
-            window.showErrorNotification('未視聴回の検索に失敗しました');
+            window.showErrorNotification(t('favorites.searchFailed'));
           }
-          contBtn.textContent = '▶ 続き';
+          contBtn.textContent = t('favorites.continue');
           contBtn.dataset.busy = '';
         };
         contBtn.addEventListener('click', onContinue);
@@ -313,21 +314,21 @@ function handleFavoritesPanelOpen() {
       // 並び順トグルの表示も更新
       const sortToggle = overlay.querySelector('#favorite-sort-toggle');
       if (sortToggle) {
-        sortToggle.textContent = sortMode === 'manual' ? '並び順: 手動（↑↓で入れ替え）' : '並び順: カテゴリ別';
+        sortToggle.textContent = sortMode === 'manual' ? t('favorites.sortManual') : t('favorites.sortCategory');
       }
       wireListEvents();
       wireProgressBadges();
     }
 
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: 'お気に入り' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.favorites') }]),
       extraAsideHtml: `
-        ${window.buildNativeSearchBoxHtml({ id: 'favorite-native-search', placeholder: '科目名・親カテゴリ名で検索' })}
+        ${window.buildNativeSearchBoxHtml({ id: 'favorite-native-search', placeholder: t('favorites.searchPlaceholder') })}
         <div style="padding:0 20px 12px 20px;">
-          <span id="favorite-sort-toggle" role="button" tabindex="0" style="display:inline-block;padding:4px 12px;border:1px solid #d1d5db;border-radius:12px;font-size:12px;color:#374151;cursor:pointer;">並び順: カテゴリ別</span>
+          <span id="favorite-sort-toggle" role="button" tabindex="0" style="display:inline-block;padding:4px 12px;border:1px solid #d1d5db;border-radius:12px;font-size:12px;color:#374151;cursor:pointer;">${t('favorites.sortCategory')}</span>
         </div>
       `,
-      asideListHtml: '<div id="favorite-native-list" style="padding:16px;color:#666;">読み込み中...</div>'
+      asideListHtml: `<div id="favorite-native-list" style="padding:16px;color:#666;">${t('common.loading')}</div>`
     });
 
     const searchInput = overlay.querySelector('#favorite-native-search');

@@ -32,8 +32,8 @@ function buildHistoryTopHtml() {
       <div class="item-inner">
         <div class="input-wrapper">
           <div style="display:flex;align-items:center;gap:12px;padding:8px 0;width:100%;">
-            <input id="history-native-search" type="text" placeholder="タイトル・科目名で検索" style="flex:1;box-sizing:border-box;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;">
-            <span id="history-native-clear-all" role="button" tabindex="0" style="white-space:nowrap;color:#dc2626;cursor:pointer;font-size:14px;padding:6px 10px;border-radius:6px;">履歴を全て削除</span>
+            <input id="history-native-search" type="text" placeholder="${t('history.searchPlaceholder')}" style="flex:1;box-sizing:border-box;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;">
+            <span id="history-native-clear-all" role="button" tabindex="0" style="white-space:nowrap;color:#dc2626;cursor:pointer;font-size:14px;padding:6px 10px;border-radius:6px;">${t('history.clearAll')}</span>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ function buildHistoryItemHtml(item, categories) {
   // 削除ボタンは<ion-item>直下（.item-mdは元々position:relative）に絶対配置する。
   // <button>の中に<button>を入れるとHTML仕様違反でタグ構造が壊れるため<span role="button">にする
   const deleteHtml = `
-    <span class="history-delete-btn" role="button" tabindex="0" title="削除" data-content-id="${item.contentId}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
+    <span class="history-delete-btn" role="button" tabindex="0" title="${t('common.delete')}" data-content-id="${item.contentId}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
     </span>
   `;
@@ -117,16 +117,16 @@ function handleHistoryPanelOpen() {
       if (listEl) {
         listEl.innerHTML = sorted.length
           ? sorted.map((item) => buildHistoryItemHtml(item, categories)).join('')
-          : '<div style="padding:16px;color:#666;">該当する履歴はありません</div>';
+          : `<div style="padding:16px;color:#666;">${t('history.empty')}</div>`;
       }
       wireItemEvents();
     }
 
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: '履歴' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.history') }]),
       mainHtml: window.renderNativeVideoListMainHtml({
         topHtml: buildHistoryTopHtml(),
-        itemsHtml: '<div style="padding:16px;color:#666;">読み込み中...</div>'
+        itemsHtml: `<div style="padding:16px;color:#666;">${t('common.loading')}</div>`
       })
     });
 
@@ -142,8 +142,8 @@ function handleHistoryPanelOpen() {
       const onClearAll = async () => {
         if (!validItems.length) return;
         const confirmed = typeof window.showConfirmDialog === 'function'
-          ? await window.showConfirmDialog(`履歴を全て削除しますか？（${validItems.length}件）`, '履歴の全削除')
-          : confirm(`履歴を全て削除しますか？（${validItems.length}件）`);
+          ? await window.showConfirmDialog(t('history.confirmClearAll', { count: validItems.length }), t('history.clearAllTitle'))
+          : confirm(t('history.confirmClearAll', { count: validItems.length }));
         if (!confirmed) return;
         window.saveSetting('history', []);
         window.prefetchRecommendListData();

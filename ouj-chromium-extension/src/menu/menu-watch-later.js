@@ -14,7 +14,7 @@ function createWatchLaterListData() {
       return { ...video, progress, addedAt: entry.addedAt, contentId: entry.contentId, categoryId: video.categoryId || entry.categoryId };
     } catch (e) {
       // 情報が取れなくても項目自体は表示する（削除できるようにするため）
-      return { contentId: entry.contentId, categoryId: entry.categoryId, title: `動画情報を取得できませんでした (ID: ${entry.contentId})`, summary: '', progress: 0, addedAt: entry.addedAt };
+      return { contentId: entry.contentId, categoryId: entry.categoryId, title: t('watchLater.unavailable', { id: entry.contentId }), summary: '', progress: 0, addedAt: entry.addedAt };
     }
   })).then((items) => window.getCategoriesData().then((categories) => ({ categories, items })));
 }
@@ -25,7 +25,7 @@ function buildWatchLaterItemHtml(item, categories) {
     : '';
   const categoryPath = window.buildCategoryPathText(categories, item.categoryId);
   const deleteHtml = `
-    <span class="watch-later-delete-btn" role="button" tabindex="0" title="リストから削除" data-content-id="${item.contentId}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
+    <span class="watch-later-delete-btn" role="button" tabindex="0" title="${t('watchLater.removeFromList')}" data-content-id="${item.contentId}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
     </span>
   `;
@@ -34,7 +34,7 @@ function buildWatchLaterItemHtml(item, categories) {
     categoryId: item.categoryId,
     title: item.title,
     summary: item.summary,
-    categoryPath: `${categoryPath}${dateStr ? `（${dateStr} 追加）` : ''}`,
+    categoryPath: `${categoryPath}${dateStr ? t('common.addedOn', { date: dateStr }) : ''}`,
     progressPercent: Math.floor((item.progress || 0) * 100),
     extraHtml: deleteHtml,
   });
@@ -80,26 +80,26 @@ function handleWatchLaterPanelOpen() {
       if (listEl) {
         listEl.innerHTML = validItems.length
           ? validItems.map((item) => buildWatchLaterItemHtml(item, categories)).join('')
-          : '<div style="padding:16px;color:#666;">「あとで見る」はまだありません。動画ページ・動画一覧ページ・回一覧の「⏱」ボタンで追加できます。</div>';
+          : `<div style="padding:16px;color:#666;">${t('watchLater.empty')}</div>`;
       }
       wireItemEvents();
     }
 
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: 'あとで見る' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.watchLater') }]),
       mainHtml: window.renderNativeVideoListMainHtml({
         topHtml: `
           <ion-item class="sort item item-block item-md">
             <div class="item-inner">
               <div class="input-wrapper">
                 <div style="padding:8px 0;font-size:12px;color:#666;">
-                  上から順に連続再生できます（動画ページの設定で「あとで見るリストの順に次を再生」を選択）。最後まで見た動画は自動的にリストから外れます。
+                  ${t('watchLater.note')}
                 </div>
               </div>
             </div>
           </ion-item>
         `,
-        itemsHtml: '<div style="padding:16px;color:#666;">読み込み中...</div>'
+        itemsHtml: `<div style="padding:16px;color:#666;">${t('common.loading')}</div>`
       })
     });
 

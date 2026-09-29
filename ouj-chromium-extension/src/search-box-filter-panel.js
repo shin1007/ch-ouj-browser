@@ -45,7 +45,7 @@ function buildRecentSearchSection() {
 
   const section = document.createElement('div');
   section.style.cssText = 'margin-bottom:10px;';
-  section.appendChild(buildPanelSectionLabel('最近の検索'));
+  section.appendChild(buildPanelSectionLabel(t('filters.recentSearchesTitle')));
 
   const chips = document.createElement('div');
   chips.style.cssText = 'display:flex;flex-wrap:wrap;';

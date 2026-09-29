@@ -62,14 +62,14 @@ function renderFilterBar(list) {
   if (!isVideoSelect) {
     // テレビ/ラジオは他のAND条件チップと違いOR条件(どちらかON、両方ONで両方表示)なので独立トグルにする
     bar.appendChild(
-      buildFilterChip('テレビ番組', state.media.tv, () => {
+      buildFilterChip(t('filters.tv'), state.media.tv, () => {
         window.saveSetting(filterKeys.media, { tv: !state.media.tv, radio: state.media.radio });
         renderFilterBar(list);
         window.applyFilters();
       }, MEDIA_FILTER_CHIP_COLOR)
     );
     bar.appendChild(
-      buildFilterChip('ラジオ番組', state.media.radio, () => {
+      buildFilterChip(t('filters.radio'), state.media.radio, () => {
         window.saveSetting(filterKeys.media, { tv: state.media.tv, radio: !state.media.radio });
         renderFilterBar(list);
         window.applyFilters();
@@ -77,7 +77,7 @@ function renderFilterBar(list) {
     );
 
     bar.appendChild(
-      buildFilterChip('字幕ありのみ', state.captionOnly, () => {
+      buildFilterChip(t('filters.captionOnly'), state.captionOnly, () => {
         window.saveSetting(filterKeys.captionOnly, !state.captionOnly);
         renderFilterBar(list);
         window.applyFilters();
@@ -86,7 +86,7 @@ function renderFilterBar(list) {
   }
 
   bar.appendChild(
-    buildFilterChip('未完了のみ', state.incompleteOnly, () => {
+    buildFilterChip(t('filters.incompleteOnly'), state.incompleteOnly, () => {
       window.saveSetting(filterKeys.incompleteOnly, !state.incompleteOnly);
       renderFilterBar(list);
       window.applyFilters();
@@ -94,7 +94,7 @@ function renderFilterBar(list) {
   );
 
   bar.appendChild(
-    buildFilterChip('視聴途中のみ', state.partialOnly, () => {
+    buildFilterChip(t('filters.partialOnly'), state.partialOnly, () => {
       window.saveSetting(filterKeys.partialOnly, !state.partialOnly);
       renderFilterBar(list);
       window.applyFilters();
@@ -166,18 +166,18 @@ function buildMultiSelectDropdown({ label, options, selected, onChange, isLoadin
   panel.style.cssText = 'display:none;position:absolute;top:100%;left:0;z-index:100;margin-top:2px;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);max-height:260px;overflow-y:auto;min-width:180px;padding:4px 0;';
 
   function updateButtonText() {
-    if (selected.length === 0) button.textContent = `${label}: すべて`;
+    if (selected.length === 0) button.textContent = t('filters.dropdownAll', { label });
     else if (selected.length === 1) {
       const opt = currentOptions.find((o) => o.value === selected[0]);
       button.textContent = `${label}: ${opt ? opt.label : selected[0]}`;
-    } else button.textContent = `${label}: ${selected.length}件選択中`;
+    } else button.textContent = t('filters.dropdownSelected', { label, n: selected.length });
   }
 
   function renderPanelRows() {
     panel.innerHTML = '';
     if (currentOptions.length === 0) {
       const empty = document.createElement('div');
-      empty.textContent = currentIsLoading ? '読み込み中...' : '選択肢がありません';
+      empty.textContent = currentIsLoading ? t('common.loading') : t('filters.noOptions');
       empty.style.cssText = 'padding:6px 12px;font-size:13px;color:#999;';
       panel.appendChild(empty);
       return;
@@ -286,7 +286,7 @@ async function loadYearCourseOptions() {
     try {
       if (typeof window.createYearListData === 'function') {
         const { yearBuckets } = await window.createYearListData();
-        yearOptions = yearBuckets.map((b) => ({ value: String(b.year).slice(-2), label: `${b.year}年度` }));
+        yearOptions = yearBuckets.map((b) => ({ value: String(b.year).slice(-2), label: t('filters.yearFormat', { year: b.year }) }));
       }
     } catch (e) { /* 取得失敗時は選択肢なし(=絞り込み無し)のまま */ }
     try {
@@ -326,7 +326,7 @@ function buildYearCourseRow(list) {
   const isLoaded = !!cachedYearCourseOptions;
 
   const label = document.createElement('span');
-  label.textContent = '絞り込み:';
+  label.textContent = t('filters.label');
   label.style.cssText = 'font-size:13px;color:#666;';
   row.appendChild(label);
 
@@ -334,7 +334,7 @@ function buildYearCourseRow(list) {
   if (!Array.isArray(list.oujCourseFilter)) list.oujCourseFilter = [];
 
   const yearDropdown = buildMultiSelectDropdown({
-    label: '年度',
+    label: t('filters.year'),
     options: isLoaded ? cachedYearCourseOptions.yearOptions : [],
     selected: list.oujYearFilter,
     onChange: window.applyFilters,
@@ -344,7 +344,7 @@ function buildYearCourseRow(list) {
   row.appendChild(yearDropdown);
 
   const courseDropdown = buildMultiSelectDropdown({
-    label: 'コース',
+    label: t('filters.course'),
     options: isLoaded ? cachedYearCourseOptions.courseOptions : [],
     selected: list.oujCourseFilter,
     onChange: window.applyFilters,
@@ -379,7 +379,7 @@ function buildSearchKeywordHistoryRow(list) {
   row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;width:100%;margin-top:4px;';
 
   const label = document.createElement('span');
-  label.textContent = '最近の検索:';
+  label.textContent = t('filters.recentSearches');
   label.style.cssText = 'font-size:13px;color:#666;margin-right:8px;';
   row.appendChild(label);
 
@@ -392,7 +392,7 @@ function buildSearchKeywordHistoryRow(list) {
   });
 
   // 履歴のクリア
-  const clearChip = buildFilterChip('× 履歴を消す', false, () => {
+  const clearChip = buildFilterChip(t('filters.clearRecent'), false, () => {
     window.saveSetting(historyKey, []);
     renderFilterBar(list);
   });
@@ -410,15 +410,15 @@ function buildSortRow(list) {
   row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;width:100%;margin-top:4px;';
 
   const label = document.createElement('span');
-  label.textContent = '並び替え:';
+  label.textContent = t('sort.label');
   label.style.cssText = 'font-size:13px;color:#666;margin-right:8px;';
   row.appendChild(label);
 
   const sortOptions = [
-    { value: 'default', label: 'サイト表示順' },
-    { value: 'newest', label: '新しい順' },
-    { value: 'unwatched', label: '未視聴を優先' },
-    { value: 'partial', label: '視聴途中を優先' },
+    { value: 'default', label: t('sort.default') },
+    { value: 'newest', label: t('sort.newest') },
+    { value: 'unwatched', label: t('sort.unwatched') },
+    { value: 'partial', label: t('sort.partial') },
   ];
   sortOptions.forEach(({ value, label: optionLabel }) => {
     row.appendChild(
@@ -436,7 +436,7 @@ function buildSortRow(list) {
 
   if (list.oujSortLoading) {
     const loading = document.createElement('span');
-    loading.textContent = '並び替え中...';
+    loading.textContent = t('sort.sorting');
     loading.style.cssText = 'font-size:12px;color:#999;margin-left:8px;';
     row.appendChild(loading);
   }
