@@ -122,7 +122,7 @@ for (const f of ['src/utils/page-type.js', 'src/対象ファイル.js']) {
 | spec | 何を見ているか |
 |---|---|
 | [video-settings-sections.spec.js](tests/offline/video-settings-sections.spec.js) | 動画下部の設定パネルの各ブロックを表示オプションで隠せるか（採取済みHTMLを使う） |
-| [store-description.spec.js](tests/offline/store-description.spec.js) | `投稿用.md` → `ストア説明.md` の生成（Markdownが残らないか・文字数上限・未公開の変更点を載せていないか）。ブラウザすら使わない |
+| [store-description.spec.js](tests/offline/store-description.spec.js) | `投稿用.md` → `store/assets/locales/ja/description.txt` の生成（Markdownが残らないか・文字数上限・未公開の変更点を載せていないか）。ブラウザすら使わない |
 
 ---
 

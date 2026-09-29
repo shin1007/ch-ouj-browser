@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 投稿用.md から、Chrome ウェブストアの「詳細な説明」にそのまま貼れる ストア説明.md を作る。
+// 投稿用.md から、Chrome ウェブストアの「詳細な説明」にそのまま貼れる store/assets/locales/ja/description.txt を作る。
 //
 // なぜ変換が必要か:
 //   ストアの説明欄は**プレーンテキスト**で、Markdownは一切解釈されない（`#`や`-`、
@@ -14,7 +14,7 @@
 //   リンク（ストア上では意味がないため）だけ。それ以外は投稿用.mdの内容をすべて載せる。
 //
 // 使い方:
-//   node tools/build-store-description.js            … ストア説明.md を生成
+//   node tools/build-store-description.js            … store/assets/locales/ja/description.txt を生成
 //   node tools/build-store-description.js --check    … 生成物が最新か確認（差分があれば終了コード1）
 //   node tools/build-store-description.js --release 2026.8.1
 //        … 投稿用.md の「変更点（次回リリース予定）」を「変更点（2026.8.1）」に書き換えてから生成する。
@@ -25,7 +25,8 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const SOURCE_PATH = path.join(ROOT, '投稿用.md');
-const OUTPUT_PATH = path.join(ROOT, 'ストア説明.md');
+// ch-uploader（ストア入稿CLI）が読む説明文。生成物なので直接編集しない
+const OUTPUT_PATH = path.join(ROOT, 'store', 'assets', 'locales', 'ja', 'description.txt');
 const MANIFEST_PATH = path.join(ROOT, 'src', 'manifest.json');
 
 // Chrome ウェブストアの入力欄の上限
@@ -252,17 +253,18 @@ function main() {
   if (isCheck) {
     const current = fs.existsSync(OUTPUT_PATH) ? fs.readFileSync(OUTPUT_PATH, 'utf8') : null;
     if (current !== description) {
-      console.error('ストア説明.md が投稿用.md と一致していません。`npm run store` を実行してください。');
+      console.error('store/assets/locales/ja/description.txt が投稿用.md と一致していません。`npm run store` を実行してください。');
       process.exit(1);
     }
-    console.log('ストア説明.md は最新です。');
+    console.log('store/assets/locales/ja/description.txt は最新です。');
     return;
   }
 
+  fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, description);
 
   const length = description.length;
-  console.log(`ストア説明.md を生成しました（${length} 文字 / 上限 ${DETAILED_DESCRIPTION_LIMIT} 文字）`);
+  console.log(`store/assets/locales/ja/description.txt を生成しました（${length} 文字 / 上限 ${DETAILED_DESCRIPTION_LIMIT} 文字）`);
   if (length > DETAILED_DESCRIPTION_LIMIT) {
     console.error(`※ 上限を ${length - DETAILED_DESCRIPTION_LIMIT} 文字超えています。載せる変更点を減らしてください。`);
     process.exit(1);

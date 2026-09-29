@@ -1,4 +1,4 @@
-// ストア説明.md の生成（tools/build-store-description.js）の検証。
+// store/assets/locales/ja/description.txt の生成（tools/build-store-description.js）の検証。
 // ブラウザも実サイトも使わない純粋なテキスト変換なので、ログインなしで回せる。
 const fs = require('fs');
 const { test, expect } = require('@playwright/test');
@@ -17,7 +17,7 @@ test.skip(!sourceExists, '投稿用.md がありません（git管理外のた�
 
 const markdown = sourceExists ? fs.readFileSync(SOURCE_PATH, 'utf8') : '';
 
-test.describe('ストア説明.mdの生成', () => {
+test.describe('store/assets/locales/ja/description.txtの生成', () => {
   test('Markdown記法が残らない（ストアの説明欄はプレーンテキストのため）', () => {
     const description = buildStoreDescription(markdown);
 
@@ -57,8 +57,8 @@ test.describe('ストア説明.mdの生成', () => {
     expect(description).not.toContain('mjphckgpnhhjfdpgkblomeiehjgeaagb');
   });
 
-  test('生成済みの ストア説明.md が最新（ずれていたら npm run store）', () => {
-    expect(fs.existsSync(OUTPUT_PATH), 'ストア説明.md がありません').toBe(true);
+  test('生成済みの store/assets/locales/ja/description.txt が最新（ずれていたら npm run store）', () => {
+    expect(fs.existsSync(OUTPUT_PATH), 'store/assets/locales/ja/description.txt がありません').toBe(true);
     expect(fs.readFileSync(OUTPUT_PATH, 'utf8')).toBe(buildStoreDescription(markdown));
   });
 });

@@ -1,0 +1,46 @@
+# ch-uploader 入稿設定。パスはこのファイルのあるディレクトリからの相対。
+# 仕様: ../../AGENT_INPUT_SPEC.md
+# extensionId は既存アイテム（mjphckgpnhhjfdpgkblomeiehjgeaagb）の更新入稿のため指定する。
+extensionId: "mjphckgpnhhjfdpgkblomeiehjgeaagb"
+
+privacy:
+  singlePurpose: "放送大学の学習サイト（v.ouj.ac.jp）での動画視聴や科目探しを、お気に入り・視聴履歴・再生設定などの機能で便利にします。"
+
+  permissionJustifications:
+    storage: "お気に入り・履歴・あとで見る・しおり・再生速度や表示オプションなどの設定と、サイトAPIの取得結果（科目一覧・視聴進捗）の一時キャッシュを、利用者のブラウザ内に保存するために使用します。"
+    scripting: "ログインページや動画一覧ページの読み込み完了後に、機能を提供するスクリプトを対象ページへ再注入するために使用します（対象は放送大学のサイトのみ）。"
+    webNavigation: "放送大学サイト内のページ遷移（SPAの画面切り替え）を検知し、遷移後のページに機能を再適用するために使用します。"
+    host permission: "放送大学の学習サイト（v.ouj.ac.jp / sso.ouj.ac.jp）のページに表示機能を追加し、同サイトのAPIから科目・視聴進捗を取得し、再生位置をサイトへ保存するために使用します。"
+
+  usesRemoteCode: false
+
+  dataUsage:
+    collects: []
+    certifications:
+      noSellingToThirdParties: true
+      noUseUnrelatedToSinglePurpose: true
+      noUseForCreditworthinessOrLending: true
+
+  # TODO: 未作成。プライバシーポリシーを公開したURLに差し替えること（必須）
+  privacyPolicyUrl: "https://github.com/shin1007/ouj_browser"
+
+storeListing:
+  category: "教育"
+  defaultLocale: "ja"
+  icon: "assets/icon.png"
+  homepageUrl: "https://github.com/shin1007/ouj_browser"
+  supportUrl: "https://github.com/shin1007/ouj_browser/issues"
+  adultContent: false
+
+  locales:
+    ja:
+      description: "assets/locales/ja/description.txt"
+      screenshots:
+        - "assets/locales/ja/screenshots/01.png"
+        - "assets/locales/ja/screenshots/02.png"
+        - "assets/locales/ja/screenshots/03.png"
+        - "assets/locales/ja/screenshots/04.png"
+        - "assets/locales/ja/screenshots/05.png"
+
+package:
+  zip: "package.zip"

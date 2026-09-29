@@ -156,13 +156,13 @@ v.* 共通           → applyOujDisplayOptionStyles(表示オプションの非
 - `manifest.json` の `version` はストア公開直前にのみ上げる。README変更点の記載とは別タイミング。
 - リリース時は [menu/menu-whats-new.js](src/menu/menu-whats-new.js) の `OUJ_CHANGELOG_ENTRIES` 先頭にも追記する。
 - **リリース作業の全手順は [リリース手順.md](リリース手順.md)**（変更点の書き場所2か所・バージョン反映2か所・テスト・`npm run store:release`・zip作成・公開後の後始末）。リリースのときは必ずこれをチェックリストとして使う。
-- `ストア説明.md` は `投稿用.md` からの**生成物**なので直接編集しない（直すのは `投稿用.md` かジェネレータ側）。ずれていないかは `npm run store:check`／`npm run test:offline` で分かる。
+- `store/assets/locales/ja/description.txt` は `投稿用.md` からの**生成物**なので直接編集しない（直すのは `投稿用.md` かジェネレータ側）。ずれていないかは `npm run store:check`／`npm run test:offline` で分かる。
 
 ## tools/ — 運用スクリプト
 
 | ファイル | 役割 |
 |---|---|
-| [tools/build-store-description.js](tools/build-store-description.js) | `投稿用.md` → `ストア説明.md`（Chromeウェブストアの「詳細な説明」用プレーンテキスト）の生成。Markdown記法を落とし、文中リンクはURLを行末へ、見出しは`■`/`◆`に変換。「変更点（次回リリース予定）」と自分自身のストアページへのリンクは載せない。`--check`で生成物が最新か確認、`--release [version]`でバージョン番号を投稿用.mdに書き込んでから生成。検証は [tests/offline/store-description.spec.js](tests/offline/store-description.spec.js) |
+| [tools/build-store-description.js](tools/build-store-description.js) | `投稿用.md` → `store/assets/locales/ja/description.txt`（Chromeウェブストアの「詳細な説明」用プレーンテキスト）の生成。Markdown記法を落とし、文中リンクはURLを行末へ、見出しは`■`/`◆`に変換。「変更点（次回リリース予定）」と自分自身のストアページへのリンクは載せない。`--check`で生成物が最新か確認、`--release [version]`でバージョン番号を投稿用.mdに書き込んでから生成。検証は [tests/offline/store-description.spec.js](tests/offline/store-description.spec.js) |
 
 ## 自動テスト
 .envがあるので、それを利用してログイン・テストを行えます。
