@@ -12,6 +12,11 @@
 ・Androidで以下のブラウザはダメっぽいですが、いずれ対応するかもしれません。
 　- Microsoft Edge Canary https://play.google.com/store/apps/details?id=com.microsoft.emmx.canary&hl=ja
 
+■ 変更点（2026.9.30）
+・日本語・English・한국어・简体中文・繁體中文に対応しました
+　- ブラウザの言語に合わせて自動で切り替わります。設定から手動で選ぶこともできます
+　- Chromeウェブストア・拡張機能一覧の名前と説明文も、各言語で表示されます
+
 ■ 変更点（2026.7.31）
 ・メニューに「表示オプション」を追加。この拡張機能が画面に追加している表示を、機能ごとにオフにできます
 　- オフにするのは「表示」だけで、お気に入り・履歴・視聴進捗などの記録は今までどおり続きます
@@ -116,7 +121,7 @@
 
 ■ ご意見・不具合のご報告
 ・X(旧Twitter): @pedmWay1hR85704 https://x.com/pedmWay1hR85704
-・機能追加やバグ報告はGitHubからIssueを発行してもらえると助かります。 https://github.com/shin1007/ouj_browser/issues
+・機能追加やバグ報告はGitHubからIssueを発行してもらえると助かります。 https://github.com/shin1007/ch-ouj-browser/issues
 
 ■ これまでの変更点
 

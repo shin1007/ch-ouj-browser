@@ -22,14 +22,14 @@ privacy:
       noUseForCreditworthinessOrLending: true
 
   # ポリシーページは無い（データ収集なしのため不要）。ch-uploaderのスキーマが必須URLとして要求するため、暫定でリポジトリURLを入れている
-  privacyPolicyUrl: "https://github.com/shin1007/ouj_browser"
+  privacyPolicyUrl: "https://github.com/shin1007/ch-ouj-browser"
 
 storeListing:
   category: "教育"
   defaultLocale: "ja"
   icon: "assets/icon.png"
-  homepageUrl: "https://github.com/shin1007/ouj_browser"
-  supportUrl: "https://github.com/shin1007/ouj_browser/issues"
+  homepageUrl: "https://github.com/shin1007/ch-ouj-browser"
+  supportUrl: "https://github.com/shin1007/ch-ouj-browser/issues"
   adultContent: false
 
   locales:

@@ -12,6 +12,31 @@ const LAST_SEEN_VERSION_KEY = 'lastSeenVersion';
 // 表示する変更点（新しい順）。内容はREADMEの変更点の要約
 const OUJ_CHANGELOG_ENTRIES = [
   {
+    version: '2026.9.30',
+    items: [
+      '日本語・English・한국어・简体中文・繁體中文に対応しました。ブラウザの言語に合わせて自動で切り替わり、設定から手動で選ぶこともできます',
+      'Chromeウェブストア・拡張機能一覧の名前と説明文も、各言語で表示されます',
+    ],
+    itemsByLang: {
+      en: [
+        'Now available in Japanese, English, Korean, Simplified Chinese and Traditional Chinese. The language follows your browser automatically, and you can also choose it manually in the settings.',
+        'The name and description shown in the Chrome Web Store and the extensions page are also translated.',
+      ],
+      ko: [
+        '일본어·English·한국어·简体中文·繁體中文을 지원합니다. 브라우저 언어에 맞춰 자동으로 전환되며, 설정에서 직접 선택할 수도 있습니다.',
+        'Chrome 웹 스토어와 확장 프로그램 목록에 표시되는 이름과 설명도 각 언어로 표시됩니다.',
+      ],
+      zh_CN: [
+        '现已支持日语、English、한국어、简体中文和繁體中文。会根据浏览器语言自动切换，也可以在设置中手动选择。',
+        'Chrome 应用商店和扩展程序列表中显示的名称和说明也会以各语言显示。',
+      ],
+      zh_TW: [
+        '現已支援日語、English、한국어、简体中文與繁體中文。會依瀏覽器語言自動切換，也可以在設定中手動選擇。',
+        'Chrome 線上應用程式商店與擴充功能清單中顯示的名稱和說明也會以各語言顯示。',
+      ],
+    },
+  },
+  {
     version: '2026.7.31',
     items: [
       'メニューに「表示オプション」を追加。この拡張機能が画面に追加している表示を機能ごとにオフにできます（お気に入りや履歴の記録などの機能自体は残ります）',
@@ -153,7 +178,7 @@ function handleWhatsNewPanelOpen() {
           ${window.oujI18n.getLanguage() !== 'ja' ? `<div style="padding:0 20px;font-size:12px;color:#999;">${t('whatsNew.olderInJapanese')}</div>` : ''}
           <div style="padding:12px 20px 20px 20px;font-size:12px;color:#999;">
             ${t('whatsNew.versionLine', { version: getExtensionVersion() || t('whatsNew.unknown') })}
-            <a href="https://github.com/shin1007/ouj_browser" target="_blank" rel="noopener" style="color:#1976d2;">GitHub</a>
+            <a href="https://github.com/shin1007/ch-ouj-browser" target="_blank" rel="noopener" style="color:#1976d2;">GitHub</a>
             ${t('whatsNew.reportSuffix')}
           </div>
         </div>
