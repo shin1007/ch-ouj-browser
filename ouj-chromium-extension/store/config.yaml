@@ -42,5 +42,38 @@ storeListing:
         - "assets/locales/ja/screenshots/04.png"
         - "assets/locales/ja/screenshots/05.png"
 
+    en:
+      description: "assets/locales/en/description.txt"
+      screenshots:
+        - "assets/locales/ja/screenshots/01.png"
+        - "assets/locales/ja/screenshots/02.png"
+        - "assets/locales/ja/screenshots/03.png"
+        - "assets/locales/ja/screenshots/04.png"
+        - "assets/locales/ja/screenshots/05.png"
+    ko:
+      description: "assets/locales/ko/description.txt"
+      screenshots:
+        - "assets/locales/ja/screenshots/01.png"
+        - "assets/locales/ja/screenshots/02.png"
+        - "assets/locales/ja/screenshots/03.png"
+        - "assets/locales/ja/screenshots/04.png"
+        - "assets/locales/ja/screenshots/05.png"
+    zh_CN:
+      description: "assets/locales/zh_CN/description.txt"
+      screenshots:
+        - "assets/locales/ja/screenshots/01.png"
+        - "assets/locales/ja/screenshots/02.png"
+        - "assets/locales/ja/screenshots/03.png"
+        - "assets/locales/ja/screenshots/04.png"
+        - "assets/locales/ja/screenshots/05.png"
+    zh_TW:
+      description: "assets/locales/zh_TW/description.txt"
+      screenshots:
+        - "assets/locales/ja/screenshots/01.png"
+        - "assets/locales/ja/screenshots/02.png"
+        - "assets/locales/ja/screenshots/03.png"
+        - "assets/locales/ja/screenshots/04.png"
+        - "assets/locales/ja/screenshots/05.png"
+
 package:
   zip: "package.zip"
