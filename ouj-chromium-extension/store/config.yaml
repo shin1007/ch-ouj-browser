@@ -21,7 +21,7 @@ privacy:
       noUseUnrelatedToSinglePurpose: true
       noUseForCreditworthinessOrLending: true
 
-  # TODO: 未作成。プライバシーポリシーを公開したURLに差し替えること（必須）
+  # ポリシーページは無い（データ収集なしのため不要）。ch-uploaderのスキーマが必須URLとして要求するため、暫定でリポジトリURLを入れている
   privacyPolicyUrl: "https://github.com/shin1007/ouj_browser"
 
 storeListing:
