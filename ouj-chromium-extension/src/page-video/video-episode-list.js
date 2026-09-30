@@ -45,7 +45,7 @@ async function insertEpisodeListMenu(titleElement) {
     font-weight: 600;
     color: #1565c0;
   `;
-  summary.textContent = `回一覧（${list.length}件）`;
+  summary.textContent = t('episodeList.summary', { n: list.length });
   details.appendChild(summary);
 
   const listContainer = document.createElement('div');
@@ -100,7 +100,7 @@ async function insertEpisodeListMenu(titleElement) {
     watchedToggle.dataset.contentId = item.contentId;
     watchedToggle.setAttribute('role', 'button');
     watchedToggle.setAttribute('tabindex', '0');
-    watchedToggle.title = 'クリックで視聴済み/未視聴を切り替え';
+    watchedToggle.title = t('episodeList.toggleWatched');
     watchedToggle.style.cssText = `
       flex-shrink: 0;
       padding: 10px 8px;
@@ -117,7 +117,7 @@ async function insertEpisodeListMenu(titleElement) {
     watchLaterToggle.className = 'episode-watch-later-toggle';
     watchLaterToggle.setAttribute('role', 'button');
     watchLaterToggle.setAttribute('tabindex', '0');
-    watchLaterToggle.title = '「あとで見る」に追加/削除';
+    watchLaterToggle.title = t('episodeList.toggleWatchLater');
     const inWatchLater = typeof window.isInWatchLater === 'function' && window.isInWatchLater(item.contentId);
     watchLaterToggle.style.cssText = `
       flex-shrink: 0;
@@ -157,7 +157,9 @@ async function insertEpisodeListMenu(titleElement) {
   listContainer.querySelectorAll('.episode-watched-toggle').forEach((toggle) => {
     const contentId = toggle.dataset.contentId;
     const applyState = (isFinished) => {
-      toggle.textContent = isFinished ? '✓済' : '未';
+      // 表示文言は言語で変わるため、状態は文言ではなくdata属性で持つ
+      toggle.dataset.finished = isFinished ? '1' : '';
+      toggle.textContent = isFinished ? t('episodeList.done') : t('episodeList.notDone');
       toggle.style.color = isFinished ? '#2e7d32' : '#bbb';
       toggle.style.fontWeight = isFinished ? 'bold' : 'normal';
     };
@@ -166,7 +168,7 @@ async function insertEpisodeListMenu(titleElement) {
       const onToggle = async (event) => {
         event.stopPropagation();
         // 現在の表示状態の逆を手動マークとして保存する
-        const currentlyFinished = toggle.textContent.includes('済');
+        const currentlyFinished = toggle.dataset.finished === '1';
         window.setWatchedOverride(contentId, !currentlyFinished);
         applyState(!currentlyFinished);
       };

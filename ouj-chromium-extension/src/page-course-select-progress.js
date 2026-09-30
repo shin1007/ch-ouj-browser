@@ -27,7 +27,7 @@ function createCourseProgressBadgePlaceholder(categoryId) {
 function createCourseContinuePlaceholder() {
   const btn = document.createElement('span');
   btn.className = 'course-continue-btn';
-  btn.textContent = '▶ 続き';
+  btn.textContent = t('favorites.continue');
   btn.style.cssText = `
     display: inline-flex;
     align-items: center;
@@ -85,7 +85,7 @@ async function classifyCourseProgress(categoryId, badge, gate) {
     // 修了ペース予測（直近2週間の視聴履歴があるときだけツールチップで表示）
     const pace = estimateCompletionPace(videoList, finishedCount);
     if (pace) {
-      badge.title = `あと${pace.remaining}回。直近2週間の視聴ペース（週${pace.perWeek}回）が続けば約${pace.weeks}週間で見終わります`;
+      badge.title = t('progress.paceTooltip', { remaining: pace.remaining, perWeek: pace.perWeek, weeks: pace.weeks });
     }
 
     // 「▶続き」ボタン: 最初の未視聴回へ直行する（未視聴回がある場合のみ）。予約済みの
@@ -96,7 +96,7 @@ async function classifyCourseProgress(categoryId, badge, gate) {
       if (target) {
         continuePlaceholder.setAttribute('role', 'button');
         continuePlaceholder.setAttribute('tabindex', '0');
-        continuePlaceholder.title = `続きから再生: ${target.title || ''}`;
+        continuePlaceholder.title = t('progress.playFrom', { title: target.title || '' });
         continuePlaceholder.style.visibility = 'visible';
         continuePlaceholder.style.cursor = 'pointer';
         const onContinue = (event) => {

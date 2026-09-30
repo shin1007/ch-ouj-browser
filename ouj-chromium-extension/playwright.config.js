@@ -21,6 +21,14 @@ module.exports = defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [
+    // 採取済みHTML（target_site/captured/）だけで完結し、実サイトにも拡張機能の
+    // 読み込みにも依存しないテスト。ログイン0回で何度でも回せる（TESTING.md §3）。
+    {
+      name: 'offline',
+      testDir: './tests/offline',
+      testMatch: /.*\.spec\.js/,
+      use: { viewport: { width: 1280, height: 800 } },
+    },
     // popup.spec.jsは実サイトへのログインが不要なため専用プロジェクトで実行する
     // （tests/visual/fixtures.js 側でプロジェクト名を見てログイン処理をスキップする）。
     {
@@ -36,7 +44,7 @@ module.exports = defineConfig({
     {
       name: 'desktop',
       testMatch: /.*\.spec\.js/,
-      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/],
+      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/, /player-buffer\.spec\.js/],
       use: {
         viewport: { width: 1280, height: 800 },
       },
@@ -44,7 +52,7 @@ module.exports = defineConfig({
     {
       name: 'mobile',
       testMatch: /.*\.spec\.js/,
-      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/],
+      testIgnore: [/popup\.spec\.js/, /subtitle-layout\.spec\.js/, /player-buffer\.spec\.js/],
       use: {
         viewport: { width: 390, height: 844 },
       },
@@ -66,6 +74,15 @@ module.exports = defineConfig({
       testMatch: /subtitle-layout\.spec\.js/,
       use: {
         viewport: { width: 390, height: 844 },
+      },
+    },
+    // 先読み（バッファ）量の検証も実際のDRM動画の読み込みを見るためEdgeが要る。
+    // ビューポート差は関係ない検証なので1プロジェクトだけ（＝ログインも1回だけ）にしている。
+    {
+      name: 'drm-buffer',
+      testMatch: /player-buffer\.spec\.js/,
+      use: {
+        viewport: { width: 1280, height: 800 },
       },
     },
   ],

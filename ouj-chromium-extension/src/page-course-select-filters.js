@@ -332,24 +332,24 @@ function buildPresetFilterChips(state, keys, onChange) {
 
   // テレビ/ラジオは他のAND条件チップと違いOR条件なので独立トグルにし、色も変えて区別する
   const mediaChipColor = window.OUJ_MEDIA_FILTER_CHIP_COLOR || '#00897b';
-  chips.appendChild(makeCourseChip('テレビ番組', state.media.tv, () => {
+  chips.appendChild(makeCourseChip(t('filters.tv'), state.media.tv, () => {
     window.saveSetting(keys.media, { tv: !state.media.tv, radio: state.media.radio });
     onChange();
   }, mediaChipColor));
-  chips.appendChild(makeCourseChip('ラジオ番組', state.media.radio, () => {
+  chips.appendChild(makeCourseChip(t('filters.radio'), state.media.radio, () => {
     window.saveSetting(keys.media, { tv: state.media.tv, radio: !state.media.radio });
     onChange();
   }, mediaChipColor));
 
-  chips.appendChild(makeCourseChip('字幕ありのみ', state.captionOnly, () => {
+  chips.appendChild(makeCourseChip(t('filters.captionOnly'), state.captionOnly, () => {
     window.saveSetting(keys.captionOnly, !state.captionOnly);
     onChange();
   }));
-  chips.appendChild(makeCourseChip('未完了のみ', state.incompleteOnly, () => {
+  chips.appendChild(makeCourseChip(t('filters.incompleteOnly'), state.incompleteOnly, () => {
     window.saveSetting(keys.incompleteOnly, !state.incompleteOnly);
     onChange();
   }));
-  chips.appendChild(makeCourseChip('視聴途中のみ', state.partialOnly, () => {
+  chips.appendChild(makeCourseChip(t('filters.partialOnly'), state.partialOnly, () => {
     window.saveSetting(keys.partialOnly, !state.partialOnly);
     onChange();
   }));
@@ -385,7 +385,7 @@ function renderCourseFilterBar() {
   };
 
   const label = document.createElement('span');
-  label.textContent = '絞り込み:';
+  label.textContent = t('filters.label');
   label.style.cssText = 'font-size:13px;color:#666;margin-right:8px;';
   bar.appendChild(label);
 
@@ -397,8 +397,8 @@ function renderCourseFilterBar() {
   const years = collectCourseYears();
   if (years.length > 0 && typeof window.buildOujMultiSelectDropdown === 'function') {
     const yearDropdown = window.buildOujMultiSelectDropdown({
-      label: '年度',
-      options: years.map((y) => ({ value: y, label: `${y}年度` })),
+      label: t('filters.year'),
+      options: years.map((y) => ({ value: y, label: t('filters.yearFormat', { year: y }) })),
       selected: courseYearFilter,
       onChange: applyCourseFilters,
     });
@@ -412,7 +412,7 @@ function renderCourseFilterBar() {
 
   const loading = document.createElement('span');
   loading.id = COURSE_FILTER_LOADING_ID;
-  loading.textContent = '絞り込み中...';
+  loading.textContent = t('filters.filtering');
   loading.style.cssText = 'font-size:12px;color:#999;margin-left:4px;display:none;';
   bar.appendChild(loading);
 
@@ -427,15 +427,15 @@ function buildCourseSortRow() {
   row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;width:100%;margin-top:4px;';
 
   const label = document.createElement('span');
-  label.textContent = '並び替え:';
+  label.textContent = t('sort.label');
   label.style.cssText = 'font-size:13px;color:#666;margin-right:8px;';
   row.appendChild(label);
 
   const sortOptions = [
-    { value: 'default', label: 'サイト表示順' },
-    { value: 'newest', label: '新しい順' },
-    { value: 'unwatched', label: '未視聴を優先' },
-    { value: 'partial', label: '視聴途中を優先' },
+    { value: 'default', label: t('sort.default') },
+    { value: 'newest', label: t('sort.newest') },
+    { value: 'unwatched', label: t('sort.unwatched') },
+    { value: 'partial', label: t('sort.partial') },
   ];
   sortOptions.forEach(({ value, label: optionLabel }) => {
     row.appendChild(makeCourseChip(optionLabel, courseSortMode === value, async () => {
@@ -451,7 +451,7 @@ function buildCourseSortRow() {
 
   if (courseSortLoading) {
     const loading = document.createElement('span');
-    loading.textContent = '並び替え中...';
+    loading.textContent = t('sort.sorting');
     loading.style.cssText = 'font-size:12px;color:#999;margin-left:8px;';
     row.appendChild(loading);
   }
@@ -523,7 +523,7 @@ function buildFilterSectionLabel(text) {
 function buildBrowseSection() {
   const section = document.createElement('div');
   section.style.cssText = 'margin-bottom:10px;';
-  section.appendChild(buildFilterSectionLabel('年度・コースへジャンプ'));
+  section.appendChild(buildFilterSectionLabel(t('jump.title')));
 
   const row = document.createElement('div');
   row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;gap:8px;';
@@ -531,12 +531,12 @@ function buildBrowseSection() {
 
   const yearSelect = document.createElement('select');
   yearSelect.style.cssText = selectStyle;
-  yearSelect.appendChild(new Option('年度: すべて', ''));
+  yearSelect.appendChild(new Option(t('jump.yearAll'), ''));
   yearSelect.disabled = true;
 
   const courseSelect = document.createElement('select');
   courseSelect.style.cssText = `${selectStyle}flex:1;min-width:200px;`;
-  courseSelect.appendChild(new Option('読み込み中...', ''));
+  courseSelect.appendChild(new Option(t('common.loading'), ''));
   courseSelect.disabled = true;
 
   row.appendChild(yearSelect);
@@ -545,7 +545,7 @@ function buildBrowseSection() {
 
   const hint = document.createElement('div');
   hint.style.cssText = 'font-size:11px;color:#999;margin-top:4px;';
-  hint.textContent = 'コースを選ぶとそのコースへ移動します（年度も選ぶと科目一覧をその年度で絞り込み）';
+  hint.textContent = t('jump.hint');
   section.appendChild(hint);
 
   const trim = (name) => (typeof window.trimCourseName === 'function') ? window.trimCourseName(name) : name;
@@ -557,17 +557,17 @@ function buildBrowseSection() {
     // 年度セレクト: 各年度を選択肢にする
     if (Array.isArray(yearBuckets) && yearBuckets.length > 0) {
       yearSelect.disabled = false;
-      yearBuckets.forEach((b) => yearSelect.appendChild(new Option(`${b.year}年度`, String(b.year))));
+      yearBuckets.forEach((b) => yearSelect.appendChild(new Option(t('filters.yearFormat', { year: b.year }), String(b.year))));
     }
 
     // コースセレクト: 学部/大学院等でグループ化（optgroup）して選択肢にする
     courseSelect.innerHTML = '';
     if (!Array.isArray(courseGroups) || courseGroups.length === 0) {
-      courseSelect.appendChild(new Option('コースデータを取得できませんでした', ''));
+      courseSelect.appendChild(new Option(t('jump.courseFailed'), ''));
       return;
     }
     const totalCourses = courseGroups.reduce((n, g) => n + g.courses.length, 0);
-    courseSelect.appendChild(new Option(`コースを選ぶ（${totalCourses}件）`, ''));
+    courseSelect.appendChild(new Option(t('jump.chooseCourse', { count: totalCourses }), ''));
     courseGroups.forEach((group) => {
       const optgroup = document.createElement('optgroup');
       optgroup.label = trim(group.parentName);
@@ -614,7 +614,7 @@ function renderFolderBrowseBar() {
   bar.appendChild(buildBrowseSection());
 
   const presetSection = document.createElement('div');
-  presetSection.appendChild(buildFilterSectionLabel('絞り込み（今後開く科目一覧・検索結果に適用）'));
+  presetSection.appendChild(buildFilterSectionLabel(t('filters.presetTitle')));
   const presetChipsHolder = document.createElement('div');
   presetSection.appendChild(presetChipsHolder);
   bar.appendChild(presetSection);

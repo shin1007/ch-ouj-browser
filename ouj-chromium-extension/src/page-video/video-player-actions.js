@@ -68,8 +68,8 @@ async function addPipButton(titleElement) {
   if (titleElement.querySelector('.video-pip-button')) return; // 判定待ちの間に他経路で追加済み
   const button = createTitleActionButton({
     className: 'video-pip-button',
-    title: 'ピクチャーインピクチャー（小窓）で再生',
-    html: '⧉ 小窓',
+    title: t('actions.pipTitle'),
+    html: t('actions.pip'),
   });
   button.addEventListener('click', async () => {
     const video = document.querySelector('video');
@@ -85,9 +85,9 @@ async function addPipButton(titleElement) {
       // ラジオ番組は動画トラックが無くPiP自体が構造的に使えない(InvalidStateError)ため、
       // 原因不明の失敗と区別して対応不可であることを伝える
       if (e.name === 'InvalidStateError' && video.videoWidth === 0) {
-        window.showErrorNotification('ラジオ番組（映像のない音声のみのコンテンツ）は小窓表示に対応していません');
+        window.showErrorNotification(t('actions.pipRadio'));
       } else {
-        window.showErrorNotification('小窓表示に失敗しました');
+        window.showErrorNotification(t('actions.pipFailed'));
       }
     }
   });
@@ -105,6 +105,10 @@ async function pipOrPauseCurrentVideoIfPlaying() {
   if (document.pictureInPictureEnabled) {
     try {
       await video.requestPictureInPicture();
+      // 「パネルを開いたから小窓にした」ことを覚えておき、小窓を閉じたとき／
+      // パネルを閉じたときに動画をページ内へ戻せるようにする（下記の
+      // leavepictureinpicture 監視と menu-native-shell.js の removeNativeOverlay）
+      window.oujPipStartedByOverlay = true;
       return;
     } catch (e) {
       // PiP不可(ラジオ番組等、動画トラックが無いコンテンツ)の場合は下の一時停止に
@@ -114,7 +118,7 @@ async function pipOrPauseCurrentVideoIfPlaying() {
   }
   video.pause();
   if (typeof window.showInfoNotification === 'function') {
-    window.showInfoNotification('ラジオ番組など小窓表示に対応していないコンテンツのため、動画を一時停止しました（閉じると続きから再生できます）');
+    window.showInfoNotification(t('actions.pipPaused'));
   }
 }
 
@@ -134,6 +138,31 @@ if (!window.oujPipAutoExitOnNavigateAdded) {
   });
 }
 
+// 小窓(PiP)を閉じた（PiPウィンドウの「タブに戻る」＝拡大ボタン、または×）ときの後始末。
+// メニューのオーバーレイパネルを開くと動画は自動的に小窓へ逃がされるが、パネル自体は
+// #main全体を覆ったまま残る。そのため小窓から戻ってきても動画は隠れたままで、
+// 「拡張機能のパネルへ行くと動画に戻れない」状態になっていた。PiPが終わったら
+// パネルを閉じ、動画を画面内までスクロールして必ず見える状態にする。
+// leavepictureinpictureはvideo要素で発火してバブリングするため、SPAで動画要素が
+// 差し替わっても効くようdocumentで受ける。
+if (!window.oujPipShowVideoOnLeaveAdded) {
+  window.oujPipShowVideoOnLeaveAdded = true;
+  document.addEventListener('leavepictureinpicture', () => {
+    // 先に降ろしておく。この後のremoveNativeOverlayが「パネルを閉じたので
+    // PiPを解除する」処理へ入って二重に解除しようとするのを防ぐ
+    window.oujPipStartedByOverlay = false;
+    const overlayOpen = typeof window.isOujNativeOverlayOpen === 'function'
+      && window.isOujNativeOverlayOpen();
+    if (!overlayOpen) return;
+    window.removeNativeOverlay();
+    // パネル内を下までスクロールしていると、パネルを閉じただけでは動画が画面外に
+    // ある。block:'nearest'なら既に見えているときは動かず、画面外のときだけ最小限
+    // スクロールして必ず見える状態にできる
+    const video = document.querySelector('video');
+    if (video) video.scrollIntoView({ block: 'nearest' });
+  });
+}
+
 // しおりボタン
 function addBookmarkButton(titleElement, currentVideo) {
   // titleElementはSPA内で動画が切り替わっても(タイトルのテキストだけ更新されて)
@@ -144,22 +173,22 @@ function addBookmarkButton(titleElement, currentVideo) {
   if (existing) existing.remove();
   const button = createTitleActionButton({
     className: 'video-bookmark-button',
-    title: '現在の再生位置にしおりを挟む（メニューの「しおり」から一覧できます）',
-    html: '🔖 しおり',
+    title: t('actions.bookmarkTitle'),
+    html: t('actions.bookmark'),
   });
   button.addEventListener('click', async () => {
     const video = document.querySelector('video');
     if (!video) {
-      window.showWarningNotification('動画が見つかりません');
+      window.showWarningNotification(t('actions.videoNotFound'));
       return;
     }
     const time = Math.floor(video.currentTime);
     const detailLines = (currentVideo?.detail || '').split('\n');
     const courseName = (detailLines[0] || '').replace(/（’\d{2}）$/, '').trim();
     const note = await window.showPromptDialog(
-      `位置: ${formatBookmarkTime(time)} にしおりを挟みます。メモがあれば入力してください（空欄でもOK）。`,
-      'しおりを追加',
-      { placeholder: '例: 試験に出そうな用語の説明', okText: '追加' }
+      t('actions.bookmarkPrompt', { time: formatBookmarkTime(time) }),
+      t('actions.bookmarkAdd'),
+      { placeholder: t('actions.bookmarkPlaceholder'), okText: t('common.add') }
     );
     if (note === null) return; // キャンセル
     saveBookmark({
@@ -172,7 +201,7 @@ function addBookmarkButton(titleElement, currentVideo) {
       note: note.trim(),
       createdAt: new Date().toISOString(),
     });
-    window.showSuccessNotification(`しおりを追加しました（${formatBookmarkTime(time)}）`);
+    window.showSuccessNotification(t('actions.bookmarkAdded', { time: formatBookmarkTime(time) }));
   });
   titleElement.appendChild(button);
 }
@@ -187,19 +216,19 @@ function addWatchLaterButton(titleElement, currentVideo) {
   const categoryId = String(currentVideo?.categoryId || window.getCurrentCategoryId() || '');
   const button = createTitleActionButton({
     className: 'video-watch-later-button',
-    title: '「あとで見る」リストに追加/削除（メニューから一覧できます）',
+    title: t('actions.watchLaterTitle'),
     html: '',
   });
   const updateLabel = () => {
     const active = window.isInWatchLater(contentId);
-    button.innerHTML = active ? '✓ あとで見る' : '⏱ あとで見る';
+    button.innerHTML = active ? t('videoSelect.watchLaterOn') : t('videoSelect.watchLaterOff');
     button.style.backgroundColor = active ? '#e3f2fd' : '#f0f0f0';
   };
   updateLabel();
   button.addEventListener('click', () => {
     const nowActive = window.toggleWatchLater(contentId, categoryId);
     updateLabel();
-    window.showSuccessNotification(nowActive ? '「あとで見る」に追加しました' : '「あとで見る」から削除しました');
+    window.showSuccessNotification(nowActive ? t('videoSelect.addedToWatchLater') : t('videoSelect.removedFromWatchLater'));
   });
   titleElement.appendChild(button);
 }
@@ -234,7 +263,7 @@ function applyPendingSeekIfAny() {
     const seek = () => {
       if (isFinite(video.duration) && video.duration > 0) {
         video.currentTime = Math.min(pending.time, Math.max(0, video.duration - 1));
-        window.showInfoNotification(`しおりの位置（${formatBookmarkTime(pending.time)}）から再生します`);
+        window.showInfoNotification(t('actions.resumeFromBookmark', { time: formatBookmarkTime(pending.time) }));
       }
     };
     if (video.readyState >= 1 && isFinite(video.duration)) {

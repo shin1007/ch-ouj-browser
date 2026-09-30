@@ -9,16 +9,16 @@ function buildBookmarkItemHtml(bookmark) {
     : '';
   const timeLabel = window.formatBookmarkTime(bookmark.time || 0);
   const deleteHtml = `
-    <span class="bookmark-delete-btn" role="button" tabindex="0" title="削除" data-bookmark-id="${bookmark.id}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
+    <span class="bookmark-delete-btn" role="button" tabindex="0" title="${t('common.delete')}" data-bookmark-id="${bookmark.id}" style="position:absolute;top:10px;right:16px;z-index:2;background:rgba(255,255,255,0.9);border-radius:6px;padding:6px;cursor:pointer;color:#9ca3af;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
     </span>
   `;
   return window.buildNativeVideoItemHtml({
     contentId: bookmark.contentId,
     categoryId: bookmark.categoryId,
-    title: `🔖 ${timeLabel} ｜ ${bookmark.title || '(タイトル不明)'}`,
-    summary: bookmark.note || 'メモなし',
-    categoryPath: `${bookmark.courseName || ''}${dateStr ? `（${dateStr} 追加）` : ''}`,
+    title: `🔖 ${timeLabel} ｜ ${bookmark.title || t('bookmarks.unknownTitle')}`,
+    summary: bookmark.note || t('bookmarks.noNote'),
+    categoryPath: `${bookmark.courseName || ''}${dateStr ? t('common.addedOn', { date: dateStr }) : ''}`,
     durationLabel: timeLabel,
     extraHtml: deleteHtml,
   });
@@ -77,27 +77,27 @@ function handleBookmarksPanelOpen() {
       if (listEl) {
         listEl.innerHTML = filtered.length
           ? filtered.map(buildBookmarkItemHtml).join('')
-          : '<div style="padding:16px;color:#666;">しおりはまだありません。動画ページの「🔖しおり」ボタンで追加できます。</div>';
+          : `<div style="padding:16px;color:#666;">${t('bookmarks.empty')}</div>`;
       }
       lastRendered = filtered;
       wireItemEvents();
     }
 
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: 'しおり' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.bookmarks') }]),
       mainHtml: window.renderNativeVideoListMainHtml({
         topHtml: `
           <ion-item class="sort item item-block item-md">
             <div class="item-inner">
               <div class="input-wrapper">
                 <div style="display:flex;align-items:center;gap:12px;padding:8px 0;width:100%;">
-                  <input id="bookmark-native-search" type="text" placeholder="タイトル・科目名・メモで検索" style="flex:1;box-sizing:border-box;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;">
+                  <input id="bookmark-native-search" type="text" placeholder="${t('bookmarks.searchPlaceholder')}" style="flex:1;box-sizing:border-box;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;">
                 </div>
               </div>
             </div>
           </ion-item>
         `,
-        itemsHtml: '<div style="padding:16px;color:#666;">読み込み中...</div>'
+        itemsHtml: `<div style="padding:16px;color:#666;">${t('common.loading')}</div>`
       })
     });
 

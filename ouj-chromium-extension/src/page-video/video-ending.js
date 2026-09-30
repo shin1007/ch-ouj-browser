@@ -73,12 +73,12 @@ function startNextVideoCountdown(seconds = 5) {
     text-align: center;
   `;
   overlay.innerHTML = `
-    <div style="margin-bottom:6px;color:#bbdefb;font-size:12px;">次の動画</div>
+    <div style="margin-bottom:6px;color:#bbdefb;font-size:12px;">${t('ending.next')}</div>
     <div id="ouj-countdown-title" style="font-weight:bold;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:400px;"></div>
-    <div style="margin-bottom:10px;"><span id="ouj-countdown-num" style="font-size:20px;font-weight:bold;color:#90caf9;">${seconds}</span> 秒後に自動で進みます</div>
+    <div style="margin-bottom:10px;">${t('ending.autoAdvance', { seconds: `<span id="ouj-countdown-num" style="font-size:20px;font-weight:bold;color:#90caf9;">${seconds}</span>` })}</div>
     <div style="display:flex;gap:10px;justify-content:center;">
-      <button id="ouj-countdown-cancel" style="padding:6px 14px;border:1px solid #999;background:transparent;color:#fff;border-radius:6px;cursor:pointer;font-size:13px;">キャンセル</button>
-      <button id="ouj-countdown-now" style="padding:6px 14px;border:none;background:#1976d2;color:#fff;border-radius:6px;cursor:pointer;font-size:13px;">すぐ進む</button>
+      <button id="ouj-countdown-cancel" style="padding:6px 14px;border:1px solid #999;background:transparent;color:#fff;border-radius:6px;cursor:pointer;font-size:13px;">${t('common.cancel')}</button>
+      <button id="ouj-countdown-now" style="padding:6px 14px;border:none;background:#1976d2;color:#fff;border-radius:6px;cursor:pointer;font-size:13px;">${t('ending.goNow')}</button>
     </div>
   `;
   container.appendChild(overlay);
@@ -86,7 +86,7 @@ function startNextVideoCountdown(seconds = 5) {
   // タイトルは非同期で埋める
   getNextVideoTitle().then((title) => {
     const titleEl = document.getElementById('ouj-countdown-title');
-    if (titleEl) titleEl.textContent = title || '（タイトル不明）';
+    if (titleEl) titleEl.textContent = title || t('ending.unknownTitle');
   });
 
   overlay.querySelector('#ouj-countdown-cancel').addEventListener('click', (event) => {
@@ -139,7 +139,15 @@ function startVideoEndMonitoring() {
         return;
       }
       if (window.nextVideoId) {
-        startNextVideoCountdown(5);
+        // 表示オプションでカウントダウン表示を隠している場合は、表示せずに
+        // そのまま次の動画へ進む（「自動で次に進む」設定とは別物なので止めない）
+        const countdownVisible = typeof window.isOujFeatureVisible !== 'function'
+          || window.isOujFeatureVisible('player-next-countdown');
+        if (countdownVisible) {
+          startNextVideoCountdown(5);
+        } else if (typeof window.skipToNextVideo === 'function') {
+          window.skipToNextVideo();
+        }
       }
     };
     // SPA遷移で同じvideo要素が使い回される場合の重複登録を防ぐ

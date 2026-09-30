@@ -37,14 +37,25 @@ async function main() {
       }
     });
   }
+  // 表示オプション（utils/display-options.js）で非表示にされた機能は挿入しない。
+  // 各機能の表示/非表示はメニューの「表示オプション」から切り替える。
+  const isVisible = (featureId) => (
+    typeof window.isOujFeatureVisible !== 'function' || window.isOujFeatureVisible(featureId)
+  );
+  // 設定を切り替えた直後だけでなく、SPAの画面遷移で作り直された要素にも効くよう
+  // ページ処理のたびに非表示用スタイルを入れ直す
+  if (typeof window.applyOujDisplayOptionStyles === 'function') {
+    window.applyOujDisplayOptionStyles();
+  }
+
   window.insertLeftMenu();
-  window.insertHeaderDarkModeToggle();
-  window.insertHeaderCollapseToggle();
-  window.insertHeaderWakabaLink();
+  if (isVisible('header-darkmode')) window.insertHeaderDarkModeToggle();
+  if (isVisible('header-collapse')) window.insertHeaderCollapseToggle();
+  if (isVisible('header-wakaba')) window.insertHeaderWakabaLink();
   window.startMenuOpeningMutationObserver();
   restoreOujOpenNativePanelIfAny();
   // 検索ボックス(#searchText)フォーカス時のクイック絞り込みパネル（全ページ共通）
-  if (typeof window.initSearchBoxFilterPanel === 'function') {
+  if (typeof window.initSearchBoxFilterPanel === 'function' && isVisible('search-box-panel')) {
     window.initSearchBoxFilterPanel();
   }
 
@@ -61,33 +72,33 @@ async function main() {
   if (pageType.page === 'home') {
     // ホームページの処理を呼び出す
     // 「続きから見る」パネルは自動ログイン判定と並行して挿入する
-    if (typeof window.insertHomeContinuePanel === 'function') {
+    if (typeof window.insertHomeContinuePanel === 'function' && isVisible('home-continue')) {
       window.insertHomeContinuePanel();
-    }
-    // ヘッダーロゴクリック等、URLが変化しない「ホームの作り直し」でパネルが
-    // 消えたままにならないよう監視する(内部で多重起動防止済み、詳細は
-    // page-home-continue.js参照)
-    if (typeof window.startHomeContinuePanelObserver === 'function') {
-      window.startHomeContinuePanelObserver();
+      // ヘッダーロゴクリック等、URLが変化しない「ホームの作り直し」でパネルが
+      // 消えたままにならないよう監視する(内部で多重起動防止済み、詳細は
+      // page-home-continue.js参照)
+      if (typeof window.startHomeContinuePanelObserver === 'function') {
+        window.startHomeContinuePanelObserver();
+      }
     }
     await window.handleHomePageAutoLogin();
   } else if (pageType.page === 'search-result') {
-    window.initializeSearchResultFilters();
+    if (isVisible('search-result-filters')) window.initializeSearchResultFilters();
   } else if (pageType.page === 'player') {
-    window.addFavoriteButtonToBreadCrumbs();
-    window.initializeVideoPlayer();      
+    if (isVisible('breadcrumb-favorite')) window.addFavoriteButtonToBreadCrumbs();
+    window.initializeVideoPlayer();
   } else if (pageType.page === 'series-select') {
-    window.waitThenAddFavBtnToCategoryList();
-    window.waitThenAddProgressBadgesToCategoryList();
+    if (isVisible('course-favorite')) window.waitThenAddFavBtnToCategoryList();
+    if (isVisible('course-progress')) window.waitThenAddProgressBadgesToCategoryList();
     // 科目フォルダ一覧の絞り込み(テレビ/ラジオ・字幕・未完了・視聴途中)
-    if (typeof window.initializeCourseListFilters === 'function') {
+    if (typeof window.initializeCourseListFilters === 'function' && isVisible('course-filters')) {
       window.initializeCourseListFilters();
     }
   } else if (pageType.page === 'video-select') {
-    window.addFavoriteButtonToBreadCrumbs();
-    window.addWatchLaterButtonsToVideoList();
+    if (isVisible('breadcrumb-favorite')) window.addFavoriteButtonToBreadCrumbs();
+    if (isVisible('video-select-watch-later')) window.addWatchLaterButtonsToVideoList();
     // 回一覧は検索結果と同じDOMなのでフィルタ機構を流用(視聴状況フィルタ+並び替え)
-    if (typeof window.initializeSearchResultFilters === 'function') {
+    if (typeof window.initializeSearchResultFilters === 'function' && isVisible('search-result-filters')) {
       window.initializeSearchResultFilters('video-select');
     }
   } else {
@@ -114,6 +125,7 @@ function restoreOujOpenNativePanelIfAny() {
     recommend: window.handleRecommendPanelOpen,
     studytime: window.handleStudyTimePanelOpen,
     whatsnew: window.handleWhatsNewPanelOpen,
+    displayoptions: window.handleDisplayOptionsPanelOpen,
     'all-subjects-filter': window.handleAllSubjectsFilterPanelOpen
   };
   const openPanel = panelOpenHandlers[pendingPanelId];
@@ -155,6 +167,16 @@ function callSafeMainOnce() {
     safeMain();
   }
 }
+
+// 表示オプションを「非表示 → 表示」に戻したときに、ページ再読み込みなしで
+// 反映するための再実行口。非表示の機能は上のisVisible()ゲートでそもそも挿入
+// されないため、CSSを外すだけでは戻らない。各挿入処理は冪等（挿入済みなら
+// 何もしない）なので、main()をもう一度走らせれば足りない要素だけが補われる。
+// 直前の実行からの間隔でスロットルされないよう、タイムスタンプを明示的に消す。
+window.oujRerunPageFeatures = function oujRerunPageFeatures() {
+  window.oujLastMainTime = 0;
+  callSafeMainOnce();
+};
 
 // content.jsは、manifest.jsonの宣言的content_scripts(document_end)と、
 // background.jsのwebNavigation.onCompletedによる再注入の両方から、同じページに対して

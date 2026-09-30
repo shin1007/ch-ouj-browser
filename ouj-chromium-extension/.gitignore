@@ -5,3 +5,6 @@ node_modules/
 test-results/
 playwright-report/
 playwright/.cache/
+
+# ch-uploader 入稿用のビルド生成物（リリース手順の git archive で作る）
+store/package.zip

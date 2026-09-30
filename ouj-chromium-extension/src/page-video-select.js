@@ -14,11 +14,17 @@ function createVideoSelectWatchLaterToggle(contentId, categoryId) {
   toggle.className = 'ouj-video-select-watch-later';
   toggle.setAttribute('role', 'button');
   toggle.setAttribute('tabindex', '0');
-  toggle.title = '「あとで見る」に追加/削除（メニューの「あとで見る」から一覧できます）';
+  toggle.title = t('videoSelect.watchLaterTooltip');
+  // 同じ行に並ぶ視聴状況バッジ(.ouj-result-badges / page-search-result-filters.js)と
+  // 縦位置を揃える。inline-flexの既定のvertical-align:baselineは、中身を
+  // align-items:centerで中央寄せしているぶんベースラインがずれて下がって見えるため、
+  // バッジ側と同じvertical-align:middleを指定する（以前はmargin-topで下げていたが、
+  // これがタイトル行に並んだときの不自然なズレの原因だった）
   toggle.style.cssText = `
     display: inline-flex;
     align-items: center;
-    margin-top: 6px;
+    vertical-align: middle;
+    margin-left: 8px;
     padding: 3px 10px;
     border-radius: 14px;
     font-size: 12px;
@@ -33,7 +39,7 @@ function createVideoSelectWatchLaterToggle(contentId, categoryId) {
 
   const updateLabel = () => {
     const active = window.isInWatchLater(contentId);
-    toggle.textContent = active ? '✓ あとで見る' : '⏱ あとで見る';
+    toggle.textContent = active ? t('videoSelect.watchLaterOn') : t('videoSelect.watchLaterOff');
     toggle.style.background = active ? '#e3f2fd' : '#f0f0f0';
     toggle.style.borderColor = active ? '#90caf9' : '#ccc';
     toggle.style.color = active ? '#1565c0' : '#555';
@@ -45,7 +51,7 @@ function createVideoSelectWatchLaterToggle(contentId, categoryId) {
     event.preventDefault();
     const nowActive = window.toggleWatchLater(contentId, categoryId);
     updateLabel();
-    window.showSuccessNotification(nowActive ? '「あとで見る」に追加しました' : '「あとで見る」から削除しました');
+    window.showSuccessNotification(nowActive ? t('videoSelect.addedToWatchLater') : t('videoSelect.removedFromWatchLater'));
   };
   toggle.addEventListener('click', onToggle);
   toggle.addEventListener('keydown', (event) => {

@@ -164,8 +164,8 @@ function createOujHeaderTab({ id, title, text, onClick }) {
 
 function ensureHeaderCollapseTabs() {
   if (document.getElementById(HEADER_EXPAND_TAB_ID)) return;
-  createOujHeaderTab({ id: HEADER_COLLAPSE_TAB_ID, title: 'ヘッダーを折りたたむ', text: '▲', onClick: cycleOujHeaderCollapsed });
-  createOujHeaderTab({ id: HEADER_EXPAND_TAB_ID, title: 'ヘッダーを表示', text: '▼', onClick: cycleOujHeaderCollapsed });
+  createOujHeaderTab({ id: HEADER_COLLAPSE_TAB_ID, title: t('header.collapse'), text: '▲', onClick: cycleOujHeaderCollapsed });
+  createOujHeaderTab({ id: HEADER_EXPAND_TAB_ID, title: t('header.expand'), text: '▼', onClick: cycleOujHeaderCollapsed });
 }
 
 function insertHeaderCollapseToggle() {
@@ -183,6 +183,10 @@ function insertHeaderCollapseToggle() {
   });
 }
 window.insertHeaderCollapseToggle = insertHeaderCollapseToggle;
+// 表示オプションでこのボタンを隠したとき、折りたたんだままだと戻す手段が
+// 無くなるため、パネル側からヘッダーを開き直せるように公開する
+// （chrome.storageの設定値は変えないので、再度表示すれば元の状態に戻る）
+window.applyOujHeaderCollapsed = applyOujHeaderCollapsed;
 
 // ポップアップ等、他のタブでの変更もリアルタイムに反映
 chrome.storage.onChanged.addListener((changes, areaName) => {

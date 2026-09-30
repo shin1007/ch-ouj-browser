@@ -135,7 +135,8 @@ h2 {
 }
 
 /* 表示テーマ設定 */
-#theme-section {
+#theme-section,
+#language-section {
     margin-top: 15px;
     padding: 15px;
     background-color: white;
@@ -150,7 +151,8 @@ h2 {
     color: #333;
 }
 
-#theme-select {
+#theme-select,
+#language-select {
     width: 100%;
     padding: 8px 10px;
     font-size: 14px;
@@ -161,7 +163,8 @@ h2 {
     cursor: pointer;
 }
 
-#theme-select:focus {
+#theme-select:focus,
+#language-select:focus {
     outline: none;
     border-color: #0075C1;
     box-shadow: 0 0 0 2px rgba(0, 117, 193, 0.2);

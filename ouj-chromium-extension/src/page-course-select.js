@@ -40,8 +40,11 @@ async function addFavoriteButtonsToCategoryList() {
     
     // お気に入りボタン作成
     const favBtn = document.createElement('button');
-    favBtn.className = 'favorite-btn';
-    favBtn.title = 'お気に入り';
+    // ouj-course-fav-btnは表示オプション(utils/display-options.js)で
+    // 「科目一覧のお気に入り星」だけを隠すための目印。お気に入りパネル内の
+    // .favorite-btn（menu-native-shell.js）を巻き込まないよう別クラスにしている
+    favBtn.className = 'favorite-btn ouj-course-fav-btn';
+    favBtn.title = t('common.favorites');
     favBtn.style.display = 'inline-flex';
     favBtn.style.alignItems = 'center';
     favBtn.style.justifyContent = 'center';
@@ -60,7 +63,7 @@ async function addFavoriteButtonsToCategoryList() {
     const iconName = isFavorite ? 'star' : 'star-outline';
     const iconClass = isFavorite ? 'ion-md-star' : 'ion-md-star-outline';
     
-  favBtn.innerHTML = `<ion-icon name="${iconName}" class="icon icon-md ${iconClass} item-icon" aria-label="お気に入り" style="font-size:24px;"></ion-icon>`;
+  favBtn.innerHTML = `<ion-icon name="${iconName}" class="icon icon-md ${iconClass} item-icon" aria-label="${t('common.favorites')}" style="font-size:24px;"></ion-icon>`;
     
     // クリックイベントを追加
     favBtn.addEventListener('click', async (event) => {
@@ -73,7 +76,7 @@ async function addFavoriteButtonsToCategoryList() {
       const newIsFavorite = await window.toggleFavorite(categoryId);
       const newIconName = newIsFavorite ? 'star' : 'star-outline';
       const newIconClass = newIsFavorite ? 'ion-md-star' : 'ion-md-star-outline';
-      favBtn.innerHTML = `<ion-icon name="${newIconName}" class="icon icon-md ${newIconClass} item-icon" aria-label="お気に入り" style="font-size:24px;"></ion-icon>`;
+      favBtn.innerHTML = `<ion-icon name="${newIconName}" class="icon icon-md ${newIconClass} item-icon" aria-label="${t('common.favorites')}" style="font-size:24px;"></ion-icon>`;
       favBtn.disabled = false;
     });
     

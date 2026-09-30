@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "items": {
+    "mjphckgpnhhjfdpgkblomeiehjgeaagb": {
+      "screenshots": {
+        "ja": [
+          "5e73b7bf7a68cc94fd7505aa8ef54784e7854f6c91d716524e441ec04fbc2727",
+          "1a9130969a7194af69bcd3f3eb158a970512b677e8ca7ba96b61ec1366093bb6",
+          "7716ce17ada5ca1820808ca893571fafe16238fc76d1fe5c2a2cdb9435ccb64f",
+          "925b97f94e2cf319d365570191fa0bd95004856e80f42406a0b47ae33683541b",
+          "3883f27498c73b8e991f0b8c057d776b17ff01ba94b278080c3d2b3e157de977"
+        ]
+      },
+      "fields": {
+        "package.zip": {
+          "hash": "0581455d82aa9fe6a319d98f18dffec4ef654b87d9a9aa0ee469096504165b66",
+          "appliedAt": "2026-09-29T15:32:58.369Z"
+        },
+        "privacy.singlePurpose": {
+          "hash": "7c7a915a80562daaffc5e9b570fbac7aa8f7527f2a65e4f0eb7d0bdde5c6b90c",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.usesRemoteCode": {
+          "hash": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.dataUsage": {
+          "hash": "71d4df33b88e964d305e4731e44f63898dfa6e9e9349e9fc00a3f359ca952752",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.privacyPolicyUrl": {
+          "hash": "04ca7614dad47b146f1182c684584cd6b12bcb1b01f08fdd77a909434920cfb8",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.permission.storage": {
+          "hash": "0bab10e8f6a85164ba4474daa6bd6689d8ef119c37ba53c39a4b147a2f912e48",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.permission.scripting": {
+          "hash": "43d7c17ccc351769c88f286014b24fea96b35bee71317d86bff67150a6339aa6",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.permission.webNavigation": {
+          "hash": "1d5fd9b323afd025956c4877ad75cbc3d9e1ce563d28fd10683dce3ed3606dc0",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "privacy.permission.host permission": {
+          "hash": "6552aa7dbabab3a9177858e4c7048f35ce6fe7bf3750b75b7038e6e3892d62b9",
+          "appliedAt": "2026-09-29T15:33:03.982Z"
+        },
+        "storeListing.category": {
+          "hash": "c883995ff5ab5961b4f6df2640a3165280e1dce1b8811323bc71c29ff3ee68a9",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.icon": {
+          "hash": "14203257172435a0c4c90dce1e9ec2fc8778cd421a52e7d7f3d86c0b01cda280",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.adultContent": {
+          "hash": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.homepageUrl": {
+          "hash": "04ca7614dad47b146f1182c684584cd6b12bcb1b01f08fdd77a909434920cfb8",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.supportUrl": {
+          "hash": "d5d4cf4335a8b8755a80a5ba8c4637ae58a82897739bf321b263bfb888ae6429",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.locale.ja.description": {
+          "hash": "f161ae6b16d20b14b8e23969a48e2c753e9adb1d9f4795f202a8d5929c535190",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        },
+        "storeListing.locale.ja.screenshots": {
+          "hash": "3ba3cd4050c645aad388519c9f944caebefbb4eda28c77ecff16d16fd1634094",
+          "appliedAt": "2026-09-29T15:33:34.230Z"
+        }
+      }
+    }
+  }
+}

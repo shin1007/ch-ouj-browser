@@ -57,7 +57,7 @@ async function getAllSubjectItems() {
       categoryId: category.categoryId,
       name: category.name,
       summary: category.summary || '',
-      parentName: parent ? parent.name : 'その他',
+      parentName: parent ? parent.name : t('common.other'),
       media,
       caption,
       year: window.extractYearFromCategoryName(category.name),
@@ -111,12 +111,12 @@ function buildAllSubjectsProgressBadgeHtml(categoryId) {
 
 function fillAllSubjectsProgressBadge(badge, watchState) {
   if (watchState === 'complete') {
-    badge.textContent = '視聴済み';
+    badge.textContent = t('badge.watchedShort');
     badge.style.background = '#dcedc8';
     badge.style.color = '#33691e';
     badge.style.visibility = 'visible';
   } else if (watchState === 'partial') {
-    badge.textContent = '視聴途中';
+    badge.textContent = t('badge.partialShort');
     badge.style.background = '#e3f2fd';
     badge.style.color = '#1565c0';
     badge.style.visibility = 'visible';
@@ -146,7 +146,7 @@ function allSubjectsCourseNumPrefix(name) {
 function groupAllSubjectsByParent(items) {
   const groups = new Map();
   items.forEach((item) => {
-    const key = item.parentName || 'その他';
+    const key = item.parentName || t('common.other');
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(item);
   });
@@ -156,7 +156,7 @@ function groupAllSubjectsByParent(items) {
 }
 
 function buildAllSubjectsGroupedListHtml(items) {
-  if (!items.length) return '<div style="padding:16px;color:#666;">条件に合う科目がありません</div>';
+  if (!items.length) return `<div style="padding:16px;color:#666;">${t('allSubjects.noMatch')}</div>`;
   const groups = groupAllSubjectsByParent(items);
   return groups
     .map((group) => window.buildNativeSectionHeaderHtml(group.name) + group.items.map(buildAllSubjectsItemHtml).join(''))
@@ -167,27 +167,27 @@ function buildAllSubjectsFilterSummaryText(state, count) {
   const parts = [];
   // テレビ/ラジオ両方ONは絞り込み無し(既定値)を表すため、ラベルには出さない。
   // 片方のみON、または両方OFF(0件)の時だけ状態が分かるように出す
-  if (state.media.tv && !state.media.radio) parts.push('テレビ番組');
-  if (state.media.radio && !state.media.tv) parts.push('ラジオ番組');
-  if (!state.media.tv && !state.media.radio) parts.push('テレビ番組・ラジオ番組とも非表示');
-  if (state.captionOnly) parts.push('字幕ありのみ');
-  if (state.incompleteOnly) parts.push('未完了のみ');
-  if (state.partialOnly) parts.push('視聴途中のみ');
-  if (state.year.length === 1) parts.push(`${state.year[0]}年度`);
-  else if (state.year.length > 1) parts.push(`年度${state.year.length}件選択`);
+  if (state.media.tv && !state.media.radio) parts.push(t('filters.tv'));
+  if (state.media.radio && !state.media.tv) parts.push(t('filters.radio'));
+  if (!state.media.tv && !state.media.radio) parts.push(t('allSubjects.bothHidden'));
+  if (state.captionOnly) parts.push(t('filters.captionOnly'));
+  if (state.incompleteOnly) parts.push(t('filters.incompleteOnly'));
+  if (state.partialOnly) parts.push(t('filters.partialOnly'));
+  if (state.year.length === 1) parts.push(t('filters.yearFormat', { year: state.year[0] }));
+  else if (state.year.length > 1) parts.push(t('allSubjects.yearsSelected', { n: state.year.length }));
   if (state.course.length === 1) parts.push(state.course[0]);
-  else if (state.course.length > 1) parts.push(`コース${state.course.length}件選択`);
-  const condition = parts.length ? parts.join('・') : '条件なし（全科目）';
-  return `絞り込み: ${condition}（${count}件）`;
+  else if (state.course.length > 1) parts.push(t('allSubjects.coursesSelected', { n: state.course.length }));
+  const condition = parts.length ? parts.join(t('allSubjects.separator')) : t('allSubjects.noCondition');
+  return t('allSubjects.summary', { condition, count });
 }
 
 // 年度・コースの絞り込み選択肢を全科目一覧から作る(いずれも複数選択可のドロップダウン用)。
 // コースの並びはグループ見出し(groupAllSubjectsByParent)と同じ番号順に揃える
 function buildAllSubjectsYearCourseOptions(items) {
   const years = Array.from(new Set(items.map((i) => i.year).filter(Boolean))).sort((a, b) => b - a);
-  const yearOptions = years.map((y) => ({ value: String(y), label: `${y}年度` }));
+  const yearOptions = years.map((y) => ({ value: String(y), label: t('filters.yearFormat', { year: y }) }));
 
-  const courseNames = Array.from(new Set(items.map((i) => i.parentName || 'その他')))
+  const courseNames = Array.from(new Set(items.map((i) => i.parentName || t('common.other'))))
     .sort((a, b) => allSubjectsCourseNumPrefix(a) - allSubjectsCourseNumPrefix(b) || a.localeCompare(b, 'ja'));
   const courseOptions = courseNames.map((name) => ({ value: name, label: name }));
 
@@ -289,13 +289,13 @@ function renderAllSubjectsPanel(overlay) {
   }
 
   overlay.innerHTML = window.renderNativeShellHtml({
-    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: '絞り込み検索（全科目）' }]),
+    breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('allSubjects.title') }]),
     extraAsideHtml: `
-      ${window.buildNativeSearchBoxHtml({ id: 'all-subjects-native-search', placeholder: '科目名・コース名で絞り込み' })}
+      ${window.buildNativeSearchBoxHtml({ id: 'all-subjects-native-search', placeholder: t('allSubjects.searchPlaceholder') })}
       <div id="all-subjects-filter-summary" style="padding:0 20px 8px 20px;font-size:12px;color:#666;"></div>
       <div id="all-subjects-year-course-filters" style="padding:0 20px 12px 20px;display:flex;flex-wrap:wrap;gap:8px;"></div>
     `,
-    asideListHtml: '<div id="all-subjects-native-list" style="padding:16px;color:#666;">読み込み中...</div>'
+    asideListHtml: `<div id="all-subjects-native-list" style="padding:16px;color:#666;">${t('common.loading')}</div>`
   });
 
   const searchInput = overlay.querySelector('#all-subjects-native-search');
@@ -309,10 +309,10 @@ function renderAllSubjectsPanel(overlay) {
   // 年度・コースは全科目一覧(getAllSubjectItems)の取得が終わるまで選択肢が確定しないため、
   // 検索結果ページのbuildYearCourseRowと同じくisLoading:trueで先に表示し、取得後にoujSetOptionsで差し替える
   const yearDropdown = window.buildOujMultiSelectDropdown({
-    label: '年度', options: [], selected: yearFilter, onChange: renderList, isLoading: true,
+    label: t('filters.year'), options: [], selected: yearFilter, onChange: renderList, isLoading: true,
   });
   const courseDropdown = window.buildOujMultiSelectDropdown({
-    label: 'コース', options: [], selected: courseFilter, onChange: renderList, isLoading: true,
+    label: t('filters.course'), options: [], selected: courseFilter, onChange: renderList, isLoading: true,
   });
   const yearCourseContainer = overlay.querySelector('#all-subjects-year-course-filters');
   if (yearCourseContainer) {

@@ -47,7 +47,12 @@
 
   // メニュー（ヘッダー）側の表示テーマ切り替えボタンから利用する共通API。
   // ポップアップと設定キー・切り替え順を共有することで、値のずれを防ぐ。
-  window.OUJ_DARK_MODE_LABELS = { auto: '自動', light: 'ライト', dark: 'ダーク' };
+  // 言語切替に追従できるよう、参照のたびに t() を呼ぶgetterにしている
+  window.OUJ_DARK_MODE_LABELS = {
+    get auto() { return window.t ? window.t('darkmode.auto') : '自動'; },
+    get light() { return window.t ? window.t('darkmode.light') : 'ライト'; },
+    get dark() { return window.t ? window.t('darkmode.dark') : 'ダーク'; },
+  };
 
   window.getOujDarkModeSetting = function (callback) {
     chrome.storage.sync.get([STORAGE_KEY], (result) => {

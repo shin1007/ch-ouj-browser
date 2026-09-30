@@ -1,0 +1,3253 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+  <title>放送大学</title>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./assets/images/webclip/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/images/webclip/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="./assets/images/webclip/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/images/webclip/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./assets/images/webclip/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/images/webclip/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/images/webclip/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./assets/images/webclip/apple-touch-icon-180x180.png">
+  <script>
+      var tenantId = "1";
+      var cssTemplate = "tenant/ouj";
+      var options = {
+                        homeSettingUrl: "./top-page.json"
+                      , initMessageUrl: "./init-message.html?v=1"
+                      , loginType: 2
+                      , logoUrl: "./assets/images/icon_logo.png"
+                      , maxListNum: 30
+                      , sami: true
+                      , systemRequirementUrl: "https://www.ouj.ac.jp/help/siteinfo/#recommended"
+                      , tenantType: 1
+                      , visibleVodMenu: false
+      };
+  </script>
+  <script src="cas-cooperation.js"></script>
+  <script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-header.min.js"></script><base href="./"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/css/tenant/ouj.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/leaflet/1.3.1/leaflet.css"><script>  var basePath = "//v.ouj.ac.jp/module/classtream_viewer3/";</script>
+<div><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/ui.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/icomoon/style.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/player.css?ver=1.0.25"></div><style type="text/css">.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+</style><style type="text/css">.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}</style></head>
+<body>
+  <iframe style="width:100%; height:100%; border:none;" src="//v.ouj.ac.jp/module/classtream_viewer3/assets/html/no-script.html"></iframe>
+  <ion-app class="app-root app-root-md md platform-core enable-hover" ng-version="5.0.0"><div app-viewport=""></div><ng-component class="app-root"><ion-content id="app-content" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div class="wrapper">
+
+        <router-outlet></router-outlet><navi><div id="main-navi">
+
+  
+
+  <common-header>
+
+<ion-header class="header header-md">
+
+    <ion-navbar class="left toolbar toolbar-md" id="cls-common-header" role="banner"><div class="toolbar-background toolbar-background-md"></div><button class="back-button bar-button bar-button-md back-button-md bar-button-default bar-button-default-md" ion-button="bar-button"><span class="button-inner"><ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" aria-label="arrow back"></ion-icon><span class="back-button-text back-button-text-md"></span></span><div class="button-effect"></div></button><div class="toolbar-content toolbar-content-md">
+
+        <div class="logo-menu">
+
+            <!----><img class="logo-img" src="./assets/images/icon_logo.png" alt="ホーム">
+
+        </div>
+
+        
+
+        <!----><div class="login-button login-button-bottom">
+
+            <!---->
+
+            <div class="user-id-menu">
+
+                <!----><ion-label class="user-id label label-md">XXXXXXXXXX</ion-label>
+
+            </div>
+
+        </div>
+
+        <div class="vod-list-search">
+
+            
+
+            <vod-list-search>
+
+<div class="search-area" role="search">
+
+    
+
+    <button class="search-back-button button button-md button-outline button-outline-md" ion-button="" outline="" title="戻る"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" name="arrow-round-back" role="img" class="icon icon-md ion-md-arrow-round-back" aria-label="arrow round-back"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <input autocomplete="off" id="searchText" maxlength="200" type="text" placeholder="動画検索" title="検索する文字を入力してください。">
+
+    
+
+    <button aria-labelledby="searchText" class="theme-color search-button button button-md button-default button-default-md" ion-button="" value="動画検索" aria-label="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <button class="theme-color search-expand-button button button-md button-clear button-clear-md button-round button-round-md" clear="" ion-button="" round="" title="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+</div></vod-list-search>
+
+        </div>
+
+        
+
+        <!---->
+
+    </div></ion-navbar>
+
+    
+
+    <!---->
+
+</ion-header></common-header>
+
+  
+
+  <div class="menu-background-color" id="menu">
+
+    <menu-navi><ion-content class="wrapper-menu-main menu-background-color content content-md" role="navigation"><div class="fixed-content"></div><div class="scroll-content">
+
+    <ion-content class="menu-main menu-background-color content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+        
+
+        <ion-list class="menu-list top-ion-list list list-md" role="menu">
+
+            <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="home" role="img" class="icon icon-md ion-md-home item-icon" aria-label="home"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ホーム
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+            <!---->
+
+            <!---->
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list" aria-label="カテゴリー">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md"> 
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        カテゴリー
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!----><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            01 教養学部
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            02 大学院
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            03 夏季集中科目
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            04 ラジオ番組の字幕付加実験
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            05 特別講義
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        設定
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <ion-item class="item-selectable item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="exit" role="img" class="icon icon-md ion-md-exit item-icon" aria-label="exit"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ログアウト
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+        </ion-list>
+
+
+
+        <!----><ion-list class="menu-list list list-md">
+
+            
+
+            <div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/help/siteinfo/#recommended" aria-label="ご利用にあたって別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                                <div class="icon-text">
+
+                                    <div class="icon-area">
+
+                                        <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                    </div>
+
+                                    <div class="text-area">
+
+                                        ご利用にあたって
+
+                                    </div>
+
+                                </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            
+
+            <!----><div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/" aria-label="放送大学トップページへ別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                            <div class="icon-text">
+
+                                <div class="icon-area">
+
+                                    <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                </div>
+
+                                <div class="text-area">
+
+                                    放送大学トップページへ
+
+                                </div>
+
+                            </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </ion-list>
+
+    </div></ion-content>
+
+
+
+    
+
+    <!----><menu-footer><footer class="footer" lang="en" role="contentinfo">
+
+    ver. 3.2.30 powered by IPL
+
+    
+
+<footer>
+
+</footer></footer></menu-footer>
+
+</div></ion-content></menu-navi>
+
+  </div>
+
+  
+
+  <main class="navi-main-default" id="main" role="main">
+
+    
+
+    <div></div><main-vod-list>
+
+<common-overlay>
+
+<div id="common-overlay" ion-fixed="" padding="" hidden=""></div></common-overlay>
+
+
+
+<ion-content class="content content-md has-infinite-scroll"><div class="fixed-content"></div><div class="scroll-content">
+
+    
+
+    <list-title><div class="common-outer-main-content-area">
+
+    <ion-title class="page-list-title common-list-title-bottom title title-md"><div class="toolbar-title toolbar-title-md">
+
+        
+
+        <span class="list-title-span" id="list-title-span" role="heading" tabindex="0">動画</span>
+
+        
+
+        <!---->
+
+        <!---->
+
+    </div></ion-title>
+
+    
+
+    <!---->
+
+</div></list-title>
+
+    
+
+    <vod-list-navigator><aside role="complementary">
+
+    
+
+    <!----><div class="breadcrumbs">
+
+        <ul aria-label="カテゴリーのパンくずリスト">
+
+            <!----><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">01 教養学部</a>
+
+            </li><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">01 基盤科目</a>
+
+            </li><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">001 運動と健康（’２２） 1140094</a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    
+
+    <ion-list class="vod-category-list list list-md" id="child-category-list" role="list" aria-label="カテゴリー">
+
+        <!---->
+
+    </ion-list>
+
+</aside></vod-list-navigator>
+
+    
+
+    <div aria-labelledby="list-title-span" role="main">
+
+        
+
+        <!---->
+
+        
+
+        <!----><ion-item class="sort item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <label class="sort-label" aria-label="content.sort-list">
+
+                <select class="sort-select ng-untouched ng-pristine ng-valid">
+
+                    <!----><option value="1">新着順</option><option value="7">公開順</option><option value="3">タイトル順</option><option value="4">タイトル(逆)順</option>
+
+                </select>
+
+            </label>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        
+
+        <ion-list aria-describedby="list-title-span" can-swipe="listCanSwipe" id="common-list-content" role="list" class="list list-md">
+
+            <!----><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 生体と恒常性">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31761/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 生体と恒常性
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2026年7月31日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2026/07/31</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">生命は細胞によってできており、細胞が生命活動を行うためには、体内を適切な環境に調節する必要がある。この回では、細胞の構造と機能ついて解説するとともに、体内環境を適切に保つ生体恒常性について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第02回 栄養とエネルギー代謝">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31762/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第02回 栄養とエネルギー代謝
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年8月16日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/08/16</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">摂取した栄養素は、生命維持や運動のためのエネルギーとして利用される。この回では、生命活動の直接的なエネルギーであるアデノシン三リン酸の合成経路、およびエネルギー供給系について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第03回 骨格筋の構造と働き">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31763/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第03回 骨格筋の構造と働き
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月25日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/25</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">歩く、走るなどの多くの身体活動は、関節に付着する筋活動によって行われる。この回では、運動に携わる骨格筋の基本的な構造とその働き、および筋肥大と筋萎縮について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第04回 神経系の構造と働き">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31764/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第04回 神経系の構造と働き
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月13日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/13</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">脳や脊髄からの命令が神経線維を伝わり筋に到達することで運動は行われ、調節される。この回では、神経系の構造と機能、および運動に対する神経系の役割などについて概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第05回 呼吸器系の構造と働き">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31765/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第05回 呼吸器系の構造と働き
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月13日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/13</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">ヒトは、酸素を身体に取り入れることでエネルギーを得るとともに、生じた二酸化炭素を排出している。この回では、呼吸器系の構造と機能、および運動への適応について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第06回 循環器系の構造と働き">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31766/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第06回 循環器系の構造と働き
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月14日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/14</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">呼吸によって身体へ取り入れた酸素は、血液を介して心臓から全身に送られる。この回では、循環器系の構造と機能、および運動への適応について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第07回 運動と環境">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31767/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第07回 運動と環境
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月20日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/20</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">運動は様々な環境において行われる。この回では、特に、暑熱や寒冷、水中、そして、高地環境における運動時の生理学的応答や適応について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第08回 トレーニングの計画と実際1">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31768/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第08回 トレーニングの計画と実際1
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月14日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/14</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">一般人からアスリートまでの幅広い対象者のトレーニングは安全かつ効果的に行う必要がある。この回では、トレーニングの原理・原則、およびトレーニング実施上の注意点について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第09回 トレーニングの計画と実際2">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31769/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第09回 トレーニングの計画と実際2
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">トレーニングは目的に応じて適切なトレーニングを計画・実施しなければならない。この回では、体力要素別に各種トレーニングについて概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第10回 運動と発育・発達">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31770/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第10回 運動と発育・発達
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">成人期以前のからだは生涯を通じて最も成長する。運動遊びを含む運動・スポーツ環境は子どもの成長にどのような影響を及ぼしているのだろうか。この回では、子どもの健全な発育発達を促す身体活動の在り方について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第11回 子どもの体力・運動能力">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31771/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第11回 子どもの体力・運動能力
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">過去と現在の比較、諸外国との相違を通して日本の子どもの体力・運動能力の現状について解説するとともに、何が違いに影響を及ぼしているのか、そして子どもにおける体力・運動能力の意義について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第12回 障害者とスポーツ">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31772/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第12回 障害者とスポーツ
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">障害の有無に関わらず、日常的に運動やスポーツに親しむことは、生涯にわたり健康で豊かな生活を営む上で重要である。この回では、障害のある人たちとスポーツとの関わりについての現状と課題を学ぶ。また、パラリンピックをはじめとする障害者スポーツの競技大会等を紹介し、それらが障害のある人たちや社会にもたらす影響について概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第13回 特別支援教育と学校体育">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31773/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第13回 特別支援教育と学校体育
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">学校体育の充実は生涯スポーツへの発展に大きな役割を果たす。障害がある子どもの体育・健康に関する指導は、特別支援教育の制度下において、教育課程全体を通じて行われている。この回では、特別支援学校（知的障害）の保健体育科の目標や指導内容、指導計画等を概説し、障害のある子どもへの体育・スポーツ指導の実際について理解することを目指す。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第14回 生活習慣病と運動">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31774/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第14回 生活習慣病と運動
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">身体活動量の低下が多くの生活習慣病のリスクとなり、死亡率を上昇させる。年齢に応じて、運動や生活活動を増やすことが、全身持久力を向上し、死亡率や生活習慣病予防につながることを理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第15回 運動処方">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31775/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第15回 運動処方
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月13日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/13</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">安全に身体活動を実施する上で、留意すべき症状、疾患、状態、環境などをふまえ、勧められる身体活動を理解し、推奨される身体活動の頻度、強度、時間、種類、活動量、漸進性すなわち運動処方(FITT-VP)を理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 001 運動と健康（’２２） 1140094</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の001 運動と健康（’２２） 1140094"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+        
+
+        <ion-infinite-scroll>
+
+            <ion-infinite-scroll-content loadingspinner="bubbles" loadingtext="Loading more data..." state="enabled"><div class="infinite-loading"><!----><div class="infinite-loading-spinner"><ion-spinner class="spinner spinner-md spinner-bubbles spinner-md-bubbles"><!----><svg viewBox="0 0 64 64" style="top: 0px; left: 9px; animation-delay: -1000ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 5.78509px; left: 6.8944px; animation-delay: -888.889ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 8.86327px; left: 1.56283px; animation-delay: -777.778ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 7.79423px; left: -4.5px; animation-delay: -666.667ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 3.07818px; left: -8.45723px; animation-delay: -555.556ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -3.07818px; left: -8.45723px; animation-delay: -444.444ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -7.79423px; left: -4.5px; animation-delay: -333.333ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -8.86327px; left: 1.56283px; animation-delay: -222.222ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -5.78509px; left: 6.8944px; animation-delay: -111.111ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><!----></ion-spinner></div><!----><div class="infinite-loading-text">Loading more data...</div></div></ion-infinite-scroll-content>
+
+        </ion-infinite-scroll>
+
+    </div>
+
+</div></ion-content></main-vod-list>
+
+  </main>
+
+  
+
+</div></navi>
+
+    </div>
+
+</div></ion-content></ng-component><div overlay-portal=""></div><div overlay-portal=""></div><div class="loading-portal" overlay-portal=""></div><div class="toast-portal"></div><div class="click-block click-block-enabled"></div></ion-app>
+
+
+<script src="//v.ouj.ac.jp/module/js/jquery/jquery-2.2.3.min.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-check.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/js/classtream-webapi-1.1.0/classtream-webapi.js?v=1.1.0.17"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream.min.js"></script><script src="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/THEOplayer.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/pdf/2.1.266/pdf.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/polyfills.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/vendor.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-base.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-player.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/webrtc/webrtc-player.min.js?ver=1.0.0"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.js?v=3.2.30"></script></body></html>

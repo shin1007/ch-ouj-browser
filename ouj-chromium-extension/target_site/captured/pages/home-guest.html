@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+  <title>放送大学</title>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./assets/images/webclip/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/images/webclip/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="./assets/images/webclip/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/images/webclip/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./assets/images/webclip/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/images/webclip/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/images/webclip/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./assets/images/webclip/apple-touch-icon-180x180.png">
+  <script>
+      var tenantId = "1";
+      var cssTemplate = "tenant/ouj";
+      var options = {
+                        homeSettingUrl: "./top-page.json"
+                      , initMessageUrl: "./init-message.html?v=1"
+                      , loginType: 2
+                      , logoUrl: "./assets/images/icon_logo.png"
+                      , maxListNum: 30
+                      , sami: true
+                      , systemRequirementUrl: "https://www.ouj.ac.jp/help/siteinfo/#recommended"
+                      , tenantType: 1
+                      , visibleVodMenu: false
+      };
+  </script>
+  <script src="cas-cooperation.js"></script>
+  <script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-header.min.js"></script><base href="./"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/css/tenant/ouj.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/leaflet/1.3.1/leaflet.css"><script>  var basePath = "//v.ouj.ac.jp/module/classtream_viewer3/";</script>
+<div><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/ui.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/icomoon/style.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/player.css?ver=1.0.25"></div><style type="text/css">.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+</style><style type="text/css">.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}</style></head>
+<body>
+  <iframe style="width:100%; height:100%; border:none;" src="//v.ouj.ac.jp/module/classtream_viewer3/assets/html/no-script.html"></iframe>
+  <ion-app class="app-root app-root-md md platform-core enable-hover" ng-version="5.0.0"><div app-viewport=""></div><ng-component class="app-root"><ion-content id="app-content" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div class="wrapper">
+
+        <router-outlet></router-outlet><navi><div id="main-navi">
+
+  
+
+  <common-header>
+
+<ion-header class="header header-md">
+
+    <ion-navbar class="left toolbar toolbar-md" id="cls-common-header" role="banner"><div class="toolbar-background toolbar-background-md"></div><button class="back-button bar-button bar-button-md back-button-md bar-button-default bar-button-default-md" ion-button="bar-button"><span class="button-inner"><ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" aria-label="arrow back"></ion-icon><span class="back-button-text back-button-text-md"></span></span><div class="button-effect"></div></button><div class="toolbar-content toolbar-content-md">
+
+        <div class="logo-menu">
+
+            <!----><img class="logo-img" src="./assets/images/icon_logo.png" alt="ホーム">
+
+        </div>
+
+        
+
+        <!----><div class="login-button login-button-bottom">
+
+            <!----><button class="login-button button button-md button-default button-default-md" id="theme-color" ion-button="" value="ログイン"><span class="button-inner">
+
+                ログイン
+
+            </span><div class="button-effect"></div></button>
+
+            <div class="user-id-menu">
+
+                <!---->
+
+            </div>
+
+        </div>
+
+        <div class="vod-list-search">
+
+            
+
+            <vod-list-search>
+
+<div class="search-area" role="search">
+
+    
+
+    <button class="search-back-button button button-md button-outline button-outline-md" ion-button="" outline="" title="戻る"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" name="arrow-round-back" role="img" class="icon icon-md ion-md-arrow-round-back" aria-label="arrow round-back"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <input autocomplete="off" id="searchText" maxlength="200" type="text" placeholder="動画検索" title="検索する文字を入力してください。">
+
+    
+
+    <button aria-labelledby="searchText" class="theme-color search-button button button-md button-default button-default-md" ion-button="" value="動画検索" aria-label="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <button class="theme-color search-expand-button button button-md button-clear button-clear-md button-round button-round-md" clear="" ion-button="" round="" title="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+</div></vod-list-search>
+
+        </div>
+
+        
+
+        <!---->
+
+    </div></ion-navbar>
+
+    
+
+    <!---->
+
+</ion-header></common-header>
+
+  
+
+  <div class="menu-background-color" id="menu">
+
+    <menu-navi><ion-content class="wrapper-menu-main menu-background-color content content-md" role="navigation"><div class="fixed-content"></div><div class="scroll-content">
+
+    <ion-content class="menu-main menu-background-color content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+        
+
+        <ion-list class="menu-list top-ion-list list list-md" role="menu">
+
+            <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="home" role="img" class="icon icon-md ion-md-home item-icon" aria-label="home"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ホーム
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+            <!---->
+
+            <!---->
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list" aria-label="カテゴリー">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md"> 
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        カテゴリー
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!----><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            01 テレビ
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            02 ラジオ
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+
+
+        
+
+        <!---->
+
+
+
+        <!----><ion-list class="menu-list list list-md">
+
+            
+
+            <div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/help/siteinfo/#recommended" aria-label="ご利用にあたって別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                                <div class="icon-text">
+
+                                    <div class="icon-area">
+
+                                        <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                    </div>
+
+                                    <div class="text-area">
+
+                                        ご利用にあたって
+
+                                    </div>
+
+                                </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            
+
+            <!----><div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/" aria-label="放送大学トップページへ別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                            <div class="icon-text">
+
+                                <div class="icon-area">
+
+                                    <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                </div>
+
+                                <div class="text-area">
+
+                                    放送大学トップページへ
+
+                                </div>
+
+                            </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </ion-list>
+
+    </div></ion-content>
+
+
+
+    
+
+    <!----><menu-footer><footer class="footer" lang="en" role="contentinfo">
+
+    ver. 3.2.30 powered by IPL
+
+    
+
+<footer>
+
+</footer></footer></menu-footer>
+
+</div></ion-content></menu-navi>
+
+  </div>
+
+  
+
+  <main class="navi-main-default" id="main" role="main">
+
+    
+
+    <div></div><main-home><ion-content id="home-main-content" tabindex="0" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div></div><init-message>
+
+<div class="initMessage"><div class="div-left"><span>放送大学の放送授業は全部で約300科目あり、「BSデジタル放送」「CATV」等を利用して全国で放送されております。このサイトでは、一部の授業科目を除き、1回分または全15回を無償公開しています。なお、特別講義については一部の講義を公開しています。<br><br><font color="red">放送大学の学生・教職員はログインすれば全15回を視聴可能です。左上のログインボタンを押してログインしてください。なお、OCWは海外から視聴できません。海外から接続した場合には視聴確認用コンテンツが表示されます。</font><br><br>＜科目の選択方法＞<br>A)検索エリアに担当教員の氏名や科目名等を入力して検索。<br><br>B)メニューからカテゴリーを選択して、科目を選択。<br>　例）01教養学部→01基盤科目→遠隔学習のためのパソコン活用（’１７)<br><br>＜OCW科目について＞<br>OCW科目は01テレビ、02ラジオ内の「01 OCW（全15回公開）」にございます。<br><br></span></div></div></init-message><notice-list><!----><ion-title class="common-list-title title title-md"><div class="toolbar-title toolbar-title-md">
+
+    お知らせ
+
+</div></ion-title>
+
+<ion-list can-swipe="listCanSwipe" id="common-content-list" class="list list-md">
+
+    <!----><ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+        <ion-row class="row">
+
+            <ion-col class="col">
+
+                <div class="message"><div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">大学院放送授業科目「臨床心理面接特論Ⅱ（’２５）」（科目コード：8950776）については、諸般の事情により第４回「心理面接の現場①：精神科病院／精神科クリニック」のインターネット配信を２０２６年４月１日（水）から一時停止しておりましたが、４月２０日（月）から公開を再開いたしました。</span></div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">公開再開までにお時間をいただき多大なご迷惑をお掛けしましたこと、重ねてお詫び申し上げます。</span></div></div></div>
+
+                <!---->
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+        <ion-row class="row">
+
+            <ion-col class="col">
+
+                <div class="message"><div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">２６年度開設科目の配信を開始いたしました。</span></div></div></div>
+
+                <!----><div class="start-date">
+
+                    
+
+                    <span aria-label="2026年4月1日9時"></span>
+
+                    <div aria-hidden="true">
+
+                        2026/04/01 09:00
+
+                    </div>
+
+                </div>
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+        <ion-row class="row">
+
+            <ion-col class="col">
+
+                <div class="message"><div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">現在、海外からの視聴については規制を強化しております。</span></div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">放送大学学生の方が海外からの視聴を希望する場合、システムWAKABAの学内連絡から、「海外からの放送授業インターネット配信視聴について」というお知らせをご確認下さい。</span></div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">なお、海外視聴を申請した場合でも海外から視聴可能となるまでお時間を頂きます。ご不便をお掛け致しますが、何卒、御承知おき下さい。</span></div></div></div>
+
+                <!---->
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+        <ion-row class="row">
+
+            <ion-col class="col">
+
+                <div class="message"><div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">放送大学認証システムを初期パスワードのままお使いの方は、パスワードの変更をお願いします。</span></div><div style="text-align: LEFT;"><span style="font-family: _sans;font-size: 14px;color: #000000;">パスワード変更用Webサイトは <span style="font-family: _sans;font-size: 14px;color: #0000FF;"><a href="https://sso.ouj.ac.jp/webmtn/" target="_blank" style="font-family: _sans;font-size: 14px;color: #0000FF;text-decoration: none;"><u>こちら</u></a></span></span></div></div></div>
+
+                <!---->
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+</ion-list></notice-list><content-pickup-list><!---->
+
+<ion-list can-swipe="listCanSwipe" id="common-content-list" class="list list-md">
+
+    <!---->
+
+</ion-list>
+
+<!----></content-pickup-list><content-live-list><!---->
+
+<ion-list can-swipe="listCanSwipe" id="common-content-list" role="list" class="list list-md">
+
+    <!---->
+
+</ion-list>
+
+<!----></content-live-list>
+
+</div></ion-content></main-home>
+
+  </main>
+
+  
+
+</div></navi>
+
+    </div>
+
+</div></ion-content></ng-component><div overlay-portal=""></div><div overlay-portal=""></div><div class="loading-portal" overlay-portal=""></div><div class="toast-portal"></div><div class="click-block click-block-enabled"></div></ion-app>
+
+
+<script src="//v.ouj.ac.jp/module/js/jquery/jquery-2.2.3.min.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-check.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/js/classtream-webapi-1.1.0/classtream-webapi.js?v=1.1.0.17"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream.min.js"></script><script src="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/THEOplayer.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/pdf/2.1.266/pdf.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/polyfills.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/vendor.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-base.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-player.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/webrtc/webrtc-player.min.js?ver=1.0.0"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.js?v=3.2.30"></script></body></html>

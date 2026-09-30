@@ -1,0 +1,807 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style><style class="vjs-styles-dimensions"></style>
+  <title>放送大学</title>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./assets/images/webclip/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/images/webclip/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="./assets/images/webclip/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/images/webclip/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./assets/images/webclip/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/images/webclip/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/images/webclip/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./assets/images/webclip/apple-touch-icon-180x180.png">
+  <script>
+      var tenantId = "1";
+      var cssTemplate = "tenant/ouj";
+      var options = {
+                        homeSettingUrl: "./top-page.json"
+                      , initMessageUrl: "./init-message.html?v=1"
+                      , loginType: 2
+                      , logoUrl: "./assets/images/icon_logo.png"
+                      , maxListNum: 30
+                      , sami: true
+                      , systemRequirementUrl: "https://www.ouj.ac.jp/help/siteinfo/#recommended"
+                      , tenantType: 1
+                      , visibleVodMenu: false
+      };
+  </script>
+  <script src="cas-cooperation.js"></script>
+  <script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-header.min.js"></script><base href="./"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/css/tenant/ouj.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/leaflet/1.3.1/leaflet.css"><script>  var basePath = "//v.ouj.ac.jp/module/classtream_viewer3/";</script>
+<div><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/ui.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/icomoon/style.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/player.css?ver=1.0.25"></div><style type="text/css">.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+</style><style type="text/css">.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}</style></head>
+<body>
+  <iframe style="width:100%; height:100%; border:none;" src="//v.ouj.ac.jp/module/classtream_viewer3/assets/html/no-script.html"></iframe>
+  <ion-app class="app-root app-root-md md platform-core enable-hover" ng-version="5.0.0"><div app-viewport=""></div><ng-component class="app-root"><ion-content id="app-content" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div class="wrapper">
+
+        <router-outlet></router-outlet><navi><div id="main-navi">
+
+  
+
+  <common-header>
+
+<ion-header class="header header-md">
+
+    <ion-navbar class="left toolbar toolbar-md" id="cls-common-header" role="banner"><div class="toolbar-background toolbar-background-md"></div><button class="back-button bar-button bar-button-md back-button-md bar-button-default bar-button-default-md" ion-button="bar-button"><span class="button-inner"><ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" aria-label="arrow back"></ion-icon><span class="back-button-text back-button-text-md"></span></span><div class="button-effect"></div></button><div class="toolbar-content toolbar-content-md">
+
+        <div class="logo-menu">
+
+            <!----><img class="logo-img" src="./assets/images/icon_logo.png" alt="ホーム">
+
+        </div>
+
+        
+
+        <!----><div class="login-button login-button-bottom">
+
+            <!---->
+
+            <div class="user-id-menu">
+
+                <!----><ion-label class="user-id label label-md">XXXXXXXXXX</ion-label>
+
+            </div>
+
+        </div>
+
+        <div class="vod-list-search">
+
+            
+
+            <vod-list-search>
+
+<div class="search-area" role="search">
+
+    
+
+    <button class="search-back-button button button-md button-outline button-outline-md" ion-button="" outline="" title="戻る"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" name="arrow-round-back" role="img" class="icon icon-md ion-md-arrow-round-back" aria-label="arrow round-back"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <input autocomplete="off" id="searchText" maxlength="200" type="text" placeholder="動画検索" title="検索する文字を入力してください。">
+
+    
+
+    <button aria-labelledby="searchText" class="theme-color search-button button button-md button-default button-default-md" ion-button="" value="動画検索" aria-label="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <button class="theme-color search-expand-button button button-md button-clear button-clear-md button-round button-round-md" clear="" ion-button="" round="" title="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+</div></vod-list-search>
+
+        </div>
+
+        
+
+        <!---->
+
+    </div></ion-navbar>
+
+    
+
+    <!---->
+
+</ion-header></common-header>
+
+  
+
+  <div class="menu-background-color" id="menu">
+
+    <menu-navi><ion-content class="wrapper-menu-main menu-background-color content content-md" role="navigation"><div class="fixed-content"></div><div class="scroll-content">
+
+    <ion-content class="menu-main menu-background-color content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+        
+
+        <ion-list class="menu-list top-ion-list list list-md" role="menu">
+
+            <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="home" role="img" class="icon icon-md ion-md-home item-icon" aria-label="home"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ホーム
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+            <!---->
+
+            <!---->
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list" aria-label="カテゴリー">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md"> 
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        カテゴリー
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!----><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            01 教養学部
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            02 大学院
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            03 夏季集中科目
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            04 ラジオ番組の字幕付加実験
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            05 特別講義
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        設定
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <ion-item class="item-selectable item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="exit" role="img" class="icon icon-md ion-md-exit item-icon" aria-label="exit"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ログアウト
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+        </ion-list>
+
+
+
+        <!----><ion-list class="menu-list list list-md">
+
+            
+
+            <div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/help/siteinfo/#recommended" aria-label="ご利用にあたって別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                                <div class="icon-text">
+
+                                    <div class="icon-area">
+
+                                        <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                    </div>
+
+                                    <div class="text-area">
+
+                                        ご利用にあたって
+
+                                    </div>
+
+                                </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            
+
+            <!----><div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/" aria-label="放送大学トップページへ別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                            <div class="icon-text">
+
+                                <div class="icon-area">
+
+                                    <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                </div>
+
+                                <div class="text-area">
+
+                                    放送大学トップページへ
+
+                                </div>
+
+                            </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </ion-list>
+
+    </div></ion-content>
+
+
+
+    
+
+    <!----><menu-footer><footer class="footer" lang="en" role="contentinfo">
+
+    ver. 3.2.30 powered by IPL
+
+    
+
+<footer>
+
+</footer></footer></menu-footer>
+
+</div></ion-content></menu-navi>
+
+  </div>
+
+  
+
+  <main class="navi-main-default" id="main" role="main">
+
+    
+
+    <div></div><main-player><ion-content class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    
+
+    <player role="main">
+
+<!----><vod-list-navigator><aside role="complementary">
+
+    
+
+    <!----><div class="breadcrumbs">
+
+        <ul aria-label="カテゴリーのパンくずリスト">
+
+            <!----><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">01 教養学部</a>
+
+            </li><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">02 基盤科目(外国語科目)</a>
+
+            </li><li class="child-breadcrumb">
+
+                <a href="javascript:void(0);">002 英語で発信する日本文化（’２６） 1420160</a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    
+
+    <ion-list class="vod-category-list list list-md" id="child-category-list" role="list" aria-label="カテゴリー">
+
+        <!---->
+
+    </ion-list>
+
+</aside></vod-list-navigator>
+
+<div class="body">
+
+    <div class="player-left-content">
+
+        <div class="content-area" id="content-area">
+
+            <div class="content-item-area common-outer-main-content-area" id="player-content">
+
+                
+
+                <div autofocus="" class="player-area common-inner-main-content-area" id="player-area" style="height: 533.724px;"><div class="theoplayer-container video-js theoplayer-skin theo-seekbar-above-controls vjs-paused theo-chromecast-unavailable theo-airplay-unavailable vjs-workinghover vjs-v5 vjs-waiting vjs-error vjs-controls-disabled vjs-user-inactive" tabindex="-1" id="vjs_video_3" role="region" aria-label="video player" style="width: 100%; height: 100%;"><div class="theo-player-wrapper"><div id="vjs_video_3_THEOplayerDi" style="position: absolute; visibility: hidden;" tabindex="-1" class="vjs-tech"><audio preload="auto" style="display: none;"></audio><audio preload="auto" style="display: none;"></audio><video preload="auto" playsinline="" webkit-playsinline="" src="https://v-st.ouj.ac.jp/drm/classtream/1/38215/1-0/mpd/content-abr.mpd?stTicket=526453c68b1d4fdd89f0d3ebe97882a8&amp;userNo=162302" style="display: block; width: 100%; height: 100%; pointer-events: none;"></video><div class="theoplayer-texttracks" style="position: absolute; display: block; overflow: hidden; pointer-events: none; inset: 0px; width: 100%; height: 100%; line-height: 1.3em; z-index: 5;"></div><video preload="auto" playsinline="" webkit-playsinline="" style="display: none; width: 100%; height: 100%; pointer-events: none;"></video><div class="theoplayer-texttracks" style="position: absolute; display: block; overflow: hidden; pointer-events: none; inset: 0px; width: 100%; height: 100%; line-height: 1.3em; z-index: 5;"></div><div style="position: absolute; inset: 0px; width: 100%; height: 100%;"></div><audio preload="auto" style="display: none;"></audio><audio preload="auto" style="display: none;"></audio><video preload="auto" playsinline="" webkit-playsinline="" style="display: none; width: 100%; height: 100%; pointer-events: none;"></video><div class="theoplayer-texttracks" style="position: absolute; display: block; overflow: hidden; pointer-events: none; inset: 0px; width: 100%; height: 100%; line-height: 1.3em; z-index: 5;"></div><video preload="auto" playsinline="" webkit-playsinline="" style="display: none; width: 100%; height: 100%; pointer-events: none;"></video><div class="theoplayer-texttracks" style="position: absolute; display: block; overflow: hidden; pointer-events: none; inset: 0px; width: 100%; height: 100%; line-height: 1.3em; z-index: 5;"></div><div style="position: absolute; inset: 0px; width: 100%; height: 100%;"></div><div class="theoplayer-ad-nonlinear" style="display: none; position: absolute; width: 100%; bottom: 3em; z-index: 10; text-align: center;"></div><div class="theoplayer-ad-linear" style="display: none; z-index: 10; position: absolute; inset: 0px; width: 100%; height: 100%;"></div><video preload="auto" playsinline="" webkit-playsinline="" style="display: none; width: 100%; height: 100%; pointer-events: none;"></video><div class="theoplayer-texttracks" style="position: absolute; display: none; overflow: hidden; pointer-events: none; inset: 0px; width: 100%; height: 100%; line-height: 1.3em; z-index: 5;"></div><div class="cls-watermark-display" style="visibility: visible;"></div><div class="cls-sami-display"><div class="cls-sami-display-div"></div></div><div class="cls-watermark-display" style="visibility: visible;"><div class="cls-watermark-display-label-canvas"></div><canvas class="cls-watermark-display-canvas"></canvas><canvas class="cls-watermark-display-canvas"></canvas><canvas class="cls-watermark-display-canvas"></canvas><canvas class="cls-watermark-display-canvas"></canvas></div><div class="cls-record-time-display"></div><div class="theoplayer-poster" style="z-index: 1; display: inline-block; vertical-align: middle; background-repeat: no-repeat; background-position: 50% 50%; background-size: contain; cursor: pointer; margin: 0px; padding: 0px; position: absolute; inset: 0px; height: 100%; background-image: url(&quot;https://v.ouj.ac.jp/v1/tenants/1/vod-contents/38215/thumbnail/large2&quot;); visibility: visible;"></div></div><button class="theo-primary-color vjs-big-play-button" type="button" aria-live="polite" title="映像再生" aria-disabled="false"><span class="vjs-control-text">映像再生</span><div class="theo-big-play-button-svg-container"><img id="cls-big-play-button" src="//v.ouj.ac.jp/module/classtream-player/v3.0/css/svg/play.svg"></div></button><div class="cls-message-display vjs-hidden" tabindex="1"><div class="cls-message-label"></div></div><div class="cls-popup-message-display" tabindex="1"><div class="vjs-hidden"><button class="cls-close-button"></button><div class="cls-message-label"></div><span><a class="cls-link" target="_blank">こちらをクリック</a></span></div></div><div class="theo-top-controlbar theo-secondary-color vjs-control-bar " dir="ltr" role="group"><div class="theo-tertiary-color theo-control-bar-shadow"></div></div><div></div><div class="vjs-poster vjs-hidden" tabindex="-1" aria-disabled="false"></div><div class="theo-chromecast-overlay vjs-hidden"><div class="theo-chromecast-status"><div class="theo-chromecast-status-icon">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="currentColor">
+    <path d="M7 24v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm18-7H11v1.63c3.96 1.28 7.09 4.41 8.37 8.37H25V13zM7 16v2a9 9 0 0 1 9 9h2c0-6.08-4.93-11-11-11zm20-7H9c-1.1 0-2 .9-2 2v3h2v-3h18v14h-7v2h7c1.1 0 2-.9 2-2V11c0-1.1-.9-2-2-2z"></path>
+</svg></div><div class="theo-chromecast-status-info">Playing on</div><div class="theo-chromecast-status-title"></div></div></div><div class="theo-menu-container "><div class="theo-menu-animatable theo-menu vjs-menu vjs-hidden" style="left: 0px;"><div class="theo-tertiary-background theo-menu-animation-container"><div class="theo-menu vjs-menu theo-menu-content-animatable vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="" aria-disabled="false">字幕</div><ul class="vjs-menu-content theo-menu-content" role="menu"></ul></div></div></div><div class="theo-menu-animatable theo-menu vjs-menu vjs-hidden" style="left: 0px;"><div class="theo-tertiary-background theo-menu-animation-container"><div class="theo-menu vjs-menu theo-menu-content-animatable vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="" aria-disabled="false">Language</div><ul class="vjs-menu-content theo-menu-content" role="menu"></ul></div></div></div><div class="theo-menu-animatable theo-menu vjs-menu vjs-hidden theo-settings-control-menu" style="left: 0px;"><div class="theo-tertiary-background theo-menu-animation-container"><div class="theo-menu vjs-menu theo-menu-content-animatable vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="" aria-disabled="false">設定</div><ul class="vjs-menu-content theo-menu-content" role="menu" id="setting-menu-content"><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitem" aria-live="off" aria-disabled="false" id="setting-menu-item-speed" aria-haspopup="true"><span class="theo-settings-control-menu-item-title">速度</span><span id="setting-item-speed-value" class="theo-settings-control-menu-item-value">通常</span></li><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitem" aria-live="off" aria-disabled="false" id="setting-menu-item-quality" aria-haspopup="true"><span class="theo-settings-control-menu-item-title">品質</span><span class="theo-primary-color theo-settings-control-menu-item-value"><span class="theo-settings-control-menu-quality-automatic">自動</span> <span>自動</span> <span class="theo-primary-color theo-settings-control-menu-item-hd-label">HD</span></span></li></ul></div><div class="theo-submenu theo-leaf-submenu theo-menu-content theo-menu-content-animatable theo-menu vjs-menu vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="Go back to the previous menu" aria-disabled="false">品質</div><ul class="vjs-menu-content theo-menu-content" role="menu" id="quality-menu-content"><li class="theo-menu-item vjs-menu-item vjs-selected" tabindex="0" role="menuitemradio" aria-live="off" aria-label="品質自動" aria-disabled="false" aria-checked="true">自動</li></ul></div><div class="theo-submenu theo-leaf-submenu theo-menu-content theo-menu-content-animatable theo-menu vjs-menu vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="Go back to the previous menu" aria-disabled="false">速度</div><ul class="vjs-menu-content theo-menu-content" role="menu"><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 0.25" aria-disabled="false" aria-checked="false">0.25</li><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 0.5" aria-disabled="false" aria-checked="false">0.5</li><li class="theo-menu-item vjs-menu-item vjs-selected" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 通常" aria-disabled="false" aria-checked="true">通常</li><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 1.25" aria-disabled="false" aria-checked="false">1.25</li><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 1.5" aria-disabled="false" aria-checked="false">1.5</li><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemradio" aria-live="off" aria-label="Set video speed to 2" aria-disabled="false" aria-checked="false">2</li></ul></div><div class="theo-submenu theo-leaf-submenu theo-menu-content theo-menu-content-animatable theo-menu vjs-menu vjs-hidden" role="presentation"><div class="theo-primary-background theo-menu-header" tabindex="0" role="button" aria-live="off" aria-label="Go back to the previous menu" aria-disabled="false">速度</div><ul class="vjs-menu-content theo-menu-content" role="menu"><li class="theo-menu-item vjs-menu-item" tabindex="0" role="menuitemcheckbox" aria-live="off" aria-label="" aria-disabled="false" aria-checked="false">0.8</li><li class="theo-menu-item vjs-menu-item vjs-selected" tabindex="0" role="menuitemcheckbox" aria-live="off" aria-label="" aria-disabled="false" aria-checked="true">通常</li><li class="theo-menu-item vjs-menu-item cls-transcode-menu-item" tabindex="0" role="menuitemcheckbox" aria-live="off" aria-label="" aria-disabled="false" aria-checked="false">1.5<img class="cls-transcode-menu-item-icon theoplayer-skin" src="//v.ouj.ac.jp/module/classtream-player/v3.0/css/svg/transcode.svg" aria-hidden="true"></li></ul></div></div></div></div><div class="theo-secondary-color vjs-control-bar " dir="ltr" role="group"><div class="theo-tertiary-color theo-control-bar-shadow"></div><div class="vjs-progress-control vjs-control"><div tabindex="0" class="vjs-progress-holder vjs-slider vjs-slider-horizontal" role="slider" aria-valuenow="NaN" aria-valuemin="0" aria-valuemax="100" aria-label="progress bar" aria-valuetext="0:00"><div class="vjs-load-progress" aria-label="seek bar" style="width: 0%;"><span class="vjs-control-text" aria-hidden="true"><span>ロード済</span>: 0%</span></div><div class="vjs-mouse-display vjs-keep-tooltips-inside" data-current-time="0:00" style="left: 0px;"><div class="vjs-time-tooltip theo-secondary-color"><span class="theo-time-tooltip-text">0:00</span></div></div><div class="theo-primary-color vjs-play-progress vjs-slider-bar vjs-keep-tooltips-inside" data-current-time="0:00" style="width: 0%;"><span class="vjs-control-text"><span>進行状況</span>: 0%</span></div><div class="theo-primary-color vjs-tooltip-progress-bar vjs-slider-bar " data-current-time="0:00" aria-valuenow="NaN" aria-valuetext="0:00" style="width: 0%;"><div class="vjs-time-tooltip">0:00</div><span class="vjs-control-text"><span>進行状況</span>: 0%</span></div><div class="theoplayer-chapterbar"></div></div></div><button class="vjs-play-control vjs-control vjs-button" type="button" aria-live="polite" aria-disabled="false" aria-label=""><span class="vjs-control-text">再生</span><span class="theo-button-tooltip vjs-hidden" aria-hidden="true">再生</span></button><button class="vjs-mute-control vjs-control vjs-button vjs-vol-3" type="button" aria-live="polite" aria-disabled="false"><span class="vjs-control-text">ミュート</span><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">ミュート</span></button><div class="vjs-volume-control vjs-control"><div tabindex="0" class="vjs-volume-bar vjs-slider-bar vjs-slider vjs-slider-horizontal" role="slider" aria-valuenow="100.00" aria-valuemin="0" aria-valuemax="100" aria-label="volume level" aria-valuetext="100.00%"><div class="theo-primary-color vjs-volume-level "><span class="vjs-control-text"></span></div></div></div><div class="vjs-current-time vjs-time-control vjs-control"><div class="vjs-current-time-display" aria-live="off"><span class="vjs-control-text">現在時間</span> 0:00</div></div><div class="vjs-time-control vjs-time-divider"><div><span>/</span></div></div><div class="vjs-duration vjs-time-control vjs-control"><div class="vjs-duration-display" aria-live="off"><span class="vjs-control-text">再生時間</span> 0:00</div></div><button class="theo-live-control vjs-control vjs-button vjs-hidden" type="button" aria-live="off" aria-disabled="false" title="Live"><span class="theo-live-control-indicator"></span><span class="theo-live-control-text">Live</span></button><div class="vjs-remaining-time vjs-time-control vjs-control"><div class="vjs-remaining-time-display" aria-live="off"><span class="vjs-control-text">残り時間</span> -0:00</div></div><div class="cls-live-viewer vjs-control"><span></span></div><div class="vjs-custom-control-spacer vjs-spacer ">&nbsp;</div><button class="theo-vr-button theo-controlbar-button vjs-control vjs-button vjs-hidden" type="button" aria-live="polite" aria-disabled="false"><span class="vjs-control-text">VRで視聴</span><span class="theo-button-tooltip vjs-hidden" aria-hidden="true">VRで視聴</span></button><div class="vjs-descriptions-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" tabindex="0" role="menuitem" aria-live="polite" title="説明" aria-disabled="false" aria-expanded="false" aria-haspopup="true" aria-label="Descriptions Menu"><div class="vjs-menu" role="presentation"><ul class="vjs-menu-content" role="menu"><li class="vjs-menu-item vjs-selected" tabindex="-1" role="menuitemcheckbox" aria-live="polite" aria-disabled="false" aria-checked="true"><span class="vjs-control-text">, selected</span>説明を非表示</li></ul></div><span class="vjs-control-text">説明</span></div><button class="vjs-icon-subtitles theo-text-track-control-button theo-controlbar-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" type="button" aria-live="off" aria-disabled="false" aria-haspopup="true"><span class="vjs-control-text">字幕</span><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">字幕</span></button><button class="theo-cast-button theo-chromecast-button theo-controlbar-button vjs-control vjs-button" type="button" aria-live="polite" aria-disabled="false"><span class="vjs-control-text">Unavailable</span><div class="theo-button-icon-blur"></div><div class="theo-cast-svg-container">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
+        <defs>
+            <clipPath id="theo-chromecast-rings-mask-0">
+                <path d="M0-36h44V0H0z"></path>
+            </clipPath>
+        </defs>
+        <path class="theo-chromecast-outer" d="M2 10a4 4 0 0 1 4-4h36a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H28v-4h14V10H6v6H2z"></path>
+        <path class="theo-chromecast-inner" d="M10 14h28v20H26.74A26 26 0 0 0 10 17.26z"></path>
+        <g class="theo-chromecast-rings" fill="none" stroke="currentColor" stroke-width="4" transform="translate(2 42)" clip-path="url(#theo-chromecast-rings-mask-0)">
+            <circle stroke="none" cx="0" cy="0" r="30"></circle>
+            <circle class="theo-chromecast-ring theo-chromecast-ring1" stroke-width="6" cx="0" cy="0" r="3"></circle>
+            <circle class="theo-chromecast-ring theo-chromecast-ring2" cx="0" cy="0" r="12"></circle>
+            <circle class="theo-chromecast-ring theo-chromecast-ring3" cx="0" cy="0" r="20"></circle>
+            <path class="theo-chromecast-ring theo-chromecast-ring4" stroke-linecap="round" d="M0-20A20 20 0 0 1 20 0"></path>
+        </g>
+    </svg></div><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">Unavailable</span></button><button class="theo-cast-button theo-airplay-button theo-controlbar-button vjs-control vjs-button" type="button" aria-live="polite" aria-disabled="false"><span class="vjs-control-text">Unavailable</span><div class="theo-button-icon-blur"></div><div class="theo-cast-svg-container">
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+    <path class="theo-cast-inner" d="M5 7h14v8H5z"></path>
+    <path d="M6 22h12l-6-6zM21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v-2H3V5h18v12h-4v2h4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+</svg></div><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">Unavailable</span></button><button class="vjs-icon-audio theo-audio-track-control-button theo-controlbar-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button vjs-hidden" type="button" aria-live="off" aria-disabled="false" aria-haspopup="true"><span class="vjs-control-text">Language</span><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">Language</span></button><button class="icon-backward cls-backward theo-controlbar-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button" aria-disabled="false" aria-label="10秒戻る"><span class="theo-button-tooltip" aria-hidden="true">10秒戻る</span><div class="cls-backward-label" aria-hidden="true">10</div></button><button class="icon-forward cls-forward theo-controlbar-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button" aria-disabled="false" aria-label="30秒進む"><span class="theo-button-tooltip" aria-hidden="true">30秒進む</span><div class="cls-forward-label" aria-hidden="true">30</div></button><button class="vjs-icon-cog theo-settings-control-button theo-controlbar-button vjs-menu-button vjs-menu-button-popup vjs-control vjs-button" type="button" aria-live="off" aria-disabled="false" aria-haspopup="true"><span class="vjs-control-text">設定</span><span class="theo-settings-control-label-hd theo-primary-background">HD</span><span class="theo-button-tooltip" aria-hidden="true" style="left: 0px;">設定</span></button><button class="vjs-fullscreen-control vjs-control vjs-button" type="button" aria-live="polite" aria-disabled="false"><span class="vjs-control-text">フルスクリーン</span><span class="theo-button-tooltip vjs-hidden" aria-hidden="true">フルスクリーン</span></button></div><div class="vjs-text-track-display vjs-hidden" aria-live="off" aria-atomic="true"></div><div class="theo-secondary-color vjs-loading-spinner " dir="ltr"><div class="theo-loading-spinner-rotator"><div class="theo-loading-spinner-circle-left"></div><div class="theo-loading-spinner-circle-right"></div></div></div><div class="vjs-error-display vjs-modal-dialog" tabindex="-1" aria-describedby="vjs_video_3u534N" aria-hidden="false" aria-label="プレイヤーメッセージ" role="dialog"><p class="vjs-modal-dialog-description vjs-offscreen" id="vjs_video_3u534N">This is a modal window.</p><div class="vjs-modal-dialog-content" role="document">再生中に問題が発生しました。</div></div><div class="vjs-caption-settings vjs-modal-overlay vjs-hidden" tabindex="-1" role="dialog" aria-labelledby="TTsettingsDialogLabel-vjs_video_3u540" aria-describedby="TTsettingsDialogDescription-vjs_video_3u540"><div role="document"><div class="vjs-control-text" id="TTsettingsDialogLabel-vjs_video_3u540" aria-level="1" role="heading">Caption Settings Dialog</div><div class="vjs-control-text" id="TTsettingsDialogDescription-vjs_video_3u540">Beginning of dialog window. Escape will cancel and close the window.</div><div class="vjs-tracksettings"><div class="vjs-tracksettings-colors"><fieldset class="vjs-fg-color vjs-tracksetting"><legend>Text</legend><label class="vjs-label" for="captions-foreground-color-vjs_video_3u540">Color</label><select id="captions-foreground-color-vjs_video_3u540"><option value="#FFF">White</option><option value="#000">Black</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-text-opacity vjs-opacity"><label class="vjs-label" for="captions-foreground-opacity-vjs_video_3u540">Transparency</label><select id="captions-foreground-opacity-vjs_video_3u540"><option value="1">Opaque</option><option value="0.5">Semi-Transparent</option></select></span></fieldset><fieldset class="vjs-bg-color vjs-tracksetting"><legend>Background</legend><label class="vjs-label" for="captions-background-color-vjs_video_3u540">Color</label><select id="captions-background-color-vjs_video_3u540"><option value="#000">Black</option><option value="#FFF">White</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-bg-opacity vjs-opacity"><label class="vjs-label" for="captions-background-opacity-vjs_video_3u540">Transparency</label><select id="captions-background-opacity-vjs_video_3u540"><option value="1">Opaque</option><option value="0.5">Semi-Transparent</option><option value="0">Transparent</option></select></span></fieldset><fieldset class="vjs-window-color vjs-tracksetting"><legend>Window</legend><label class="vjs-label" for="captions-window-color-vjs_video_3u540">Color</label><select id="captions-window-color-vjs_video_3u540"><option value="#000">Black</option><option value="#FFF">White</option><option value="#F00">Red</option><option value="#0F0">Green</option><option value="#00F">Blue</option><option value="#FF0">Yellow</option><option value="#F0F">Magenta</option><option value="#0FF">Cyan</option></select><span class="vjs-window-opacity vjs-opacity"><label class="vjs-label" for="captions-window-opacity-vjs_video_3u540">Transparency</label><select id="captions-window-opacity-vjs_video_3u540"><option value="0">Transparent</option><option value="0.5">Semi-Transparent</option><option value="1">Opaque</option></select></span></fieldset></div><div class="vjs-tracksettings-font"><div class="vjs-font-percent vjs-tracksetting"><label class="vjs-label" for="captions-font-size-vjs_video_3u540">Font Size</label><select id="captions-font-size-vjs_video_3u540"><option value="0.50">50%</option><option value="0.75">75%</option><option value="1.00">100%</option><option value="1.25">125%</option><option value="1.50">150%</option><option value="1.75">175%</option><option value="2.00">200%</option><option value="3.00">300%</option><option value="4.00">400%</option></select></div><div class="vjs-edge-style vjs-tracksetting"><label class="vjs-label" for="vjs_video_3u540">Text Edge Style</label><select id="vjs_video_3u540"><option value="none">None</option><option value="raised">Raised</option><option value="depressed">Depressed</option><option value="uniform">Uniform</option><option value="dropshadow">Dropshadow</option></select></div><div class="vjs-font-family vjs-tracksetting"><label class="vjs-label" for="captions-font-family-vjs_video_3u540">Font Family</label><select id="captions-font-family-vjs_video_3u540"><option value="proportionalSansSerif">Proportional Sans-Serif</option><option value="monospaceSansSerif">Monospace Sans-Serif</option><option value="proportionalSerif">Proportional Serif</option><option value="monospaceSerif">Monospace Serif</option><option value="casual">Casual</option><option value="script">Script</option><option value="small-caps">Small Caps</option></select></div></div><div class="vjs-tracksettings-controls"><button class="vjs-default-button">Defaults</button><button class="vjs-done-button">Done</button></div></div></div></div><ul class="theo-context-menu vjs-hidden"><li><a class="theo-context-menu-a" href="https://www.theoplayer.com/player-referral" target="Xa"><div class="theo-context-menu-logo"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="507.262px" height="399.16px" viewBox="0 0.1 507.262 399.16" enable-background="new 0 0.1 507.262 399.16" xml:space="preserve" class="theo-context-menu-logo-svg">
+	<g transform="matrix(1.90897, 0, 0, 1.90897, 212.4, 144.6)">
+		<path fill="#FFFFFF" d="M-38.416-53.802C-53.351-38.867-60.82-20.814-60.82,0.353c0,21.253,7.466,39.392,22.404,54.413
+			c6.83,6.658,13.827,11.778,20.996,15.363c5.122,2.561,10.583,4.397,16.388,5.507v1.024h-78.481
+			c-21.168,0-31.752-10.584-31.752-31.752v-88.724c0-21.252,10.584-31.879,31.752-31.879h79.377v0.896
+			c-6.145,1.196-11.95,3.116-17.411,5.762C-24.632-65.538-31.586-60.46-38.416-53.802"></path>
+	</g>
+	<g transform="matrix(0.535073, 0, 0, 0.535073, 242.35, 104.7)">
+		<path fill="#FFFFFF" d="M188.354,104.104c-32.941,23.472-75.492,49.679-127.641,78.61c-50.275,28.254-94.358,50.44-132.254,66.572l-41.989,15.616
+			c-2.645-11.348-5.122-28.17-7.426-50.44c-5.205-44.383-7.809-93.375-7.809-146.975c0-49.079,3.538-94.947,10.622-137.631
+			l10.249-49.034l44.551,14.978C-24.762-88.838,17.06-67.03,62.124-38.777c47.705,29.871,88.638,58.294,122.773,85.266
+			c17.061,13.571,29.351,24.028,36.862,31.367L188.354,104.104"></path>
+	</g>
+	<g transform="matrix(1.91028, 0, 0, 1.91028, 327.15, 144.6)">
+		<path fill="#FFFFFF" d="M94.286-43.816v88.723c0,21.168-10.583,31.751-31.751,31.751h-80.018v-1.025
+			c14.683-2.816,27.527-9.77,38.537-20.867c14.936-15.024,22.405-33.16,22.405-54.413c0-21.168-7.467-39.22-22.405-54.156
+			C9.871-64.985-3.188-71.939-18.123-74.671v-1.024h80.658C83.702-75.696,94.286-65.069,94.286-43.816"></path>
+	</g>
+</svg>
+</div><div class="theo-context-version">Powered by THEOplayer 7.0.0</div></a></li></ul><div class="theoplayer-chaptertitle" style="display: none;"><p></p></div><div class="cls-exit-fullscreen-button-display"><div class="vjs-hidden"></div></div><div class="theo-360-compass vjs-hidden"><div class="theo-360-fov" style="transform: scale(0.875) rotate(40deg) skew(-10deg);"></div></div></div></div></div>
+
+                
+
+                <!---->
+
+                <!---->
+
+            </div>
+
+        </div>
+
+        <!----><div class="content-info-area common-outer-main-content-area" id="content-detail-area">
+
+            
+
+            <span aria-label="映像についての情報"></span>
+
+            
+
+            <div class="title">
+
+                
+
+                <span aria-label="タイトル"></span>
+
+                第01回 序／Introduction
+
+            </div>
+
+            
+
+            <!---->
+
+            
+
+            <!----><div class="icon-area">
+
+                
+
+                <!---->
+
+                
+
+                <!---->
+
+                
+
+                <!---->
+
+                
+
+                <!---->
+
+            </div>
+
+            
+
+            <div class="content-detail-area">
+
+                <div class="content-detail">
+
+                    <ion-grid class="grid" role="presentation">
+
+                        
+
+                        <!---->
+
+                        
+
+                        <!----><ion-row class="row" id="main-color-row">
+
+                            <ion-col class="col" col-2="" id="main-color">
+
+                                概要
+
+                            </ion-col>
+
+                            <ion-col class="player-detail-text-area col">全体の導入として、授業の仕立てを解説し、さらに英語で日本文化を発信することの意義と、それを行うためにどのような勉強が必要かを学ぶ。</ion-col>
+
+                        </ion-row>
+
+                        
+
+                        <!----><ion-row class="row" id="main-color-row">
+
+                            <ion-col class="col" col-2="" id="main-color">
+
+                                カテゴリー
+
+                            </ion-col>
+
+                            <ion-col class="player-detail-text-area col" aria-label="01 教養学部の02 基盤科目(外国語科目)の002 英語で発信する日本文化（’２６） 1420160">
+
+                                <div aria-hidden="true">01 教養学部 &gt; 02 基盤科目(外国語科目) &gt; 002 英語で発信する日本文化（’２６） 1420160</div>
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        
+
+                        <!----><ion-row class="row" id="main-color-row">
+
+                            <ion-col class="col" col-2="" id="main-color">
+
+                                再生時間
+
+                            </ion-col>
+
+                            <ion-col class="col" aria-label="45分">
+
+                                <div aria-hidden="true">00:45:00</div>
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        <!---->
+
+                        
+
+                        <!----><ion-row class="row" id="main-color-row">
+
+                            <ion-col class="col" col-2="" id="main-color">
+
+                                詳細
+
+                            </ion-col>
+
+                            <ion-col class="player-detail-text-area col">英語で発信する日本文化（’２６）<br>大橋　理枝（放送大学教授）、斎藤　兆史（東京大学名誉教授）<br>斎藤　兆史（東京大学名誉教授）<br>大橋　理枝（放送大学教授）<br>トム・ガリー（東京大学名誉教授）<br></ion-col>
+
+                        </ion-row>
+
+                        
+
+                        <!---->
+
+                    </ion-grid>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <div class="player-right-content content-item-area" id="player-right-content" hidden="">
+
+        
+
+        <div class="window-content" id="window-content" hidden="">
+
+            <div class="window-area" id="window-area" style="height: 225.2px;">
+
+                <div></div>
+
+            </div>
+
+        </div>
+
+        
+
+        <div></div>
+
+    </div>
+
+</div></player>
+
+</div></ion-content></main-player>
+
+  </main>
+
+  
+
+</div></navi>
+
+    </div>
+
+</div></ion-content></ng-component><div overlay-portal=""></div><div overlay-portal=""></div><div class="loading-portal" overlay-portal=""></div><div class="toast-portal"></div><div class="click-block click-block-enabled"></div></ion-app>
+
+
+<script src="//v.ouj.ac.jp/module/js/jquery/jquery-2.2.3.min.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-check.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/js/classtream-webapi-1.1.0/classtream-webapi.js?v=1.1.0.17"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream.min.js"></script><script src="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/THEOplayer.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/pdf/2.1.266/pdf.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/polyfills.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/vendor.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-base.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-player.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/webrtc/webrtc-player.min.js?ver=1.0.0"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.js?v=3.2.30"></script><div class="cls-watermark-display-label"></div></body></html>

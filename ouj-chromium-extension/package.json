@@ -5,9 +5,17 @@
   "description": "放送大学授業ブラウザ拡張機能の表示テスト（Playwright視覚回帰テスト）",
   "scripts": {
     "test:visual": "playwright test",
+    "test:offline": "playwright test --project=offline",
     "test:visual:update": "playwright test --update-snapshots",
     "test:visual:ui": "playwright test --ui",
-    "test:drm": "playwright test --project=drm-desktop --project=drm-mobile"
+    "test:drm": "playwright test --project=drm-desktop --project=drm-mobile",
+    "test:buffer": "playwright test --project=drm-buffer",
+    "store": "node tools/build-store-description.js",
+    "store:check": "node tools/build-store-description.js --check",
+    "store:release": "node tools/build-store-description.js --release",
+    "capture": "node tests/capture/capture-target-site.js",
+    "capture:if-stale": "node tests/capture/capture-target-site.js --if-stale",
+    "capture:check": "node tests/capture/capture-target-site.js --check"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

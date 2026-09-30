@@ -29,7 +29,7 @@ function armSleepTimer(minutes) {
       video.pause();
     }
     if (typeof window.showSuccessNotification === 'function') {
-      window.showSuccessNotification('スリープタイマーにより再生を一時停止しました。', 5000);
+      window.showSuccessNotification(t('sleep.paused'), 5000);
     }
   }, minutes * 60 * 1000);
 }
@@ -52,7 +52,7 @@ function consumeSleepAtEpisodeEnd() {
     video.pause();
   }
   if (typeof window.showSuccessNotification === 'function') {
-    window.showSuccessNotification('スリープタイマー（この回の終わりまで）により再生を停止しました。', 5000);
+    window.showSuccessNotification(t('sleep.stoppedAtEnd'), 5000);
   }
   return true;
 }

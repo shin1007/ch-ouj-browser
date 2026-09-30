@@ -1,0 +1,53 @@
+OUJ Lecture Browser (Open University of Japan)
+
+A Chrome extension that makes watching and studying lectures on the Open University of Japan (OUJ) streaming site more convenient and comfortable. The extension is available in Japanese, English, Korean, Simplified Chinese and Traditional Chinese, and follows your browser language automatically. Note that the OUJ site itself (course names, lecture titles) is in Japanese.
+
+■ Main features
+
+◆ Video page
+・Previous / next lecture links and a lecture list for the same course
+・Playback speed control, remembered per course
+・Auto-advance to the next video with a cancelable countdown
+・Subtitle on/off for TV and radio programs
+・Auto-play, auto-skip of the beginning / end (remembered per course)
+・Remaining time shown in real (speed-adjusted) time
+・Picture-in-picture, bookmarks (position + note), a "watch later" list with sequential playback
+・A-B repeat, sleep timer, screen wake lock, volume normalization
+・Media keys and lock-screen controls (Media Session)
+・Adjustable buffer length (preload up to 10 minutes) for unstable connections
+・Playback progress saved as you watch
+
+◆ Course and video lists
+・Viewing-progress bars and badges, a "Continue" button that jumps to the first unwatched lecture, and completion-pace estimate
+・Favorite courses (manual ordering, pinning)
+
+◆ Search
+・Quick filter panel in the search box: pick a year or course without typing a keyword
+・Filters for TV / radio, subtitles, unfinished only, year and course; recent searches; sort options
+
+◆ Menu
+・Favorites, watch later, bookmarks, history, recommended videos
+・Study time (7 / 30 / 90-day chart, streak, daily goal)
+・What's new, dark mode
+・Display options: turn off any element this extension adds to the screen, feature by feature (recorded data is kept)
+
+◆ Home
+・"Continue watching" panel
+
+■ Supported browsers
+・Bookmark the OUJ home page: https://v.ouj.ac.jp/view/ouj/#/navi/home
+・iPhone: try Orion Browser by Kagi https://apps.apple.com/jp/app/orion-browser-by-kagi/id1484498200
+・Android: try Quetta Browser https://play.google.com/store/apps/details?id=net.quetta.browser or Yandex Browser https://play.google.com/store/apps/details?id=com.yandex.browser (untested, reports welcome)
+
+■ What's new (2026.9.30)
+・Now available in Japanese, English, Korean, Simplified Chinese and Traditional Chinese. The language follows your browser automatically, and can also be chosen manually in the settings.
+・The name and description shown in the Chrome Web Store and the extensions page are also translated.
+
+■ Notes
+・This extension is developed by an individual and is not an official OUJ product.
+・Use at your own risk.
+・No personal data is collected. Favorites, history and settings are stored only in your browser.
+
+■ Feedback
+・X (Twitter): @pedmWay1hR85704 https://x.com/pedmWay1hR85704
+・For feature requests and bug reports, please open an issue on GitHub: https://github.com/shin1007/ch-ouj-browser/issues

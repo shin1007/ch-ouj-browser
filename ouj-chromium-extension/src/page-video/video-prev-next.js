@@ -58,7 +58,7 @@ async function insertPrevNextLinks(titleElement) {
         <path d="M12 4L6 10L12 16" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div style="overflow: hidden; flex: 1; text-align: center;">
-        <div style="font-weight: 600; color: #1565c0; margin-bottom: 6px; font-size: 15px; letter-spacing: 0.5px;">前の動画</div>
+        <div style="font-weight: 600; color: #1565c0; margin-bottom: 6px; font-size: 15px; letter-spacing: 0.5px;">${t('prevNext.prev')}</div>
         <div style="font-size: 14px; color: #424242; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;">${prev.title || prev.contentId}</div>
       </div>
     `;
@@ -119,7 +119,7 @@ async function insertPrevNextLinks(titleElement) {
     `;
     nextLink.innerHTML = `
       <div style="overflow: hidden; flex: 1; text-align: center;">
-        <div style="font-weight: 600; color: #1565c0; margin-bottom: 6px; font-size: 15px; letter-spacing: 0.5px;">次の動画</div>
+        <div style="font-weight: 600; color: #1565c0; margin-bottom: 6px; font-size: 15px; letter-spacing: 0.5px;">${t('ending.next')}</div>
         <div style="font-size: 14px; color: #424242; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word;">${next.title || next.contentId}</div>
       </div>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink: 0;">

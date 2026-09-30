@@ -32,7 +32,7 @@ function startMediaSession(currentVideo) {
   const detailLines = detail.split('\n');
   // detailの1行目から科目名を取得し、末尾の年度表記を削除
   const courseName = (detailLines[0] || '').replace(/（’\d{2}）$/, '').trim();
-  const artists = detailLines.slice(1).join(', ').trim() || '放送大学';
+  const artists = detailLines.slice(1).join(', ').trim() || t('mediaSession.artist');
 
   const artwork = currentVideo?.contentId
     ? [{ src: `https://v.ouj.ac.jp/v1/tenants/1/vod-contents/${currentVideo.contentId}/thumbnail/large`, sizes: '512x512', type: 'image/jpeg' }]

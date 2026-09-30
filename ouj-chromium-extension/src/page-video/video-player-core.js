@@ -62,10 +62,17 @@ async function addFunctionPanel(currentVideo, startUrl){
     }
     return;
   }
-  addShareButtonAfterVideoTitle();
+  // 表示オプション(utils/display-options.js)で非表示にされていれば挿入しない
+  const isPlayerUiVisible = (featureId) => (
+    typeof window.isOujFeatureVisible !== 'function' || window.isOujFeatureVisible(featureId)
+  );
+
+  if (isPlayerUiVisible('player-share')) {
+    addShareButtonAfterVideoTitle();
+  }
 
   // タイトル横のアクションボタン群（PiP・しおり・あとで見る）を追加
-  if (typeof window.addPlayerActionButtons === 'function') {
+  if (typeof window.addPlayerActionButtons === 'function' && isPlayerUiVisible('player-actions')) {
     window.addPlayerActionButtons(currentVideo);
   }
 
@@ -452,8 +459,8 @@ function addShareButtonAfterVideoTitle() {
   button.style.border = '1px solid #ccc';
   button.style.borderRadius = '3px';
   button.style.backgroundColor = '#f0f0f0';
-  button.innerHTML = getIconHtml('share') + '共有';
-  button.title = '科目名、授業名、URLをクリップボードにコピー';
+  button.innerHTML = getIconHtml('share') + t('actions.share');
+  button.title = t('actions.shareTitle');
   button.addEventListener('click', () => {
     // 既存のメッセージがあれば削除
     const existingMessage = button.parentNode.querySelector('.copy-status-message');
@@ -478,10 +485,10 @@ function addShareButtonAfterVideoTitle() {
     const url = window.location.href;
     const copyText = `\n${trimmedLectureName} ${videoTitle}\n#放送大学\n${url}`;
     navigator.clipboard.writeText(copyText)
-      .then(() => showCopyStatusMessage('コピーしました', true))
+      .then(() => showCopyStatusMessage(t('actions.copied'), true))
       .catch(err => {
         console.error('クリップボードへのコピーに失敗しました:', err);
-        showCopyStatusMessage('コピー失敗', false);
+        showCopyStatusMessage(t('actions.copyFailed'), false);
       });
   });
 

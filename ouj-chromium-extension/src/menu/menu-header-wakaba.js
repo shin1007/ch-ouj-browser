@@ -30,7 +30,7 @@ function insertHeaderWakabaLink() {
     link.href = HEADER_WAKABA_URL;
     link.target = '_blank';
     link.rel = 'noopener';
-    link.title = 'システムWAKABAを開く';
+    link.title = t('header.openWakaba');
     link.textContent = '🎓';
     Object.assign(link.style, {
       display: 'inline-flex',

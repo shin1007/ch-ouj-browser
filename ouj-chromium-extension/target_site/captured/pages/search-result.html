@@ -1,0 +1,5633 @@
+<!DOCTYPE html><html lang="ja" dir="ltr"><head><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+  <title>放送大学</title>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="./assets/images/webclip/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./assets/images/webclip/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/images/webclip/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="./assets/images/webclip/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/images/webclip/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="./assets/images/webclip/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/images/webclip/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/images/webclip/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./assets/images/webclip/apple-touch-icon-180x180.png">
+  <script>
+      var tenantId = "1";
+      var cssTemplate = "tenant/ouj";
+      var options = {
+                        homeSettingUrl: "./top-page.json"
+                      , initMessageUrl: "./init-message.html?v=1"
+                      , loginType: 2
+                      , logoUrl: "./assets/images/icon_logo.png"
+                      , maxListNum: 30
+                      , sami: true
+                      , systemRequirementUrl: "https://www.ouj.ac.jp/help/siteinfo/#recommended"
+                      , tenantType: 1
+                      , visibleVodMenu: false
+      };
+  </script>
+  <script src="cas-cooperation.js"></script>
+  <script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-header.min.js"></script><base href="./"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/css/tenant/ouj.css?v=3.2.30"><link rel="stylesheet" href="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/leaflet/1.3.1/leaflet.css"><script>  var basePath = "//v.ouj.ac.jp/module/classtream_viewer3/";</script>
+<div><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/ui.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/icomoon/style.css"><link rel="stylesheet" type="text/css" href="//v.ouj.ac.jp/module/classtream-player/v3.0/css/player.css?ver=1.0.25"></div><style type="text/css">.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+</style><style type="text/css">.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}</style></head>
+<body>
+  <iframe style="width:100%; height:100%; border:none;" src="//v.ouj.ac.jp/module/classtream_viewer3/assets/html/no-script.html"></iframe>
+  <ion-app class="app-root app-root-md md platform-core enable-hover" ng-version="5.0.0"><div app-viewport=""></div><ng-component class="app-root"><ion-content id="app-content" class="content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+    <div class="wrapper">
+
+        <router-outlet></router-outlet><navi><div id="main-navi">
+
+  
+
+  <common-header>
+
+<ion-header class="header header-md">
+
+    <ion-navbar class="left toolbar toolbar-md" id="cls-common-header" role="banner"><div class="toolbar-background toolbar-background-md"></div><button class="back-button bar-button bar-button-md back-button-md bar-button-default bar-button-default-md" ion-button="bar-button"><span class="button-inner"><ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" aria-label="arrow back"></ion-icon><span class="back-button-text back-button-text-md"></span></span><div class="button-effect"></div></button><div class="toolbar-content toolbar-content-md">
+
+        <div class="logo-menu">
+
+            <!----><img class="logo-img" src="./assets/images/icon_logo.png" alt="ホーム">
+
+        </div>
+
+        
+
+        <!----><div class="login-button login-button-bottom">
+
+            <!---->
+
+            <div class="user-id-menu">
+
+                <!----><ion-label class="user-id label label-md">XXXXXXXXXX</ion-label>
+
+            </div>
+
+        </div>
+
+        <div class="vod-list-search">
+
+            
+
+            <vod-list-search>
+
+<div class="search-area" role="search">
+
+    
+
+    <button class="search-back-button button button-md button-outline button-outline-md" ion-button="" outline="" title="戻る"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" name="arrow-round-back" role="img" class="icon icon-md ion-md-arrow-round-back" aria-label="arrow round-back"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <input autocomplete="off" id="searchText" maxlength="200" type="text" placeholder="動画検索" title="検索する文字を入力してください。">
+
+    
+
+    <button aria-labelledby="searchText" class="theme-color search-button button button-md button-default button-default-md" ion-button="" value="動画検索" aria-label="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+    
+
+    <button class="theme-color search-expand-button button button-md button-clear button-clear-md button-round button-round-md" clear="" ion-button="" round="" title="動画検索"><span class="button-inner">
+
+        <ion-icon aria-hidden="true" class="search-icon icon icon-md ion-md-search" name="search" role="img" aria-label="search"></ion-icon>
+
+    </span><div class="button-effect"></div></button>
+
+</div></vod-list-search>
+
+        </div>
+
+        
+
+        <!---->
+
+    </div></ion-navbar>
+
+    
+
+    <!---->
+
+</ion-header></common-header>
+
+  
+
+  <div class="menu-background-color" id="menu">
+
+    <menu-navi><ion-content class="wrapper-menu-main menu-background-color content content-md" role="navigation"><div class="fixed-content"></div><div class="scroll-content">
+
+    <ion-content class="menu-main menu-background-color content content-md"><div class="fixed-content"></div><div class="scroll-content">
+
+        
+
+        <ion-list class="menu-list top-ion-list list list-md" role="menu">
+
+            <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="home" role="img" class="icon icon-md ion-md-home item-icon" aria-label="home"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ホーム
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+            <!---->
+
+            <!---->
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list" aria-label="カテゴリー">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md"> 
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        カテゴリー
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!----><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            01 教養学部
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            02 大学院
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            03 夏季集中科目
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            04 ラジオ番組の字幕付加実験
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="folder" role="img" class="icon icon-md ion-md-folder item-icon" aria-label="folder"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            05 特別講義
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+
+
+        
+
+        <!----><ion-list class="menu-list list list-md" role="list">
+
+            <ion-item aria-hidden="true" class="item-header item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <div class="icon-text">
+
+                    <div class="top-text-area">
+
+                        設定
+
+                    </div>
+
+                </div>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <ion-item class="item-selectable item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button">
+
+                    <div class="icon-text">
+
+                        <div class="icon-area">
+
+                            <ion-icon aria-hidden="true" name="exit" role="img" class="icon icon-md ion-md-exit item-icon" aria-label="exit"></ion-icon>
+
+                        </div>
+
+                        <div class="text-area">
+
+                            ログアウト
+
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+            <!---->
+
+        </ion-list>
+
+
+
+        <!----><ion-list class="menu-list list list-md">
+
+            
+
+            <div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/help/siteinfo/#recommended" aria-label="ご利用にあたって別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item-selectable item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                                <div class="icon-text">
+
+                                    <div class="icon-area">
+
+                                        <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                    </div>
+
+                                    <div class="text-area">
+
+                                        ご利用にあたって
+
+                                    </div>
+
+                                </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+            
+
+            <!----><div class="small-area">
+
+                <a target="_blank" href="https://www.ouj.ac.jp/" aria-label="放送大学トップページへ別ページで開く">
+
+                    <button aria-hidden="true" id="link-item-button">
+
+                        <ion-item class="item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                            <div class="icon-text">
+
+                                <div class="icon-area">
+
+                                    <ion-icon aria-hidden="true" name="play" role="img" class="icon icon-md ion-md-play item-icon" aria-label="play"></ion-icon>
+
+                                </div>
+
+                                <div class="text-area">
+
+                                    放送大学トップページへ
+
+                                </div>
+
+                            </div>
+
+                        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </ion-list>
+
+    </div></ion-content>
+
+
+
+    
+
+    <!----><menu-footer><footer class="footer" lang="en" role="contentinfo">
+
+    ver. 3.2.30 powered by IPL
+
+    
+
+<footer>
+
+</footer></footer></menu-footer>
+
+</div></ion-content></menu-navi>
+
+  </div>
+
+  
+
+  <main class="navi-main-default" id="main" role="main">
+
+    
+
+    <div></div><main-vod-list>
+
+<common-overlay>
+
+<div id="common-overlay" ion-fixed="" padding="" hidden=""></div></common-overlay>
+
+
+
+<ion-content class="content content-md has-infinite-scroll"><div class="fixed-content"></div><div class="scroll-content">
+
+    
+
+    <list-title><div class="common-outer-main-content-area">
+
+    <ion-title class="page-list-title common-list-title-bottom title title-md"><div class="toolbar-title toolbar-title-md">
+
+        
+
+        <span class="list-title-span" id="list-title-span" role="heading" tabindex="0">動画</span>
+
+        
+
+        <!---->
+
+        <!---->
+
+    </div></ion-title>
+
+    
+
+    <!---->
+
+</div></list-title>
+
+    
+
+    <vod-list-navigator><aside role="complementary">
+
+    
+
+    <!---->
+
+    
+
+    <ion-list class="vod-category-list list list-md" id="child-category-list" role="list" aria-label="カテゴリー">
+
+        <!---->
+
+    </ion-list>
+
+</aside></vod-list-navigator>
+
+    
+
+    <div aria-labelledby="list-title-span" role="main">
+
+        
+
+        <!---->
+
+        
+
+        <!----><ion-item class="sort item item-block item-md"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+            <label class="sort-label" aria-label="content.sort-list">
+
+                <select class="sort-select ng-untouched ng-pristine ng-valid">
+
+                    <!----><option value="1">新着順</option><option value="7">公開順</option><option value="3">タイトル順</option><option value="4">タイトル(逆)順</option>
+
+                </select>
+
+            </label>
+
+        </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        
+
+        <ion-list aria-describedby="list-title-span" can-swipe="listCanSwipe" id="common-list-content" role="list" class="list list-md">
+
+            <!----><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 イメージをめぐる物語">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/34789/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 イメージをめぐる物語
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月18日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/18</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">イメージとは何か。一般的な、いわゆる「イメージ」から、アートの立場によるイメージ、心理臨床におけるイメージとのかかわり、考え方などをいくつか概観する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 052 イメージの力（’２４） 1529730</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの052 イメージの力（’２４） 1529730"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 イントロダクション：心理学的支援の全体">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/30536/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 イントロダクション：心理学的支援の全体
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年9月4日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/09/04</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学的支援が展開される領域とその形について概説する。個人療法から集団療法さらにはコミュニティ支援などさまざまな形、また医療、教育、司法矯正をはじめ多樣な領域があるが、いずれにおいても、｢人と関わる｣という意味での共通性があり、カウンセリングの心構えと技法が中心に位置する。このことについて論じたい。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 051 心理カウンセリング序説（’２１） 1529501</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの051 心理カウンセリング序説（’２１） 1529501"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 ユーザを知る１：考え方（１）">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/11290/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 ユーザを知る１：考え方（１）
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">・使いにくい、分かりにくい情報機器は、情報機器の利用者（ユーザ）のことを考えずに開発されたことが大きな原因であることを理解する。<br>・情報機器のユーザについてきちんと調べてからものづくりをするという、人間中心設計の考え方の必要性を理解する。<br>・ユーザ調査法が認知心理学の研究法を応用していることを理解すると同時に、ユーザを調査する際の注意点を理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 07 情報コース &gt; 021 ユーザ調査法（’２０） 1570390a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の07 情報コースの021 ユーザ調査法（’２０） 1570390a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2020年3月24日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2020/03/24 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 ユーザを知る１：考え方（１）">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/11289/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 ユーザを知る１：考え方（１）
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">・使いにくい、分かりにくい情報機器は、情報機器の利用者（ユーザ）のことを考えずに開発されたことが大きな原因であることを理解する。<br>・情報機器のユーザについてきちんと調べてからものづくりをするという、人間中心設計の考え方の必要性を理解する。<br>・ユーザ調査法が認知心理学の研究法を応用していることを理解すると同時に、ユーザを調査する際の注意点を理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 066 ユーザ調査法（’２０） 1570390</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの066 ユーザ調査法（’２０） 1570390"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2020年3月24日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2020/03/24 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 ライフサイクルの基礎">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/39205/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 ライフサイクルの基礎
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">ライフサイクルの基本的な概念について説明するとともに、本科目の目的と概要について講じ、ライフサイクルの心理臨床の意義を考察する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 053 ライフサイクルの心理臨床（’２６） 1529900</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの053 ライフサイクルの心理臨床（’２６） 1529900"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2026年3月16日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2026/03/16 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 中高年の人々はどういう時代を生きてきたのか－生涯発達的視座からみた心理臨床的課題－">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/10974/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 中高年の人々はどういう時代を生きてきたのか－生涯発達的視座からみた心理臨床的課題－
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月18日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/18</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">中高年者が生きてきた時代背景をふまえた上で、中高年がこれから生きていく時代を展望し、彼らに対する心理臨床的視点の有用性について論じる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 056 中高年の心理臨床（’２０） 1529455</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの056 中高年の心理臨床（’２０） 1529455"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2020年3月24日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2020/03/24 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 人の発達とは">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31332/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 人の発達とは
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">人は、その誕生から死によって生涯を閉じるまで、どのように自らの生を作っていくのだろうか。また、そこにはどのような要因が影響しているのだろうか。発達を「生涯にわたる時間と空間の中での変化」として捉える枠組みを概観し、主要な発達の理論を整理する。また、発達研究の方法についても学ぶ。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 006 発達心理学特論（’２１） 8950709a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの006 発達心理学特論（’２１） 8950709a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 人の発達とは">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31331/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 人の発達とは
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月9日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/09</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">人は、その誕生から死によって生涯を閉じるまで、どのように自らの生を作っていくのだろうか。また、そこにはどのような要因が影響しているのだろうか。発達を「生涯にわたる時間と空間の中での変化」として捉える枠組みを概観し、主要な発達の理論を整理する。また、発達研究の方法についても学ぶ。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 02 人間発達科学プログラム &gt; 009 発達心理学特論（’２１） 8950709</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の02 人間発達科学プログラムの009 発達心理学特論（’２１） 8950709"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 位置づけ">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/36948/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 位置づけ
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">（１）「学習・言語心理学」の科学・学問全体の中での位置づけを理解する。（２）「学習・言語心理学」という科目全体としては「言語行動」を対象とするのが適切であることを理解する。（３）「学習・言語心理学」の最も関連している領域は「感覚心理学」「知覚心理学」「認知心理学」「言語学」であることを理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 046 学習・言語心理学（’２５） 1529803</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの046 学習・言語心理学（’２５） 1529803"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2025年3月11日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2025/03/11 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 保健医療分野における心理臨床">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/32811/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 保健医療分野における心理臨床
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">保健医療分野で働くために身につけておくべき医療制度や医療倫理、患者中心のアプローチのためのモデルを紹介する。また、医療現場で働く心理職の活動について、特に総合病院における活動について取り上げる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 011 保健医療心理学特論（’２２） 8950725</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの011 保健医療心理学特論（’２２） 8950725"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2022年3月17日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2022/03/17 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 学校臨床心理学の照射領域">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31272/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 学校臨床心理学の照射領域
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">学校臨床心理学でカバーする領域を横断的･縦断的に論じる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 013 学校臨床心理学特論（’２１）  8950687a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの013 学校臨床心理学特論（’２１）  8950687a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 学校臨床心理学の照射領域">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31271/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 学校臨床心理学の照射領域
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">学校臨床心理学でカバーする領域を横断的･縦断的に論じる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 02 人間発達科学プログラム &gt; 008 学校臨床心理学特論（’２１）  8950687</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の02 人間発達科学プログラムの008 学校臨床心理学特論（’２１）  8950687"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 導入：心理職における専門性とは何か">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/38500/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 導入：心理職における専門性とは何か
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心の専門家としての心理職の専門性の本質を考える。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 062 心理職の専門性（’２６） 1529870</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの062 心理職の専門性（’２６） 1529870"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2026年3月12日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2026/03/12 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理と教育へのとびら">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/34594/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理と教育へのとびら
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年8月10日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/08/10</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">本コースの学ぶべき内容とポイント、領域の特徴などを概説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 01 基盤科目 &gt; 008 心理と教育へのいざない（’２４） 1140124</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の01 基盤科目の008 心理と教育へのいざない（’２４） 1140124"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学とは">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/35540/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学とは
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学は人の心を研究する学問であるが、「心の科学」や「行動の科学」とも呼ばれている。この回では、心理学とはどのような学問か、その基本的な考え方と、成立背景について概説する。また、心理学の基礎資格である「認定心理士」の分類を参考に、心理学の諸領域について解説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 06 人間と文化コース &gt; 015 心理学概論（’２４） 1720104a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の06 人間と文化コースの015 心理学概論（’２４） 1720104a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学とは">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/35539/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学とは
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年8月12日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/08/12</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学は人の心を研究する学問であるが、「心の科学」や「行動の科学」とも呼ばれている。この回では、心理学とはどのような学問か、その基本的な考え方と、成立背景について概説する。また、心理学の基礎資格である「認定心理士」の分類を参考に、心理学の諸領域について解説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 005 心理学概論（’２４） 1720104</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの005 心理学概論（’２４） 1720104"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学における統計学の必要性">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31302/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学における統計学の必要性
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学研究における統計学の必要性や関連性について述べる。教育や臨床などの実践において、統計的な考え方や手法が果たす役割について考え、本講で統計的な考え方や手法を学ぶ目的を明確にする。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 005 心理・教育統計法特論（’２１） 8950695a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの005 心理・教育統計法特論（’２１） 8950695a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学における統計学の必要性">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31301/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学における統計学の必要性
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学研究における統計学の必要性や関連性について述べる。教育や臨床などの実践において、統計的な考え方や手法が果たす役割について考え、本講で統計的な考え方や手法を学ぶ目的を明確にする。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 02 人間発達科学プログラム &gt; 010 心理・教育統計法特論（’２１）  8950695</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の02 人間発達科学プログラムの010 心理・教育統計法特論（’２１）  8950695"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学研究法入門１：心理学研究の基礎知識">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/10839/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学研究法入門１：心理学研究の基礎知識
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学研究に着手するにあたり、誰もが共通理解をもっておくべき重要事項について解説する。それぞれの研究法を詳しく学ぶ前に、なるべくわかりやすい例をあげて大づかみな理解を目指す。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 041 心理学研究法（’２０） 1529390</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの041 心理学研究法（’２０） 1529390"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2020年3月24日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2020/03/24 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学統計法を学ぶにあたって">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/30552/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学統計法を学ぶにあたって
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学統計法とはなにかについてその概要について理解することを目的とする。また、心理学でなぜ統計学を用いるのかを解説し、本講義で学習する範囲などを明確にする。さらに、本講義を受けるにあたっての注意点などについても説明する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 07 情報コース &gt; 032 心理学統計法（’２１）　 1529510a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の07 情報コースの032 心理学統計法（’２１）　 1529510a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理学統計法を学ぶにあたって">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/30551/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理学統計法を学ぶにあたって
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理学統計法とはなにかについてその概要について理解することを目的とする。また、心理学でなぜ統計学を用いるのかを解説し、本講義で学習する範囲などを明確にする。さらに、本講義を受けるにあたっての注意点などについても説明する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 043 心理学統計法（’２１）　 1529510</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの043 心理学統計法（’２１）　 1529510"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理的アセスメントとは何か">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/38515/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理的アセスメントとは何か
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理支援の過程における第一歩となる心理的アセスメントの定義と特徴について解説する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 063 心理的アセスメント（’２６） 1529889</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの063 心理的アセスメント（’２６） 1529889"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2026年3月12日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2026/03/12 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理臨床における法・倫理・制度の基本">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/30581/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理臨床における法・倫理・制度の基本
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">法・倫理・制度は、心理臨床を行うどの場面においても、その実践と密接に関係している。憲法から実際の心理臨床に至るまでの流れを解説し、自己決定権についても論じる。また、本書の全体を概観する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 058 心理臨床における法・倫理・制度（’２１） 1529528</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの058 心理臨床における法・倫理・制度（’２１） 1529528"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年3月23日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/03/23 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 心理面接とは：面接関係と面接構造">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/37803/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 心理面接とは：面接関係と面接構造
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年10月16日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/10/16</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">心理職の職能の中での心理面接の位置づけについて論じるとともに、それを成り立たせる基本的な構造とセッティングについて論じる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 002 臨床心理面接特論Ⅰ（’２５） 8950768</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの002 臨床心理面接特論Ⅰ（’２５） 8950768"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2025年3月11日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2025/03/11 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 思春期･青年期の誕生">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/9123/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 思春期･青年期の誕生
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年7月20日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/07/20</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">思春期・青年期は歴史的に、どのように誕生したのか。また個人の生の中で、どのように誕生するのか。新しい精神の夜明けについて、心理学的な観点から概要を講じる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 055 思春期・青年期の心理臨床（’１９） 1529293</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの055 思春期・青年期の心理臨床（’１９） 1529293"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2019年3月22日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2019/03/22 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 感情と人格">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/31452/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 感情と人格
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">感情と人格について論ずるための準備として、まずは日常用語と学術用語の違いについて論じる。また、感情、人格をそれぞれ心理学として論じるとはどういうことかについて述べつつ、各章で何を扱うかについて説明することで本講の全体の見通しを立てる。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 057 感情・人格心理学（’２１） 1529498</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの057 感情・人格心理学（’２１） 1529498"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2021年9月10日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2021/09/10 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 教育実践への教育心理学のアプローチ">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/35990/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 教育実践への教育心理学のアプローチ
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">教育心理学は、教育活動全般を対象としているが、とりわけ学校教育での活動を対象とした理論的、実践的な研究が多く行われている。この回では、学校教育についての教育心理学でどのような研究法によってどのような研究が行われているのか概観する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 007 教育心理学特論（’２４） 8921067a</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの007 教育心理学特論（’２４） 8921067a"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 教育実践への教育心理学のアプローチ">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/35989/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:44:59
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 教育実践への教育心理学のアプローチ
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間44分59秒"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">教育心理学は、教育活動全般を対象としているが、とりわけ学校教育での活動を対象とした理論的、実践的な研究が多く行われている。この回では、学校教育についての教育心理学でどのような研究法によってどのような研究が行われているのか概観する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 02 人間発達科学プログラム &gt; 011 教育心理学特論（’２４） 8921067</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の02 人間発達科学プログラムの011 教育心理学特論（’２４） 8921067"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2024年3月14日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2024/03/14 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 教育･学校心理学を知る">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/11439/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 教育･学校心理学を知る
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----><div class="div-right" title="視聴日">
+
+    <div class="viewed-item no-aria-label" aria-label="視聴日">
+
+        <div class="viewed-button">
+
+            <ion-icon aria-hidden="true" class="check icon icon-md ion-md-checkmark" name="checkmark" role="img" aria-label="checkmark"></ion-icon>
+
+        </div>
+
+    </div>
+
+    <div class="viewed-item">
+
+        
+
+        <span aria-label="2025年10月17日"></span>
+
+        <div aria-hidden="true" class="viewed-button">2025/10/17</div>
+
+    </div>
+
+</div></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">教育･学校心理学とはどのような研究分野で、その特徴は何か、また心理学全体の中でどのように位置づけられるかについて概観する。そして、そこではどのような研究法によって、どのような内容の研究が行われているのかについて具体的にみていく。さらには、研究を進める上で大切な研究倫理の問題などについても触れていく。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">01 教養学部 &gt; 04 心理と教育コース &gt; 004 教育・学校心理学（’２０） 1720082</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー01 教養学部の04 心理と教育コースの004 教育・学校心理学（’２０） 1720082"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2020年3月24日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2020/03/24 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item><ion-item class="menu-background-color item item-block item-md" role="listitem"><div class="item-inner"><div class="input-wrapper"><!----><ion-label class="label label-md">
+
+                <button id="link-item-button" value="第01回 犯罪心理学の歴史と理論">
+
+                    <ion-row class="row">
+
+                        <ion-col class="col">
+
+                            <div class="main-content">
+
+                                
+
+                                <div class="thumb-content">
+
+                                    <div class="thumb-main">
+
+                                        <img class="thumb-img" src="https://v.ouj.ac.jp/v1/tenants/1/vod-contents/39070/thumbnail/large">
+
+                                        <div aria-hidden="true" class="thumb-footer">
+
+                                            
+
+                                            
+
+                                            <div aria-hidden="true" class="thumb-label">
+
+                                                00:45:00
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                
+
+                                <div class="list-content">
+
+                                    <ion-row class="list-content-title row">
+
+                                        <ion-col class="col">
+
+                                            
+
+                                            <div class="title">
+
+                                                第01回 犯罪心理学の歴史と理論
+
+                                            </div>
+
+                                            
+
+                                            <span aria-label="再生時間45分"></span>
+
+                                            
+
+                                            <div class="view-date">
+
+                                                <!----><view-date><!----></view-date>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-detail row">
+
+                                        <ion-col class="col">犯罪心理学の歴史を現代に至るまで概観し、代表となる犯罪や非行の理論について理解する。そして、生物学的な視点や心理学的な視点、社会学的な視点からのアプローチである「生物－心理－社会モデル」について理解する。</ion-col>
+
+                                    </ion-row>
+
+                                    
+
+                                    <ion-row class="list-content-category row">
+
+                                        <ion-col class="col">
+
+                                            <!----><div>
+
+                                                <label aria-hidden="true" class="content-category">02 大学院 &gt; 03 臨床心理学プログラム &gt; 009 司法矯正・犯罪心理学特論（’２６） 8950784</label>
+
+                                                
+
+                                                <span aria-label="カテゴリー02 大学院の03 臨床心理学プログラムの009 司法矯正・犯罪心理学特論（’２６） 8950784"></span>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                    <ion-row class="list-content-footer row">
+
+                                        
+
+                                        <ion-col class="list-content-footer-review col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-view-count col">
+
+                                            <!---->
+
+                                        </ion-col>
+
+                                        
+
+                                        <ion-col class="list-content-footer-vod-date col" col-auto="">
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="2026年3月12日 登録"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    2026/03/12 登録
+
+                                                </div>
+
+                                            </div>
+
+                                            <div hidden="">
+
+                                                
+
+                                                <span aria-label="{{value}} 公開"></span>
+
+                                                <div aria-hidden="true">
+
+                                                    {{value}} 公開
+
+                                                </div>
+
+                                            </div>
+
+                                        </ion-col>
+
+                                    </ion-row>
+
+                                </div>
+
+                            </div>
+
+                        </ion-col>
+
+                    </ion-row>
+
+                </button>
+
+            </ion-label></div><!----></div><div class="button-effect"></div></ion-item>
+
+        </ion-list>
+
+        
+
+        <ion-infinite-scroll>
+
+            <ion-infinite-scroll-content loadingspinner="bubbles" loadingtext="Loading more data..." state="enabled"><div class="infinite-loading"><!----><div class="infinite-loading-spinner"><ion-spinner class="spinner spinner-md spinner-bubbles spinner-md-bubbles"><!----><svg viewBox="0 0 64 64" style="top: 0px; left: 9px; animation-delay: -1000ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 5.78509px; left: 6.8944px; animation-delay: -888.889ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 8.86327px; left: 1.56283px; animation-delay: -777.778ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 7.79423px; left: -4.5px; animation-delay: -666.667ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: 3.07818px; left: -8.45723px; animation-delay: -555.556ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -3.07818px; left: -8.45723px; animation-delay: -444.444ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -7.79423px; left: -4.5px; animation-delay: -333.333ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -8.86327px; left: 1.56283px; animation-delay: -222.222ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><svg viewBox="0 0 64 64" style="top: -5.78509px; left: 6.8944px; animation-delay: -111.111ms; animation-duration: 1000ms;"><circle transform="translate(32,32)" r="5"></circle></svg><!----></ion-spinner></div><!----><div class="infinite-loading-text">Loading more data...</div></div></ion-infinite-scroll-content>
+
+        </ion-infinite-scroll>
+
+    </div>
+
+</div></ion-content></main-vod-list>
+
+  </main>
+
+  
+
+</div></navi>
+
+    </div>
+
+</div></ion-content></ng-component><div overlay-portal=""></div><div overlay-portal=""></div><div class="loading-portal" overlay-portal=""></div><div class="toast-portal"></div><div class="click-block click-block-enabled"></div></ion-app>
+
+
+<script src="//v.ouj.ac.jp/module/js/jquery/jquery-2.2.3.min.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/js/classtream3-check.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/js/classtream-webapi-1.1.0/classtream-webapi.js?v=1.1.0.17"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream.min.js"></script><script src="//v.ouj.ac.jp/module/classtream-player/lib/THEOplayer-7.0.0_20240417/THEOplayer.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/assets/lib/pdf/2.1.266/pdf.js"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/polyfills.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/vendor.min.js?v=3.2.30"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-base.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/v3.0/js/classtream-player.min.js?ver=1.0.25"></script><script src="//v.ouj.ac.jp/module/classtream-player/webrtc/webrtc-player.min.js?ver=1.0.0"></script><script src="//v.ouj.ac.jp/module/classtream_viewer3/build/main.min.js?v=3.2.30"></script></body></html>

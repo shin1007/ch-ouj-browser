@@ -10,11 +10,11 @@
  * @param {Object} options - オプション設定
  * @returns {Promise<boolean>} ユーザーの選択（true: OK, false: キャンセル）
  */
-const showConfirmDialog = (message, title = '確認', options = {}) => {
+const showConfirmDialog = (message, title = t('common.confirm'), options = {}) => {
     return new Promise((resolve) => {
         const {
             okText = 'OK',
-            cancelText = 'キャンセル',
+            cancelText = t('common.cancel'),
             okButtonClass = 'confirm-ok',
             cancelButtonClass = 'confirm-cancel'
         } = options;
@@ -182,13 +182,13 @@ const showConfirmDialog = (message, title = '確認', options = {}) => {
  * @param {Object} options - { placeholder, defaultValue, okText, cancelText }
  * @returns {Promise<string|null>} 入力文字列（キャンセル時はnull）
  */
-const showPromptDialog = (message, title = '入力', options = {}) => {
+const showPromptDialog = (message, title = t('common.input'), options = {}) => {
     return new Promise((resolve) => {
         const {
             placeholder = '',
             defaultValue = '',
             okText = 'OK',
-            cancelText = 'キャンセル'
+            cancelText = t('common.cancel')
         } = options;
 
         // 既存のダイアログがあれば削除する（理由はshowConfirmDialogのコメント参照）

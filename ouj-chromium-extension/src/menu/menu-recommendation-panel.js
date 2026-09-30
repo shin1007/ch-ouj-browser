@@ -21,15 +21,15 @@ function buildRecommendTopHtml() {
       <div class="item-inner">
         <div class="input-wrapper">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;width:100%;font-size:14px;color:#374151;">
-            <label for="history-recommend-level">履歴から</label>
-            <select id="history-recommend-level" title="履歴からのおすすめ表示数">${createOptions(historyLevel)}</select>
-            <span>件</span>
-            <label for="favorite-recommend-level">お気に入りから</label>
-            <select id="favorite-recommend-level" title="お気に入りからのおすすめ表示数">${createOptions(favoriteLevel)}</select>
-            <span>件</span>
-            <label for="similar-recommend-level">類似から</label>
-            <select id="similar-recommend-level" title="類似からのおすすめ表示数">${createOptions(similarLevel)}</select>
-            <span>件</span>
+            <label for="history-recommend-level">${t('recommend.fromHistory')}</label>
+            <select id="history-recommend-level" title="${t('recommend.historyCountTitle')}">${createOptions(historyLevel)}</select>
+            <span>${t('recommend.countUnit')}</span>
+            <label for="favorite-recommend-level">${t('recommend.fromFavorites')}</label>
+            <select id="favorite-recommend-level" title="${t('recommend.favoritesCountTitle')}">${createOptions(favoriteLevel)}</select>
+            <span>${t('recommend.countUnit')}</span>
+            <label for="similar-recommend-level">${t('recommend.fromSimilar')}</label>
+            <select id="similar-recommend-level" title="${t('recommend.similarCountTitle')}">${createOptions(similarLevel)}</select>
+            <span>${t('recommend.countUnit')}</span>
           </div>
         </div>
       </div>
@@ -42,13 +42,13 @@ function buildRecommendItemHtml(item, categories) {
   let sourceLabel = '';
   let sourceColor = '';
   if (item.source === 'history') {
-    sourceLabel = '履歴';
+    sourceLabel = t('menu.history');
     sourceColor = '#3b82f6';
   } else if (item.source === 'favorites') {
-    sourceLabel = 'お気に入り';
+    sourceLabel = t('menu.favorites');
     sourceColor = '#f59e0b';
   } else if (item.source === 'similar') {
-    sourceLabel = '類似';
+    sourceLabel = t('recommend.sourceSimilar');
     sourceColor = '#059669';
   }
   const badgeHtml = sourceLabel
@@ -88,7 +88,7 @@ function handleRecommendPanelOpen() {
       if (listEl) {
         listEl.innerHTML = recommendList.length
           ? recommendList.map((item) => buildRecommendItemHtml(item, categories)).join('')
-          : '<div style="padding:16px;color:#666;">おすすめ動画はありません（全て再生済み）</div>';
+          : `<div style="padding:16px;color:#666;">${t('recommend.empty')}</div>`;
       }
       wireItemEvents();
     }
@@ -124,10 +124,10 @@ function handleRecommendPanelOpen() {
     }
 
     overlay.innerHTML = window.renderNativeShellHtml({
-      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: 'おすすめ動画' }]),
+      breadcrumbHtml: window.buildNativeBreadcrumbHtml([{ text: t('menu.recommend') }]),
       mainHtml: window.renderNativeVideoListMainHtml({
         topHtml: buildRecommendTopHtml(),
-        itemsHtml: '<div style="padding:16px;color:#666;">読み込み中...</div>'
+        itemsHtml: `<div style="padding:16px;color:#666;">${t('common.loading')}</div>`
       })
     });
     wireDropdowns();

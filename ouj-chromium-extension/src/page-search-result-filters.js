@@ -41,8 +41,18 @@ function querySearchResultList() {
 
 // フィルタの判定結果(dataset.oujFilterHidden)に応じて表示/非表示を切り替える共通関数。
 // 以前は重複講義の非表示機能(page-search-result.js)もこのdatasetと合わせて判定していたが、
-// 重複扱いされた科目が検索結果から見えなくなるのは望ましくないとのことでその機能自体を廃止した
+// 重複扱いされた科目が検索結果から見えなくなるのは望ましくないとのことでその機能自体を廃止した。
+//
+// コンパクト表示(page-search-result-compact.js)がONの間は、同じ科目の回を1行にまとめる都合で
+// 「絞り込みでは残るが、まとめ役の行に集約したので隠す」項目が出る。まとめ側の判断
+// (dataset.oujCompactState)を絞り込みより優先する。分類完了のたびに呼ばれる
+// applyFiltersToItemが、まとめて隠した項目を表示し直してしまうのを防ぐため
 function updateSearchResultItemVisibility(item) {
+    const compactState = item.dataset.oujCompactState;
+    if (compactState === 'shown' || compactState === 'hidden') {
+      item.style.display = compactState === 'hidden' ? 'none' : '';
+      return;
+    }
     item.style.display = item.dataset.oujFilterHidden === 'true' ? 'none' : '';
 }
 
@@ -101,23 +111,66 @@ function getSearchFilterState(list) {
   };
 }
 
-// 現在のURLから検索キーワード（se=パラメータ）を取り出して履歴に保存する。
-// rawはURLに入っていたそのままの値（再検索時にそのまま使う）、labelは表示用のデコード済み文字列
-function recordSearchKeyword() {
+// 現在のURLの se= から検索キーワードをデコードして取り出す。取れなければ空文字。
+// サイトはURLへ書く時にencodeURI、読む時にdecodeURIを通しており、さらにその外側で
+// ルーターのエンコード/デコードが入る。そのため同じキーワードでもURL上の
+// エンコード段数は経路によって変わる（例: 家族 が 家族 / %E5%AE%B6… / %25E5%25AE… の
+// いずれにもなり得る）。decodeURLComponentSafeは'%'が消えるまで再帰デコードするので
+// 段数に関わらず素のキーワードへ揃えられる
+function getCurrentSearchKeyword() {
   const match = window.location.href.match(/[?&]se=([^&]+)/);
-  if (!match) return;
-  const raw = match[1];
-  let label = raw;
+  if (!match) return '';
   try {
-    label = window.decodeURLComponentSafe(`se=${raw}`);
-  } catch (e) { /* デコード失敗時はrawのまま表示 */ }
+    return window.decodeURLComponentSafe(`se=${match[1]}`) || '';
+  } catch (e) {
+    return match[1]; // デコード失敗時はURL上の値をそのまま使う
+  }
+}
+
+// 現在のURLから検索キーワード（se=パラメータ）を取り出して履歴に保存する。
+// 保存するのはデコード済みの素のキーワード(label)のみ。以前はURL上の値(raw)も持って
+// 再検索時にそのまま流用していたが、上記のとおりエンコード段数が経路ごとに違うため、
+// 再検索→履歴保存を繰り返すうちに段数がずれて文字化けする原因になっていた
+function recordSearchKeyword() {
+  const label = getCurrentSearchKeyword();
   if (!label || !label.trim()) return;
   let history = window.getSetting(SEARCH_KEYWORD_HISTORY_KEY, []);
   if (!Array.isArray(history)) history = [];
   history = history.filter((item) => item.label !== label);
-  history.unshift({ raw, label });
+  history.unshift({ label });
   if (history.length > SEARCH_KEYWORD_HISTORY_MAX) history = history.slice(0, SEARCH_KEYWORD_HISTORY_MAX);
   window.saveSetting(SEARCH_KEYWORD_HISTORY_KEY, history);
+}
+
+// キーワードで検索し直す（「最近の検索」チップの共通処理）。
+// ヘッダーの検索欄へ値を入れてサイト純正の検索ボタンを押す＝サイト自身の検索処理に
+// 乗せる。こうする理由は2つ:
+//  - URL(?se=)を組み立てて遷移する方式だと、今表示中のキーワードと同じ場合はURLが
+//    まったく同じになり、ハッシュ遷移が起きない＝クリックしても無反応になっていた
+//    （サイトの検索ボタンは同じ語でも毎回検索し直す）
+//  - URLを経由しないためエンコード段数の問題が起きない（文字化け対策）
+// 純正の検索欄が見つからないページ用に、URL遷移のフォールバックも残す
+function runOujSearchByKeyword(keyword) {
+  const text = (keyword || '').trim();
+  if (!text) return;
+
+  const input = document.getElementById('searchText');
+  const button = document.querySelector('button.search-button');
+  if (input && button) {
+    input.value = text;
+    button.click();
+    return;
+  }
+
+  // フォールバック: 1回だけエンコードして遷移する（サイトの読み出し側は
+  // ルーターのデコード＋decodeURIを通すのでこの形で正しく復元される）。
+  // 同一URLだと遷移が起きないため、その場合は再読み込みする
+  const url = `https://v.ouj.ac.jp/view/ouj/#/navi/vod?se=${encodeURIComponent(text)}`;
+  if (window.location.href === url) {
+    window.location.reload();
+    return;
+  }
+  window.location.href = url;
 }
 
 // 分類結果（字幕・視聴状況）を項目上に常時表示する小さなバッジ。
@@ -134,12 +187,12 @@ function applyBadgesToItem(item) {
     `<span style="display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:normal;background:${bg};color:${color};white-space:nowrap;">${text}</span>`;
   let html = '';
   if (item.dataset.oujCaption === '1') {
-    html += makeBadge('字幕あり', '#e8f5e9', '#2e7d32');
+    html += makeBadge(t('badge.captions'), '#e8f5e9', '#2e7d32');
   }
   if (item.dataset.oujWatchState === 'done') {
-    html += makeBadge('✓ 視聴済み', '#dcedc8', '#33691e');
+    html += makeBadge(t('badge.watched'), '#dcedc8', '#33691e');
   } else if (item.dataset.oujWatchState === 'partial') {
-    html += makeBadge(`途中 ${item.dataset.oujWatchPercent || ''}%`, '#fff3e0', '#e65100');
+    html += makeBadge(t('badge.partial', { percent: item.dataset.oujWatchPercent || '' }), '#fff3e0', '#e65100');
   }
   if (!html) return;
   badges.innerHTML = html;
@@ -191,6 +244,10 @@ async function classifySearchResultItem(item, gate, context = 'search') {
       // 粒度の粗いコース単位で絞り込みたいという要望のため科目そのものは使わない)
       const videoData = await gate.run(() => window.getVideoData(contentId));
       if (videoData) {
+        // 動画が属する科目のcategoryId。サイト内リンク(player?…&ca= / vod?ca=)の組み立てに使う。
+        // 項目のパンくず末尾に出ている数字は科目コードであってcategoryIdではないため、
+        // リンクにはこちらを使う必要がある(page-search-result-compact.jsのリンク生成)
+        if (videoData.categoryId) item.dataset.oujCategoryId = String(videoData.categoryId);
         const detailLine = (videoData.detail || '').split('\n')[0] || '';
         const yearMatch = detailLine.match(/[（(][’'‘`]?([0-9０-９]{2})[）)]/);
         if (yearMatch) item.dataset.oujYear = yearMatch[1].replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xFEE0));
@@ -204,6 +261,24 @@ async function classifySearchResultItem(item, gate, context = 'search') {
   }
   applyFiltersToItem(item);
   applyBadgesToItem(item);
+  // コンパクト表示中は分類結果でまとめ方(チップに出す回・「確認中」の残数)が変わる
+  if (window.scheduleOujCompactRegroup) window.scheduleOujCompactRegroup(querySearchResultList());
+}
+
+// 未分類の項目を1件だけ分類する(既に分類済み/分類中なら何もせず既存の結果を待つ)。
+// IntersectionObserver・並び替え・コンパクト表示のいずれから呼ばれても、同じcontentIdへの
+// 分類リクエストが二重に走らないようにするための共通入口
+function ensureItemClassified(item, gate, context = 'search') {
+  if (item.dataset.oujClassified === 'done' || item.dataset.oujClassified === 'unavailable') {
+    return Promise.resolve();
+  }
+  if (item.dataset.oujClassified === 'pending' && item.__oujClassifyPromise) {
+    return item.__oujClassifyPromise;
+  }
+  item.dataset.oujClassified = 'pending';
+  const promise = classifySearchResultItem(item, gate, context);
+  item.__oujClassifyPromise = promise;
+  return promise;
 }
 
 // 何らかのフィルタ条件が有効になっているか(絞り込みが1つも掛かっていない「すべて表示」
@@ -256,6 +331,8 @@ function applyFilters() {
   if (!list) return;
   const state = getSearchFilterState(list);
   list.querySelectorAll(':scope > ion-item[role="listitem"]').forEach((item) => applyFiltersToItem(item, state));
+  // 絞り込み結果が変わればまとめ方(各グループに残る回)も変わる
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
 }
 
 // --- 並び替え機能 ---
@@ -287,17 +364,8 @@ async function applySearchResultSort(list) {
     const context = list.oujFilterContext || 'search';
     // IntersectionObserverによって既に分類中(pending)の項目は、ここで再度
     // classifySearchResultItemを呼ぶと同じcontentIdへの分類リクエストが二重に走って
-    // しまう。既存の分類Promiseがあればそれを待ち、無い項目だけ新規に分類する
-    const needsClassification = items.filter((item) => item.dataset.oujClassified !== 'done' && item.dataset.oujClassified !== 'unavailable');
-    await Promise.all(needsClassification.map((item) => {
-      if (item.dataset.oujClassified === 'pending' && item.__oujClassifyPromise) {
-        return item.__oujClassifyPromise;
-      }
-      item.dataset.oujClassified = 'pending';
-      const promise = classifySearchResultItem(item, gate, context);
-      item.__oujClassifyPromise = promise;
-      return promise;
-    }));
+    // しまう。ensureItemClassifiedが既存の分類Promiseの使い回しを引き受ける
+    await Promise.all(items.map((item) => ensureItemClassified(item, gate, context)));
   }
 
   // 視聴状況の優先度で並べ替える。同順位内はサイト表示順を保つ
@@ -336,6 +404,8 @@ async function applySearchResultSort(list) {
   }
 
   sorted.forEach((item) => list.appendChild(item));
+  // 並び替え後はグループの代表(先頭の回)も変わりうるのでまとめ直す
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
 }
 
 function startSearchFilterObserver(context = 'search') {
@@ -388,6 +458,9 @@ function setupSearchFilterBarOnList(list, context) {
   list.__oujFilterGate = observer.__oujGate;
   window.renderFilterBar(list);
   registerItemsForClassification(observer, list);
+  if (window.applyOujCompactGrouping) window.applyOujCompactGrouping(list);
+  // 「自動読み込み」がONなら、続きのページを自動で読み始める(OFFなら何もしない)
+  if (window.startOujAutoLoad) window.startOujAutoLoad(list);
 
   // 無限スクロールで追加される項目にも監視対象を広げる。あわせて、このリストへの流し込みと
   // 同じタイミングでバーが消えた場合にも入れ直す(itemが流し込まれる=検索/回一覧ページなので安全)。
@@ -401,6 +474,8 @@ function setupSearchFilterBarOnList(list, context) {
     // 検索結果の流し込み・再描画のたびに純正の並び替えが復活しうるので隠し直す
     window.hideNativeSortControl();
     registerItemsForClassification(observer, list);
+    // 無限スクロールで足された項目もまとめ対象にする(既存グループへの追加もありうる)
+    if (window.scheduleOujCompactRegroup) window.scheduleOujCompactRegroup(list);
   });
   mutationObserver.observe(list, { childList: true });
 }
@@ -456,7 +531,13 @@ window.updateSearchResultItemVisibility = updateSearchResultItemVisibility;
 window.getSearchFilterState = getSearchFilterState;
 window.applyFilters = applyFilters;
 window.applySearchResultSort = applySearchResultSort;
+// コンパクト表示(page-search-result-compact.js)から使う一覧要素の取得と単発分類
+window.queryOujSearchResultList = querySearchResultList;
+window.ensureOujItemClassified = ensureItemClassified;
 // 検索ボックスのクイック絞り込みパネルから再利用する設定キー・履歴キー
 window.OUJ_SEARCH_FILTER_KEYS = SEARCH_FILTER_SETTINGS_KEYS;
 window.OUJ_SEARCH_KEYWORD_HISTORY_KEY = SEARCH_KEYWORD_HISTORY_KEY;
+// 「最近の検索」チップからの再検索（フィルターバー・検索ボックスパネルの両方で共有）
+window.runOujSearchByKeyword = runOujSearchByKeyword;
+window.getOujCurrentSearchKeyword = getCurrentSearchKeyword;
 window.getOujMediaFilterState = getMediaFilterState;

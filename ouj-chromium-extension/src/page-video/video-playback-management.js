@@ -27,6 +27,8 @@ function setPlaybackSpeed() {
 // 倍速再生時は「あと何分で見終わるか」が直感的に分からないため、
 // 再生速度で割った換算値を表示する（等速なら実時間のみ）
 function updateRemainingTimeDisplay(video) {
+  // 表示オプション(utils/display-options.js)で非表示にしていれば作らない
+  if (typeof window.isOujFeatureVisible === 'function' && !window.isOujFeatureVisible('player-remaining-time')) return;
   const titleEl = document.querySelector('#content-detail-area > div.title');
   if (!titleEl || !video || !isFinite(video.duration) || video.duration <= 0) return;
   let span = document.getElementById('ouj-remaining-time');
@@ -44,9 +46,9 @@ function updateRemainingTimeDisplay(video) {
   const remainReal = Math.max(0, video.duration - video.currentTime);
   const rate = video.playbackRate || 1;
   if (Math.abs(rate - 1) < 0.01) {
-    span.textContent = `残り ${formatTime(remainReal)}`;
+    span.textContent = t('playback.remaining', { time: formatTime(remainReal) });
   } else {
-    span.textContent = `残り ${formatTime(remainReal / rate)}（${rate}x換算・実時間 ${formatTime(remainReal)}）`;
+    span.textContent = t('playback.remainingScaled', { time: formatTime(remainReal / rate), rate, real: formatTime(remainReal) });
   }
 }
 
@@ -92,7 +94,7 @@ function armOpeningSkip(video) {
       done = true;
       video.currentTime = skipStart;
       if (typeof window.showInfoNotification === 'function') {
-        window.showInfoNotification(`冒頭を${skipStart}秒スキップしました`);
+        window.showInfoNotification(t('playback.skippedStart', { n: skipStart }));
       }
     } else if (video.currentTime >= 3) {
       // レジューム等で途中から始まった → スキップ不要
