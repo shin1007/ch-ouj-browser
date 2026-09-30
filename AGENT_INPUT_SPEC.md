@@ -9,6 +9,9 @@ ch-uploader自体の実装方針(Page Object、Playwright運用ルールなど)�
 > **このファイルは拡張機能リポジトリにコピーして使ってもよい。** そのまま `store/AGENT.md` などに置くか、
 > 拡張機能リポジトリの `CLAUDE.md` に丸ごと追記すれば、向こうのエージェントが ch-uploader を
 > 参照しなくても入稿データを用意できる(仕様が古くなっていないかは下記スキーマ節の注記を参照)。
+> コピーは古くなる。`config.yaml` の検証でエラーが出たり、この文書と挙動が食い違ったら、
+> ch-uploader リポジトリの `docs/AGENT_INPUT_SPEC.md` が最新版なので取り直すようユーザーに伝えること。
+> (コピー元の版: 2026-09-29)
 
 ## 大前提: 入稿データはあなたのリポジトリが持つ
 
@@ -38,14 +41,14 @@ ch-uploader のリポジトリルートは基準にならない。
 ├── package.zip                       # ビルド済みzip(unpackedディレクトリではない)
 └── assets/
     ├── icon.png                      # 必須 128x128px / 24bit PNG(アルファ可)
-    ├── promo-tile-440x280.png        # 任意 440x280 / JPEG または 24bit PNG(アルファなし)
-    ├── marquee-1400x560.png          # 任意 1400x560 / JPEG または 24bit PNG(アルファなし)
+    ├── promo-tile-440x280.png        # 任意 440x280 / JPEG(.jpg)または 24bit PNG(アルファなし)
+    ├── marquee-1400x560.png          # 任意 1400x560 / JPEG(.jpg)または 24bit PNG(アルファなし)
     └── locales/
         └── ja/                       # defaultLocale は必ず1つ用意する
             ├── description.txt       # 必須 プレーンテキスト 16,000文字以内
             └── screenshots/
-                ├── 01.png            # 必須(最低1枚・最大5枚)
-                └── 02.png            # 1280x800 または 640x400 / JPEG または 24bit PNG(アルファなし)
+                ├── 01.png            # 必須(最低1枚・最大5枚)。.jpg も可
+                └── 02.jpg            # 1280x800 または 640x400 / JPEG または 24bit PNG(アルファなし)
 ```
 
 - ファイル名・ディレクトリ名は自由。`config.yaml` 側でパスを明示的に指定する。
@@ -53,6 +56,7 @@ ch-uploader のリポジトリルートは基準にならない。
   `magick identify assets/icon.png`、無ければ Node や Python でヘッダを読むなどして確認し、
   合っていないものはユーザーに報告する(勝手にリサイズして引き伸ばさない)。
 - スクリーンショットとプロモーションタイルは **アルファチャンネルなし**。透過PNGを置くと弾かれる。
+- 画像は PNG のほか JPEG(`.jpg` / `.jpeg`)も使える(ch-uploader は拡張子で制限していない)。ファイル名の拡張子は実際の形式と一致させる。
 - `package.zip` は unpacked ディレクトリではなく、`manifest.json` を含むフォルダの**中身**を直接zip化したもの
   (zipを展開した直下に `manifest.json` が来る構造)。
 - `package.zip` / `assets/` をコミットするかはこのリポジトリの方針に従う(ビルド生成物なら `.gitignore` 可)。
@@ -96,19 +100,19 @@ privacy:
       noUseUnrelatedToSinglePurpose: true
       noUseForCreditworthinessOrLending: true
 
-  privacyPolicyUrl: "https://example.com/privacy-policy"   # 必須・URL形式
+  # URL形式。データを何も収集しない(collects が空)なら省略可。収集するなら必須。
+  privacyPolicyUrl: "https://example.com/privacy-policy"
 
 storeListing:
   category: "ショッピング"          # 下の一覧から日本語表記を完全一致でコピーする
-  defaultLocale: "ja"
+  defaultLocale: "ja"               # 任意。省略すると "ja"。locales にこのキーが必要。manifest.json の default_locale と一致させること(食い違うと実行時エラー)
   icon: "assets/icon.png"
   promoTileSmall: "assets/promo-tile-440x280.png"                 # 任意
   marqueeTile: "assets/marquee-1400x560.png"                     # 任意
   promoVideoUrl: "https://www.youtube.com/watch?v=xxxxxxxxxxx"    # 任意
-  websiteUrl: "https://example.com"                              # 任意
-  homepageUrl: "https://example.com"                             # 任意
+  homepageUrl: "https://example.com"                             # 任意。ダッシュボードの「ホームページ URL」欄
   supportUrl: "https://example.com/support"                       # 任意
-  adultContent: false
+  adultContent: false                                             # 任意。省略すると false
 
   # ロケールごとの説明文とスクリーンショット。複数書くと各ロケールに切り替えて入力される。
   # ここに書ける言語は、パッケージの _locales に存在する言語だけ(後述)。
@@ -127,7 +131,7 @@ package:
 
 ### `category` に指定できる値(日本語UI表記・完全一致)
 
-CLIはダッシュボードのコンボボックスをこの表示テキストで選択するため、表記を1文字も変えないこと。
+CLIはダッシュボードのコンボボックスをこの表示テキストで選択するため、表記を1文字も変えないこと。一覧にない値は config 読み込み時点でエラーになる。
 
 ```
 仕事効率化 / コミュニケーション / ツール / デベロッパー ツール / ワークフローと計画 / 教育 /
@@ -158,6 +162,12 @@ C:\ローカルリポジトリ\ch-uploader\bin\ch-upload.cmd .\store
 C:\ローカルリポジトリ\ch-uploader\bin\ch-upload.cmd .\store --only=storeListing
 ```
 
+**既定では、入力(下書き保存)が終わってもブラウザは閉じない。** ユーザーが内容を目視確認できるようにするためで、
+ユーザーがブラウザを閉じるまでコマンドが終了せず待機し続ける(失敗時も、失敗画面を確認できるよう同様)。
+あなたが実行する場合は、バックグラウンドで起動するか、コマンドをすぐ返したいときに `--close` を足すこと
+(`--close` を付けると終了時にブラウザを自動で閉じる)。ブラウザを開いたままにするなら、ユーザーに
+「確認後にブラウザを閉じてください」と伝えること。
+
 各ステップは冪等なので、途中で失敗しても同じコマンドを再実行すればよい。
 終了コードは0=成功 / 1=失敗。失敗時は標準エラーにスタックトレースが出る。
 
@@ -185,12 +195,26 @@ C:\ローカルリポジトリ\ch-uploader\bin\ch-upload.cmd .\store --only=stor
   ダッシュボードで「審査のため送信」を手動クリックする必要がある。実行後はそれを必ず案内すること。
 - `extensionId` を省略して実行した場合、新規アイテムが作成され `config.yaml` にIDが書き戻されている。
   **書き戻された `config.yaml` をコミットする。**
+- 実行すると `config.yaml` と同じディレクトリに `.ch-uploader-state.json` が作られる。前回アップロードした
+  スクリーンショットの内容ハッシュの記録で、次回以降 **変更があった分だけ**を差し替えるために使う。
+  **これもコミットする**(消えても動くが、その場合は毎回スクリーンショットを全削除→入れ直しになる)。
+  ダッシュボードで手動でスクリーンショットを編集した場合は、記録とずれるため `--reset-screenshots` を付けて実行する。
+  同じファイルには、項目ごと(単一用途・権限理由・説明文・アイコン・zip など)の内容ハッシュと `appliedAt`
+  (ch-uploader が最後にその内容を反映した日時)も入る。内容が変わった項目だけ日時が更新されるので、再実行しても差分は増えない。
+  ダッシュボード上の実際の変更日時ではなく、手動編集は反映されない。実行終了時に「変更 N 件 / 変更なし M 件」が表示される。
+- **実行終了時に「要確認: 警告が N 件ありました」と出たら、その内容を必ずユーザーに伝えること。**
+  警告があっても処理自体は完了している(終了コードは0)ため、見落とすとダッシュボードの状態と
+  `config.yaml` がずれたままになる。
+- 実行ログは ch-uploader リポジトリの `logs/run-<日時>.log` に毎回残る(直近30件)。失敗時は同じ `logs/` に
+  `failure-<時刻>.png`(画面)と `.html`(DOM)も保存され、パスが表示される。うまくいかなかった場合は、
+  それらのパスをユーザーに伝えること(ch-uploader 側でセレクタを直すための手がかりになる)。
+- `adultContent` は未指定なら「オフ」に揃えられる(ダッシュボード側でオンにしていても上書きされ、警告が出る)。
 
 ## 未対応事項・制約(2026-09-29時点)
 
-- **データ使用カテゴリは6種類のみ対応。** 個人情報 / 健康情報 / 金融・決済情報 に該当する場合は
-  `collects` に書かず、「この項目はダッシュボードで手動入力してください」とユーザーに明示的に伝える。
-  当てはまらないカテゴリで代用してはいけない。
+- **データ使用カテゴリはダッシュボードの9種類すべてに対応**(個人を特定できる情報 / 健康情報 / 金融・決済情報 /
+  認証情報 / 個人的なコミュニケーション / 位置情報 / ウェブ履歴 / ユーザーのアクティビティ / ウェブサイトのコンテンツ。
+  キー名は `src/config/schema.ts` の `DataUsageCategory`)。当てはまらないカテゴリで代用してはいけない。
 - **`locales` に書ける言語はパッケージの `_locales` にある言語だけ。** ダッシュボードUIから言語を
   新規追加する手段はない。言語を増やすには `_locales/<lang>/messages.json` を含めてzipを作り直す。
 - **CLIは「下書きとして保存する」までしか自動実行しない。** 「審査のため送信」はユーザーが

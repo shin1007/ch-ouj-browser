@@ -21,9 +21,6 @@ privacy:
       noUseUnrelatedToSinglePurpose: true
       noUseForCreditworthinessOrLending: true
 
-  # ポリシーページは無い（データ収集なしのため不要）。ch-uploaderのスキーマが必須URLとして要求するため、暫定でリポジトリURLを入れている
-  privacyPolicyUrl: "https://github.com/shin1007/ch-ouj-browser"
-
 storeListing:
   category: "教育"
   defaultLocale: "ja"
